@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N3NY000 - GTA V Mod Menu</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            background: #000;
+        }
+
+        /* Showcase Section */
+        .showcase {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .showcase video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .showcase .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .showcase .text {
+            z-index: 2;
+            text-align: center;
+        }
+
+        .showcase .text h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #f4b400;
+            margin-bottom: 10px;
+        }
+
+        .showcase .text h3 {
+            font-size: 1.5rem;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .showcase .text p {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .showcase .text a {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 8px 18px;
+            background-color: #4a90e2;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1em;
+            border-radius: 25px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .showcase .text a:hover {
+            background-color: #7f8c8d;
+            transform: scale(1.05);
+        }
+
+        /* Video Box Section */
+        .video-box {
+            padding: 20px;
+            background: #111;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .video-box .video-container {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .video-box iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: 2px solid #fff;
+            border-radius: 8px;
+        }
+
+        /* About Us Section */
+        .about-us {
+            padding: 50px;
+            background: #222;
+            text-align: center;
+        }
+
+        .about-us h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #f4b400;
+        }
+
+        .about-us p {
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .feature {
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .feature h3 {
+            color: #f4b400;
+            margin: 10px 0;
+        }
+
+        .feature p {
+            color: #bbb;
+        }
+
+        .feature span {
+            font-size: 2em;
+        }
+
+        /* Pricing Section */
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 100vh;
+            background-color: #222; /* Dark gray background */
+        }
+
+        .pricing-box {
+            background-color: #333; /* Dark gray box background */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid white; /* White outline around box */
+        }
+
+        .pricing-box .plan-name h3,
+        .pricing-box .value h3 {
+            color: white;
+        }
+
+        .pricing-box ul {
+            color: white;
+            text-align: left;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .pricing-box ul li {
+            padding: 5px 0;
+        }
+
+        .button-group a {
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .button-group a:hover {
+            background-color: #7f8c8d;
+        }
+
+        .pricing-box .left-logo,
+        .pricing-box .right-image {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .pricing-box .left-logo img,
+        .pricing-box .right-image img {
+            width: 100px;
+            height: auto;
+            margin: 10px;
+        }
+
+        .pricing-box .left-logo {
+            float: left;
+            margin-right: 20px;
+        }
+
+        .pricing-box .right-image {
+            float: right;
+            margin-left: 20px;
+        }
+
+        /* Clearfix */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    <section class="showcase">
+        <header>
+            <h2 class="logo"></h2>
+            <div class="toggle"></div>
+        </header>
+        <video src="video.mp4" muted loop autoplay></video>
+        <div class="overlay"></div>
+        <div class="text">
+            <h2>N3NY000</h2> 
+            <h3>GTA V Mod Menu</h3>
+            <p>All The Power You Seek In One Menu</p>
+            <a href="http://nenyoocheats.com/">Download v20</a>
+            <a href="https://discord.gg/bCunaArEjM">Discord</a>
+            <a href="https://bstlar.com/F/N3NYOOfreeKEY">Get Free Key</a>
+        </div>
+    </section>
+
+    <section class="video-box">
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/c95i0i87Hvw?si=N7aOV0Y7UYNDdMct" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/q-fxzRr1BDE?si=c5bBCKl-46dQ-Mzv" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+    <section class="about-us">
+        <div class="about-content">
+            <h2>About Us</h2>
+            <p>N3NY000 originally began as a mod menu for GTA 5, quickly gaining recognition as one of the most popular options. Launched in 2021/2022 as a free menu, N3NY000 has now returned, better than ever, with an upgraded and enhanced version that offers even more features and performance.</p>
+            <div class="features">
+                <div class="feature">
+                    <span>🌟</span>
+                    <h3>Unique Options</h3>
+                    <p>We prioritize integrating unique features to set us apart, including car prosthetics, lightsabers, the fastest rapid fire, aggressive planes, magical snowballs, and much more..</p>
+                </div>
+                <div class="feature">
+                    <span>✳️</span>
+                    <h3>Adaptable Design</h3>
+                    <p>The N3NY000 UI is designed to be simple, intuitive, and user-friendly, ensuring ease of use for everyone.</p>
+                </div>
+                <div class="feature">
+                    <span>😊</span>
+                    <h3>Why N3NY000</h3>
+                    <p>User-friendly, feature-packed, and loaded with unique options—N3NY000 is simply the best mod menu available.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <div class="pricing-container">
+        <div class="pricing-box clearfix">
+            <div class="left-logo">
+                <img src="logo.png" alt="Logo Left"> <!-- Left logo image -->
+            </div>
+            <div class="plan-name">
+                <h3>Purchase</h3>
+            </div>
+            <div class="value">
+                <h3>10<span>$</span></h3>
+            </div>
+            <ul>
+                <li>   </li>
+                <li>   </li>
+                <li>VFX Engine</li>
+                <li>Money/RP Drop</li>
+               
+                
+                <li>Money Options</li>
+                <li>Casino Rigging </li>
+                <li>Full Stat Editor</li>
+                <li>Free Shopping</li>
+               
+                <li>Player Magnet</li>
+                <li>Crashes & Kicks</li>
+                <li>Full Stat Editor</li>
+                <li>Business Manager</li>
+                
+                <li>Fun & Unique Features</li>
+                <li>Bunch Of Player Trolling</li>
+                <li>Recovery - Rank/Unlocks/More</li>
+                <li>Saveable Outfits & Vehicles - .XML/INI/JSON/TXT</li>
+                <li>Just some of the features we have to offer & Much More.</li>
+            </ul>
+
+            <div class="button-group">
+                <a href="https://scooby101.mysellix.io/product/n3ny000-vip" target="_blank">Purchase</a>
+                <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">Free Version</a>
+            </div>
+            <div class="right-image">
+                <img src="logo-right.png" alt="Logo Right"> <!-- Right logo image -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

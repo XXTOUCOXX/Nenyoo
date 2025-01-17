@@ -159,6 +159,7 @@
             gap: 20px;
             min-height: 100vh;
             background-color: #222; /* Dark gray background */
+            padding: 50px 0;
         }
 
         .pricing-box {
@@ -169,6 +170,9 @@
             width: 100%;
             max-width: 400px;
             border: 2px solid white; /* White outline around box */
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .pricing-box .plan-name h3,
@@ -200,34 +204,81 @@
             background-color: #7f8c8d;
         }
 
-        .pricing-box .left-logo,
-        .pricing-box .right-image {
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .pricing-box .left-logo img,
-        .pricing-box .right-image img {
-            width: 100px;
-            height: auto;
-            margin: 10px;
-        }
-
         .pricing-box .left-logo {
-            float: left;
-            margin-right: 20px;
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .pricing-box .left-logo img {
+            width: 150px; /* Adjust the size as needed */
+            height: auto;
         }
 
         .pricing-box .right-image {
-            float: right;
-            margin-left: 20px;
+            position: absolute;
+            right: -100px;
+            top: 0;
+            z-index: 0;
+            height: 100%; /* Match the height of the pricing box */
+            display: flex;
+            justify-content: center;
         }
 
-        /* Clearfix */
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
+        .pricing-box .right-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the area properly */
+            opacity: 0.2; /* Slight transparency */
+        }
+
+        /* Picture Box Next to Pricing Section */
+        .pricing-image-box {
+            width: 100%;
+            max-width: 500px; /* Reduced size of the image box */
+            height: 100%; /* Match the height of the pricing box */
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pricing-image-box a {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .pricing-image-box .image-carousel {
+            display: flex;
+            width: 400%; /* Adjusted width */
+            animation: scrollImages 25s linear infinite; /* Slower speed */
+        }
+
+        .pricing-image-box .image-carousel img {
+            width: 28%; /* Reduced image size */
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            margin-right: 10px; /* Tiny gap between images */
+        }
+
+        @keyframes scrollImages {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-25%);
+            }
+            50% {
+                transform: translateX(-50%);
+            }
+            75% {
+                transform: translateX(-75%);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
@@ -243,9 +294,9 @@
             <h2>N3NY000</h2> 
             <h3>GTA V Mod Menu</h3>
             <p>All The Power You Seek In One Menu</p>
-            <a href="http://nenyoocheats.com/">Download v20</a>
-            <a href="https://discord.gg/bCunaArEjM">Discord</a>
-            <a href="https://bstlar.com/F/N3NYOOfreeKEY">Get Free Key</a>
+            
+            <a href="https://discord.gg/uB4DM5GNQc"target="_blank">Discord</a>
+            
         </div>
     </section>
 
@@ -301,30 +352,47 @@
                 <img src="logo.png" alt="Logo Left"> <!-- Left logo image -->
             </div>
             <div class="plan-name">
-                <h3>Purchase</h3>
+                <h3>N3ny000</h3>
             </div>
             <div class="value">
-                <h3>10<span>$</span></h3>
+                <h3>Price: $10<span></span></h3>
             </div>
             <ul>
-                <li>   </li>
-                <li>   </li>
+                <li>VFX Engine</li>
                 <li>Money/RP Drop</li>
-                <li>Bunch Of Trolling</li>
-                <li>Fun & Unique</li>
-                <li>Money & Recovery</li>
-                <li>Join Public Sessions</li>
-                <li>Player Crashes & Kicks</li>
-                <li>Just some of the features we have to offer.</li>
+                <li>Money Options</li>
+                <li>Casino Rigging</li>
+                <li>Full Stat Editor</li>
+                <li>Free Shopping</li>
+                <li>Player Magnet</li>
+                <li>Crashes & Kicks</li>
+                <li>Full Stat Editor</li>
+                <li>Business Manager</li>
+                <li>Fun & Unique Features</li>
+                <li>Bunch Of Player Trolling</li>
+                <li>Recovery - Rank/Unlocks/More</li>
+                <li>Saveable Outfits & Vehicles - .XML/INI/JSON/TXT</li>
             </ul>
 
             <div class="button-group">
-                <a href="https://scooby101.mysellix.io/product/n3ny000-vip" target="_blank">Purchase</a>
+                <a href="https://scooby101.mysellix.io/product/n3ny000-vip" target="_blank">Purchase VIP</a>
                 <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">Free Version</a>
             </div>
-            <div class="right-image">
-                <img src="logo-right.png" alt="Logo Right"> <!-- Right logo image -->
-            </div>
+        </div>
+
+        <!-- Picture Box Next to Pricing Section -->
+        <div class="pricing-image-box">
+            <a href="https://example.com" target="_blank">
+                <div class="image-carousel">
+                    <img src="menu.png" alt="Image 1">
+                    <img src="dance.gif" alt="Image 2">
+                    <img src="menu.png" alt="Image 3">
+                    <img src="dance2.gif" alt="Image 4">
+                    <img src="menu.png" alt="Image 5">
+                    <img src="dance3.gif" alt="Image 6">
+                    <img src="menu.png" alt="Image 5">
+                </div>
+            </a>
         </div>
     </div>
 </body>
