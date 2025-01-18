@@ -15,9 +15,17 @@
             background: #000;
         }
 
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Place behind other content */
+        }
 
-          /* Sidebar Styles */
-          .sidebar {
+        /* Sidebar Styles */
+        .sidebar {
             position: fixed;
             top: 0;
             left: 0;
@@ -32,31 +40,31 @@
             background: none; /* Removes background */
         }
 
-        .sidebar a {
-            text-decoration: none;
-            color: #fff;
-            margin: 20px 0; /* Spacing between items */
-            text-align: center;
-            transition: transform 0.3s ease, color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centers text and icons */
-            font-size: 14px;
-        }
+            .sidebar a {
+                text-decoration: none;
+                color: #fff;
+                margin: 20px 0; /* Spacing between items */
+                text-align: center;
+                transition: transform 0.3s ease, color 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center; /* Centers text and icons */
+                font-size: 14px;
+            }
 
-        .sidebar a:hover {
-            color: #f4b400; /* Highlight color */
-            transform: scale(1.2); /* Slight zoom on hover */
-        }
+                .sidebar a:hover {
+                    color: #f4b400; /* Highlight color */
+                    transform: scale(1.2); /* Slight zoom on hover */
+                }
 
-        .sidebar a .icon {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
+                .sidebar a .icon {
+                    font-size: 24px;
+                    margin-bottom: 5px;
+                }
 
-        .sidebar a .text {
-            font-size: 12px;
-        }
+                .sidebar a .text {
+                    font-size: 12px;
+                }
 
 
         /* Showcase Section */
@@ -69,66 +77,66 @@
             overflow: hidden;
         }
 
-        .showcase video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
+            .showcase video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: -1;
+            }
 
-        .showcase .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
+            .showcase .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1;
+            }
 
-        .showcase .text {
-            z-index: 2;
-            text-align: center;
-        }
+            .showcase .text {
+                z-index: 2;
+                text-align: center;
+            }
 
-        .showcase .text h2 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #f4b400;
-            margin-bottom: 10px;
-        }
+                .showcase .text h2 {
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                    color: #f4b400;
+                    margin-bottom: 10px;
+                }
 
-        .showcase .text h3 {
-            font-size: 1.5rem;
-            color: #bbb;
-            margin-bottom: 15px;
-        }
+                .showcase .text h3 {
+                    font-size: 1.5rem;
+                    color: #bbb;
+                    margin-bottom: 15px;
+                }
 
-        .showcase .text p {
-            font-size: 1rem;
-            color: #fff;
-            margin-bottom: 20px;
-        }
+                .showcase .text p {
+                    font-size: 1rem;
+                    color: #fff;
+                    margin-bottom: 20px;
+                }
 
-        .showcase .text a {
-            display: inline-block;
-            margin: 10px 0;
-            padding: 8px 18px;
-            background-color: #4a90e2;
-            color: #fff;
-            text-decoration: none;
-            font-size: 1em;
-            border-radius: 25px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
+                .showcase .text a {
+                    display: inline-block;
+                    margin: 10px 0;
+                    padding: 8px 18px;
+                    background-color: #4a90e2;
+                    color: #fff;
+                    text-decoration: none;
+                    font-size: 1em;
+                    border-radius: 25px;
+                    transition: background-color 0.3s, transform 0.3s;
+                }
 
-        .showcase .text a:hover {
-            background-color: #7f8c8d;
-            transform: scale(1.05);
-        }
+                    .showcase .text a:hover {
+                        background-color: #7f8c8d;
+                        transform: scale(1.05);
+                    }
 
         /* Video Box Section */
         .video-box {
@@ -140,17 +148,17 @@
             gap: 20px;
         }
 
-        .video-box .video-container {
-            flex: 1;
-            max-width: 600px;
-        }
+            .video-box .video-container {
+                flex: 1;
+                max-width: 600px;
+            }
 
-        .video-box iframe {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border: 2px solid #fff;
-            border-radius: 8px;
-        }
+            .video-box iframe {
+                width: 100%;
+                aspect-ratio: 16 / 9;
+                border: 2px solid #fff;
+                border-radius: 8px;
+            }
 
         /* About Us Section */
         .about-us {
@@ -159,17 +167,17 @@
             text-align: center;
         }
 
-        .about-us h2 {
-            margin-bottom: 20px;
-            font-size: 2em;
-            color: #f4b400;
-        }
+            .about-us h2 {
+                margin-bottom: 20px;
+                font-size: 2em;
+                color: #f4b400;
+            }
 
-        .about-us p {
-            margin-bottom: 30px;
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
+            .about-us p {
+                margin-bottom: 30px;
+                font-size: 1.2em;
+                line-height: 1.6;
+            }
 
         .features {
             display: flex;
@@ -182,18 +190,18 @@
             text-align: center;
         }
 
-        .feature h3 {
-            color: #f4b400;
-            margin: 10px 0;
-        }
+            .feature h3 {
+                color: #f4b400;
+                margin: 10px 0;
+            }
 
-        .feature p {
-            color: #bbb;
-        }
+            .feature p {
+                color: #bbb;
+            }
 
-        .feature span {
-            font-size: 2em;
-        }
+            .feature span {
+                font-size: 2em;
+            }
 
         /* Pricing Section */
         .pricing-container {
@@ -219,21 +227,21 @@
             flex-direction: column;
         }
 
-        .pricing-box .plan-name h3,
-        .pricing-box .value h3 {
-            color: white;
-        }
+            .pricing-box .plan-name h3,
+            .pricing-box .value h3 {
+                color: white;
+            }
 
-        .pricing-box ul {
-            color: white;
-            text-align: left;
-            list-style: none;
-            padding-left: 0;
-        }
+            .pricing-box ul {
+                color: white;
+                text-align: left;
+                list-style: none;
+                padding-left: 0;
+            }
 
-        .pricing-box ul li {
-            padding: 5px 0;
-        }
+                .pricing-box ul li {
+                    padding: 5px 0;
+                }
 
         .button-group a {
             padding: 10px 20px;
@@ -244,9 +252,9 @@
             margin: 10px;
         }
 
-        .button-group a:hover {
-            background-color: #7f8c8d;
-        }
+            .button-group a:hover {
+                background-color: #7f8c8d;
+            }
 
         .pricing-box .left-logo {
             display: block;
@@ -254,10 +262,10 @@
             margin-bottom: 20px;
         }
 
-        .pricing-box .left-logo img {
-            width: 150px; /* Adjust the size as needed */
-            height: auto;
-        }
+            .pricing-box .left-logo img {
+                width: 150px; /* Adjust the size as needed */
+                height: auto;
+            }
 
         .pricing-box .right-image {
             position: absolute;
@@ -269,12 +277,12 @@
             justify-content: center;
         }
 
-        .pricing-box .right-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensure the image covers the area properly */
-            opacity: 0.2; /* Slight transparency */
-        }
+            .pricing-box .right-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Ensure the image covers the area properly */
+                opacity: 0.2; /* Slight transparency */
+            }
 
         /* Picture Box Next to Pricing Section */
         .pricing-image-box {
@@ -287,39 +295,43 @@
             position: relative;
         }
 
-        .pricing-image-box a {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
+            .pricing-image-box a {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
 
-        .pricing-image-box .image-carousel {
-            display: flex;
-            width: 400%; /* Adjusted width */
-            animation: scrollImages 25s linear infinite; /* Slower speed */
-        }
+            .pricing-image-box .image-carousel {
+                display: flex;
+                width: 400%; /* Adjusted width */
+                animation: scrollImages 25s linear infinite; /* Slower speed */
+            }
 
-        .pricing-image-box .image-carousel img {
-            width: 28%; /* Reduced image size */
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-            margin-right: 10px; /* Tiny gap between images */
-        }
+                .pricing-image-box .image-carousel img {
+                    width: 28%; /* Reduced image size */
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+                    margin-right: 10px; /* Tiny gap between images */
+                }
 
         @keyframes scrollImages {
             0% {
                 transform: translateX(0);
             }
+
             25% {
                 transform: translateX(-25%);
             }
+
             50% {
                 transform: translateX(-50%);
             }
+
             75% {
                 transform: translateX(-75%);
             }
+
             100% {
                 transform: translateX(0);
             }
@@ -329,33 +341,33 @@
 <body>
 
 
-<!-- Sidebar -->
-<div class="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar">
 
-    <a href="#buy">
-        <span class="icon">💲</span>
-        <span class="text">Purchase VIP</span>
-    </a>
+        <a href="#buy">
+            <span class="icon">💲</span>
+            <span class="text">Purchase VIP</span>
+        </a>
 
-    <a href="#showcase">
-        <span class="icon">🎥</span>
-        <span class="text">Showcase</span>
-    </a>
-    <a href="#about">
-        <span class="icon">ℹ️</span>
-        <span class="text">About</span>
-    </a>
+        <a href="#showcase">
+            <span class="icon">🎥</span>
+            <span class="text">Showcase</span>
+        </a>
+        <a href="#about">
+            <span class="icon">ℹ️</span>
+            <span class="text">About</span>
+        </a>
 
 
-    <a href="   "target="_blank">
-        <span class="icon">💾</span>
-        <span class="text">Download</span>
-    </a>
-    <a href="fsl.html"target="_blank">
-        <span class="icon">💽</span>
-        <span class="text">FSL</span>
-    </a>
-</div>
+        <a href="   " target="_blank">
+            <span class="icon">💾</span>
+            <span class="text">Download</span>
+        </a>
+        <a href="fsl.html" target="_blank">
+            <span class="icon">💽</span>
+            <span class="text">FSL</span>
+        </a>
+    </div>
 
     <!-- Audio Element for Autoplay MP3 -->
     <audio autoplay loop>
@@ -371,112 +383,237 @@
         <video src="video.mp4" muted loop autoplay></video>
         <div class="overlay"></div>
         <div class="text">
-            <h2>N3NY000</h2> 
+            <h2>N3NY000</h2>
             <h3>GTA V Mod Menu</h3>
             <p>All The Power You Seek In One Menu</p>
-            
+
             <a href="https://discord.gg/uB4DM5GNQc" target="_blank">Discord</a>
-            
+
         </div>
     </section>
 
     <section id="showcase">
-    <section class="video-box">
-        <div class="video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/c95i0i87Hvw?si=N7aOV0Y7UYNDdMct" 
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
-        <div class="video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/q-fxzRr1BDE?si=c5bBCKl-46dQ-Mzv" 
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </section>
+        <section class="video-box">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/c95i0i87Hvw?si=N7aOV0Y7UYNDdMct"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/q-fxzRr1BDE?si=c5bBCKl-46dQ-Mzv"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </section>
 
-    <section id="about">
-    <section class="about-us">
-        <div class="about-content">
-            <h2>About Us</h2>
-            <p>N3NY000 originally began as a mod menu for GTA 5, quickly gaining recognition as one of the most popular options. Launched in 2021/2022 as a free menu, N3NY000 has now returned, better than ever, with an upgraded and enhanced version that offers even more features and performance.</p>
-            <div class="features">
-                <div class="feature">
-                    <span>🌟</span>
-                    <h3>Unique Options</h3>
-                    <p>We prioritize integrating unique features to set us apart, including car prosthetics, lightsabers, the fastest rapid fire, aggressive planes, magical snowballs, and much more..</p>
+        <section id="about">
+            <section class="about-us">
+                <div class="about-content">
+                    <h2>About Us</h2>
+                    <p>N3NY000 originally began as a mod menu for GTA 5, quickly gaining recognition as one of the most popular options. Launched in 2021/2022 as a free menu, N3NY000 has now returned, better than ever, with an upgraded and enhanced version that offers even more features and performance.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <span>🌟</span>
+                            <h3>Unique Options</h3>
+                            <p>We prioritize integrating unique features to set us apart, including car prosthetics, lightsabers, the fastest rapid fire, aggressive planes, magical snowballs, and much more..</p>
+                        </div>
+                        <div class="feature">
+                            <span>✳️</span>
+                            <h3>Adaptable Design</h3>
+                            <p>The N3NY000 UI is designed to be simple, intuitive, and user-friendly, ensuring ease of use for everyone.</p>
+                        </div>
+                        <div class="feature">
+                            <span>😊</span>
+                            <h3>Why N3NY000</h3>
+                            <p>User-friendly, feature-packed, and loaded with unique options—N3NY000 is simply the best mod menu available.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature">
-                    <span>✳️</span>
-                    <h3>Adaptable Design</h3>
-                    <p>The N3NY000 UI is designed to be simple, intuitive, and user-friendly, ensuring ease of use for everyone.</p>
-                </div>
-                <div class="feature">
-                    <span>😊</span>
-                    <h3>Why N3NY000</h3>
-                    <p>User-friendly, feature-packed, and loaded with unique options—N3NY000 is simply the best mod menu available.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <section id="buy">
-    <!-- Pricing Section -->
-    <div class="pricing-container">
-        <div class="pricing-box clearfix">
-            <div class="left-logo">
-                <img src="logo.png" alt="Logo Left"> <!-- Left logo image -->
-            </div>
-            <div class="plan-name">
-                <h3>N3ny000 VIP</h3>
-            </div>
-            <div class="value">
-                <h3>Price: $10<span></span></h3>
-            </div>
-            <ul>
-                <li>VFX Engine</li>
-                <li>Money/RP Drop</li>
-                <li>Money Options</li>
-                <li>Casino Rigging</li>
-                <li>Full Stat Editor</li>
-                <li>Free Shopping</li>
-                <li>Player Magnet</li>
-                <li>Crashes & Kicks</li>
-                <li>Full Stat Editor</li>
-                <li>Business Manager</li>
-                <li>Fun & Unique Features</li>
-                <li>Bunch Of Player Trolling</li>
-                <li>Recovery - Rank/Unlocks/More</li>
-                <li>Saveable Outfits & Vehicles - .XML/INI/JSON/TXT</li>
-            </ul>
+            <section id="buy">
+                <!-- Pricing Section -->
+                <div class="pricing-container">
+                    <div class="pricing-box clearfix">
+                        <div class="left-logo">
+                            <img src="logo.png" alt="Logo Left"> <!-- Left logo image -->
+                        </div>
+                        <div class="plan-name">
+                            <h3>N3ny000 VIP</h3>
+                        </div>
+                        <div class="value">
+                            <h3>Price: $10<span></span></h3>
+                        </div>
+                        <ul>
+                            <li>VFX Engine</li>
+                            <li>Money/RP Drop</li>
+                            <li>Money Options</li>
+                            <li>Casino Rigging</li>
+                            <li>Full Stat Editor</li>
+                            <li>Free Shopping</li>
+                            <li>Player Magnet</li>
+                            <li>Crashes & Kicks</li>
+                            <li>Full Stat Editor</li>
+                            <li>Business Manager</li>
+                            <li>Fun & Unique Features</li>
+                            <li>Bunch Of Player Trolling</li>
+                            <li>Recovery - Rank/Unlocks/More</li>
+                            <li>Saveable Outfits & Vehicles - .XML/INI/JSON/TXT</li>
+                        </ul>
 
-            <div class="button-group">
-                <a href="https://scooby101.mysellix.io/product/n3ny000-vip" target="_blank">Purchase VIP</a>
-                <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">Free Version</a>
-            </div>
-        </div>
+                        <div class="button-group">
+                            <a href="https://scooby101.mysellix.io/product/n3ny000-vip" target="_blank">Purchase VIP</a>
+                            <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">Free Version</a>
+                        </div>
+                    </div>
 
-        <!-- Picture Box Next to Pricing Section -->
-        <div class="pricing-image-box">
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-                <div class="image-carousel">
-                    <img src="menu.png" alt="Image 1">
-                    <img src="dance.gif" alt="Image 2">
-                    <img src="menu.png" alt="Image 3">
-                    <img src="dance2.gif" alt="Image 4">
-                    <img src="menu.png" alt="Image 5">
-                    <img src="dance3.gif" alt="Image 6">
-                    <img src="menu.png" alt="Image 5">
+                    <!-- Picture Box Next to Pricing Section -->
+                    <div class="pricing-image-box">
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                            <div class="image-carousel">
+                                <img src="menu.png" alt="Image 1">
+                                <img src="dance.gif" alt="Image 2">
+                                <img src="menu.png" alt="Image 3">
+                                <img src="dance2.gif" alt="Image 4">
+                                <img src="menu.png" alt="Image 5">
+                                <img src="dance3.gif" alt="Image 6">
+                                <img src="menu.png" alt="Image 5">
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </a>
-        </div>
-    </div>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Add specific styles for particles.js container */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 280%;
+            top: 0;
+            left: 0;
+            z-index:1; /* Place behind other content */
+        }
+        /* Your existing styles remain here */
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles.js Container -->
+    <div id="particles-js"></div>
+
+
+
+    <!-- Include Libraries -->
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+    <!-- Initialize Particles.js -->
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": {
+                        "enable": true,
+                        "value_area": 3000
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 1.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 250,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 10,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    }
+                },
+                "modes": {
+                    "repulse": {
+                        "distance": 100
+                    },
+                    "push": {
+                        "particles_nb": 1
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Optional: Update particle count with stats.js
+        var count_particles, stats, update;
+        stats = new Stats();
+        stats.setMode(0);
+        document.body.appendChild(stats.domElement);
+        count_particles = document.querySelector('.js-count-particles');
+        update = function () {
+            stats.begin();
+            stats.end();
+            if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+            }
+            requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
+    </script>
 </body>
 </html>
