@@ -15,6 +15,50 @@
             background: #000;
         }
 
+
+          /* Sidebar Styles */
+          .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centers content vertically */
+            align-items: center;
+            padding: 0;
+            z-index: 10;
+            background: none; /* Removes background */
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            margin: 20px 0; /* Spacing between items */
+            text-align: center;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers text and icons */
+            font-size: 14px;
+        }
+
+        .sidebar a:hover {
+            color: #f4b400; /* Highlight color */
+            transform: scale(1.2); /* Slight zoom on hover */
+        }
+
+        .sidebar a .icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .sidebar a .text {
+            font-size: 12px;
+        }
+
+
         /* Showcase Section */
         .showcase {
             position: relative;
@@ -283,6 +327,36 @@
     </style>
 </head>
 <body>
+
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+    <a href="#buy">
+        <span class="icon">💲</span>
+        <span class="text">Purchase VIP</span>
+    </a>
+
+    <a href="#showcase">
+        <span class="icon">🎥</span>
+        <span class="text">Showcase</span>
+    </a>
+    <a href="#about">
+        <span class="icon">ℹ️</span>
+        <span class="text">About</span>
+    </a>
+
+
+    <a href="   "target="_blank">
+        <span class="icon">💾</span>
+        <span class="text">Download</span>
+    </a>
+    <a href="  "target="_blank">
+        <span class="icon">💽</span>
+        <span class="text">FSL</span>
+    </a>
+</div>
+
     <!-- Audio Element for Autoplay MP3 -->
     <audio autoplay loop>
         <source src="happynat.mp3" type="audio/mp3">
@@ -306,6 +380,7 @@
         </div>
     </section>
 
+    <section id="showcase">
     <section class="video-box">
         <div class="video-container">
             <iframe 
@@ -327,6 +402,7 @@
         </div>
     </section>
 
+    <section id="about">
     <section class="about-us">
         <div class="about-content">
             <h2>About Us</h2>
@@ -351,6 +427,7 @@
         </div>
     </section>
 
+    <section id="buy">
     <!-- Pricing Section -->
     <div class="pricing-container">
         <div class="pricing-box clearfix">
