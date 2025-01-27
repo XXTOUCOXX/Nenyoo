@@ -204,31 +204,55 @@
                 font-size: 2em;
             }
 
-        /* Pricing Section */
-        .pricing-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            min-height: 100vh;
-            background-color: #222; /* Dark gray background */
-            padding: 50px 0;
-            z-index: 20;
-        }
+/* General background color and layout setup */
+#buy {
+    background-color: #181818; /* Set the background color like before */
+    padding: 50px 0; /* Space around the section */
+    color: white; /* Text color */
+    text-align: center;
+    min-height: 100vh; /* Ensure the section takes at least the full height of the viewport */
+}
 
-        .pricing-box {
-            background-color: #333; /* Dark gray box background */
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
-            border: 2px solid white; /* White outline around box */
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            z-index: 20;
-        }
+/* Flexbox for the pricing section to align the boxes next to each other */
+.pricing-container {
+    display: flex;
+    justify-content: center; /* Center pricing boxes horizontally */
+    gap: 20px; /* Space between the two pricing boxes */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    margin-bottom: 40px; /* Space below pricing boxes */
+}
+
+/* Adjust the width of the pricing boxes to fit them side by side */
+.pricing-box {
+    background-color: #333; /* Dark gray box background */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; /* Maximum width of each pricing box */
+    border: 2px solid white; /* White outline around box */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Image Box Styling (positioned below the pricing boxes) */
+.pricing-image-box {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the image box horizontally */
+    margin-top: 40px; /* Give space between pricing boxes and image box */
+}
+
+.image-carousel img {
+    margin: 10px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+
 
             .pricing-box .plan-name h3,
             .pricing-box .value h3 {
@@ -317,7 +341,7 @@
                     height: 100%;
                     object-fit: cover;
                     transition: transform 0.5s ease;
-                    margin-right: 10px; /* Tiny gap between images */
+                    margin-right: -40px; /* Tiny gap between images */
                 }
 
         @keyframes scrollImages {
@@ -446,10 +470,10 @@
                     </div>
                 </div>
             </section>
-
             <section id="buy">
                 <!-- Pricing Section -->
                 <div class="pricing-container">
+                    <!-- First Pricing Box -->
                     <div class="pricing-box clearfix">
                         <div class="left-logo">
                             <img src="logo.png" alt="Logo Left"> <!-- Left logo image -->
@@ -461,46 +485,89 @@
                             <h3>Price: $10<span></span></h3>
                         </div>
                         <ul>
-                            <li>VFX Engine</li>
+                            
                             <li>Money/RP Drop</li>
                             <li>Money Options</li>
                             <li>Casino Rigging</li>
-                            <li>Full Stat Editor</li>
-                            <li>Free Shopping</li>
-                            <li>Player Magnet</li>
-
-                            <li>Traffic Changer/li>
-                                <li>Map Loader</li>
-                            <li>Crashes & Kicks</li>
+                            <li>Map Loader</li>
                             <li>Full Stat Editor</li>
                             <li>Business Manager</li>
-                            <li>Fun & Unique Features</li>
-                            <li>Bunch Of Player Trolling</li>
-                            <li>Recovery - Rank/Unlocks/More</li>
+                            <li>Recovery - Money/Rank/Unlocks/More</li>
                             <li>Saveable Outfits & Vehicles - .XML/INI/JSON/TXT</li>
+                            <li>Bunch of Weapons//Self//Vehicles//World//Fun//Misc Options</li>
                         </ul>
-
+            
                         <div class="button-group">
                             <a href="https://scooby101.mysellix.io/product/n3ny000-vip" target="_blank">Purchase VIP</a>
-                            <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">Free Version</a>
+                            
                         </div>
                     </div>
+            
+                    <!-- Second Pricing Box -->
+                    <div class="pricing-box clearfix">
+                        <div class="left-logo">
+                            <img src="logo.png" alt="Logo Left"> <!-- Left logo image -->
+                        </div>
+                        <div class="plan-name">
+                            <h3>N3ny000 VIP Plus</h3>
+                        </div>
+                        <div class="value">
+                            <h3>Price: $20<span></span></h3>
+                        </div>
+                        <ul>
+                            <li>ScriptHookV</li>
+                            <li>VFX Engine</li>
+                            
+                            <li>Session Browser</li>
+                            <li>Player Tracker</li>
+                            <li>Free Shopping</li>
+                            <li>Player Magnet</li>
+                            <li>DLC Loader</li>
+                            <li>Map Loader</li>
+                            <li>Traffic Changer</li>
+                            <li>Player Crashes & Kicks</li>
+                            <li>All Players Options</li>
+                            <li>Business Manager</li>
+                            <li>Chat Spammer</li>
+                            <li>Fun & Unique Features</li>
+                            <li>Advanced Protections</li>
+                            <li>-</li>
+                            <li>Money/RP Drop</li>
+                            <li>Money Options</li>
+                            <li>Casino Rigging</li>
+                            <li>Map Loader</li>
+                            <li>Full Stat Editor</li>
+                            <li>Business Manager</li>
+                            <li>Recovery - Money/Rank/Unlocks/More</li>
+                            <li>Saveable Outfits & Vehicles - .XML/INI/JSON/TXT</li>
+                            <li>Bunch of Weapons//Self//Vehicles//World//Fun//Misc Options</li>
 
-                    <!-- Picture Box Next to Pricing Section -->
-                    <div class="pricing-image-box">
-                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-                            <div class="image-carousel">
-                                <img src="menu.png" alt="Image 1">
-                                <img src="dance.gif" alt="Image 2">
-                                <img src="menu.png" alt="Image 3">
-                                <img src="dance2.gif" alt="Image 4">
-                                <img src="menu.png" alt="Image 5">
-                                <img src="dance3.gif" alt="Image 6">
-                                <img src="menu.png" alt="Image 5">
-                            </div>
-                        </a>
+                        </ul>
+            
+                        <div class="button-group">
+                            <a href="https://scooby101.mysellix.io/product/n3ny000-vip-plus" target="_blank">Purchase Pro</a>
+                            
+                        </div>
                     </div>
                 </div>
+            
+                <!-- Picture Box Below Pricing Section -->
+                <div class="pricing-image-box">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                        <div class="image-carousel">
+                            <img src="menu.png" alt="Image 1">
+                            <img src="dance.gif" alt="Image 2">
+                            <img src="menu.png" alt="Image 3">
+                            <img src="dance2.gif" alt="Image 4">
+                            <img src="menu.png" alt="Image 5">
+                            <img src="dance3.gif" alt="Image 6">
+                            <img src="menu.png" alt="Image 5">
+                        </div>
+                    </a>
+                </div>
+            </section>
+            
+            
 
 </body>
 </html>
