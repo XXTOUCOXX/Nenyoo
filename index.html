@@ -220,6 +220,7 @@
     gap: 20px; /* Space between the two pricing boxes */
     flex-wrap: wrap; /* Allow wrapping for smaller screens */
     margin-bottom: 40px; /* Space below pricing boxes */
+	z-index: 0;
 }
 
 /* Adjust the width of the pricing boxes to fit them side by side */
@@ -234,6 +235,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+	z-index: 20;
 }
 
 /* Image Box Styling (positioned below the pricing boxes) */
@@ -242,6 +244,7 @@
     display: flex;
     justify-content: center; /* Center the image box horizontally */
     margin-top: 40px; /* Give space between pricing boxes and image box */
+	z-index: 20;
 }
 
 .image-carousel img {
@@ -277,7 +280,7 @@
             text-decoration: none;
             border-radius: 5px;
             margin: 10px;
-            z-index: 20;
+            z-index: 30;
         }
 
             .button-group a:hover {
@@ -552,15 +555,11 @@
             
                         <div class="button-group">
                             <a href="https://scooby101.mysellix.io/product/n3ny000-vip-plus" target="_blank">Purchase VIP Plus</a>
+							<a href="https://scooby101.mysellix.io/product/n3ny000-vip-plus-upgrade" target="_blank">VIP To VIP Plus</a>
+							
+							
                         </div>
-                    
-                            <a href="https://scooby101.mysellix.io/product/n3ny000-vip-plus-upgrade" target="_blank">Upgrade from VIP To VIP Plus</a>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Picture Box Below Pricing Section -->
-                <div class="pricing-image-box">
+										   <div class="pricing-image-box">
                     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                         <div class="image-carousel">
                             <img src="menu.png" alt="Image 1">
@@ -573,6 +572,13 @@
                         </div>
                     </a>
                 </div>
+	
+                    </div>
+					
+                </div>
+            
+      
+ 
             </section>
             
             
@@ -594,7 +600,7 @@
             height: 280%;
             top: 0;
             left: 0;
-            z-index:1; /* Place behind other content */
+            z-index:0; /* Place behind other content */
         }
         /* Your existing styles remain here */
         /* General Styles */
