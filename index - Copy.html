@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N3NY000 - Premium GTA V Mod Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #103FF7;
+            --secondary: #f4b400;
+            --accent: #4a90e2;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #ffffff;
+            --gray: #7f8c8d;
+            --dark-gray: #222;
+        }
+
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--light);
+            background: var(--dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 90px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .sidebar:hover {
+            width: 110px;
+            background: rgba(10, 10, 10, 0.9);
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: var(--light);
+            margin: 20px 0;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .sidebar a:hover .icon {
+            transform: scale(1.2);
+            color: var(--accent);
+        }
+
+        .sidebar a:hover::after {
+            width: 3px;
+            opacity: 1;
+        }
+
+        .sidebar a::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: var(--accent);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a .icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a .text {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Showcase Section */
+        .showcase {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .showcase video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .showcase .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+            z-index: 1;
+        }
+
+        .showcase .text {
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .showcase .text h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(16, 63, 247, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .showcase .text h3 {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .showcase .text p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--light);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .showcase .text a {
+            display: inline-block;
+            margin: 10px 15px;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1em;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase .text a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 63, 247, 0.4);
+        }
+
+        .showcase .text a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .showcase .text a:hover::before {
+            left: 100%;
+        }
+
+        /* Video Box Section */
+        .video-box {
+            padding: 60px 20px;
+            background: var(--darker);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .video-box .video-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            perspective: 1000px;
+        }
+
+        .video-box iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .video-box iframe:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        /* About Us Section */
+        .about-us {
+            padding: 80px 20px;
+            background: var(--dark-gray);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            color: var(--secondary);
+            font-weight: 700;
+			
+        }
+	.section-title2 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            color: var(--secondary);
+            font-weight: 700;
+			left: 41%;
+			
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .about-us p {
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #bbb;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent);
+        }
+
+        .feature h3 {
+            color: var(--secondary);
+            margin: 20px 0;
+            font-size: 1.3em;
+        }
+
+        .feature p {
+            color: #bbb;
+            font-size: 0.95em;
+            margin-bottom: 0;
+        }
+
+        .feature span {
+            font-size: 2.5em;
+            color: var(--accent);
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover span {
+            transform: scale(1.2);
+            color: var(--secondary);
+        }
+
+        /* Pricing Section */
+        #buy {
+            background: linear-gradient(to bottom, #111, #000);
+            padding: 80px 20px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        #buy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 60px;
+            z-index: 2;
+            perspective: 1000px;
+        }
+
+        .pricing-box {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 380px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+
+        .pricing-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(74, 144, 226, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .pricing-box:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 15px 40px rgba(16, 63, 247, 0.3);
+            border-color: var(--accent);
+        }
+
+        .pricing-box:hover::before {
+            animation: shine 1.5s;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                left: 150%;
+                opacity: 0;
+            }
+        }
+
+        .pricing-box .left-logo {
+            display: block;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .pricing-box .left-logo img {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .pricing-box:hover .left-logo img {
+            filter: drop-shadow(0 0 15px var(--accent));
+        }
+
+        .pricing-box .plan-name h3 {
+            color: var(--light);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .pricing-box .plan-name h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .pricing-box .value h3 {
+            color: var(--light);
+            font-size: 1.2em;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .pricing-box .value h3 span {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .pricing-box ul {
+            color: var(--light);
+            text-align: left;
+            list-style: none;
+            padding-left: 0;
+            margin: 25px 0;
+            flex-grow: 1;
+        }
+
+        .pricing-box ul li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .pricing-box ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .button-group a {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 30px;
+            margin: 8px 0;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 5px 15px rgba(16, 63, 247, 0.3);
+        }
+
+        .button-group a:nth-child(2) {
+            background: linear-gradient(135deg, var(--dark-gray), #333);
+        }
+
+        .button-group a:nth-child(3) {
+            background: linear-gradient(135deg, #f4b400, #f47c00);
+        }
+
+        .button-group a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 63, 247, 0.5);
+        }
+
+        .button-group a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .button-group a:hover::before {
+            left: 100%;
+        }
+
+        /* Image Carousel */
+        .pricing-image-box {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            height: 300px;
+        }
+
+        .image-carousel {
+            display: flex;
+            width: 400%;
+            height: 100%;
+            animation: scrollImages 30s linear infinite;
+        }
+
+        .image-carousel img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        @keyframes scrollImages {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(0); }
+            25% { transform: translateX(-25%); }
+            45% { transform: translateX(-25%); }
+            50% { transform: translateX(-50%); }
+            70% { transform: translateX(-50%); }
+            75% { transform: translateX(-75%); }
+            95% { transform: translateX(-75%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.9em;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                background: rgba(10, 10, 10, 0.9);
+            }
+            
+            .sidebar:hover {
+                width: 70px;
+            }
+            
+            .video-box {
+                flex-direction: column;
+                padding: 40px 20px;
+            }
+            
+            .video-box .video-container {
+                max-width: 100%;
+            }
+            
+            .pricing-box {
+                max-width: 100%;
+            }
+            
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature {
+                max-width: 100%;
+            }
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Glow Animation */
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px var(--primary); }
+            50% { text-shadow: 0 0 20px var(--accent); }
+            100% { text-shadow: 0 0 5px var(--primary); }
+        }
+
+        .glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#buy">
+            <span class="icon"><i class="fas fa-crown"></i></span>
+            <span class="text">VIP</span>
+        </a>
+
+        <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">
+            <span class="icon"><i class="fas fa-key"></i></span>
+            <span class="text">Free Key</span>
+        </a>
+
+        <a href="#showcase">
+            <span class="icon"><i class="fas fa-video"></i></span>
+            <span class="text">Showcase</span>
+        </a>
+        
+        <a href="#about">
+            <span class="icon"><i class="fas fa-info-circle"></i></span>
+            <span class="text">About</span>
+        </a>
+
+        <a href="download.html" target="_blank">
+            <span class="icon"><i class="fas fa-download"></i></span>
+            <span class="text">Download</span>
+        </a>
+        
+        <a href="fsl.html" target="_blank">
+            <span class="icon"><i class="fas fa-compact-disc"></i></span>
+            <span class="text">FSL</span>
+        </a>
+    </div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Showcase Section -->
+    <section class="showcase">
+        <video src="video.mp4" muted loop autoplay playsinline></video>
+        <div class="overlay"></div>
+        <div class="text">
+            <h2 class="glow">N3NY000</h2>
+            <h3>ULTIMATE GTA V MOD MENU</h3>
+            <p>Experience unparalleled control with our feature-packed mod menu. Dominate Los Santos with unique options, superior performance, and an intuitive interface designed for power users.</p>
+            <a href="https://discord.gg/uB4DM5GNQc" target="_blank" class="pulse">
+                <i class="fab fa-discord"></i> Join Our Discord
+            </a>
+        </div>
+    </section>
+
+    <!-- Video Showcase Section -->
+    <section id="showcase">
+        <section class="video-box">
+            <div class="video-container floating">
+                <iframe src="https://www.youtube.com/embed/c95i0i87Hvw?si=N7aOV0Y7UYNDdMct"
+                        title="N3NY000 Showcase"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-container floating" style="animation-delay: 0.5s;">
+                <iframe src="https://www.youtube.com/embed/q-fxzRr1BDE?si=c5bBCKl-46dQ-Mzv"
+                        title="N3NY000 Features"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about">
+        <section class="about-us">
+            <h2 class="section-title">Why Choose N3NY000?</h2>
+            <p>N3NY000 began as a revolutionary free mod menu in 2021, quickly becoming the most trusted name in GTA V modifications. After extensive development, we've returned with a completely rebuilt, ultra-stable platform packed with exclusive features you won't find anywhere else.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <span><i class="fas fa-star"></i></span>
+                    <h3>Exclusive Features</h3>
+                    <p>Car prosthetics, lightsabers, aggressive planes, magical snowballs, and hundreds of unique options that set us apart from any other menu.</p>
+                </div>
+                
+                <div class="feature">
+                    <span><i class="fas fa-tachometer-alt"></i></span>
+                    <h3>Peak Performance</h3>
+                    <p>Optimized codebase ensures maximum stability with minimal resource usage. Enjoy buttery smooth performance even with all features enabled.</p>
+                </div>
+                
+                <div class="feature">
+                    <span><i class="fas fa-shield-alt"></i></span>
+                    <h3>Advanced Protection</h3>
+                    <p>Multiple layers of anti-detection keep you safe while our crash protections defend against hostile menus.</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+
+<!-- Your existing pricing boxes should remain unchanged below this point -->
+
+    <!-- Pricing Section -->
+    <section id="buy">
+        <h2 class="section-title2">Choose Your Package</h2>
+        
+        <h2 class="pricing-title" style="text-align: center;">GTA 5 Enhanced:</h2>
+
+      
+            
+
+        <div class="pricing-container">
+           
+
+                   <!-- Free Version -->
+       
+                   <div class="pricing-box">
+                    <div class="left-logo">
+                        <img src="free.png" alt="N3NY000 Free">
+                    </div>
+                    <div class="plan-name">
+                        <h3>FREE VERSION</h3>
+                    </div>
+                    <div class="value">
+                        <h3>Key Resets Every 48 Hours</h3>
+                        <h3>Limited Feature Set</h3>
+                    </div>
+                    <ul>
+                        <li>Basic Player Options</li>
+                        <li>Essential Vehicle Features</li>
+                        <li>Limited Protections</li>
+                        <li>Basic Trolling Options</li>
+                        <li>Simple Money Methods</li>
+                    </ul>
+                    <div class="button-group">
+                        <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">
+                            <i class="fas fa-key"></i> Get Free Key
+                        </a>
+                    </div>
+                </div>
+            
+            <div class="pricing-box">
+                <div class="left-logo">
+                    <img src="free.png" alt="N3NY000 Free">
+                </div>
+                <div class="plan-name">
+                    <h3>ENHANCED VERSION</h3>
+                </div>
+                <div class="value">
+                    <h3>7 Days: <span>$15</span></h3>
+                    <h3>Lifetime: <span>$25</span></h3>
+
+                    <h3>Upgrade from VIP: <span>$10</span></h3>
+                    <h3>Upgrade from VIP+: <span>$5.50</span></h3>
+                </div>
+                <ul>
+                    
+                    <li>Access to Legacy & Enhanced Versions </li>
+                    <li>Everything from Legacy VIP Plus </li>
+                    <li>Battle Eye Enabled & Disabled Support</li>
+                    <li>Fully Working in Public Lobbies / Missions/Heists/Races Etc</li>
+                    <li>Recovery Options > Money/Rank/Unlocks/Stats</li>
+                    <li>Trolling Options</li>
+                    <li> </li>
+                </ul>
+                <div class="button-group">
+                    <a href="https://nenyooo.myshopify.com/products/nenyooo-enhanced-lifetime" target="_blank">
+                        <i class="fas fa-crown"></i> Purchase Lifetime 
+                    </a>
+                    <a href="https://dizzgaming.selly.store/product/13a4ec37" target="_blank">
+                        <i class="fas fa-clock"></i> Purchase 7-Day 
+                    </a>
+              
+                    <a href="https://dizzgaming.selly.store/product/b29238b8" target="_blank">
+                        <i class="fas fa-arrow-up"></i> Upgrade from VIP/VIP+
+                    </a>
+
+                    <a href="morepayments.html" target="_blank">
+                        <i class="fas fa-arrow-up"></i> More Payments
+                    </a>
+    
+                </div>
+            </div>
+
+        </div>
+
+
+<h2 class="pricing-title" style="text-align: center;">GTA 5 Legacy:</h2>
+
+
+        <div class="pricing-container">
+            <!-- Free Version -->
+       
+            <div class="pricing-box">
+                <div class="left-logo">
+                    <img src="free.png" alt="N3NY000 Free">
+                </div>
+                <div class="plan-name">
+                    <h3>FREE VERSION</h3>
+                </div>
+                <div class="value">
+                    <h3>Key Resets Every 48 Hours</h3>
+                    <h3>Limited Feature Set</h3>
+                </div>
+                <ul>
+                    <li>Basic Player Options</li>
+                    <li>Essential Vehicle Features</li>
+                    <li>Limited Protections</li>
+                    <li>Basic Trolling Options</li>
+                    <li>Simple Money Methods</li>
+                </ul>
+                <div class="button-group">
+                    <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">
+                        <i class="fas fa-key"></i> Get Free Key
+                    </a>
+                </div>
+            </div>
+    
+
+            <!-- VIP Version -->
+            <div class="pricing-box">
+                <div class="left-logo">
+                    <img src="vip.png" alt="N3NY000 VIP">
+                </div>
+                <div class="plan-name">
+                    <h3>VIP EDITION</h3>
+                </div>
+                <div class="value">
+                    <h3>7 Days: <span>$5</span></h3>
+                    <h3>Lifetime: <span>$10</span></h3>
+                </div>
+                <ul>
+                    <li>Map & XML Vehicle Loader</li>
+                    <li>Advanced Vehicle Abilities</li>
+                    <li>Full Casino Rigging</li>
+                    <li>Complete Stat Editor</li>
+                    <li>All Unlocks & Rank Options</li>
+                    <li>Money/RP Drop System</li>
+                    <li>Session Bounty Loops</li>
+                    <li>Streamer Mode</li>
+                    <li>Player IP & Geo Location</li>
+                    <li>Save Vehicles & Outfits</li>
+                </ul>
+                <div class="button-group">
+                    <a href="https://dizzgaming.selly.store/product/9a07ddff" target="_blank">
+                        <i class="fas fa-crown"></i> Purchase Lifetime VIP
+                    </a>
+                   
+                    <a href="morepayments.html" target="_blank">
+                        <i class="fas fa-arrow-up"></i> More Payments
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- VIP Plus Version -->
+            <div class="pricing-box">
+                <div class="left-logo">
+                    <img src="vipplus.png" alt="N3NY000 VIP Plus">
+                </div>
+                <div class="plan-name">
+                    <h3>VIP PLUS</h3>
+                </div>
+                <div class="value">
+                    <h3>7 Days: <span>$10</span></h3>
+                    <h3>Lifetime: <span>$20</span></h3>
+                </div>
+                <ul>
+                    <li>All VIP Features Included</li>
+                    <li>ScriptHookV Integration</li>
+                    <li>VFX Engine & Session Browser</li>
+                    <li>Player Tracker & Magnet</li>
+                    <li>DLC Loader & Business Manager</li>
+                    <li>Chat Spammer & Traffic Control</li>
+                    <li>Advanced Crashes & Kicks</li>
+                    <li>Teleport All Players</li>
+                    <li>Rockstar ID Tools</li>
+                    <li>Battle Eye Support</li>
+                    <li>Protections</li>
+                </ul>
+                <div class="button-group">
+                    <a href="https://dizzgaming.selly.store/product/534851ce" target="_blank">
+                        <i class="fas fa-crown"></i> Purchase Lifetime VIP+
+                    </a>
+                    <a href="https://dizzgaming.selly.store/product/08e421eb" target="_blank">
+                        <i class="fas fa-clock"></i> Purchase 7-Day VIP+
+                    </a>
+                    <a href="https://dizzgaming.selly.store/product/b29238b8" target="_blank">
+                        <i class="fas fa-arrow-up"></i> Purchase Upgrade to VIP+
+                    </a>
+
+                    <a href="morepayments.html" target="_blank">
+                        <i class="fas fa-arrow-up"></i> More Payments
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing-image-box">
+            <div class="image-carousel">
+                <img src="menu.png" alt="Menu Preview 1">
+                <img src="dance.gif" alt="Feature Showcase 1">
+                <img src="menu2.png" alt="Menu Preview 2">
+                <img src="dance2.gif" alt="Feature Showcase 2">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
+        <p>This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#4a90e2"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#4a90e2",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // Add scroll animation for sections
+            const sections = document.querySelectorAll('section');
+            
+            function checkScroll() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
