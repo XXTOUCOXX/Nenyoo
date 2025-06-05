@@ -4,190 +4,507 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N3ny000 Download</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+            --info: #0984e3;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: url('downloadGuides/backgrounddown.gif') no-repeat center center fixed; /* Replace with your image or GIF URL */
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('downloadGuides/backgrounddown.gif') no-repeat center center fixed;
             background-size: cover;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            color: var(--light);
+            overflow-x: hidden;
         }
 
         .taskbar {
             width: 100%;
             color: white;
-            padding: 10px 0;
+            padding: 15px 0;
             display: flex;
-            justify-content: space-around; /* Ensures even spacing */
-            position: fixed; /* Make the taskbar follow the page */
+            justify-content: center;
+            position: fixed;
             top: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             z-index: 1000;
-            box-sizing: border-box; /* Ensures the padding doesn't affect layout */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .taskbar-container {
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .taskbar-nav {
+            display: flex;
+            gap: 30px;
         }
 
         .taskbar a {
             color: white;
             text-decoration: none;
             font-size: 16px;
+            font-weight: 500;
             display: flex;
             align-items: center;
-            padding: 0 10px; /* Add padding for spacing */
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+            gap: 12px; /* Added gap between icon and text */
         }
 
-        .taskbar a:hover {
-            text-decoration: underline;
-        }
+            .taskbar a:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
 
-        .taskbar a img {
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-        }
+            .taskbar a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: var(--accent);
+                transition: all 0.3s ease;
+            }
 
+            .taskbar a:hover::after {
+                width: 100%;
+                left: 0;
+            }
+
+            .taskbar a i {
+                font-size: 18px;
+                width: 24px; /* Fixed width for consistent spacing */
+                text-align: center;
+            }
+
+        /* Rest of your existing CSS remains the same */
         .content {
-            margin-top: 80px; /* Increase this margin to give more space below the taskbar */
+            margin-top: 100px;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .download-btn {
+            position: relative;
+            padding: 18px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+            .download-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: 0.5s;
+            }
+
+            .download-btn:hover::before {
+                left: 100%;
+            }
+
+            .download-btn i {
+                margin-right: 10px;
+                font-size: 20px;
+            }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+            }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #55efc4);
+        }
+
+            .btn-success:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+            }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #ffeaa7);
+        }
+
+            .btn-warning:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(253, 203, 110, 0.4);
+            }
+
+        .guide {
+            margin-top: 60px;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .button-container {
+        .guide-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+            .guide-header h2 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+                background: linear-gradient(to right, var(--accent), var(--secondary));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                position: relative;
+                display: inline-block;
+            }
+
+                .guide-header h2::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -10px;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background: linear-gradient(to right, var(--accent), var(--secondary));
+                    border-radius: 3px;
+                }
+
+        .guide-item {
+            margin-bottom: 40px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+            .guide-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            }
+
+            .guide-item h3 {
+                margin: 0 0 20px 0;
+                font-size: 1.5rem;
+                color: white;
+                position: relative;
+                padding-bottom: 10px;
+            }
+
+                .guide-item h3::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 50px;
+                    height: 3px;
+                    background: var(--accent);
+                    border-radius: 3px;
+                }
+
+            .guide-item a {
+                color: var(--accent);
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+                .guide-item a:hover {
+                    text-decoration: underline;
+                    color: #ff9ff3;
+                }
+
+            .guide-item img {
+                max-width: 100%;
+                height: auto;
+                margin-top: 20px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s ease;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+                .guide-item img:hover {
+                    transform: scale(1.02);
+                }
+
+        .image-container {
             display: flex;
-            gap: 20px;
+            justify-content: center;
             margin-top: 20px;
         }
 
-        .button-container a {
-            text-decoration: none;
-        }
+            .image-container img {
+                max-height: 500px;
+                object-fit: contain;
+            }
 
-        .button-container button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .button-container button:first-child {
-            background-color: #007BFF;
-            color: white;
-        }
-
-        .button-container button:first-child:hover {
-            background-color: #0056b3;
-        }
-
-        .button-container button:last-child {
-            background-color: #28A745;
-            color: white;
-        }
-
-        .button-container button:last-child:hover {
-            background-color: #1e7e34;
-        }
-
-        .guide {
-            margin-top: 40px;
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .guide-item {
+        .troubleshooting {
+            width: 100%;
+            background: rgba(214, 48, 49, 0.1);
+            border-left: 4px solid var(--danger);
+            padding: 20px;
+            border-radius: 8px;
             margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(214, 48, 49, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(214, 48, 49, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(214, 48, 49, 0);
+            }
+        }
+
+        .troubleshooting h3 {
+            color: var(--danger);
+            margin-bottom: 15px;
+        }
+
+        .troubleshooting ul {
+            padding-left: 20px;
+        }
+
+        .troubleshooting li {
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            width: 100%;
             text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .guide-item img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-        }
+        @media (max-width: 768px) {
+            .taskbar-nav {
+                gap: 15px;
+            }
 
-        .guide-item h3 {
-            margin: 0;
-            font-size: 20px;
-            color: white;
+            .taskbar a {
+                padding: 8px 10px;
+                font-size: 14px;
+                gap: 8px; /* Adjusted gap for mobile */
+            }
+
+                .taskbar a i {
+                    font-size: 16px;
+                    width: 20px;
+                }
+
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-item {
+                padding: 20px;
+            }
+
+            .guide-header h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="taskbar">
-        <a href="index.html" target="_blank"><img src="home-icon.png" alt="Home"> </a>
-        <a href="fsl.html" target="_blank"><img src="about-icon.png" alt="FSL"> </a>
-        <a href="https://scooby101.mysellix.io/product/n3ny000-vip" target="_blank"><img src="services-icon.png" alt=" ">Purchase VIP</a>
-        <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank"><img src="contact-icon.png" alt=" "> Free Key</a>
+        <div class="taskbar-container">
+            <div class="taskbar-nav">
+                <a href="index.html" target="_blank"><i class="fas fa-home"></i> Home</a>
+                <a href="fsl.html" target="_blank"><i class="fas fa-info-circle"></i> FSL</a>
+                <a href=https://www.nenyoocheats.com/" target="_blank"><i class="fas fa-crown"></i> Purchase VIP</a>
+                <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank"><i class="fas fa-key"></i> Free Key</a>
+            </div>
+        </div>
     </div>
+
     <div class="content">
-        <div class="button-container">
-            <a href="https://mega.nz/file/lCkzgRhR#Fw62YM2PO63PYXydiOtHmZo9NcBmoik1CZ2gttW3MZw" target="_blank"><button>Download N3ny000 Loader & Auto Updater\</button></a>
-        </div>
+        <div class="button-grid">
+            <a href="https://mega.nz/file/lCkzgRhR#Fw62YM2PO63PYXydiOtHmZo9NcBmoik1CZ2gttW3MZw" target="_blank" class="download-btn btn-primary">
+                <i class="fas fa-download"></i> Download N3ny000 Loader & Auto Updater
+            </a>
 
-     <div class="button-container">
-            <a href="https://updown.link/file/atygbt" target="_blank"><button>Nenyooo Folder (Extract in C Drive)</button></a>
-        </div>
+            <a href="https://updown.link/file/atygbt" target="_blank" class="download-btn btn-success">
+                <i class="fas fa-folder-open"></i> Nenyooo Folder (Extract in C Drive)
+            </a>
 
-             <div class="button-container">
-            <a href="https://bstlar.com/F/NenyoooFREEmanual" target="_blank"><button>Manual Inject with DLL (Only FREE Version)</button></a>
+            <a href="https://bstlar.com/F/NenyoooFREEmanual" target="_blank" class="download-btn btn-warning">
+                <i class="fas fa-file-code"></i> Manual Inject with DLL (Only FREE Version)
+            </a>
         </div>
 
         <div class="guide">
-            <div class="guide-item">
-                <h3>Menu Crashing On Inject or having other issues:</h3>
-            </div>
-            <div class="guide-item">
-                <h3>Make Sure TO Install All VC Runtimes:  <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one" target="_blank"> Download </a></h3>
+            <div class="guide-header">
+                <h2>Installation Guide</h2>
             </div>
 
-    <div class="guide-item">
-                <h3>ID3DCOMPILER_43.DLL Error (Read The Steps On the Site)  <a href="https://www.dll-files.com/download/0c20f567e2e586f6bcf3f0ce3ae64aab/d3dcompiler_43.dll.html?c=NEtlVFVZaHdDU2Y0USt3b0lOaVNUQT09"_blank"> Download </a></h3>
-            </div>
-
-            <div class="guide-item">
-                <h3>Try Deleting C/N3NYOO Folder</h3>
+            <div class="troubleshooting">
+                <h3><i class="fas fa-exclamation-triangle"></i> Menu Crashing On Inject or having other issues:</h3>
+                <ul>
+                    <li>Make Sure TO Install All VC Runtimes: <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one" target="_blank">Download</a></li>
+                    <li>ID3DCOMPILER_43.DLL Error (Read The Steps On the Site) <a href="https://www.dll-files.com/download/0c20f567e2e586f6bcf3f0ce3ae64aab/d3dcompiler_43.dll.html?c=NEtlVFVZaHdDU2Y0USt3b0lOaVNUQT09" target="_blank">Download</a></li>
+                    <li>Try Deleting C/N3NYOO Folder</li>
+                </ul>
             </div>
 
             <div class="guide-item">
                 <h3>Step 1: First Of All Download Loader From Above ^^^</h3>
             </div>
+
             <div class="guide-item">
                 <h3>Step 2: Click This Button To Login With Your Key [FREE Or VIP]</h3>
-                <img src="downloadGuides/1.webp" alt="Step 2">
+                <div class="image-container">
+                    <img src="downloadGuides/1.webp" alt="Step 2">
+                </div>
             </div>
+
             <div class="guide-item">
                 <h3>Step 3: Make Sure BattlEye Is OFF</h3>
-                <img src="downloadGuides/2.webp" alt="Step 3">
+                <div class="image-container">
+                    <img src="downloadGuides/2.webp" alt="Step 3">
+                </div>
             </div>
 
             <div class="guide-item">
                 <h3>Step 4: Start GTA V And Go On Main Loading Page</h3>
-                <img src="downloadGuides/3.webp" alt="Step 4">
+                <div class="image-container">
+                    <img src="downloadGuides/3.webp" alt="Step 4">
+                </div>
             </div>
 
             <div class="guide-item">
                 <h3>Step 5: Start GTA V And Go On Main Loading Page</h3>
-                <img src="downloadGuides/4.webp" alt="Step 5">
+                <div class="image-container">
+                    <img src="downloadGuides/4.webp" alt="Step 5">
+                </div>
             </div>
 
             <div class="guide-item">
                 <h3>Step 6: Start GTA V And Go On Main Loading Page</h3>
-                <img src="downloadGuides/5.webp" alt="Step 6">
+                <div class="image-container">
+                    <img src="downloadGuides/5.webp" alt="Step 6">
+                </div>
             </div>
 
             <div class="guide-item">
                 <h3>Step 7: When Game Is Loaded Press F4 On Keyboard To Open Menu Or Press R1 + Right D-Pad On Controller</h3>
-                <img src="downloadGuides/6.webp" alt="Step 7">
+                <div class="image-container">
+                    <img src="downloadGuides/6.webp" alt="Step 7">
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="footer">
+        <p>© 2023 N3ny000. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const guideItems = document.querySelectorAll('.guide-item');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            guideItems.forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'all 0.6s ease-out';
+                observer.observe(item);
+            });
+        });
+    </script>
 </body>
 </html>
