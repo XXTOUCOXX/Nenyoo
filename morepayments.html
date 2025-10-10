@@ -3,70 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alternative payment methods for N3NY000 Mod Menu. PayPal, Crypto, Gift Cards, and more. Safe and secure payments with instant delivery.">
+    <meta name="keywords" content="N3NY000 payment, GTA 5 mod menu payment, crypto payment, PayPal, gift cards, alternative payments">
     <link rel="shortcut icon" href="images/logo.png">
-    <title>Payment Methods | INFAMOUS</title>
+    <title>Payment Methods - N3NY000 / Nenyooo | Alternative Payments</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #e74c3c;
-            --secondary: #2980b9;
-            --accent: #3498db;
-            --text: #2d3436;
+            --primary: #103FF7;
+            --secondary: #f4b400;
+            --accent: #4a90e2;
+            --dark: #0a0a0a;
+            --light: #ffffff;
+            --success: #00b894;
+            --danger: #d63031;
             --light-gray: #f5f6fa;
             --medium-gray: #dfe6e9;
             --dark-gray: #636e72;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 15px;
-            color: var(--text);
-            line-height: 1.5;
-            background-color: var(--light-gray);
+            padding: 20px;
+            color: var(--light);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+            min-height: 100vh;
         }
         .tabs {
             display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--medium-gray);
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(74, 144, 226, 0.3);
+            gap: 10px;
         }
         .tab {
-            padding: 10px 20px;
+            padding: 14px 28px;
             cursor: pointer;
-            background: white;
-            border: 1px solid var(--medium-gray);
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(74, 144, 226, 0.3);
             border-bottom: none;
-            border-radius: 5px 5px 0 0;
-            margin-right: 5px;
+            border-radius: 10px 10px 0 0;
             font-weight: 600;
-            color: var(--dark-gray);
+            color: var(--light);
             transition: all 0.3s ease;
+            position: relative;
         }
         .tab.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(16, 63, 247, 0.3), rgba(74, 144, 226, 0.3));
+            color: var(--secondary);
+            border-color: var(--accent);
+            box-shadow: 0 -5px 15px rgba(74, 144, 226, 0.2);
         }
         .tab:hover:not(.active) {
-            background: var(--medium-gray);
+            background: rgba(40, 40, 40, 0.9);
+            transform: translateY(-2px);
         }
         .tab-content {
             display: none;
-            background: white;
-            padding: 20px;
-            border-radius: 0 5px 5px 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: rgba(30, 30, 30, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 0 15px 15px 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.4s ease;
         }
         .tab-content.active {
             display: block;
         }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         h1 {
-            color: var(--primary);
-            font-size: 24px;
-            margin: 10px 0 20px;
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin: 10px 0 30px;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 20px rgba(74, 144, 226, 0.3);
         }
         .payment-grid {
             display: grid;
@@ -74,20 +97,27 @@
             gap: 15px;
         }
         .payment-section {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: rgba(40, 40, 40, 0.6);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .payment-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.2);
+            border-color: rgba(74, 144, 226, 0.3);
         }
         h2 {
             color: var(--secondary);
-            font-size: 18px;
-            margin: 0 0 12px;
-            border-bottom: 1px solid var(--medium-gray);
-            padding-bottom: 8px;
+            font-size: 1.4rem;
+            margin: 0 0 15px;
+            border-bottom: 2px solid rgba(244, 180, 0, 0.3);
+            padding-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .payment-method {
             margin: 10px 0;
@@ -109,21 +139,22 @@
             color: var(--primary);
         }
         .contact-box {
-            background: #e8f4f8;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+            background: linear-gradient(135deg, rgba(16, 63, 247, 0.15), rgba(74, 144, 226, 0.1));
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 25px;
             grid-column: span 2;
-            border: 1px solid #d1e7f5;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            box-shadow: 0 5px 20px rgba(16, 63, 247, 0.2);
         }
         a {
-            color: var(--secondary);
+            color: var(--accent);
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.2s;
+            transition: all 0.3s ease;
         }
         a:hover {
-            color: var(--primary);
+            color: var(--secondary);
             text-decoration: underline;
         }
         .compact-list {
@@ -186,7 +217,7 @@
     </div>
 
     <div id="alternative" class="tab-content active">
-        <h1><i class="fas fa-money-bill-wave"></i> MORE PAYMENT METHODS FOR <span class="highlight">INFAMOUS // NENYOOO</span></h1>
+        <h1><i class="fas fa-money-bill-wave"></i> MORE PAYMENT METHODS FOR <span class="highlight">N3NY000 // NENYOOO</span></h1>
         
         <div class="payment-grid">
             <div class="payment-section">

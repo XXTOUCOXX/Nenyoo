@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>FSL Help - Nenyooo</title>
+    <title>FSL (Freemode Session Loader) - N3NY000 Guide</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="Nenyooo - FSL Help" />
+    <meta name="description" content="Learn about FSL (Freemode Session Loader) for N3NY000. Store online save data locally, gain infinite money, and stay in public sessions with friends." />
+    <meta name="keywords" content="FSL GTA 5, Freemode Session Loader, N3NY000 FSL, GTA 5 local save, bypass BattlEye, GTA V session starter, offline GTA online" />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -146,18 +147,19 @@
       }
 
       .steps li {
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
         position: relative;
         list-style-type: none;
-        padding-left: 2rem;
+        padding-left: 2.5rem;
+        line-height: 1.8;
       }
 
-      .steps li::before {
-        content: '→';
+      .steps li i {
         position: absolute;
         left: 0;
+        top: 3px;
         color: var(--secondary);
-        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.1rem;
       }
 
       .warning {
@@ -186,9 +188,15 @@
       code {
         font-family: 'JetBrains Mono', monospace;
         background: var(--code-bg);
-        padding: 0.2rem 0.4rem;
-        border-radius: 4px;
-        font-size: 0.9rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      strong {
+        color: var(--accent);
       }
 
       @media (max-width: 768px) {
@@ -214,13 +222,14 @@
   <body>
     <div class="container">
       <div class="content">
-        <h1>FSL</h1>
-        <p>A powerful tool that allows you to store your online save data locally, gain infinite money, and much more! (Nothing saves to your real GTA 5 account)</p>
-        <p>Stay in public sessions, start a new public session & use the player magnet to pull players into your sessions. Your friends can join you as well.</p>
+        <h1><i class="fas fa-compact-disc"></i> FSL (Freemode Session Loader)</h1>
+        <p><strong>What is FSL?</strong> A powerful tool that allows you to store your online save data locally, gain infinite money, and much more! <span style="color: var(--danger); font-weight: 600;">(Nothing saves to your real GTA 5 account)</span></p>
+        <p><i class="fas fa-users"></i> Stay in public sessions, start a new public session & use the player magnet to pull players into your sessions. Your friends can join you as well!</p>
 
         <div class="download-section">
           <div class="download-card">
             <h3><i class="fas fa-bolt"></i> Enhanced Version</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: #bbb;">For GTA V Enhanced Edition with BattlEye support</p>
             <a href="https://bstlar.com/F/FSLgtaEH" target="_blank">
               <i class="fas fa-download"></i> Download Enhanced FSL
             </a>
@@ -228,6 +237,7 @@
 
           <div class="download-card">
             <h3><i class="fas fa-history"></i> Legacy Version</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: #bbb;">For GTA V Legacy Edition (older versions)</p>
             <a href="https://bstlar.com/F/FSLgta" target="_blank">
               <i class="fas fa-download"></i> Download Legacy FSL
             </a>
@@ -235,6 +245,7 @@
 
           <div class="download-card">
             <h3><i class="fas fa-cogs"></i> Required Components</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: #bbb;">Install these before using FSL to avoid crashes</p>
             <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/" target="_blank">
               <i class="fas fa-download"></i> Install VC Runtimes
             </a>
@@ -243,19 +254,21 @@
 
         <div class="warning">
           <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
-          <p>Your friends can join you in these sessions, but remember nothing saves to your real GTA 5 account.</p>
+          <p><strong>Remember:</strong> Your friends can join you in these sessions, but nothing saves to your real GTA 5 account. All progress made in FSL mode is temporary and local only.</p>
+          <p><i class="fas fa-info-circle"></i> FSL is perfect for testing vehicles, weapons, and features without risking your main account.</p>
         </div>
 
-        <h2>How To Bypass The BattlEye Anti-Cheat</h2>
+        <h2><i class="fas fa-shield-alt"></i> How To Bypass The BattlEye Anti-Cheat</h2>
+        <p style="margin-bottom: 1.5rem; color: #bbb;">Follow these steps carefully to bypass BattlEye and use FSL:</p>
         <ol class="steps">
-          <li>Make sure BattlEye is disabled in the Rockstar Games Launcher settings.</li>
-          <li>Input the command <code>-nobattleeye</code> in <code>commandline.txt</code> located in your game directory (EPIC GAMES/STEAM etc.).</li>
-          <li>Start the Command Prompt as Administrator and enter <code>sc delete BEService</code> to remove BattleEye service completely.</li>
-          <li>Let the game load to the main menu. Do not load story mode or online.</li>
-          <li>If auto-loading into story or online mode is enabled, disable it in the game settings. After disabling auto-loading, restart the game.</li>
-          <li>Once the game is at the main menu, inject Nenyooo.</li>
-          <li>AFTER THE DLL IS INJECTED SELECT TO GO TO STORY MODE FIRST.</li>
-          <li>Once you are in story mode, open Nenyooo, select <strong>Network > Session Starter</strong> and join a public or invite-only session.</li>
+          <li><i class="fas fa-toggle-off"></i> Make sure BattlEye is disabled in the Rockstar Games Launcher settings.</li>
+          <li><i class="fas fa-terminal"></i> Input the command <code>-nobattleeye</code> in <code>commandline.txt</code> located in your game directory (EPIC GAMES/STEAM etc.).</li>
+          <li><i class="fas fa-user-shield"></i> Start the Command Prompt as Administrator and enter <code>sc delete BEService</code> to remove BattleEye service completely.</li>
+          <li><i class="fas fa-gamepad"></i> Let the game load to the main menu. Do not load story mode or online.</li>
+          <li><i class="fas fa-cog"></i> If auto-loading into story or online mode is enabled, disable it in the game settings. After disabling auto-loading, restart the game.</li>
+          <li><i class="fas fa-syringe"></i> Once the game is at the main menu, inject N3NY000.</li>
+          <li><i class="fas fa-exclamation-circle"></i> <strong style="color: var(--warning);">IMPORTANT:</strong> AFTER THE DLL IS INJECTED SELECT TO GO TO STORY MODE FIRST.</li>
+          <li><i class="fas fa-network-wired"></i> Once you are in story mode, open N3NY000, select <strong>Network > Session Starter</strong> and join a public or invite-only session.</li>
         </ol>
       </div>
     </div>
