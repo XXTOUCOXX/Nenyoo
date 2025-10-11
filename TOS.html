@@ -1,272 +1,842 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N3NY000 - Terms of Service & Policies</title>
-    <meta name="description" content="Read the Terms of Service, Refund Policy, and FAQ for Nenyooo Store. Important information about product access, payments, and support.">
+    <meta name="description" content="Read the Terms of Service, Refund Policy, and FAQ for N3NY000 Store. Important information about product access, payments, and support.">
     <meta name="keywords" content="N3NY000 TOS, Nenyooo terms of service, mod menu refund policy, payment policy, crypto payments, GTA 5 mod menu FAQ">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
+        :root {
+            --primary: #103FF7;
+            --secondary: #f4b400;
+            --accent: #4a90e2;
+            --danger: #d63031;
+            --success: #00b894;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #ffffff;
+            --gray: #7f8c8d;
+            --dark-gray: #222;
+        }
+
+        * {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
-            color: #f0f0f0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark);
+            color: var(--light);
             line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
         }
 
         .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            background: rgba(30, 30, 30, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
         }
 
-        h1 {
-            color: #4a90e2;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .back-button {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 24px;
+            background: var(--accent);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .back-button:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 63, 247, 0.4);
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+
+        .header {
             text-align: center;
-            text-shadow: 0 0 20px rgba(74, 144, 226, 0.3);
+            margin-bottom: 50px;
+            padding: 40px 20px;
+            background: rgba(16, 63, 247, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
         }
 
-        h2 {
-            color: #f4b400;
-            font-size: 1.6rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(244, 180, 0, 0.3);
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(244, 180, 0, 0.5);
+        }
+
+        .header p {
+            color: #bbb;
+            font-size: 1.1em;
+            margin-top: 15px;
+        }
+
+        .quick-summary {
+            background: linear-gradient(135deg, rgba(214, 48, 49, 0.15), rgba(214, 48, 49, 0.05));
+            border: 2px solid var(--danger);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(214, 48, 49, 0.2);
+        }
+
+        .quick-summary h2 {
+            color: var(--danger);
+            font-size: 1.8em;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        h2 i {
-            font-size: 1.3rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: #ccc;
-        }
-
-        ul {
-            margin: 1rem 0;
-            padding-left: 0;
+        .quick-summary ul {
             list-style: none;
+            padding: 0;
         }
 
-        ul li {
-            margin-bottom: 0.8rem;
-            padding-left: 2rem;
+        .quick-summary ul li {
+            padding: 12px 0 12px 35px;
             position: relative;
-            line-height: 1.8;
+            color: #ddd;
+            font-size: 1.05em;
         }
 
-        ul li::before {
+        .quick-summary ul li::before {
+            content: '\f06a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--danger);
+            font-size: 1.2em;
+        }
+
+        .tos-section {
+            background: rgba(34, 34, 34, 0.9);
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tos-section:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tos-section h2 {
+            color: var(--secondary);
+            font-size: 1.7em;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tos-section h2 i {
+            color: var(--accent);
+        }
+
+        .simple-explain {
+            background: rgba(74, 144, 226, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 1.05em;
+            color: #e0e0e0;
+        }
+
+        .simple-explain strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .rule-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .rule-list li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        .rule-list li::before {
             content: '\f00c';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
             left: 0;
-            color: #4a90e2;
+            color: var(--accent);
+            font-size: 1.1em;
         }
 
-        .faq {
-            margin-top: 3rem;
-        }
-
-        .faq h2 {
-            cursor: pointer;
-            background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(244, 180, 0, 0.1));
+        .warning-box {
+            background: rgba(244, 180, 0, 0.1);
+            border-left: 4px solid var(--secondary);
             padding: 18px 20px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(74, 144, 226, 0.3);
-            border-bottom: 2px solid rgba(244, 180, 0, 0.3);
-        }
-
-        .faq h2:hover {
-            background: linear-gradient(135deg, rgba(74, 144, 226, 0.3), rgba(244, 180, 0, 0.2));
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
-        }
-
-        .faq-content {
-            display: none;
-            background: rgba(40, 40, 40, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border-left: 4px solid #4a90e2;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .active + .faq-content {
-            display: block;
-        }
-
-        .highlight {
-            color: #f4b400;
-            font-weight: 600;
-        }
-
-        .important {
-            background: rgba(214, 48, 49, 0.1);
-            border-left: 4px solid #d63031;
-            padding: 1rem;
+            margin: 20px 0;
             border-radius: 8px;
-            margin: 1.5rem 0;
         }
 
-        .important strong {
-            color: #d63031;
+        .warning-box p {
+            color: var(--light);
+            margin: 0;
+        }
+
+        .warning-box strong {
+            color: var(--secondary);
+        }
+
+        .danger-box {
+            background: rgba(214, 48, 49, 0.1);
+            border-left: 4px solid var(--danger);
+            padding: 18px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .danger-box p {
+            color: var(--light);
+            margin: 0;
+        }
+
+        .danger-box strong {
+            color: var(--danger);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 50px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: var(--secondary);
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .faq-item {
+            background: rgba(34, 34, 34, 0.9);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent);
+        }
+
+        .faq-question {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(244, 180, 0, 0.1));
+            padding: 20px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.3), rgba(244, 180, 0, 0.2));
+        }
+
+        .faq-question h3 {
+            color: var(--light);
+            font-size: 1.15em;
+            margin: 0;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-question i {
+            color: var(--accent);
+        }
+
+        .faq-toggle {
+            color: var(--secondary);
+            font-size: 1.3em;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: rgba(20, 20, 20, 0.9);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 20px 25px;
+        }
+
+        .faq-answer p {
+            color: #ccc;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .acknowledgment {
+            background: linear-gradient(135deg, rgba(0, 184, 148, 0.15), rgba(0, 184, 148, 0.05));
+            border: 2px solid var(--success);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .acknowledgment h2 {
+            color: var(--success);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .acknowledgment p {
+            color: #ddd;
+            font-size: 1.1em;
+        }
+
+        footer {
+            background: var(--darker);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 50px;
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .tos-section {
+                padding: 25px;
+            }
+
+            .tos-section h2 {
+                font-size: 1.4em;
+            }
+
+            .quick-summary {
+                padding: 20px;
+            }
+
+            .faq-question h3 {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
-
 <body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
     <div class="container">
-        <h1><i class="fas fa-file-contract"></i> Terms of Service (TOS) – N3NY000 Store</h1>
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
 
-        <div class="important">
-            <p><strong><i class="fas fa-exclamation-triangle"></i> IMPORTANT:</strong> By purchasing, downloading, or using any products sold through N3NY000 Store (including N3NY000, Nenyooo, Infamous, and Riptide), you fully agree to the following Terms of Service. If you do not agree, you must not purchase, download, or use our products.</p>
+        <div class="header">
+            <h1><i class="fas fa-file-contract"></i> Terms of Service</h1>
+            <p>N3NY000 Store - Please read carefully before purchasing</p>
         </div>
 
-        <h2><i class="fas fa-user-check"></i> 1. Product Access and Usage</h2>
-        <ul>
-            <li>We reserve the right to ban, suspend, or permanently terminate your product key and account at any time without prior notice if you are found in violation of our terms.</li>
-            <li>Lifetime access means the lifetime of the product, not your lifetime. Products can be shut down, discontinued, or retired at any time without compensation.</li>
-            <li>Unauthorized distribution, sharing, reselling, or leaking of your product key is strictly prohibited and will result in an instant ban.</li>
-            <li>It is your responsibility to keep your product key safe. Lost, stolen, or shared keys will not be replaced. Sharing your key will result in a ban.</li>
-        </ul>
-
-        <h2><i class="fas fa-credit-card"></i> 2. Payment and Fraud Protection</h2>
-        <ul>
-            <li>We reserve the right to decline, hold, or cancel any payment flagged as suspicious, fraudulent, or high-risk.</li>
-            <li>If your payment is flagged, you will not receive your product key. The payment may be held or refunded to the card owner.</li>
-            <li>Chargebacks are strictly prohibited. Any chargeback will result in a permanent ban of your product key and blacklisting from future services.</li>
-            <li>Threatening a chargeback will result in an instant ban.</li>
-            <li>All purchases are logged and secured with transaction records, IP address, and device information to be used as evidence against fraudulent chargebacks.</li>
-            <li>Attempting a chargeback after agreeing to these terms is considered a breach of contract and fraudulent activity. We will submit all logs, communications, and user agreements as proof to the payment processor to contest chargebacks.</li>
-            <li>Users who attempt a chargeback agree to forfeit all future access to Nenyooo Store and its associated services permanently.</li>
-            <li>Providing fake payment information such as a false name, billing address, or contact details will result in the order being placed on hold for manual review. We will require a valid reason for the fake information and proof of card ownership. This proof must include a clear image of the card showing the last four digits and the cardholder's name, with all other sensitive information hidden.</li>
-        </ul>
-
-        <h2><i class="fab fa-bitcoin"></i> 3. Cryptocurrency Payments</h2>
-        <ul>
-            <li>Cryptocurrency payments are final and cannot be reversed, refunded, or disputed.</li>
-            <li>It is your responsibility to send the exact payment amount to the correct wallet address.</li>
-            <li>We are not responsible for payments sent to the wrong address, incorrect payment amounts, or network fee issues.</li>
-            <li>Failure to cover transaction fees on the blockchain will result in an incomplete payment, and your product key will not be delivered.</li>
-            <li>If you send less than the required amount or fail to cover network fees, your order will be invalid, and no compensation or product key will be provided.</li>
-        </ul>
-
-        <h2><i class="fas fa-sync-alt"></i> 4. Product Updates and Delays</h2>
-        <ul>
-            <li>Purchasing during updates or maintenance does not guarantee immediate access. There is no ETA for when the product will be fully available.</li>
-            <li>We prioritize security and thorough testing before public releases. Development may be delayed due to personal life commitments.</li>
-            <li>No compensation, refunds, or time extensions will be provided due to update delays.</li>
-        </ul>
-
-        <h2><i class="fas fa-headset"></i> 5. Support Policy</h2>
-        <ul>
-            <li>Support is provided when we are available and is not guaranteed to be instant.</li>
-            <li>Spamming support channels will result in refusal of further assistance.</li>
-            <li>We provide detailed guides to help you set up and troubleshoot common issues. You are expected to follow these guides before requesting support.</li>
-        </ul>
-
-        <h2><i class="fas fa-server"></i> 6. Service Availability</h2>
-        <ul>
-            <li>We do not guarantee continuous product availability. Products may go offline, be updated, or permanently shut down at any time.</li>
-            <li>Game updates can cause our products to temporarily stop working, which may result in crashes on inject/launch, broken features, or other stability issues.</li>
-            <li>We will aim to release an updated version that works with the newest game update as soon as possible. However, these versions may initially be unstable or considered temporary fixes.</li>
-            <li>Users understand that early updates may contain bugs and are intended for testing and user feedback to help identify remaining issues.</li>
-            <li>No refunds or compensation will be provided during periods of downtime, broken features, or while waiting for fixes.</li>
-        </ul>
-
-        <h2><i class="fas fa-user-shield"></i> 7. Data Collection and Privacy</h2>
-        <ul>
-            <li>We collect and log your PC hardware ID (HWID) and IP address. This data is collected when you create an account or redeem your product key for the first time.</li>
-            <li>No additional personal information is collected unless you choose to link your Discord account. If linked, your Discord User ID will be logged and connected to your product key/account.</li>
-            <li>We do not collect or store any payment information. All payment processing is handled securely by third-party services.</li>
-            <li>Your data is used solely for security, verification, and fraud prevention purposes.</li>
-        </ul>
-
-        <h2><i class="fas fa-undo-alt"></i> Refund Policy</h2>
-        <ul>
-            <li>All sales are final. No refunds will be provided under any circumstance.</li>
-            <li>Chargebacks result in a permanent ban of your product key and blacklisting from all services.</li>
-            <li>Payments flagged as fraudulent will be denied, and the product key will not be delivered.</li>
-            <li>No refunds will be issued due to update delays or product downtime.</li>
-            <li>Chargeback threats or fraudulent chargeback attempts will be reported to payment processors, and all user access will be revoked permanently.</li>
-            <li>We log all digital agreements, purchase confirmations, and server communications as evidence to protect against fraudulent claims.</li>
-            <li>Cryptocurrency payments are non-refundable. Incorrect amounts or payments sent to the wrong address are the buyer's responsibility.</li>
-        </ul>
-
-        <div class="important">
-            <h2 style="margin-top: 0; border-bottom: none;"><i class="fas fa-check-circle"></i> Final Acknowledgment</h2>
-            <p>By purchasing from N3NY000 Store, you confirm that you have read, understood, and fully agree to these Terms of Service and the Refund Policy.</p>
+        <!-- Quick Summary Section -->
+        <div class="quick-summary">
+            <h2><i class="fas fa-exclamation-triangle"></i> Before You Buy - Key Points</h2>
+            <ul>
+                <li>All sales are final - NO REFUNDS under any circumstances</li>
+                <li>Keep your product key safe - lost keys will NOT be replaced</li>
+                <li>Do NOT share your key - sharing = permanent ban</li>
+                <li>Chargebacks = permanent ban and blacklist from all services</li>
+                <li>"Lifetime" means product lifetime, not your lifetime (can be discontinued anytime)</li>
+                <li>Product may be down during updates - NO compensation or refunds for downtime</li>
+                <li>Crypto payments are FINAL and cannot be refunded</li>
+            </ul>
         </div>
 
-        <div class="faq">
-            <h2 onclick="toggleFAQ(this)"><i class="fas fa-question-circle"></i> FAQ: What happens if I lose my product key?</h2>
-            <div class="faq-content">
-                <p>You are responsible for keeping your product key safe. Lost keys will not be replaced and your access will be lost.</p>
+        <!-- Section 1: Product Access -->
+        <div class="tos-section">
+            <h2><i class="fas fa-user-check"></i> Product Access & Usage</h2>
+
+            <div class="simple-explain">
+                <strong>In Simple Terms:</strong>
+                Your access is a privilege, not a right. We can remove it if you break the rules. "Lifetime" doesn't mean forever - it means as long as the product exists.
             </div>
 
-            <h2 onclick="toggleFAQ(this)"><i class="fas fa-question-circle"></i> FAQ: Can I get a refund if the product is in update?</h2>
-            <div class="faq-content">
-                <p>No. Purchasing during updates does not guarantee immediate access. Refunds will not be issued due to update delays.</p>
+            <ul class="rule-list">
+                <li>We can ban or suspend your product key at any time if you violate our terms</li>
+                <li>"Lifetime access" refers to the product's lifetime, not yours - products can be discontinued at any time</li>
+                <li>Sharing, reselling, or leaking your product key is strictly forbidden and results in instant ban</li>
+                <li>YOU are responsible for keeping your key safe - lost or stolen keys will NOT be replaced</li>
+                <li>If someone else uses your key (even by accident), both accounts will be banned</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Warning:</strong> Screenshot your key after purchase and store it somewhere safe. We cannot recover lost keys.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Payments -->
+        <div class="tos-section">
+            <h2><i class="fas fa-credit-card"></i> Payments & Fraud Protection</h2>
+
+            <div class="simple-explain">
+                <strong>In Simple Terms:</strong>
+                We take fraud seriously. Suspicious payments are rejected. Chargebacks (disputing a charge with your bank) will get you permanently banned.
             </div>
 
-            <h2 onclick="toggleFAQ(this)"><i class="fas fa-question-circle"></i> FAQ: How fast is support?</h2>
-            <div class="faq-content">
-                <p>Support is provided when we are available. Instant support is not guaranteed. Please use the guides first.</p>
+            <ul class="rule-list">
+                <li>We may decline any payment that looks suspicious or fraudulent</li>
+                <li>If your payment is flagged, you will NOT receive your product key</li>
+                <li>Chargebacks are STRICTLY PROHIBITED - any chargeback = permanent ban and blacklist</li>
+                <li>Even threatening to chargeback will result in an instant ban</li>
+                <li>We log all transactions, IP addresses, and device info to dispute fraudulent chargebacks</li>
+                <li>Fake payment info (wrong name, address, etc.) will trigger manual review</li>
+            </ul>
+
+            <div class="danger-box">
+                <p><strong>Important:</strong> If we need to verify your payment, you must provide proof of card ownership (photo showing last 4 digits and name, with other details hidden). Refusal to verify = no product key.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Cryptocurrency -->
+        <div class="tos-section">
+            <h2><i class="fab fa-bitcoin"></i> Cryptocurrency Payments</h2>
+
+            <div class="simple-explain">
+                <strong>In Simple Terms:</strong>
+                Crypto payments cannot be reversed. If you send the wrong amount or to the wrong address, that's on you - no refunds.
             </div>
 
-            <h2 onclick="toggleFAQ(this)"><i class="fas fa-question-circle"></i> FAQ: Can I share my key with a friend?</h2>
-            <div class="faq-content">
-                <p>No. Sharing your key will result in a permanent ban.</p>
+            <ul class="rule-list">
+                <li>Cryptocurrency payments are FINAL - no refunds, no reversals, no disputes</li>
+                <li>YOU must send the exact amount to the correct wallet address</li>
+                <li>We're not responsible for wrong addresses, incorrect amounts, or network fee issues</li>
+                <li>If you don't cover transaction fees, your payment won't complete and you won't get your key</li>
+                <li>Sending less than required = invalid order with no compensation</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Pro Tip:</strong> Double-check the wallet address and payment amount before sending. Crypto transactions cannot be undone!</p>
+            </div>
+        </div>
+
+        <!-- Section 4: Updates & Delays -->
+        <div class="tos-section">
+            <h2><i class="fas fa-sync-alt"></i> Product Updates & Delays</h2>
+
+            <div class="simple-explain">
+                <strong>In Simple Terms:</strong>
+                When GTA updates, our products break. We fix them as fast as we can, but there's no guaranteed timeline. No refunds for waiting.
             </div>
 
-            <h2 onclick="toggleFAQ(this)"><i class="fas fa-question-circle"></i> FAQ: What happens if I chargeback?</h2>
-            <div class="faq-content">
-                <p>Your product key will be permanently banned, and you will be blacklisted from all current and future services. We will submit all transaction records and user agreements to the payment processor to dispute the chargeback and protect our business.</p>
+            <ul class="rule-list">
+                <li>Buying during updates does NOT guarantee immediate access</li>
+                <li>There is NO guaranteed ETA (estimated time) for when updates will be ready</li>
+                <li>We prioritize security and testing over rushing updates</li>
+                <li>Development may be delayed due to real-life commitments</li>
+                <li>NO refunds, compensation, or time extensions for update delays</li>
+                <li>Early updates may have bugs - they're for testing and feedback</li>
+            </ul>
+        </div>
+
+        <!-- Section 5: Support -->
+        <div class="tos-section">
+            <h2><i class="fas fa-headset"></i> Support Policy</h2>
+
+            <div class="simple-explain">
+                <strong>In Simple Terms:</strong>
+                We help when we can, but we're not available 24/7. Read the guides first. Don't spam us or we'll ignore you.
             </div>
 
-            <h2 onclick="toggleFAQ(this)"><i class="fas fa-question-circle"></i> FAQ: What happens if I send the wrong crypto amount?</h2>
-            <div class="faq-content">
-                <p>You are fully responsible for sending the correct crypto amount, including network fees. If you send less than required, send to the wrong address, or fail to cover fees, your payment will not be processed and no refund or product key will be provided.</p>
+            <ul class="rule-list">
+                <li>Support is provided when we're available - NOT guaranteed to be instant</li>
+                <li>Spamming support channels = we'll refuse to help you</li>
+                <li>We provide detailed guides - you MUST follow them before asking for help</li>
+                <li>Being rude or disrespectful = no support for you</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Tip:</strong> Check the setup guide and troubleshooting page first. 90% of issues are covered there!</p>
+            </div>
+        </div>
+
+        <!-- Section 6: Service Availability -->
+        <div class="tos-section">
+            <h2><i class="fas fa-server"></i> Service Availability & Downtime</h2>
+
+            <div class="simple-explain">
+                <strong>In Simple Terms:</strong>
+                Products can go offline, break, or shut down permanently. No refunds when this happens. Game updates WILL break things temporarily.
+            </div>
+
+            <ul class="rule-list">
+                <li>We do NOT guarantee 24/7 product availability</li>
+                <li>Products may go offline, be updated, or permanently shut down at any time</li>
+                <li>Game updates WILL cause crashes, broken features, or instability</li>
+                <li>We'll update as fast as possible, but initial fixes may be unstable</li>
+                <li>NO refunds or compensation during downtime or broken features</li>
+            </ul>
+        </div>
+
+        <!-- Section 7: Privacy & Data -->
+        <div class="tos-section">
+            <h2><i class="fas fa-user-shield"></i> Data Collection & Privacy</h2>
+
+            <div class="simple-explain">
+                <strong>In Simple Terms:</strong>
+                We collect your hardware ID and IP address to prevent fraud and key sharing. We don't collect payment info.
+            </div>
+
+            <ul class="rule-list">
+                <li>We collect your PC hardware ID (HWID) and IP address for security</li>
+                <li>This data is logged when you create an account or redeem your key</li>
+                <li>If you link Discord, your Discord User ID is also logged</li>
+                <li>We do NOT collect or store payment information - that's handled by payment processors</li>
+                <li>Your data is used ONLY for security, verification, and fraud prevention</li>
+            </ul>
+        </div>
+
+        <!-- Refund Policy -->
+        <div class="tos-section">
+            <h2><i class="fas fa-undo-alt"></i> Refund Policy</h2>
+
+            <div class="simple-explain">
+                <strong>In Simple Terms:</strong>
+                NO REFUNDS. EVER. For ANY reason. Don't even ask. Chargebacks = ban.
+            </div>
+
+            <ul class="rule-list">
+                <li>All sales are FINAL - absolutely NO refunds under any circumstance</li>
+                <li>Chargebacks = permanent ban + blacklist from all current and future services</li>
+                <li>Fraudulent payments will be denied and no key will be provided</li>
+                <li>NO refunds for update delays, downtime, or broken features</li>
+                <li>Chargeback attempts are reported to payment processors with full evidence</li>
+                <li>Crypto payments are 100% non-refundable - no exceptions</li>
+            </ul>
+
+            <div class="danger-box">
+                <p><strong>Final Warning:</strong> We log everything - purchase confirmations, agreements, server communications. We will fight fraudulent chargebacks with all available evidence.</p>
+            </div>
+        </div>
+
+        <!-- Acknowledgment -->
+        <div class="acknowledgment">
+            <h2><i class="fas fa-check-circle"></i> Your Agreement</h2>
+            <p>By purchasing from N3NY000 Store, you confirm that you have read, understood, and FULLY AGREE to these Terms of Service and Refund Policy. No exceptions will be made.</p>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3><i class="fas fa-key"></i> What happens if I lose my product key?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>You are 100% responsible for keeping your key safe. Lost keys will NOT be replaced and your access will be permanently lost. We recommend taking a screenshot and storing it in multiple safe locations (password manager, email to yourself, etc.).</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3><i class="fas fa-sync-alt"></i> Can I get a refund if the product is down for updates?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>NO. Purchasing during updates does NOT guarantee immediate access. Updates happen when GTA is updated by Rockstar, and we need time to fix compatibility issues. No refunds will be issued for update delays or downtime.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3><i class="fas fa-headset"></i> How fast is support?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Support is provided when we're available. We're not a 24/7 support team. Most issues can be solved by following the setup guide and troubleshooting page. Please check those first before contacting support.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3><i class="fas fa-users"></i> Can I share my key with a friend?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely NOT. Sharing your key will result in a permanent ban for both you and whoever uses it. We track hardware IDs and IP addresses. If multiple people use the same key, it will be detected and banned.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3><i class="fas fa-ban"></i> What happens if I do a chargeback?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Your product key will be PERMANENTLY banned, and you will be blacklisted from all current and future services. We will submit all transaction records, user agreements, and communications to the payment processor to dispute the chargeback. This is considered fraud and breach of contract.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3><i class="fab fa-bitcoin"></i> What if I send the wrong crypto amount?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>You are FULLY responsible for sending the correct amount including network fees. If you send too little, send to the wrong address, or fail to cover fees, your payment will NOT be processed and NO refund or product key will be provided. Crypto transactions are irreversible.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3><i class="fas fa-clock"></i> What does "Lifetime" access mean?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>"Lifetime" means the lifetime of the PRODUCT, not your lifetime. If we decide to shut down the product permanently, your access ends. No refunds will be given if a product is discontinued. This is standard for all software services.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3><i class="fas fa-shield-alt"></i> Is N3NY000 safe? Why does antivirus flag it?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, N3NY000 is safe when downloaded from official sources. Mod menus get flagged by antivirus because they use memory injection (the same technique malware uses) to modify game code. This is a false positive - the antivirus can't tell the difference between legitimate game modding and malicious code. You MUST disable antivirus for the mod menu to work.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <h3><i class="fas fa-gamepad"></i> Can I play in public sessions?</h3>
+                    <i class="fas fa-chevron-down faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Currently, NO. Public sessions require a BattlEye bypass, which N3NY000 doesn't have yet (will be added after recode). You can play in invite-only sessions or with other modders who have BattlEye disabled. Public session hosts will kick you after ~5 minutes due to heartbeat failure.</p>
+                </div>
             </div>
         </div>
     </div>
 
+    <footer>
+        <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
+        <p>This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // Toggle FAQ
         function toggleFAQ(element) {
-            element.classList.toggle('active');
+            const faqItem = element.parentElement;
+            const wasActive = faqItem.classList.contains('active');
+
+            // Close all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Open clicked FAQ if it wasn't active
+            if (!wasActive) {
+                faqItem.classList.add('active');
+            }
         }
+
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#4a90e2"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#4a90e2",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
     </script>
 </body>
-
 </html>
