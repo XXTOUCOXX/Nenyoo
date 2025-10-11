@@ -319,6 +319,90 @@
         </div>
 
         <div class="content-section">
+            <h2>Antivirus & False Positives</h2>
+
+            <h3>Why Do Mod Menus Get Detected as Viruses?</h3>
+
+            <p>Mod menus and cheats are frequently flagged by antivirus software, but this does NOT mean they are actually malicious. Here's why:</p>
+
+            <div class="info-box">
+                <p><strong>Understanding False Positives:</strong></p>
+                <ul>
+                    <li><strong>Memory Injection:</strong> Mod menus work by injecting code into the game's memory, which is the same technique that actual malware uses. Antivirus software can't tell the difference between legitimate game modding and malicious code injection.</li>
+                    <li><strong>Code Obfuscation:</strong> To prevent detection by anti-cheat systems, mod menus often use code obfuscation and packing techniques. These same techniques are used by malware to hide from antivirus, triggering false positives.</li>
+                    <li><strong>Behavioral Analysis:</strong> Antivirus software monitors program behavior. When a mod menu reads/writes game memory or bypasses security checks, it appears suspicious to antivirus heuristics.</li>
+                    <li><strong>Low Reputation Files:</strong> New or frequently updated mod menu files haven't built up a reputation with antivirus companies, so they're flagged as potentially dangerous.</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <p><strong>Important:</strong> N3NY000 is safe to use, but you should ONLY download it from official sources. Never download mod menus from untrusted websites, as those may contain actual malware.</p>
+            </div>
+
+            <h3>How to Disable Windows Defender</h3>
+
+            <p>For N3NY000 to work properly, you need to disable Windows Defender. Follow these steps:</p>
+
+            <div style="margin: 30px 0;">
+                <p><span class="step-number">1</span><strong>Open Windows Security</strong></p>
+                <p style="margin-left: 40px;">Press Windows key + I to open Settings, then go to "Privacy & Security" > "Windows Security" > "Virus & threat protection"</p>
+
+                <p><span class="step-number">2</span><strong>Disable Real-time Protection</strong></p>
+                <p style="margin-left: 40px;">Under "Virus & threat protection settings", click "Manage settings" and toggle OFF "Real-time protection"</p>
+
+                <p><span class="step-number">3</span><strong>Add Exclusion for N3NY000 Folder</strong></p>
+                <p style="margin-left: 40px;">Scroll down to "Exclusions" and click "Add or remove exclusions" > "Add an exclusion" > "Folder" > Navigate to <code>C:\N3NY000</code> and select it</p>
+
+                <p><span class="step-number">4</span><strong>Disable Cloud-delivered Protection</strong></p>
+                <p style="margin-left: 40px;">In the same settings page, toggle OFF "Cloud-delivered protection" and "Automatic sample submission"</p>
+
+                <p><span class="step-number">5</span><strong>Disable Tamper Protection (Important!)</strong></p>
+                <p style="margin-left: 40px;">Toggle OFF "Tamper Protection" - this prevents Windows from automatically re-enabling protections</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Alternative Method - Using Group Policy Editor (Windows Pro/Enterprise):</strong></p>
+                <ul>
+                    <li>Press Windows + R, type <code>gpedit.msc</code> and press Enter</li>
+                    <li>Navigate to: Computer Configuration > Administrative Templates > Windows Components > Microsoft Defender Antivirus</li>
+                    <li>Double-click "Turn off Microsoft Defender Antivirus" and set it to "Enabled"</li>
+                    <li>Click Apply and restart your computer</li>
+                </ul>
+            </div>
+
+            <h3>Disabling Third-Party Antivirus Software</h3>
+
+            <p>If you have third-party antivirus (Norton, McAfee, Avast, AVG, Kaspersky, etc.), you MUST uninstall it completely. Here's how:</p>
+
+            <div style="margin: 30px 0;">
+                <p><span class="step-number">1</span><strong>Uninstall via Control Panel</strong></p>
+                <p style="margin-left: 40px;">Go to Control Panel > Programs > Programs and Features > Find your antivirus > Right-click and "Uninstall"</p>
+
+                <p><span class="step-number">2</span><strong>Use Official Removal Tool</strong></p>
+                <p style="margin-left: 40px;">Most antivirus companies provide dedicated removal tools because standard uninstall doesn't remove everything:</p>
+                <ul style="margin-left: 40px;">
+                    <li><strong>Norton:</strong> Norton Remove and Reinstall tool</li>
+                    <li><strong>McAfee:</strong> McAfee Consumer Product Removal tool (MCPR)</li>
+                    <li><strong>Avast/AVG:</strong> Avast Clear / AVG Remover</li>
+                    <li><strong>Kaspersky:</strong> Kaspersky Removal Tool (kavremover)</li>
+                    <li><strong>Bitdefender:</strong> Bitdefender Uninstall Tool</li>
+                </ul>
+
+                <p><span class="step-number">3</span><strong>Restart Your PC</strong></p>
+                <p style="margin-left: 40px;">After using the removal tool, restart your computer to complete the process</p>
+            </div>
+
+            <div class="warning-box">
+                <p><strong>Why Disable Instead of Adding Exceptions?</strong></p>
+                <p>Simply adding exceptions often doesn't work because antivirus software may still block the injection process or interfere with memory operations. Complete removal ensures no conflicts occur.</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Security Reminder:</strong> While using N3NY000, practice safe browsing habits. Don't download suspicious files or visit untrusted websites. You can re-enable your antivirus when not using the mod menu.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
             <h2>How to Inject</h2>
 
             <p>After completing the above steps:</p>
