@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N3NY000 Setup & Troubleshooting Guide</title>
     <meta name="description" content="Complete setup guide and troubleshooting steps for N3NY000 GTA 5 Mod Menu">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #103FF7;
-            --secondary: #f4b400;
-            --accent: #4a90e2;
-            --dark: #0a0a0a;
-            --darker: #050505;
-            --light: #ffffff;
-            --gray: #7f8c8d;
-            --dark-gray: #222;
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --dark: #1a1a2e;
+            --light: #f5f6fa;
+            --card-bg: rgba(26, 26, 46, 0.9);
         }
 
         * {
@@ -28,586 +28,991 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--dark);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
             color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
         /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 12px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--darker);
+            background: var(--dark);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 6px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--primary));
         }
 
-        .container {
-            max-width: 1200px;
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(108, 92, 231, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 2;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .back-button {
-            display: inline-block;
-            margin-bottom: 30px;
-            padding: 12px 24px;
-            background: var(--accent);
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-links a {
             color: var(--light);
             text-decoration: none;
-            border-radius: 30px;
+            padding: 8px 16px;
+            border-radius: 8px;
             transition: all 0.3s ease;
-            font-weight: 600;
+            font-weight: 500;
         }
 
-        .back-button:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(16, 63, 247, 0.4);
-        }
-
-        .back-button i {
-            margin-right: 8px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding: 40px 20px;
-            background: rgba(16, 63, 247, 0.1);
-            border-radius: 15px;
-            border: 1px solid rgba(74, 144, 226, 0.3);
-        }
-
-        .header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em;
-            color: var(--secondary);
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(244, 180, 0, 0.5);
-        }
-
-        .content-section {
-            background: rgba(34, 34, 34, 0.8);
-            padding: 40px;
-            margin-bottom: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(74, 144, 226, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .content-section:hover {
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .content-section h2 {
-            color: var(--secondary);
-            font-size: 2em;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--accent);
-        }
-
-        .content-section h3 {
-            color: var(--accent);
-            font-size: 1.5em;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-
-        .content-section h5 {
-            color: var(--light);
-            font-size: 1.2em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        .content-section h6 {
-            color: var(--accent);
-            font-size: 1.1em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        .content-section p {
-            margin-bottom: 15px;
-            color: #bbb;
-        }
-
-        .content-section ul {
-            list-style: none;
-            padding-left: 0;
-            margin: 20px 0;
-        }
-
-        .content-section ul li {
-            padding: 10px 0 10px 30px;
-            position: relative;
-            color: #bbb;
-        }
-
-        .content-section ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .warning-box {
-            background: rgba(244, 180, 0, 0.1);
-            border-left: 4px solid var(--secondary);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-
-        .warning-box p {
-            color: var(--light);
-            margin: 0;
-        }
-
-        .info-box {
-            background: rgba(74, 144, 226, 0.1);
-            border-left: 4px solid var(--accent);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-
-        .info-box p {
-            color: var(--light);
-            margin: 0;
-        }
-
-        .step-number {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background: var(--accent);
-            color: var(--light);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .link-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: var(--primary);
-            color: var(--light);
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 10px 5px;
-            transition: all 0.3s ease;
-        }
-
-        .link-button:hover {
-            background: var(--accent);
+        .navbar-links a:hover {
+            background: rgba(108, 92, 231, 0.2);
             transform: translateY(-2px);
         }
 
-        footer {
-            background: var(--darker);
-            padding: 30px 20px;
+        .navbar-links a i {
+            margin-right: 8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 60px 20px;
             text-align: center;
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(253, 121, 168, 0.1));
+            border-bottom: 2px solid rgba(108, 92, 231, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #bbb;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Quick Navigation Cards */
+        .quick-nav {
+            max-width: 1400px;
+            margin: -50px auto 40px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             position: relative;
-            z-index: 2;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .quick-nav-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .quick-nav-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(108, 92, 231, 0.4);
+            border-color: var(--accent);
+        }
+
+        .quick-nav-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .quick-nav-card h3 {
+            margin-bottom: 10px;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+
+        .quick-nav-card p {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Section */
+        .section {
+            background: var(--card-bg);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(108, 92, 231, 0.3);
+            position: relative;
+        }
+
+        .section h2 i {
+            margin-right: 12px;
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 25px 0 15px;
+        }
+
+        .section h4 {
+            color: var(--light);
+            font-size: 1.2rem;
+            margin: 20px 0 10px;
+        }
+
+        .section p {
+            color: #bbb;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid;
+            backdrop-filter: blur(10px);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(108, 92, 231, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 15px rgba(108, 92, 231, 0);
+            }
+        }
+
+        .alert-info {
+            background: rgba(9, 132, 227, 0.1);
+            border-left-color: #0984e3;
+        }
+
+        .alert-warning {
+            background: rgba(253, 203, 110, 0.1);
+            border-left-color: var(--warning);
+        }
+
+        .alert-danger {
+            background: rgba(214, 48, 49, 0.1);
+            border-left-color: var(--danger);
+        }
+
+        .alert-success {
+            background: rgba(0, 184, 148, 0.1);
+            border-left-color: var(--success);
+        }
+
+        .alert h4 {
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert h4 i {
+            font-size: 1.3rem;
+        }
+
+        .alert p {
+            margin: 8px 0;
+            color: var(--light);
+        }
+
+        /* Steps */
+        .steps {
+            margin: 30px 0;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(108, 92, 231, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background: rgba(108, 92, 231, 0.1);
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-right: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .step-content h4 {
+            margin: 0 0 10px 0;
+            color: var(--light);
+        }
+
+        .step-content p {
+            margin: 0;
+            color: #bbb;
+        }
+
+        /* List */
+        .custom-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .custom-list li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            color: #bbb;
+            line-height: 1.8;
+        }
+
+        .custom-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #55efc4);
+            color: var(--light);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 184, 148, 0.4);
+        }
+
+        /* Accordion */
+        .accordion {
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            background: rgba(108, 92, 231, 0.05);
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(108, 92, 231, 0.2);
+        }
+
+        .accordion-header {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        .accordion-header:hover {
+            background: rgba(108, 92, 231, 0.15);
+        }
+
+        .accordion-header h4 {
+            margin: 0;
+            color: var(--light);
+            font-size: 1.1rem;
+        }
+
+        .accordion-header i {
+            color: var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-header i {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 1000px;
+            padding: 20px;
+        }
+
+        /* Code */
+        code {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 8px;
+            border-radius: 5px;
+            color: var(--warning);
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px solid rgba(108, 92, 231, 0.3);
             margin-top: 50px;
         }
 
         footer p {
-            color: var(--gray);
-            font-size: 0.9em;
+            color: #bbb;
+            margin: 5px 0;
         }
 
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px 15px;
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .content-section {
-                padding: 25px;
+            .hero p {
+                font-size: 1rem;
             }
 
-            .header h1 {
-                font-size: 2em;
+            .quick-nav {
+                grid-template-columns: 1fr;
+                margin-top: 20px;
             }
 
-            .content-section h2 {
-                font-size: 1.5em;
+            .section {
+                padding: 25px 20px;
             }
-        }
 
-        code {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 2px 6px;
-            border-radius: 3px;
-            color: var(--secondary);
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .navbar-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .step-number {
+                margin-bottom: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Particles Background -->
-    <div id="particles-js"></div>
-
-    <div class="container">
-        <a href="index.html" class="back-button">
-            <i class="fas fa-arrow-left"></i> Back to Home
-        </a>
-
-        <div class="header">
-            <h1>N3NY000 Setup Guide & Common Troubleshooting Steps</h1>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <i class="fas fa-gamepad"></i> N3NY000
+            </div>
+            <div class="navbar-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="download.html"><i class="fas fa-download"></i> Download</a>
+                <a href="fsl.html"><i class="fas fa-compact-disc"></i> FSL Guide</a>
+                <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank"><i class="fas fa-key"></i> Free Key</a>
+            </div>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
+    </nav>
 
-        <div class="content-section">
-            <h2>Pre-Setup Instructions</h2>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1><i class="fas fa-tools"></i> Setup & Troubleshooting Guide</h1>
+        <p>Everything you need to know to get N3NY000 up and running smoothly</p>
+    </section>
 
-            <p>Before you launch N3NY000 for the first time, make sure you have followed all setup instructions to avoid any issues while in-game.</p>
-
-            <div class="info-box">
-                <p><strong>Sync Your Time:</strong> Settings > Time & language > Date & time > Additional settings > Sync now</p>
-            </div>
-
-            <div class="warning-box">
-                <p>If you still experience errors while injecting, likely your user permissions are causing issues. Make a new PC user as super admin to sort permission issues.</p>
-            </div>
-
-            <h3>Required Setup:</h3>
-            <ul>
-                <li>Updated drivers</li>
-                <li>All <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one" target="_blank" class="link-button">runtimes</a> + <a href="https://www.microsoft.com/en-ca/download/details.aspx?id=35" target="_blank" class="link-button">DirectX runtimes</a> [Download AND install]</li>
-                <li>You need to EXTRACT them after downloading... Restart PC after installing</li>
-                <li>Make sure you follow the correct procedure to inject [Found later in guide]</li>
-                <li><strong>BattlEye DISABLED.</strong> Menu will not inject with it enabled. BattlEye support will be re-added after N3NY000 gets a recode</li>
-                <li>Windows Defender disabled. ALL 3rd party antivirus software UNINSTALLED [conflicts]</li>
-                <li>Using correct key for GTA version [VIP is for Legacy only, Enhanced works for both Legacy & Enhanced]</li>
-                <li><strong>DO NOT USE FSL.</strong> It does not work. You will still be kicked. Do NOT ask for help with FSL, has nothing to do with us. Your game will likely crash</li>
-            </ul>
-
-            <div class="info-box">
-                <p><strong>Loader not opening:</strong> Use VPN</p>
-            </div>
+    <!-- Quick Navigation -->
+    <div class="quick-nav">
+        <div class="quick-nav-card" onclick="scrollToSection('pre-setup')">
+            <i class="fas fa-clipboard-check"></i>
+            <h3>Pre-Setup</h3>
+            <p>Required steps before installation</p>
         </div>
-
-        <div class="content-section">
-            <h2>Antivirus & False Positives</h2>
-
-            <h3>Why Do Mod Menus Get Detected as Viruses?</h3>
-
-            <p>Mod menus and cheats are frequently flagged by antivirus software, but this does NOT mean they are actually malicious. Here's why:</p>
-
-            <div class="info-box">
-                <p><strong>Understanding False Positives:</strong></p>
-                <ul>
-                    <li><strong>Memory Injection:</strong> Mod menus work by injecting code into the game's memory, which is the same technique that actual malware uses. Antivirus software can't tell the difference between legitimate game modding and malicious code injection.</li>
-                    <li><strong>Code Obfuscation:</strong> To prevent detection by anti-cheat systems, mod menus often use code obfuscation and packing techniques. These same techniques are used by malware to hide from antivirus, triggering false positives.</li>
-                    <li><strong>Behavioral Analysis:</strong> Antivirus software monitors program behavior. When a mod menu reads/writes game memory or bypasses security checks, it appears suspicious to antivirus heuristics.</li>
-                    <li><strong>Low Reputation Files:</strong> New or frequently updated mod menu files haven't built up a reputation with antivirus companies, so they're flagged as potentially dangerous.</li>
-                </ul>
-            </div>
-
-            <div class="warning-box">
-                <p><strong>Important:</strong> N3NY000 is safe to use, but you should ONLY download it from official sources. Never download mod menus from untrusted websites, as those may contain actual malware.</p>
-            </div>
-
-            <h3>How to Disable Windows Defender</h3>
-
-            <p>For N3NY000 to work properly, you need to disable Windows Defender. Follow these steps:</p>
-
-            <div style="margin: 30px 0;">
-                <p><span class="step-number">1</span><strong>Open Windows Security</strong></p>
-                <p style="margin-left: 40px;">Press Windows key + I to open Settings, then go to "Privacy & Security" > "Windows Security" > "Virus & threat protection"</p>
-
-                <p><span class="step-number">2</span><strong>Disable Real-time Protection</strong></p>
-                <p style="margin-left: 40px;">Under "Virus & threat protection settings", click "Manage settings" and toggle OFF "Real-time protection"</p>
-
-                <p><span class="step-number">3</span><strong>Add Exclusion for N3NY000 Folder</strong></p>
-                <p style="margin-left: 40px;">Scroll down to "Exclusions" and click "Add or remove exclusions" > "Add an exclusion" > "Folder" > Navigate to <code>C:\N3NY000</code> and select it</p>
-
-                <p><span class="step-number">4</span><strong>Disable Cloud-delivered Protection</strong></p>
-                <p style="margin-left: 40px;">In the same settings page, toggle OFF "Cloud-delivered protection" and "Automatic sample submission"</p>
-
-                <p><span class="step-number">5</span><strong>Disable Tamper Protection (Important!)</strong></p>
-                <p style="margin-left: 40px;">Toggle OFF "Tamper Protection" - this prevents Windows from automatically re-enabling protections</p>
-            </div>
-
-            <div class="info-box">
-                <p><strong>Alternative Method - Using Group Policy Editor (Windows Pro/Enterprise):</strong></p>
-                <ul>
-                    <li>Press Windows + R, type <code>gpedit.msc</code> and press Enter</li>
-                    <li>Navigate to: Computer Configuration > Administrative Templates > Windows Components > Microsoft Defender Antivirus</li>
-                    <li>Double-click "Turn off Microsoft Defender Antivirus" and set it to "Enabled"</li>
-                    <li>Click Apply and restart your computer</li>
-                </ul>
-            </div>
-
-            <h3>Disabling Third-Party Antivirus Software</h3>
-
-            <p>If you have third-party antivirus (Norton, McAfee, Avast, AVG, Kaspersky, etc.), you MUST uninstall it completely. Here's how:</p>
-
-            <div style="margin: 30px 0;">
-                <p><span class="step-number">1</span><strong>Uninstall via Control Panel</strong></p>
-                <p style="margin-left: 40px;">Go to Control Panel > Programs > Programs and Features > Find your antivirus > Right-click and "Uninstall"</p>
-
-                <p><span class="step-number">2</span><strong>Use Official Removal Tool</strong></p>
-                <p style="margin-left: 40px;">Most antivirus companies provide dedicated removal tools because standard uninstall doesn't remove everything:</p>
-                <ul style="margin-left: 40px;">
-                    <li><strong>Norton:</strong> Norton Remove and Reinstall tool</li>
-                    <li><strong>McAfee:</strong> McAfee Consumer Product Removal tool (MCPR)</li>
-                    <li><strong>Avast/AVG:</strong> Avast Clear / AVG Remover</li>
-                    <li><strong>Kaspersky:</strong> Kaspersky Removal Tool (kavremover)</li>
-                    <li><strong>Bitdefender:</strong> Bitdefender Uninstall Tool</li>
-                </ul>
-
-                <p><span class="step-number">3</span><strong>Restart Your PC</strong></p>
-                <p style="margin-left: 40px;">After using the removal tool, restart your computer to complete the process</p>
-            </div>
-
-            <div class="warning-box">
-                <p><strong>Why Disable Instead of Adding Exceptions?</strong></p>
-                <p>Simply adding exceptions often doesn't work because antivirus software may still block the injection process or interfere with memory operations. Complete removal ensures no conflicts occur.</p>
-            </div>
-
-            <div class="info-box">
-                <p><strong>Security Reminder:</strong> While using N3NY000, practice safe browsing habits. Don't download suspicious files or visit untrusted websites. You can re-enable your antivirus when not using the mod menu.</p>
-            </div>
+        <div class="quick-nav-card" onclick="scrollToSection('injection')">
+            <i class="fas fa-syringe"></i>
+            <h3>How to Inject</h3>
+            <p>Step-by-step injection guide</p>
         </div>
-
-        <div class="content-section">
-            <h2>How to Inject</h2>
-
-            <p>After completing the above steps:</p>
-
-            <div style="margin: 30px 0;">
-                <p><span class="step-number">1</span><strong>Launch GTA.</strong></p>
-                <p><span class="step-number">2</span><strong>Wait for game to load.</strong></p>
-                <p><span class="step-number">3</span><strong>BEFORE you select Story/Online --> Inject.</strong></p>
-                <p><span class="step-number">4</span><strong>Enter the game.</strong></p>
-                <p><span class="step-number">5</span><strong>You will see keybind to open on screen if you followed the above steps.</strong></p>
-                <p><span class="step-number">6</span><strong>Use the menu to enter an online session. Invite only works, public sessions will not.</strong></p>
-            </div>
-
-            <div class="warning-box">
-                <p>The menu will work if you read EVERY step and follow.</p>
-            </div>
-
-            <div class="info-box">
-                <p><strong>"BattlEye is required to play GTA Online"</strong> means you did NOT follow the steps. Inject in the landing page, like the guide says.</p>
-            </div>
+        <div class="quick-nav-card" onclick="scrollToSection('troubleshooting')">
+            <i class="fas fa-wrench"></i>
+            <h3>Troubleshooting</h3>
+            <p>Fix common issues</p>
         </div>
-
-        <div class="content-section">
-            <h2>Common Issue Fixes</h2>
-
-            <h5>[WARNING] 00007FFDBC9A14BA (NvTelemetryAPI64): (filename not available): FreeTelemetryString</h5>
-            <p><strong>Solution:</strong> Update your graphics drivers, and restart PC/Laptop.</p>
-
-            <h5>D3DCOMPILER_43.DLL Error</h5>
-            <p><strong>Solution:</strong> Install DirectX runtimes, and restart PC.</p>
-
-            <h5>Crashing on Inject</h5>
-            <p><strong>Solution:</strong> Install ALL runtimes, and restart PC.</p>
-
-            <h5>Loader says "Injected" but the menu doesn't open</h5>
-            <p><strong>Solution:</strong> You did not follow the instructions, you need to disable BattlEye/Antivirus.</p>
-
-            <h5>Game won't launch after enabling FSL</h5>
-            <p><strong>Solution:</strong> You have outdated version of FSL, either get the newest version, or delete FSL as it is useless.</p>
-
-            <h5>Everything in menu is locked</h5>
-            <p><strong>Solution:</strong> You are using the free version of N3NY000. To use locked features you need to have VIP key or higher. If options are locked while using VIP key then you need to go to C:/N3NY000 and delete the auth file.</p>
-        </div>
-
-        <div class="content-section">
-            <h2>Joining Other Players Using N3NY000</h2>
-
-            <p>You can play with anyone while using the menu so long as you are both using a menu.</p>
-
-            <p>2 Nenyoo players or 1 Nenyoo and 1 yim player for example, can play with any other modders, only players that have BattlEye enabled will not be able to join and you will not be able to join them.</p>
-
-            <h6>FSL is a LOCAL SAVE tool.</h6>
-            <p>All it does is convert your online save profile into a local save, it is not some magic tool that lets you play public sessions. It may have worked like that before, a long time ago, but it was never the main reason for the tool and it will not be able to do it again.</p>
-            <p>It is for converting save to a local save only.</p>
-
-            <h5>I keep getting desynced from public sessions every five minutes</h5>
-            <p>We currently do not have a BattlEye bypass, and legitimate hosts will eventually remove you due to a heartbeat failure. There is currently no way to stop this other than using an actual (private) bypass. RIPTIDE or Infamous have this, while N3NYOOO needs a recode before it can support BattlEye.</p>
-
-            <h5>I removed FSL and all my progress disappeared!</h5>
-            <p>FSL reroutes account save data to disk, so any progress made with FSL will only show up if you have FSL enabled. If you don't want this, you can also use NENY000 without FSL.</p>
-
-            <h5>I removed FSL and the game doesn't start up anymore.</h5>
-            <p>This is a known issue; delete "Documents/GTAV Enhanced/Profiles" to fix. Make sure you have latest FSL file.</p>
-        </div>
-
-        <div class="content-section">
-            <h2>Free Key Instructions</h2>
-
-            <h5>N3NYOOO FREE key — Follow these steps:</h5>
-
-            <div style="margin: 30px 0;">
-                <p><span class="step-number">1</span><strong>Click the link:</strong> <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank" class="link-button">Get Free Key</a></p>
-                <p><span class="step-number">2</span><strong>Complete the steps on the page (follow the instructions).</strong></p>
-                <p><span class="step-number">3</span><strong>Once done, your key will appear — COPY the key shown.</strong></p>
-                <p><span class="step-number">4</span><strong>Open the loader and press "Login Using a Key", then paste your key.</strong></p>
-            </div>
-
-            <div class="warning-box">
-                <p><strong>Important:</strong></p>
-                <ul>
-                    <li>Only use the official link above to avoid scams</li>
-                    <li>Close any ad pop-ups — the key will always show on the page itself (NOT A .EXE)</li>
-                </ul>
-            </div>
-
-            <div class="info-box">
-                <p><strong>Note:</strong> The free key auto-resets every 24 hours — you must redo the steps daily.</p>
-                <p><strong>Do NOT share your key with anyone.</strong></p>
-            </div>
-
-            <p>If you are experiencing any issues with popups or extensions, make sure you turn off adblocker, and/or use Microsoft Edge.</p>
+        <div class="quick-nav-card" onclick="scrollToSection('antivirus')">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Antivirus</h3>
+            <p>Disable Windows Defender</p>
         </div>
     </div>
 
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Pre-Setup Section -->
+        <section id="pre-setup" class="section">
+            <h2><i class="fas fa-clipboard-check"></i> Pre-Setup Instructions</h2>
+            <p>Before you launch N3NY000 for the first time, make sure you have followed all setup instructions to avoid any issues while in-game.</p>
+
+            <div class="alert alert-info">
+                <h4><i class="fas fa-clock"></i> Sync Your System Time</h4>
+                <p>Go to: Settings → Time & language → Date & time → Additional settings → Sync now</p>
+            </div>
+
+            <div class="alert alert-warning">
+                <h4><i class="fas fa-exclamation-triangle"></i> Permission Issues?</h4>
+                <p>If you still experience errors while injecting, your user permissions may be causing issues. Create a new PC user as super admin to resolve permission problems.</p>
+            </div>
+
+            <h3>Required Setup Checklist:</h3>
+            <ul class="custom-list">
+                <li>Updated graphics drivers</li>
+                <li>Install all <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one" target="_blank" class="btn btn-primary">VC++ Runtimes</a> + <a href="https://www.microsoft.com/en-ca/download/details.aspx?id=35" target="_blank" class="btn btn-primary">DirectX Runtimes</a></li>
+                <li>EXTRACT the downloaded files, then install them and restart your PC</li>
+                <li>Follow the correct injection procedure (explained below)</li>
+                <li><strong>BattlEye MUST be DISABLED</strong> - Menu will not inject with it enabled</li>
+                <li>Windows Defender disabled and ALL 3rd party antivirus software UNINSTALLED</li>
+                <li>Use the correct key for your GTA version (Legacy VIP or Enhanced)</li>
+                <li><strong>DO NOT USE FSL</strong> - It causes disconnects and crashes</li>
+            </ul>
+
+            <div class="alert alert-info">
+                <h4><i class="fas fa-network-wired"></i> Loader Not Opening?</h4>
+                <p>Try using a VPN to access the loader.</p>
+            </div>
+        </section>
+
+        <!-- Antivirus Section -->
+        <section id="antivirus" class="section">
+            <h2><i class="fas fa-shield-alt"></i> Antivirus & False Positives</h2>
+
+            <h3>Why Do Mod Menus Get Detected as Viruses?</h3>
+            <p>Mod menus are frequently flagged by antivirus software, but this does NOT mean they are malicious. Here's why:</p>
+
+            <div class="alert alert-info">
+                <h4><i class="fas fa-info-circle"></i> Understanding False Positives</h4>
+                <ul class="custom-list">
+                    <li><strong>Memory Injection:</strong> Mod menus inject code into game memory, which is the same technique actual malware uses</li>
+                    <li><strong>Code Obfuscation:</strong> To prevent anti-cheat detection, menus use obfuscation techniques that trigger antivirus alerts</li>
+                    <li><strong>Behavioral Analysis:</strong> When menus read/write game memory, they appear suspicious to antivirus heuristics</li>
+                    <li><strong>Low Reputation:</strong> New or frequently updated files haven't built up reputation with antivirus companies</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-warning">
+                <h4><i class="fas fa-exclamation-triangle"></i> Important Safety Note</h4>
+                <p>N3NY000 is safe to use, but ONLY download it from official sources. Never download mod menus from untrusted websites, as those may contain actual malware.</p>
+            </div>
+
+            <h3>How to Disable Windows Defender</h3>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Open Windows Security</h4>
+                        <p>Press Windows key + I → Privacy & Security → Windows Security → Virus & threat protection</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Disable Real-time Protection</h4>
+                        <p>Under "Virus & threat protection settings", click "Manage settings" and toggle OFF "Real-time protection"</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Add Exclusion for N3NY000 Folder</h4>
+                        <p>Scroll to "Exclusions" → Add or remove exclusions → Add an exclusion → Folder → Navigate to <code>C:\N3NY000</code> and select it</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Disable Cloud Protection</h4>
+                        <p>Toggle OFF "Cloud-delivered protection" and "Automatic sample submission"</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Disable Tamper Protection (Critical!)</h4>
+                        <p>Toggle OFF "Tamper Protection" - This prevents Windows from automatically re-enabling protections</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Uninstalling Third-Party Antivirus</h3>
+            <p>If you have Norton, McAfee, Avast, AVG, Kaspersky, or any other antivirus, you MUST uninstall it completely:</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Uninstall via Control Panel</h4>
+                        <p>Control Panel → Programs → Programs and Features → Find antivirus → Right-click and "Uninstall"</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Use Official Removal Tool</h4>
+                        <p>Most antivirus companies provide removal tools because standard uninstall doesn't remove everything. Search for your antivirus + "removal tool"</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Restart Your PC</h4>
+                        <p>After using the removal tool, restart your computer to complete the process</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-danger">
+                <h4><i class="fas fa-ban"></i> Why Not Just Add Exceptions?</h4>
+                <p>Simply adding exceptions often doesn't work because antivirus may still block the injection process or interfere with memory operations. Complete removal ensures no conflicts.</p>
+            </div>
+        </section>
+
+        <!-- Injection Guide -->
+        <section id="injection" class="section">
+            <h2><i class="fas fa-syringe"></i> How to Inject N3NY000</h2>
+            <p>Follow these steps carefully for successful injection:</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Launch GTA V</h4>
+                        <p>Start the game and wait for it to fully load</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Wait at Main Menu</h4>
+                        <p>Let the game reach the main menu screen. Do NOT select Story Mode or Online yet</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Inject the Menu</h4>
+                        <p>BEFORE entering Story/Online, open the N3NY000 loader and click "Inject"</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Enter the Game</h4>
+                        <p>After successful injection, you can now enter Story Mode or Online</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Open the Menu</h4>
+                        <p>You'll see the keybind displayed on screen. Press <strong>F4</strong> (keyboard) or <strong>R1 + Right D-Pad</strong> (controller) to open the menu</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Join Online Session</h4>
+                        <p>Use the menu to enter an online session. Invite-only sessions work best. Public sessions may disconnect you</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <h4><i class="fas fa-check-circle"></i> Success!</h4>
+                <p>The menu will work if you follow EVERY step above carefully.</p>
+            </div>
+
+            <div class="alert alert-danger">
+                <h4><i class="fas fa-exclamation-triangle"></i> "BattlEye is required to play GTA Online"</h4>
+                <p>This error means you did NOT follow the steps. You must inject on the landing page BEFORE entering the game, exactly as the guide says.</p>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section id="troubleshooting" class="section">
+            <h2><i class="fas fa-wrench"></i> Common Issues & Fixes</h2>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4><i class="fas fa-exclamation-circle"></i> NvTelemetryAPI64 Error</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Full Error:</strong> [WARNING] 00007FFDBC9A14BA (NvTelemetryAPI64): (filename not available): FreeTelemetryString</p>
+                        <p><strong>Solution:</strong> Update your NVIDIA graphics drivers and restart your PC/Laptop.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4><i class="fas fa-file-code"></i> D3DCOMPILER_43.DLL Missing</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Solution:</strong> Install DirectX runtimes from the link in the Pre-Setup section, then restart your PC.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4><i class="fas fa-times-circle"></i> Game Crashes on Injection</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Solution:</strong> Install ALL VC++ runtimes and DirectX runtimes, then restart your PC. Make sure you extracted the files before installing.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4><i class="fas fa-ghost"></i> Loader Says "Injected" But Menu Doesn't Open</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Solution:</strong> You did not follow the instructions. You need to disable BattlEye and completely remove/disable all antivirus software.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4><i class="fas fa-lock"></i> Everything in Menu is Locked</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>If using Free version:</strong> You need a VIP key or higher to unlock all features.</p>
+                        <p><strong>If using VIP key:</strong> Go to <code>C:\N3NY000</code> and delete the auth file, then re-inject.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4><i class="fas fa-sync-alt"></i> Getting Kicked from Public Sessions Every 5 Minutes</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We currently do not have a BattlEye bypass, and legitimate hosts will eventually remove you due to a heartbeat failure. There is no way to stop this without a private bypass.</p>
+                        <p>Other menus like RIPTIDE or Infamous have this feature, but N3NYOOO needs a recode before it can support BattlEye.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4><i class="fas fa-gamepad"></i> Game Won't Launch After Enabling FSL</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Solution:</strong> Delete <code>Documents/GTAV Enhanced/Profiles</code> to fix this issue. Make sure you have the latest FSL file, or better yet, don't use FSL as it's not necessary.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4><i class="fas fa-folder-open"></i> FSL Progress Disappeared</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>FSL reroutes account save data to disk, so any progress made with FSL will only show up if you have FSL enabled. If you don't want this, use N3NYOOO without FSL.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Playing with Friends -->
+        <section class="section">
+            <h2><i class="fas fa-users"></i> Playing with Friends</h2>
+            <p>You can play with anyone while using the menu so long as you are both using a menu.</p>
+
+            <div class="alert alert-info">
+                <h4><i class="fas fa-user-friends"></i> Cross-Menu Compatibility</h4>
+                <p>2 Nenyoo players, 1 Nenyoo and 1 Scooby player, or any other mod menu combination with BattlEye disabled works fine.</p>
+                <p><strong>Important:</strong> Only players with BattlEye enabled will not be able to join, and you will not be able to join them.</p>
+            </div>
+
+            <div class="alert alert-warning">
+                <h4><i class="fas fa-info-circle"></i> About FSL</h4>
+                <p><strong>FSL is a LOCAL SAVE tool.</strong> All it does is convert your online save profile into a local save. It is NOT a magic tool that lets you play public sessions.</p>
+                <p>It may have worked like that before, a long time ago, but it was never the main reason for the tool and it will not work that way again. Use FSL only for converting saves to local saves.</p>
+            </div>
+        </section>
+
+        <!-- Free Key Instructions -->
+        <section class="section">
+            <h2><i class="fas fa-key"></i> Free Key Instructions</h2>
+            <p>Follow these steps to get your free N3NYOOO key:</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Click the Free Key Link</h4>
+                        <p><a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank" class="btn btn-success"><i class="fas fa-key"></i> Get Free Key</a></p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Complete the Steps</h4>
+                        <p>Follow the instructions on the page carefully</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Copy Your Key</h4>
+                        <p>Once done, your key will appear on the page. COPY the key shown (NOT an .exe file)</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Login with Your Key</h4>
+                        <p>Open the N3NY000 loader, press "Login Using a Key", and paste your copied key</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <h4><i class="fas fa-exclamation-triangle"></i> Important Notes</h4>
+                <ul class="custom-list">
+                    <li>Only use the official link above to avoid scams</li>
+                    <li>Close any ad pop-ups - the key will always show on the page itself (NOT an .EXE file)</li>
+                    <li>The free key auto-resets every 24 hours - you must redo the steps daily</li>
+                    <li>Do NOT share your key with anyone</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-info">
+                <h4><i class="fas fa-lightbulb"></i> Having Issues with Pop-ups?</h4>
+                <p>Make sure you turn off adblocker, and/or use Microsoft Edge browser.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
-        <p>This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        <p style="margin-top: 5px;">This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Initialize particles.js
+        // Smooth scroll to section
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const offset = 80; // navbar height
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Accordion functionality
         document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#4a90e2"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 2,
-                            "size_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#4a90e2",
-                        "opacity": 0.4,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": true,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    const isActive = item.classList.contains('active');
+
+                    // Close all accordion items
+                    document.querySelectorAll('.accordion-item').forEach(i => {
+                        i.classList.remove('active');
+                    });
+
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        item.classList.add('active');
                     }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 200,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
+                });
+            });
+
+            // Mobile menu toggle (placeholder for future implementation)
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', function() {
+                    const navLinks = document.querySelector('.navbar-links');
+                    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+
+            // Fade in animations on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
                     }
-                },
-                "retina_detect": true
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.6s ease-out';
+                observer.observe(section);
             });
         });
     </script>
