@@ -433,25 +433,28 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 20px;
             margin-bottom: 60px;
             z-index: 2;
             perspective: 1000px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .pricing-box {
-            background: rgba(30, 30, 30, 0.8);
-            padding: 40px 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(30, 30, 30, 0.9);
+            padding: 25px 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             width: 100%;
-            max-width: 380px;
-            border: 1px solid rgba(74, 144, 226, 0.3);
+            max-width: 260px;
+            border: 1px solid rgba(74, 144, 226, 0.4);
             position: relative;
             display: flex;
             flex-direction: column;
             z-index: 2;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
             overflow: hidden;
         }
@@ -470,8 +473,8 @@
         }
 
         .pricing-box:hover {
-            transform: translateY(-10px) rotateY(5deg);
-            box-shadow: 0 15px 40px rgba(16, 63, 247, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(16, 63, 247, 0.4);
             border-color: var(--accent);
         }
 
@@ -496,24 +499,25 @@
         .pricing-box .left-logo {
             display: block;
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
 
         .pricing-box .left-logo img {
-            width: 120px;
+            width: 80px;
             height: auto;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
             transition: all 0.3s ease;
         }
 
         .pricing-box:hover .left-logo img {
-            filter: drop-shadow(0 0 15px var(--accent));
+            filter: drop-shadow(0 0 12px var(--accent));
+            transform: scale(1.1);
         }
 
         .pricing-box .plan-name h3 {
             color: var(--light);
-            font-size: 1.8em;
-            margin-bottom: 15px;
+            font-size: 1.3em;
+            margin-bottom: 12px;
             text-align: center;
             position: relative;
             display: inline-block;
@@ -523,18 +527,18 @@
         .pricing-box .plan-name h3::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -6px;
             left: 50%;
             transform: translateX(-50%);
-            width: 50px;
+            width: 40px;
             height: 2px;
             background: var(--accent);
         }
 
         .pricing-box .value h3 {
             color: var(--light);
-            font-size: 1.2em;
-            margin: 15px 0;
+            font-size: 1em;
+            margin: 10px 0;
             text-align: center;
             font-weight: 400;
         }
@@ -542,6 +546,7 @@
         .pricing-box .value h3 span {
             font-weight: 700;
             color: var(--secondary);
+            font-size: 1.2em;
         }
 
         .pricing-box ul {
@@ -549,16 +554,17 @@
             text-align: left;
             list-style: none;
             padding-left: 0;
-            margin: 25px 0;
+            margin: 15px 0;
             flex-grow: 1;
         }
 
         .pricing-box ul li {
-            padding: 8px 0;
+            padding: 5px 0;
             position: relative;
-            padding-left: 25px;
-            font-size: 0.9em;
-            line-height: 1.5;
+            padding-left: 20px;
+            font-size: 0.8em;
+            line-height: 1.4;
+            color: #ccc;
         }
 
         .pricing-box ul li::before {
@@ -567,44 +573,46 @@
             left: 0;
             color: var(--accent);
             font-weight: bold;
+            font-size: 1.1em;
         }
 
         .button-group {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 15px;
+            gap: 6px;
         }
 
         .button-group a {
-            padding: 12px 20px;
+            padding: 8px 16px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: var(--light);
             text-decoration: none;
-            border-radius: 30px;
-            margin: 8px 0;
+            border-radius: 25px;
             width: 100%;
             text-align: center;
             transition: all 0.3s ease;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             position: relative;
             overflow: hidden;
             border: none;
-            box-shadow: 0 5px 15px rgba(16, 63, 247, 0.3);
+            box-shadow: 0 4px 12px rgba(16, 63, 247, 0.3);
+            font-size: 0.85em;
         }
 
         .button-group a:nth-child(2) {
-            background: linear-gradient(135deg, var(--dark-gray), #333);
-        }
-
-        .button-group a:nth-child(3) {
             background: linear-gradient(135deg, #f4b400, #f47c00);
         }
 
+        .button-group a:nth-child(3) {
+            background: linear-gradient(135deg, var(--dark-gray), #333);
+        }
+
         .button-group a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(16, 63, 247, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(16, 63, 247, 0.5);
         }
 
         .button-group a::before {
@@ -625,21 +633,31 @@
         /* Image Carousel */
         .pricing-image-box {
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 700px;
+            margin: 30px auto 0;
             position: relative;
             z-index: 2;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            height: 300px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            height: 280px;
+            border: 2px solid rgba(74, 144, 226, 0.3);
+            transition: all 0.4s ease;
+            background: rgba(20, 20, 20, 0.8);
+        }
+
+        .pricing-image-box:hover {
+            box-shadow: 0 12px 35px rgba(16, 63, 247, 0.4);
+            border-color: var(--accent);
+            transform: translateY(-5px);
         }
 
         .image-carousel {
             display: flex;
             width: 400%;
             height: 100%;
-            animation: scrollImages 30s linear infinite;
+            animation: scrollImages 24s ease-in-out infinite;
+            align-items: center;
         }
 
         .image-carousel img {
@@ -647,17 +665,23 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+            filter: brightness(0.9);
+            display: block;
+        }
+
+        .image-carousel img:hover {
+            filter: brightness(1);
         }
 
         @keyframes scrollImages {
             0% { transform: translateX(0); }
-            20% { transform: translateX(0); }
+            22% { transform: translateX(0); }
             25% { transform: translateX(-25%); }
-            45% { transform: translateX(-25%); }
+            47% { transform: translateX(-25%); }
             50% { transform: translateX(-50%); }
-            70% { transform: translateX(-50%); }
+            72% { transform: translateX(-50%); }
             75% { transform: translateX(-75%); }
-            95% { transform: translateX(-75%); }
+            97% { transform: translateX(-75%); }
             100% { transform: translateX(0); }
         }
 
@@ -917,99 +941,9 @@
     <!-- Pricing Section -->
     <section id="buy">
         <h2 class="section-title2">Choose Your Package</h2>
-        
-        <h2 class="pricing-title" style="text-align: center;">GTA 5 Enhanced:</h2>
-
-      
-            
 
         <div class="pricing-container">
-           
-
-                   <!-- Free Version -->
-       
-                   <div class="pricing-box">
-                    <div class="left-logo">
-                        <img src="free.png" alt="N3NY000 Free">
-                    </div>
-                    <div class="plan-name">
-                        <h3>FREE VERSION</h3>
-                    </div>
-                    <div class="value">
-                        <h3>Key Resets Every 48 Hours</h3>
-                        <h3>Limited Feature Set</h3>
-                    </div>
-                    <ul>
-                        <li>Basic Player Options</li>
-                        <li>Essential Vehicle Features</li>
-                        <li>Limited Protections</li>
-                        <li>Basic Trolling Options</li>
-                        <li>Simple Money Methods</li>
-                        <li>Lua Engine / Scripts Support</li>
-                    </ul>
-                    <div class="button-group">
-                        <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">
-                            <i class="fas fa-key"></i> Get Free Key
-                        </a>
-                    </div>
-                </div>
-            
-            <div class="pricing-box">
-                <div class="left-logo">
-                    <img src="free.png" alt="N3NY000 Free">
-                </div>
-                <div class="plan-name">
-                    <h3>ENHANCED VERSION</h3>
-                </div>
-                <div class="value">
-                    <h3>7 Days: <span>$15</span></h3>
-                    <h3>Lifetime: <span>$25</span></h3>
-
-                    <h3>Upgrade from VIP: <span>$10</span></h3>
-                    <h3>Upgrade from VIP+: <span>$5.50</span></h3>
-                </div>
-                <ul>
-                    <li>GTA 5 Legacy & Enhanced Access to both versions</li>
-                    <li>Access to Legacy & Enhanced Versions </li>
-                    <li>Everything from Legacy VIP Plus </li>
-                    <li>Battle Eye Enabled & Disabled Support</li>
-                    <li>Fully Working in Public Lobbies / Missions/Heists/Races Etc</li>
-                    <li>Recovery Options > Money/Rank/Unlocks/Stats</li>
-                    <li>Trolling Options</li>
-                    <li>Lua Engine / Scripts Support</li>
-                    <li> </li>
-                </ul>
-                <div class="button-group">
-                    <a href="https://nenyooo.myshopify.com/products/nenyooo-enhanced-lifetime" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime With Card
-                    </a>
-
-
-                    <a href="https://nenyooo.myshopify.com/products/nenyooo-enhanced-7-days" target="_blank">
-                        <i class="fas fa-clock"></i> Purchase 7-Day With Card
-                    </a>
-              
-        <a href="https://nenyooocrypto.shop/" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime & 7 days with Crypto (20% DISCOUNTED)
-                    </a>
-       
-
-                    <a href="morepayments.html" target="_blank">
-                        <i class="fas fa-arrow-up"></i> More Payments
-                    </a>
-    
-                </div>
-            </div>
-
-        </div>
-
-
-<h2 class="pricing-title" style="text-align: center;">GTA 5 Legacy:</h2>
-
-
-        <div class="pricing-container">
-            <!-- Free Version -->
-       
+            <!-- Free Version for Enhanced & Legacy -->
             <div class="pricing-box">
                 <div class="left-logo">
                     <img src="free.png" alt="N3NY000 Free">
@@ -1018,8 +952,8 @@
                     <h3>FREE VERSION</h3>
                 </div>
                 <div class="value">
+                    <h3>Enhanced & Legacy</h3>
                     <h3>Key Resets Every 48 Hours</h3>
-                    <h3>Limited Feature Set</h3>
                 </div>
                 <ul>
                     <li>Basic Player Options</li>
@@ -1027,6 +961,7 @@
                     <li>Limited Protections</li>
                     <li>Basic Trolling Options</li>
                     <li>Simple Money Methods</li>
+                    <li>Lua Engine / Scripts Support</li>
                 </ul>
                 <div class="button-group">
                     <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">
@@ -1034,105 +969,142 @@
                     </a>
                 </div>
             </div>
-    
 
-            <!-- VIP Version -->
+            <!-- Enhanced VIP -->
             <div class="pricing-box">
                 <div class="left-logo">
-                    <img src="vip.png" alt="N3NY000 VIP">
+                    <img src="vip.png" alt="Enhanced VIP">
                 </div>
                 <div class="plan-name">
-                    <h3>VIP EDITION</h3>
+                    <h3>ENHANCED VIP</h3>
                 </div>
                 <div class="value">
-                    <h3>7 Days: <span>$5</span></h3>
-                    <h3>Lifetime: <span>$10</span></h3>
+                    <h3>Price: <span>$13.50</span></h3>
                 </div>
                 <ul>
-                    <li>Map & XML Vehicle Loader</li>
-                    <li>Advanced Vehicle Abilities</li>
-                    <li>Full Casino Rigging</li>
-                    <li>Complete Stat Editor</li>
-                    <li>All Unlocks & Rank Options</li>
-                    <li>Money/RP Drop System</li>
-                    <li>Session Bounty Loops</li>
-                    <li>Streamer Mode</li>
-                    <li>Player IP & Geo Location</li>
-                    <li>Save Vehicles & Outfits</li>
+                    <li>Enhanced Edition Support</li>
+                    <li>All VIP Features</li>
+                    <li>Advanced Player Options</li>
+                    <li>Vehicle Customization</li>
+                    <li>Recovery Options</li>
+                    <li>Trolling Features</li>
+                    <li>Lua Engine Support</li>
+                    <li>Premium Support</li>
                 </ul>
                 <div class="button-group">
-                    <a href="https://nenyooo.myshopify.com/products/nenyooo-vip-lifetime-gta" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime VIP with Card
+                    <a href="https://n3ny000.myshopify.com/products/nenyooo-enhanced-lifetime" target="_blank">
+                        <i class="fas fa-crown"></i> Purchase Enhanced VIP
                     </a>
-                   
                     <a href="https://nenyooocrypto.shop/" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime VIP with Crypto (20% OFF DISCOUNTED)
+                        <i class="fas fa-bitcoin"></i> Purchase with Crypto (20% OFF)
                     </a>
-
                     <a href="morepayments.html" target="_blank">
                         <i class="fas fa-arrow-up"></i> More Payments
                     </a>
-
                 </div>
             </div>
 
-            <!-- VIP Plus Version -->
+            <!-- Legacy VIP -->
             <div class="pricing-box">
                 <div class="left-logo">
-                    <img src="vipplus.png" alt="N3NY000 VIP Plus">
+                    <img src="vip.png" alt="Legacy VIP">
                 </div>
                 <div class="plan-name">
-                    <h3>VIP PLUS</h3>
+                    <h3>LEGACY VIP</h3>
                 </div>
                 <div class="value">
-                    <h3>7 Days: <span>$10</span></h3>
-                    <h3>Lifetime: <span>$20</span></h3>
+                    <h3>Price: <span>$13.50</span></h3>
                 </div>
                 <ul>
+                    <li>Legacy Edition Support</li>
+                    <li>All VIP Features</li>
+                    <li>Advanced Player Options</li>
+                    <li>Vehicle Customization</li>
+                    <li>Recovery Options</li>
+                    <li>Trolling Features</li>
+                    <li>Lua Engine Support</li>
+                    <li>Premium Support</li>
+                </ul>
+                <div class="button-group">
+                    <a href="https://n3ny000.myshopify.com/products/nenyooo-vip-plus-lifetime" target="_blank">
+                        <i class="fas fa-crown"></i> Purchase Legacy VIP
+                    </a>
+                    <a href="https://nenyooocrypto.shop/" target="_blank">
+                        <i class="fas fa-bitcoin"></i> Purchase with Crypto (20% OFF)
+                    </a>
+                    <a href="morepayments.html" target="_blank">
+                        <i class="fas fa-arrow-up"></i> More Payments
+                    </a>
+                </div>
+            </div>
+
+            <!-- MVP Edition -->
+            <div class="pricing-box">
+                <div class="left-logo">
+                    <img src="vipplus.png" alt="MVP Edition">
+                </div>
+                <div class="plan-name">
+                    <h3>MVP EDITION</h3>
+                </div>
+                <div class="value">
+                    <h3>Enhanced & Legacy: <span>>$20</span></h3>
+                </div>
+                <ul>
+                    <li>Enhanced & Legacy Support</li>
+                    <li>Battle Eye Support + Spoofer</li>
                     <li>All VIP Features Included</li>
                     <li>ScriptHookV Integration</li>
                     <li>VFX Engine & Session Browser</li>
+                    <li>Advanced Recovery Options</li>
                     <li>Player Tracker & Magnet</li>
                     <li>DLC Loader & Business Manager</li>
-                    <li>Chat Spammer & Traffic Control</li>
                     <li>Advanced Crashes & Kicks</li>
-                    <li>Teleport All Players</li>
-                    <li>Rockstar ID Tools</li>
-                    <li>Battle Eye Support</li>
-                    <li>Protections</li>
+                    <li>Full Protections Suite</li>
                 </ul>
                 <div class="button-group">
-                    <a href="https://nenyooo.myshopify.com/products/nenyooo-vip-plus-lifetime" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime VIP+
+                    <a href="https://n3ny000.myshopify.com/products/nenyooo-mvp-lifetime" target="_blank">
+                        <i class="fas fa-crown"></i> Purchase MVP Edition
                     </a>
-
-
                     <a href="https://nenyooocrypto.shop/" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime & 7 days VIP+ with Crypto (20% Discounted)
+                        <i class="fas fa-bitcoin"></i> Purchase with Crypto (20% OFF)
                     </a>
-
-
-                    <a href="https://nenyooo.myshopify.com/products/nenyooo-vip-plus-7-days" target="_blank">
-                        <i class="fas fa-clock"></i> Purchase 7-Day VIP+
-                    </a>
-                    <a href="https://nenyooo.myshopify.com/products/nenyooo-vip-to-vip-upgrade-enhanced" target="_blank">
-                        <i class="fas fa-arrow-up"></i> Purchase Upgrade to VIP+
-                    </a>
-
                     <a href="morepayments.html" target="_blank">
                         <i class="fas fa-arrow-up"></i> More Payments
                     </a>
-
                 </div>
             </div>
-        </div>
 
-        <div class="pricing-image-box">
-            <div class="image-carousel">
-                <img src="menu.png" alt="Menu Preview 1">
-                <img src="dance.gif" alt="Feature Showcase 1">
-                <img src="menu2.png" alt="Menu Preview 2">
-                <img src="dance2.gif" alt="Feature Showcase 2">
+            <!-- Upgrade to MVP -->
+            <div class="pricing-box">
+                <div class="left-logo">
+                    <img src="vipplus.png" alt="Upgrade to MVP">
+                </div>
+                <div class="plan-name">
+                    <h3>UPGRADE TO MVP</h3>
+                </div>
+                <div class="value">
+                    <h3>Upgrade Price: <span>$10</span></h3>
+                </div>
+                <ul>
+                    <li>Upgrade from VIP to MVP</li>
+                    <li>Get Battle Eye Support + Spoofer</li>
+                    <li>Unlock All MVP Features</li>
+                    <li>Enhanced & Legacy Support</li>
+                    <li>Advanced Protections</li>
+                    <li>Premium Features Unlocked</li>
+                    <li>Lifetime Access</li>
+                </ul>
+                <div class="button-group">
+                    <a href="https://n3ny000.myshopify.com/products/nenyooo-vip-to-vip-upgrade-enhanced" target="_blank">
+                        <i class="fas fa-arrow-up"></i> Upgrade to MVP
+                    </a>
+                    <a href="https://nenyooocrypto.shop/" target="_blank">
+                        <i class="fas fa-bitcoin"></i> Upgrade with Crypto (20% OFF)
+                    </a>
+                    <a href="morepayments.html" target="_blank">
+                        <i class="fas fa-arrow-up"></i> More Payments
+                    </a>
+                </div>
             </div>
         </div>
     </section>
