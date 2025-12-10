@@ -6,22 +6,23 @@
     <title>N3NY000 - Terms of Service & Policies</title>
     <meta name="description" content="Read the Terms of Service, Refund Policy, and FAQ for N3NY000 Store. Important information about product access, payments, and support.">
     <meta name="keywords" content="N3NY000 TOS, Nenyooo terms of service, mod menu refund policy, payment policy, crypto payments, GTA 5 mod menu FAQ">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --primary: #103FF7;
             --secondary: #f4b400;
             --accent: #4a90e2;
-            --danger: #d63031;
-            --success: #00b894;
             --dark: #0a0a0a;
             --darker: #050505;
             --light: #ffffff;
-            --gray: #7f8c8d;
-            --dark-gray: #222;
+            --gray: #8a9199;
+            --dark-gray: #181818;
+            --card-bg: rgba(20, 20, 25, 0.9);
+            --success: #00b894;
+            --warning: #f4b400;
+            --danger: #e74c3c;
+            --info: #3498db;
         }
 
         * {
@@ -36,16 +37,6 @@
             color: var(--light);
             line-height: 1.7;
             overflow-x: hidden;
-        }
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            pointer-events: none;
         }
 
         /* Scrollbar */
@@ -66,71 +57,151 @@
             background: var(--accent);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 2;
+        /* Top Navigation Bar */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .back-button {
-            display: inline-block;
-            margin-bottom: 30px;
-            padding: 12px 24px;
-            background: var(--accent);
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .top-nav .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(16, 63, 247, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
             color: var(--light);
             text-decoration: none;
-            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
             transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .auth-btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            text-decoration: none;
             font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .back-button:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(16, 63, 247, 0.4);
+        .auth-btn.login {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        .back-button i {
-            margin-right: 8px;
+        .auth-btn.login:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
         }
 
-        .header {
+        .auth-btn.register {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--light);
+            border: none;
+            box-shadow: 0 4px 15px rgba(16, 63, 247, 0.4);
+        }
+
+        .auth-btn.register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 63, 247, 0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 60px;
+            padding: 80px 20px 60px;
             text-align: center;
-            margin-bottom: 50px;
-            padding: 40px 20px;
-            background: rgba(16, 63, 247, 0.1);
-            border-radius: 15px;
-            border: 1px solid rgba(74, 144, 226, 0.3);
+            background: linear-gradient(180deg, rgba(16, 63, 247, 0.1) 0%, transparent 100%);
         }
 
-        .header h1 {
+        .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em;
-            color: var(--secondary);
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(244, 180, 0, 0.5);
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(16, 63, 247, 0.5);
         }
 
-        .header p {
-            color: #bbb;
-            font-size: 1.1em;
-            margin-top: 15px;
+        .hero h1 i {
+            margin-right: 15px;
         }
 
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Quick Summary */
         .quick-summary {
-            background: linear-gradient(135deg, rgba(214, 48, 49, 0.15), rgba(214, 48, 49, 0.05));
-            border: 2px solid var(--danger);
-            border-radius: 15px;
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.4);
+            border-left: 4px solid var(--danger);
+            border-radius: 14px;
             padding: 30px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(214, 48, 49, 0.2);
         }
 
         .quick-summary h2 {
             color: var(--danger);
-            font-size: 1.8em;
+            font-size: 1.4rem;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -143,10 +214,10 @@
         }
 
         .quick-summary ul li {
-            padding: 12px 0 12px 35px;
+            padding: 10px 0 10px 30px;
             position: relative;
-            color: #ddd;
-            font-size: 1.05em;
+            color: #ccc;
+            font-size: 0.95rem;
         }
 
         .quick-summary ul li::before {
@@ -156,30 +227,29 @@
             position: absolute;
             left: 0;
             color: var(--danger);
-            font-size: 1.2em;
         }
 
+        /* TOS Section */
         .tos-section {
-            background: rgba(34, 34, 34, 0.9);
-            padding: 35px;
+            background: var(--card-bg);
+            padding: 30px;
             margin-bottom: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(74, 144, 226, 0.3);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s ease;
         }
 
         .tos-section:hover {
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transform: translateY(-2px);
+            border-color: rgba(74, 144, 226, 0.3);
         }
 
         .tos-section h2 {
+            font-family: 'Orbitron', sans-serif;
             color: var(--secondary);
-            font-size: 1.7em;
+            font-size: 1.3rem;
             margin-bottom: 20px;
             padding-bottom: 12px;
-            border-bottom: 2px solid var(--accent);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -191,19 +261,18 @@
 
         .simple-explain {
             background: rgba(74, 144, 226, 0.1);
-            border-left: 4px solid var(--accent);
+            border-left: 3px solid var(--accent);
             padding: 15px 20px;
             margin-bottom: 20px;
             border-radius: 8px;
-            font-size: 1.05em;
-            color: #e0e0e0;
+            font-size: 0.95rem;
+            color: #ccc;
         }
 
         .simple-explain strong {
             color: var(--accent);
             display: block;
             margin-bottom: 8px;
-            font-size: 1.1em;
         }
 
         .rule-list {
@@ -213,10 +282,10 @@
         }
 
         .rule-list li {
-            padding: 12px 0 12px 35px;
+            padding: 10px 0 10px 30px;
             position: relative;
             color: #bbb;
-            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
 
         .rule-list li::before {
@@ -225,38 +294,39 @@
             font-weight: 900;
             position: absolute;
             left: 0;
-            color: var(--accent);
-            font-size: 1.1em;
+            color: var(--success);
         }
 
         .warning-box {
             background: rgba(244, 180, 0, 0.1);
-            border-left: 4px solid var(--secondary);
-            padding: 18px 20px;
+            border-left: 3px solid var(--warning);
+            padding: 15px 20px;
             margin: 20px 0;
             border-radius: 8px;
         }
 
         .warning-box p {
-            color: var(--light);
+            color: #ccc;
             margin: 0;
+            font-size: 0.9rem;
         }
 
         .warning-box strong {
-            color: var(--secondary);
+            color: var(--warning);
         }
 
         .danger-box {
-            background: rgba(214, 48, 49, 0.1);
-            border-left: 4px solid var(--danger);
-            padding: 18px 20px;
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 3px solid var(--danger);
+            padding: 15px 20px;
             margin: 20px 0;
             border-radius: 8px;
         }
 
         .danger-box p {
-            color: var(--light);
+            color: #ccc;
             margin: 0;
+            font-size: 0.9rem;
         }
 
         .danger-box strong {
@@ -268,59 +338,52 @@
             margin-top: 50px;
         }
 
-        .faq-section h2 {
+        .faq-section > h2 {
+            font-family: 'Orbitron', sans-serif;
             text-align: center;
             color: var(--secondary);
-            font-size: 2.2em;
+            font-size: 1.8rem;
             margin-bottom: 30px;
-            font-family: 'Orbitron', sans-serif;
         }
 
         .faq-item {
-            background: rgba(34, 34, 34, 0.9);
+            background: var(--card-bg);
             border-radius: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             overflow: hidden;
-            border: 1px solid rgba(74, 144, 226, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            border-color: var(--accent);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .faq-question {
-            background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(244, 180, 0, 0.1));
-            padding: 20px 25px;
+            background: rgba(16, 63, 247, 0.08);
+            padding: 18px 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 15px;
         }
 
         .faq-question:hover {
-            background: linear-gradient(135deg, rgba(74, 144, 226, 0.3), rgba(244, 180, 0, 0.2));
+            background: rgba(16, 63, 247, 0.12);
         }
 
         .faq-question h3 {
             color: var(--light);
-            font-size: 1.15em;
+            font-size: 0.95rem;
             margin: 0;
-            flex: 1;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            font-weight: 600;
         }
 
-        .faq-question i {
+        .faq-question h3 i {
             color: var(--accent);
         }
 
         .faq-toggle {
-            color: var(--secondary);
-            font-size: 1.3em;
+            color: var(--accent);
             transition: transform 0.3s ease;
         }
 
@@ -331,25 +394,26 @@
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            background: rgba(20, 20, 20, 0.9);
+            transition: max-height 0.3s ease;
         }
 
         .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 20px 25px;
+            max-height: 300px;
+            padding: 20px;
         }
 
         .faq-answer p {
-            color: #ccc;
+            color: #bbb;
             margin: 0;
+            font-size: 0.9rem;
             line-height: 1.7;
         }
 
+        /* Acknowledgment */
         .acknowledgment {
-            background: linear-gradient(135deg, rgba(0, 184, 148, 0.15), rgba(0, 184, 148, 0.05));
-            border: 2px solid var(--success);
-            border-radius: 15px;
+            background: rgba(0, 184, 148, 0.1);
+            border: 1px solid rgba(0, 184, 148, 0.4);
+            border-radius: 14px;
             padding: 30px;
             margin: 40px 0;
             text-align: center;
@@ -357,7 +421,7 @@
 
         .acknowledgment h2 {
             color: var(--success);
-            font-size: 1.8em;
+            font-size: 1.4rem;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -366,66 +430,137 @@
         }
 
         .acknowledgment p {
-            color: #ddd;
-            font-size: 1.1em;
+            color: #ccc;
+            font-size: 0.95rem;
         }
 
+        /* Footer */
         footer {
             background: var(--darker);
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
-            position: relative;
-            z-index: 2;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             margin-top: 50px;
         }
 
         footer p {
             color: var(--gray);
-            font-size: 0.9em;
+            font-size: 0.85em;
+            margin: 5px 0;
+        }
+
+        footer p:first-child {
+            color: var(--light);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
+            .top-nav {
+                height: 55px;
+                padding: 0 20px;
+            }
+
+            .top-nav .logo {
+                font-size: 1.2rem;
+            }
+
+            .auth-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .auth-btn i {
+                display: none;
+            }
+
+            .hero {
+                margin-top: 55px;
+                padding: 60px 20px 40px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
             .container {
                 padding: 20px 15px;
             }
 
-            .header h1 {
-                font-size: 2em;
-            }
-
             .tos-section {
-                padding: 25px;
+                padding: 25px 20px;
             }
 
             .tos-section h2 {
-                font-size: 1.4em;
+                font-size: 1.1rem;
             }
 
             .quick-summary {
                 padding: 20px;
             }
+        }
+
+        @media (max-width: 480px) {
+            .top-nav {
+                height: 50px;
+                padding: 0 15px;
+            }
+
+            .top-nav .logo {
+                font-size: 1rem;
+            }
+
+            .auth-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            .hero h1 {
+                font-size: 1.4rem;
+            }
 
             .faq-question h3 {
-                font-size: 1em;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Particles Background -->
-    <div id="particles-js"></div>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo">N3NY000</a>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="download.html"><i class="fas fa-download"></i> Download</a>
+                <a href="setup-troubleshoot.html"><i class="fas fa-wrench"></i> Setup</a>
+                <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank"><i class="fas fa-key"></i> Free Key</a>
+            </div>
+        </div>
+        <div class="auth-buttons">
+            <a href="https://proudlyauthentication.com/customers/613591817/Nenyooo" class="auth-btn login">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="https://proudlyauthentication.com/customers/613591817/Nenyooo" class="auth-btn register">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1><i class="fas fa-file-contract"></i> Terms of Service</h1>
+        <p>N3NY000 Store - Please read carefully before purchasing</p>
+    </section>
 
     <div class="container">
-        <a href="index.html" class="back-button">
-            <i class="fas fa-arrow-left"></i> Back to Home
-        </a>
-
-        <div class="header">
-            <h1><i class="fas fa-file-contract"></i> Terms of Service</h1>
-            <p>N3NY000 Store - Please read carefully before purchasing</p>
-        </div>
-
         <!-- Quick Summary Section -->
         <div class="quick-summary">
             <h2><i class="fas fa-exclamation-triangle"></i> Before You Buy - Key Points</h2>
@@ -443,12 +578,10 @@
         <!-- Section 1: Product Access -->
         <div class="tos-section">
             <h2><i class="fas fa-user-check"></i> Product Access & Usage</h2>
-
             <div class="simple-explain">
                 <strong>In Simple Terms:</strong>
                 Your access is a privilege, not a right. We can remove it if you break the rules. "Lifetime" doesn't mean forever - it means as long as the product exists.
             </div>
-
             <ul class="rule-list">
                 <li>We can ban or suspend your product key at any time if you violate our terms</li>
                 <li>"Lifetime access" refers to the product's lifetime, not yours - products can be discontinued at any time</li>
@@ -456,7 +589,6 @@
                 <li>YOU are responsible for keeping your key safe - lost or stolen keys will NOT be replaced</li>
                 <li>If someone else uses your key (even by accident), both accounts will be banned</li>
             </ul>
-
             <div class="warning-box">
                 <p><strong>Warning:</strong> Screenshot your key after purchase and store it somewhere safe. We cannot recover lost keys.</p>
             </div>
@@ -465,12 +597,10 @@
         <!-- Section 2: Payments -->
         <div class="tos-section">
             <h2><i class="fas fa-credit-card"></i> Payments & Fraud Protection</h2>
-
             <div class="simple-explain">
                 <strong>In Simple Terms:</strong>
                 We take fraud seriously. Suspicious payments are rejected. Chargebacks (disputing a charge with your bank) will get you permanently banned.
             </div>
-
             <ul class="rule-list">
                 <li>We may decline any payment that looks suspicious or fraudulent</li>
                 <li>If your payment is flagged, you will NOT receive your product key</li>
@@ -479,7 +609,6 @@
                 <li>We log all transactions, IP addresses, and device info to dispute fraudulent chargebacks</li>
                 <li>Fake payment info (wrong name, address, etc.) will trigger manual review</li>
             </ul>
-
             <div class="danger-box">
                 <p><strong>Important:</strong> If we need to verify your payment, you must provide proof of card ownership (photo showing last 4 digits and name, with other details hidden). Refusal to verify = no product key.</p>
             </div>
@@ -488,12 +617,10 @@
         <!-- Section 3: Cryptocurrency -->
         <div class="tos-section">
             <h2><i class="fab fa-bitcoin"></i> Cryptocurrency Payments</h2>
-
             <div class="simple-explain">
                 <strong>In Simple Terms:</strong>
                 Crypto payments cannot be reversed. If you send the wrong amount or to the wrong address, that's on you - no refunds.
             </div>
-
             <ul class="rule-list">
                 <li>Cryptocurrency payments are FINAL - no refunds, no reversals, no disputes</li>
                 <li>YOU must send the exact amount to the correct wallet address</li>
@@ -501,7 +628,6 @@
                 <li>If you don't cover transaction fees, your payment won't complete and you won't get your key</li>
                 <li>Sending less than required = invalid order with no compensation</li>
             </ul>
-
             <div class="warning-box">
                 <p><strong>Pro Tip:</strong> Double-check the wallet address and payment amount before sending. Crypto transactions cannot be undone!</p>
             </div>
@@ -510,12 +636,10 @@
         <!-- Section 4: Updates & Delays -->
         <div class="tos-section">
             <h2><i class="fas fa-sync-alt"></i> Product Updates & Delays</h2>
-
             <div class="simple-explain">
                 <strong>In Simple Terms:</strong>
                 When GTA updates, our products break. We fix them as fast as we can, but there's no guaranteed timeline. No refunds for waiting.
             </div>
-
             <ul class="rule-list">
                 <li>Buying during updates does NOT guarantee immediate access</li>
                 <li>There is NO guaranteed ETA (estimated time) for when updates will be ready</li>
@@ -529,19 +653,16 @@
         <!-- Section 5: Support -->
         <div class="tos-section">
             <h2><i class="fas fa-headset"></i> Support Policy</h2>
-
             <div class="simple-explain">
                 <strong>In Simple Terms:</strong>
                 We help when we can, but we're not available 24/7. Read the guides first. Don't spam us or we'll ignore you.
             </div>
-
             <ul class="rule-list">
                 <li>Support is provided when we're available - NOT guaranteed to be instant</li>
                 <li>Spamming support channels = we'll refuse to help you</li>
                 <li>We provide detailed guides - you MUST follow them before asking for help</li>
                 <li>Being rude or disrespectful = no support for you</li>
             </ul>
-
             <div class="warning-box">
                 <p><strong>Tip:</strong> Check the setup guide and troubleshooting page first. 90% of issues are covered there!</p>
             </div>
@@ -550,12 +671,10 @@
         <!-- Section 6: Service Availability -->
         <div class="tos-section">
             <h2><i class="fas fa-server"></i> Service Availability & Downtime</h2>
-
             <div class="simple-explain">
                 <strong>In Simple Terms:</strong>
                 Products can go offline, break, or shut down permanently. No refunds when this happens. Game updates WILL break things temporarily.
             </div>
-
             <ul class="rule-list">
                 <li>We do NOT guarantee 24/7 product availability</li>
                 <li>Products may go offline, be updated, or permanently shut down at any time</li>
@@ -568,12 +687,10 @@
         <!-- Section 7: Privacy & Data -->
         <div class="tos-section">
             <h2><i class="fas fa-user-shield"></i> Data Collection & Privacy</h2>
-
             <div class="simple-explain">
                 <strong>In Simple Terms:</strong>
                 We collect your hardware ID and IP address to prevent fraud and key sharing. We don't collect payment info.
             </div>
-
             <ul class="rule-list">
                 <li>We collect your PC hardware ID (HWID) and IP address for security</li>
                 <li>This data is logged when you create an account or redeem your key</li>
@@ -586,12 +703,10 @@
         <!-- Refund Policy -->
         <div class="tos-section">
             <h2><i class="fas fa-undo-alt"></i> Refund Policy</h2>
-
             <div class="simple-explain">
                 <strong>In Simple Terms:</strong>
                 NO REFUNDS. EVER. For ANY reason. Don't even ask. Chargebacks = ban.
             </div>
-
             <ul class="rule-list">
                 <li>All sales are FINAL - absolutely NO refunds under any circumstance</li>
                 <li>Chargebacks = permanent ban + blacklist from all current and future services</li>
@@ -600,7 +715,6 @@
                 <li>Chargeback attempts are reported to payment processors with full evidence</li>
                 <li>Crypto payments are 100% non-refundable - no exceptions</li>
             </ul>
-
             <div class="danger-box">
                 <p><strong>Final Warning:</strong> We log everything - purchase confirmations, agreements, server communications. We will fight fraudulent chargebacks with all available evidence.</p>
             </div>
@@ -708,135 +822,25 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
         <p>This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Toggle FAQ
         function toggleFAQ(element) {
             const faqItem = element.parentElement;
             const wasActive = faqItem.classList.contains('active');
 
-            // Close all FAQs
             document.querySelectorAll('.faq-item').forEach(item => {
                 item.classList.remove('active');
             });
 
-            // Open clicked FAQ if it wasn't active
             if (!wasActive) {
                 faqItem.classList.add('active');
             }
         }
-
-        // Initialize particles.js
-        document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#4a90e2"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 2,
-                            "size_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#4a90e2",
-                        "opacity": 0.4,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": true,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 200,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-        });
     </script>
 </body>
 </html>

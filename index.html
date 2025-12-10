@@ -18,8 +18,9 @@
             --dark: #0a0a0a;
             --darker: #050505;
             --light: #ffffff;
-            --gray: #7f8c8d;
-            --dark-gray: #222;
+            --gray: #8a9199;
+            --dark-gray: #181818;
+            --card-bg: rgba(20, 20, 25, 0.9);
         }
 
         /* General Styles */
@@ -67,34 +68,103 @@
             background: var(--accent);
         }
 
-        /* Sidebar Styles */
-        .sidebar {
+        /* Top Navigation Bar */
+        .top-nav {
             position: fixed;
             top: 0;
             left: 0;
-            width: 90px;
-            height: 100vh;
+            right: 0;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px 0 110px;
+            z-index: 101;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .top-nav .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(16, 63, 247, 0.5);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .auth-btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auth-btn.login {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .auth-btn.login:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .auth-btn.register {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--light);
+            border: none;
+            box-shadow: 0 4px 15px rgba(16, 63, 247, 0.4);
+        }
+
+        .auth-btn.register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 63, 247, 0.6);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 80px;
+            height: calc(100vh - 60px);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            padding: 0;
+            padding: 20px 0;
             z-index: 100;
             background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            overflow-y: auto;
         }
 
         .sidebar:hover {
-            width: 110px;
+            width: 100px;
             background: rgba(10, 10, 10, 0.9);
         }
 
         .sidebar a {
             text-decoration: none;
             color: var(--light);
-            margin: 20px 0;
+            margin: 12px 0;
             text-align: center;
             transition: all 0.3s ease;
             display: flex;
@@ -103,6 +173,7 @@
             width: 100%;
             position: relative;
             overflow: hidden;
+            padding: 8px 0;
         }
 
         .sidebar a:hover {
@@ -371,11 +442,11 @@
             max-width: 350px;
             text-align: center;
             padding: 30px 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
+            background: var(--card-bg);
+            border-radius: 12px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
         }
 
         .feature:hover {
@@ -443,13 +514,13 @@
         }
 
         .pricing-box {
-            background: rgba(30, 30, 30, 0.9);
+            background: var(--card-bg);
             padding: 25px 20px;
-            border-radius: 12px;
+            border-radius: 14px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             width: 100%;
             max-width: 260px;
-            border: 1px solid rgba(74, 144, 226, 0.4);
+            border: 1px solid rgba(74, 144, 226, 0.25);
             position: relative;
             display: flex;
             flex-direction: column;
@@ -688,31 +759,62 @@
         /* Footer */
         footer {
             background: var(--darker);
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
             position: relative;
             z-index: 2;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         footer p {
             color: var(--gray);
-            font-size: 0.9em;
+            font-size: 0.85em;
+            margin: 5px 0;
+        }
+
+        footer p:first-child {
+            color: var(--light);
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
+            .top-nav {
+                padding: 0 15px 0 80px;
+                height: 55px;
+            }
+
+            .top-nav .logo {
+                font-size: 1.1rem;
+            }
+
+            .auth-buttons {
+                gap: 8px;
+            }
+
+            .auth-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .auth-btn i {
+                display: none;
+            }
+
             .sidebar {
-                width: 70px;
+                width: 60px;
+                top: 55px;
+                height: calc(100vh - 55px);
                 background: rgba(10, 10, 10, 0.9);
             }
 
             .sidebar:hover {
-                width: 70px;
+                width: 60px;
             }
 
             .sidebar .text {
-                font-size: 9px;
+                font-size: 8px;
             }
 
             .video-box {
@@ -752,12 +854,28 @@
         }
 
         @media (max-width: 480px) {
+            .top-nav {
+                padding: 0 10px 0 70px;
+                height: 50px;
+            }
+
+            .top-nav .logo {
+                font-size: 1rem;
+            }
+
+            .auth-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
             .sidebar {
-                width: 60px;
+                width: 55px;
+                top: 50px;
+                height: calc(100vh - 50px);
             }
 
             .sidebar .icon {
-                font-size: 20px;
+                font-size: 18px;
             }
 
             .sidebar .text {
@@ -813,6 +931,19 @@
     </style>
 </head>
 <body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <a href="#" class="logo">N3NY000</a>
+        <div class="auth-buttons">
+            <a href="https://proudlyauthentication.com/customers/613591817/Nenyooo" class="auth-btn login">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="https://proudlyauthentication.com/customers/613591817/Nenyooo" class="auth-btn register">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        </div>
+    </nav>
+
     <!-- Sidebar -->
     <div class="sidebar">
         <a href="#buy">
@@ -829,40 +960,36 @@
             <span class="icon"><i class="fas fa-video"></i></span>
             <span class="text">Showcase</span>
         </a>
-        
-        <a href="TOS.html"target="_blank">
-            <span class="icon"><i class="fas fa-info-circle"></i></span>
-            <span class="text">TOS</span>
-        </a>
 
         <a href="#about">
-            <span class="icon"><i class="fas fa-info-circle"></i></span>
+            <span class="icon"><i class="fas fa-users"></i></span>
             <span class="text">About</span>
         </a>
-
-
-
 
         <a href="download.html" target="_blank">
             <span class="icon"><i class="fas fa-download"></i></span>
             <span class="text">Download</span>
         </a>
-        
+
+        <a href="setup-troubleshoot.html" target="_blank">
+            <span class="icon"><i class="fas fa-wrench"></i></span>
+            <span class="text">Setup</span>
+        </a>
+
         <a href="fsl.html" target="_blank">
             <span class="icon"><i class="fas fa-compact-disc"></i></span>
             <span class="text">FSL</span>
         </a>
 
-        <a href="setup-troubleshoot.html" target="_blank">
-            <span class="icon"><i class="fas fa-wrench"></i></span>
-            <span class="text">Setup & Help</span>
+        <a href="https://www.nenyoocheats.com/lua/api" target="_blank">
+            <span class="icon"><i class="fas fa-code"></i></span>
+            <span class="text">Lua API</span>
         </a>
 
-   <a href="https://www.nenyoocheats.com/lua/api" target="_blank">
-            <span class="icon"><i class="fas fa-compact-disc"></i></span>
-            <span class="text">Lua Api</span>
+        <a href="TOS.html" target="_blank">
+            <span class="icon"><i class="fas fa-file-contract"></i></span>
+            <span class="text">TOS</span>
         </a>
-
     </div>
 
     <!-- Particles Background -->

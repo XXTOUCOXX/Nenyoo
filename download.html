@@ -6,19 +6,22 @@
     <title>N3NY000 Download & Installation Guide</title>
     <meta name="description" content="Download N3NY000 GTA V Mod Menu and follow our step-by-step installation guide. Get the loader, auto-updater, and manual injection files.">
     <meta name="keywords" content="N3NY000 download, GTA 5 mod menu download, Nenyooo download, install GTA 5 mods, mod menu loader, GTA V mod injection, free mod menu download">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6c5ce7;
-            --secondary: #a29bfe;
-            --accent: #fd79a8;
-            --dark: #2d3436;
-            --light: #f5f6fa;
+            --primary: #103FF7;
+            --secondary: #f4b400;
+            --accent: #4a90e2;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #ffffff;
+            --gray: #8a9199;
+            --dark-gray: #181818;
+            --card-bg: rgba(20, 20, 25, 0.9);
             --success: #00b894;
-            --info: #0984e3;
-            --warning: #fdcb6e;
-            --danger: #d63031;
+            --warning: #f4b400;
+            --danger: #e74c3c;
         }
 
         * {
@@ -28,127 +31,185 @@
         }
 
         body {
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('downloadGuides/backgrounddown.gif') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Poppins', sans-serif;
+            background: var(--dark);
             color: var(--light);
             overflow-x: hidden;
         }
 
-        .taskbar {
-            width: 100%;
-            color: white;
-            padding: 15px 0;
-            display: flex;
-            justify-content: center;
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
             position: fixed;
             top: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .taskbar-container {
-            width: 90%;
-            max-width: 1200px;
+            right: 0;
+            height: 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 30px;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .taskbar-nav {
+        .nav-left {
             display: flex;
-            gap: 30px;
+            align-items: center;
+            gap: 40px;
         }
 
-        .taskbar a {
-            color: white;
+        .top-nav .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
             text-decoration: none;
-            font-size: 16px;
+            text-shadow: 0 0 10px rgba(16, 63, 247, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.9rem;
             font-weight: 500;
             display: flex;
             align-items: center;
-            padding: 8px 15px;
+            gap: 8px;
+            padding: 8px 12px;
             border-radius: 6px;
             transition: all 0.3s ease;
-            position: relative;
-            gap: 12px; /* Added gap between icon and text */
         }
 
-            .taskbar a:hover {
-                background: rgba(255, 255, 255, 0.1);
-                transform: translateY(-2px);
-            }
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent);
+        }
 
-            .taskbar a::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                width: 0;
-                height: 2px;
-                background: var(--accent);
-                transition: all 0.3s ease;
-            }
+        .nav-links a i {
+            font-size: 1rem;
+        }
 
-            .taskbar a:hover::after {
-                width: 100%;
-                left: 0;
-            }
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+        }
 
-            .taskbar a i {
-                font-size: 18px;
-                width: 24px; /* Fixed width for consistent spacing */
-                text-align: center;
-            }
+        .auth-btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-        /* Rest of your existing CSS remains the same */
+        .auth-btn.login {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .auth-btn.login:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .auth-btn.register {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--light);
+            border: none;
+            box-shadow: 0 4px 15px rgba(16, 63, 247, 0.4);
+        }
+
+        .auth-btn.register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 63, 247, 0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            width: 100%;
+            padding: 140px 20px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(16, 63, 247, 0.1) 0%, transparent 100%);
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(16, 63, 247, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content */
         .content {
-            margin-top: 100px;
             width: 90%;
             max-width: 1200px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 30px 0;
-            animation: fadeIn 0.8s ease-out;
+            padding: 30px 0 60px;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* Download Buttons Grid */
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             width: 100%;
-            margin-top: 30px;
         }
 
         .download-btn {
             position: relative;
-            padding: 18px 25px;
-            font-size: 16px;
+            padding: 20px 25px;
+            font-size: 0.95rem;
             font-weight: 600;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             overflow: hidden;
@@ -157,57 +218,61 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            gap: 12px;
             color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-            .download-btn::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-                transition: 0.5s;
-            }
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
 
-            .download-btn:hover::before {
-                left: 100%;
-            }
+        .download-btn:hover::before {
+            left: 100%;
+        }
 
-            .download-btn i {
-                margin-right: 10px;
-                font-size: 20px;
-            }
+        .download-btn i {
+            font-size: 1.2rem;
+        }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 4px 20px rgba(16, 63, 247, 0.3);
         }
 
-            .btn-primary:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
-            }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 63, 247, 0.5);
+        }
 
         .btn-success {
             background: linear-gradient(135deg, var(--success), #55efc4);
+            box-shadow: 0 4px 20px rgba(0, 184, 148, 0.3);
         }
 
-            .btn-success:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
-            }
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 184, 148, 0.5);
+        }
 
         .btn-warning {
-            background: linear-gradient(135deg, var(--warning), #ffeaa7);
+            background: linear-gradient(135deg, var(--warning), #f39c12);
+            box-shadow: 0 4px 20px rgba(244, 180, 0, 0.3);
         }
 
-            .btn-warning:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 6px 20px rgba(253, 203, 110, 0.4);
-            }
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(244, 180, 0, 0.5);
+        }
 
+        /* Guide Section */
         .guide {
             margin-top: 60px;
             width: 100%;
@@ -221,149 +286,45 @@
             margin-bottom: 40px;
         }
 
-            .guide-header h2 {
-                font-size: 2.5rem;
-                margin-bottom: 15px;
-                background: linear-gradient(to right, var(--accent), var(--secondary));
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-                position: relative;
-                display: inline-block;
-            }
-
-                .guide-header h2::after {
-                    content: '';
-                    position: absolute;
-                    bottom: -10px;
-                    left: 0;
-                    width: 100%;
-                    height: 3px;
-                    background: linear-gradient(to right, var(--accent), var(--secondary));
-                    border-radius: 3px;
-                }
-
-        .guide-item {
-            margin-bottom: 40px;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
+        .guide-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
         }
 
-            .guide-item:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            }
-
-            .guide-item h3 {
-                margin: 0 0 15px 0;
-                font-size: 1.4rem;
-                color: white;
-                position: relative;
-                padding-bottom: 10px;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
-
-            .guide-item h3 i {
-                color: var(--accent);
-                font-size: 1.2rem;
-            }
-
-            .guide-item p {
-                color: #ccc;
-                line-height: 1.8;
-                margin-bottom: 15px;
-                font-size: 1rem;
-            }
-
-            .guide-item strong {
-                color: var(--accent);
-                font-weight: 600;
-            }
-
-                .guide-item h3::after {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 50px;
-                    height: 3px;
-                    background: var(--accent);
-                    border-radius: 3px;
-                }
-
-            .guide-item a {
-                color: var(--accent);
-                text-decoration: none;
-                font-weight: 600;
-                transition: all 0.3s ease;
-            }
-
-                .guide-item a:hover {
-                    text-decoration: underline;
-                    color: #ff9ff3;
-                }
-
-            .guide-item img {
-                max-width: 100%;
-                height: auto;
-                margin-top: 20px;
-                border-radius: 8px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-                transition: transform 0.3s ease;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-                .guide-item img:hover {
-                    transform: scale(1.02);
-                }
-
-        .image-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
+        .guide-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
         }
 
-            .image-container img {
-                max-height: 500px;
-                object-fit: contain;
-            }
-
+        /* Troubleshooting Box */
         .troubleshooting {
             width: 100%;
-            background: rgba(214, 48, 49, 0.1);
+            background: var(--card-bg);
             border-left: 4px solid var(--danger);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(214, 48, 49, 0.4);
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(214, 48, 49, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(214, 48, 49, 0);
-            }
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(231, 76, 60, 0.3);
         }
 
         .troubleshooting h3 {
             color: var(--danger);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .troubleshooting ul {
@@ -375,41 +336,184 @@
             margin-bottom: 12px;
             padding-left: 30px;
             position: relative;
-            line-height: 1.6;
+            line-height: 1.7;
+            color: #ccc;
         }
 
         .troubleshooting li i {
             position: absolute;
             left: 0;
-            top: 3px;
-            color: var(--danger);
+            top: 4px;
+            color: var(--accent);
         }
 
-        .footer {
+        .troubleshooting a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .troubleshooting a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        /* Guide Items */
+        .guide-item {
+            margin-bottom: 30px;
             width: 100%;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            background: rgba(0, 0, 0, 0.5);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .guide-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 144, 226, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .guide-item h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            color: white;
+            position: relative;
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .guide-item h3 i {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .guide-item h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .guide-item p {
+            color: #bbb;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .guide-item strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .guide-item a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .guide-item a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 450px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            object-fit: contain;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            background: var(--darker);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.85em;
+            margin: 5px 0;
+        }
+
+        footer p:first-child {
+            color: var(--light);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .top-nav {
+                padding: 0 20px;
+            }
         }
 
         @media (max-width: 768px) {
-            .taskbar-nav {
-                gap: 15px;
+            .top-nav {
+                height: 55px;
             }
 
-            .taskbar a {
-                padding: 8px 10px;
-                font-size: 14px;
-                gap: 8px; /* Adjusted gap for mobile */
+            .top-nav .logo {
+                font-size: 1.2rem;
             }
 
-                .taskbar a i {
-                    font-size: 16px;
-                    width: 20px;
-                }
+            .auth-buttons {
+                gap: 8px;
+            }
+
+            .auth-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .auth-btn i {
+                display: none;
+            }
+
+            .hero {
+                padding: 120px 20px 40px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
 
             .button-grid {
                 grid-template-columns: 1fr;
@@ -420,31 +524,88 @@
             }
 
             .guide-header h2 {
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
+        }
+
+        @media (max-width: 480px) {
+            .top-nav {
+                height: 50px;
+                padding: 0 15px;
+            }
+
+            .top-nav .logo {
+                font-size: 1rem;
+            }
+
+            .auth-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .troubleshooting {
+                padding: 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
         }
     </style>
 </head>
 <body>
-    <div class="taskbar">
-        <div class="taskbar-container">
-            <div class="taskbar-nav">
-                <a href="index.html" target="_blank"><i class="fas fa-home"></i> Home</a>
-                <a href="fsl.html" target="_blank"><i class="fas fa-info-circle"></i> FSL</a>
-                <a href="setup-troubleshoot.html" target="_blank"><i class="fas fa-wrench"></i> Setup & Help Guides</a>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo">N3NY000</a>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="fsl.html" target="_blank"><i class="fas fa-compact-disc"></i> FSL</a>
+                <a href="setup-troubleshoot.html" target="_blank"><i class="fas fa-wrench"></i> Setup & Help</a>
                 <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank"><i class="fas fa-key"></i> Free Key</a>
             </div>
         </div>
-    </div>
+        <div class="auth-buttons">
+            <a href="https://proudlyauthentication.com/customers/613591817/Nenyooo" class="auth-btn login">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="https://proudlyauthentication.com/customers/613591817/Nenyooo" class="auth-btn register">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Download & Installation</h1>
+        <p>Get started with N3NY000 mod menu. Download the loader and follow our step-by-step installation guide.</p>
+    </section>
+
+    <!-- Content -->
     <div class="content">
         <div class="button-grid">
             <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank" class="download-btn btn-success">
                 <i class="fas fa-key"></i> Get Free Key
             </a>
 
-            <a href="https://mega.nz/file/sGdgBLqT#cd_tbiPk9IBgrN1F45juePvcL3aPhLbBlwT61DWCH6o" target="_blank" class="download-btn btn-primary">
-                <i class="fas fa-download"></i> Download N3NY000 Loader & Auto Updater
+            <a href="https://mega.nz/file/lac10RbK#EQVmgnpMaGjNWs8ZiX1eZsjr28SjdCkULNGFHB-HN8I" target="_blank" class="download-btn btn-primary">
+                <i class="fas fa-download"></i> Download Loader & Auto Updater
             </a>
 
             <a href="https://mega.nz/file/TdoAkADQ#BKjXANfda9Ax6InvWdG3OrJl9J_1qpsrL6pcTmDNfOA" target="_blank" class="download-btn btn-success">
@@ -452,7 +613,7 @@
             </a>
 
             <a href="https://bstlar.com/F/NenyoooFREEmanual" target="_blank" class="download-btn btn-warning">
-                <i class="fas fa-file-code"></i> Manual Inject with DLL (Only FREE Version)
+                <i class="fas fa-file-code"></i> Manual Inject DLL (FREE Only)
             </a>
         </div>
 
@@ -462,7 +623,7 @@
             </div>
 
             <div class="troubleshooting">
-                <h3><i class="fas fa-exclamation-triangle"></i> Troubleshooting: Menu Crashing or Having Issues?</h3>
+                <h3><i class="fas fa-exclamation-triangle"></i> Troubleshooting: Menu Crashing or Issues?</h3>
                 <ul>
                     <li><i class="fas fa-tools"></i> Install all VC Runtimes: <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one" target="_blank">Download Here</a></li>
                     <li><i class="fas fa-magic"></i> Use Auto-Fix Scripts: <a href="https://mega.nz/file/3RZE3JgI#hYXGeqS4UiHQjZpjtZ3paB6tu9fvuhbv8XNHs_fGHas" target="_blank">Download Auto-Fix</a></li>
@@ -472,12 +633,12 @@
                 </ul>
             </div>
 
-            <div class="guide-item">
+            <div class="guide-item fade-in">
                 <h3><i class="fas fa-download"></i> Step 1: Download the N3NY000 Loader</h3>
                 <p>First, download the loader from the download buttons above. Make sure to extract all files and run as administrator.</p>
             </div>
 
-            <div class="guide-item">
+            <div class="guide-item fade-in">
                 <h3><i class="fas fa-sign-in-alt"></i> Step 2: Login With Your Key</h3>
                 <p>Click the login button and enter your key (FREE or VIP). Your key will be validated before proceeding.</p>
                 <div class="image-container">
@@ -485,7 +646,7 @@
                 </div>
             </div>
 
-            <div class="guide-item">
+            <div class="guide-item fade-in">
                 <h3><i class="fas fa-shield-alt"></i> Step 3: Disable BattlEye Anti-Cheat</h3>
                 <p>Make sure BattlEye is turned OFF in Rockstar Games Launcher settings before starting GTA V.</p>
                 <div class="image-container">
@@ -493,7 +654,7 @@
                 </div>
             </div>
 
-            <div class="guide-item">
+            <div class="guide-item fade-in">
                 <h3><i class="fas fa-gamepad"></i> Step 4: Launch GTA V</h3>
                 <p>Start GTA V and wait for it to reach the main loading screen. Do NOT enter Story Mode or Online yet.</p>
                 <div class="image-container">
@@ -501,7 +662,7 @@
                 </div>
             </div>
 
-            <div class="guide-item">
+            <div class="guide-item fade-in">
                 <h3><i class="fas fa-rocket"></i> Step 5: Inject the Mod Menu</h3>
                 <p>Once GTA V is on the main loading screen, click the inject button in the N3NY000 loader.</p>
                 <div class="image-container">
@@ -509,7 +670,7 @@
                 </div>
             </div>
 
-            <div class="guide-item">
+            <div class="guide-item fade-in">
                 <h3><i class="fas fa-check-circle"></i> Step 6: Wait for Successful Injection</h3>
                 <p>Wait for the loader to confirm successful injection. You should see a confirmation message.</p>
                 <div class="image-container">
@@ -517,7 +678,7 @@
                 </div>
             </div>
 
-            <div class="guide-item">
+            <div class="guide-item fade-in">
                 <h3><i class="fas fa-star"></i> Step 7: Open the Mod Menu In-Game</h3>
                 <p>Load into Story Mode or Online. Press <strong>F4</strong> on keyboard or <strong>R1 + Right D-Pad</strong> on controller to open the menu.</p>
                 <div class="image-container">
@@ -527,14 +688,15 @@
         </div>
     </div>
 
-    <div class="footer">
+    <!-- Footer -->
+    <footer>
         <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
-        <p style="margin-top: 5px; font-size: 0.85em;">This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
-    </div>
+        <p>This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
+    </footer>
 
     <script>
-        // Simple animation on scroll
-        document.addEventListener('DOMContentLoaded', function () {
+        // Scroll animation for guide items
+        document.addEventListener('DOMContentLoaded', function() {
             const guideItems = document.querySelectorAll('.guide-item');
 
             const observer = new IntersectionObserver((entries) => {
@@ -546,10 +708,10 @@
                 });
             }, { threshold: 0.1 });
 
-            guideItems.forEach(item => {
+            guideItems.forEach((item, index) => {
                 item.style.opacity = 0;
                 item.style.transform = 'translateY(20px)';
-                item.style.transition = 'all 0.6s ease-out';
+                item.style.transition = `all 0.6s ease-out ${index * 0.1}s`;
                 observer.observe(item);
             });
         });
