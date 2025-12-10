@@ -86,6 +86,10 @@ Step 6: Use the menu to enter an online session. Invite only works, public sessi
 
 ##### Game wont launch after enabling FSL: You have outdated version of FSL, either get the newest version, or delete FSL as it is useless.
 
+##### Game Crashing When Loading Or Injecting: [Click here for solution](https://proudlyauthentication.com/customers/613591817/nenyooo#forumView=thread&category=3&thread=8578668769)
+
+##### Loader Not Opening: [Click here for solution](https://proudlyauthentication.com/customers/613591817/nenyooo#forumView=thread&category=3&thread=1392329741)
+
 Everything in menu is locked: You are using the free version of N3NY000. To use locked features you need to have VIP key or higher. If options are locked while using VIP key then you need to go to C:/N3NY000 and delete the auth file.
 **-----------------------------------------------------------------------------------------------------------------------**
 
