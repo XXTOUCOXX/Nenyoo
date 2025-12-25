@@ -72,29 +72,31 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 90px;
+            width: 70px;
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 0;
+            padding: 10px 0;
             z-index: 100;
-            background: rgba(10, 10, 10, 0.7);
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(10px);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
+            overflow-y: auto;
         }
 
         .sidebar:hover {
-            width: 110px;
-            background: rgba(10, 10, 10, 0.9);
+            width: 80px;
+            background: rgba(10, 10, 10, 0.95);
         }
 
         .sidebar a {
             text-decoration: none;
             color: var(--light);
-            margin: 20px 0;
+            margin: 8px 0;
+            padding: 8px 5px;
             text-align: center;
             transition: all 0.3s ease;
             display: flex;
@@ -102,16 +104,14 @@
             align-items: center;
             width: 100%;
             position: relative;
-            overflow: hidden;
         }
 
         .sidebar a:hover {
             color: var(--secondary);
-            transform: translateX(5px);
         }
 
         .sidebar a:hover .icon {
-            transform: scale(1.2);
+            transform: scale(1.1);
             color: var(--accent);
         }
 
@@ -133,15 +133,17 @@
         }
 
         .sidebar a .icon {
-            font-size: 24px;
-            margin-bottom: 8px;
+            font-size: 16px;
+            margin-bottom: 4px;
             transition: all 0.3s ease;
         }
 
         .sidebar a .text {
-            font-size: 12px;
+            font-size: 9px;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            display: block;
+            white-space: nowrap;
         }
 
         /* Showcase Section */
@@ -313,15 +315,26 @@
             font-weight: 700;
 			
         }
-	.section-title2 {
+        .section-title2 {
             position: relative;
-            display: inline-block;
+            display: block;
+            text-align: center;
             margin-bottom: 50px;
             font-size: 2.5em;
             color: var(--secondary);
             font-weight: 700;
-			left: 41%;
-			
+        }
+
+        .section-title2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
         }
         .section-title::after {
             content: '';
@@ -429,11 +442,12 @@
 
         .pricing-box {
             background: rgba(30, 30, 30, 0.8);
-            padding: 40px 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 15px 12px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 380px;
+            max-width: 260px;
+            min-width: 200px;
             border: 1px solid rgba(74, 144, 226, 0.3);
             position: relative;
             display: flex;
@@ -467,6 +481,37 @@
             animation: shine 1.5s;
         }
 
+        /* MVP Featured Box */
+        .pricing-box.featured {
+            border: 2px solid var(--secondary);
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.9), rgba(30, 30, 30, 0.95));
+            position: relative;
+            margin-top: 15px;
+        }
+
+        .pricing-box.featured::after {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--secondary), #f47c00);
+            color: var(--dark);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.55em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(244, 180, 0, 0.4);
+            white-space: nowrap;
+            z-index: 5;
+        }
+
+        .pricing-box.featured:hover {
+            box-shadow: 0 15px 40px rgba(244, 180, 0, 0.3);
+            border-color: var(--secondary);
+        }
+
         @keyframes shine {
             0% {
                 left: -50%;
@@ -484,11 +529,11 @@
         .pricing-box .left-logo {
             display: block;
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 12px;
         }
 
         .pricing-box .left-logo img {
-            width: 120px;
+            width: 55px;
             height: auto;
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
             transition: all 0.3s ease;
@@ -500,8 +545,8 @@
 
         .pricing-box .plan-name h3 {
             color: var(--light);
-            font-size: 1.8em;
-            margin-bottom: 15px;
+            font-size: 1em;
+            margin-bottom: 8px;
             text-align: center;
             position: relative;
             display: inline-block;
@@ -511,18 +556,18 @@
         .pricing-box .plan-name h3::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -5px;
             left: 50%;
             transform: translateX(-50%);
-            width: 50px;
+            width: 35px;
             height: 2px;
             background: var(--accent);
         }
 
         .pricing-box .value h3 {
             color: var(--light);
-            font-size: 1.2em;
-            margin: 15px 0;
+            font-size: 0.8em;
+            margin: 8px 0;
             text-align: center;
             font-weight: 400;
         }
@@ -532,21 +577,28 @@
             color: var(--secondary);
         }
 
+        .pricing-box .value h3 span.strikethrough {
+            text-decoration: line-through;
+            color: var(--gray);
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
         .pricing-box ul {
             color: var(--light);
             text-align: left;
             list-style: none;
             padding-left: 0;
-            margin: 25px 0;
+            margin: 12px 0;
             flex-grow: 1;
         }
 
         .pricing-box ul li {
-            padding: 8px 0;
+            padding: 3px 0;
             position: relative;
-            padding-left: 25px;
-            font-size: 0.9em;
-            line-height: 1.5;
+            padding-left: 15px;
+            font-size: 0.7em;
+            line-height: 1.3;
         }
 
         .pricing-box ul li::before {
@@ -561,25 +613,26 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .button-group a {
-            padding: 12px 20px;
+            padding: 7px 10px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: var(--light);
             text-decoration: none;
-            border-radius: 30px;
-            margin: 8px 0;
+            border-radius: 20px;
+            margin: 3px 0;
             width: 100%;
             text-align: center;
             transition: all 0.3s ease;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            font-size: 0.7em;
+            letter-spacing: 0.2px;
             position: relative;
             overflow: hidden;
             border: none;
-            box-shadow: 0 5px 15px rgba(16, 63, 247, 0.3);
+            box-shadow: 0 4px 12px rgba(16, 63, 247, 0.3);
         }
 
         .button-group a:nth-child(2) {
@@ -613,28 +666,32 @@
         /* Image Carousel */
         .pricing-image-box {
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 600px;
+            margin: 30px auto 0;
             position: relative;
             z-index: 2;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            height: 300px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(74, 144, 226, 0.3);
         }
 
         .image-carousel {
             display: flex;
             width: 400%;
-            height: 100%;
-            animation: scrollImages 30s linear infinite;
+            animation: scrollImages 20s linear infinite;
         }
 
         .image-carousel img {
             width: 25%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+            height: auto;
+            aspect-ratio: 16/9;
+            object-fit: contain;
+            background: #000;
+        }
+
+        .pricing-image-box:hover .image-carousel {
+            animation-play-state: paused;
         }
 
         @keyframes scrollImages {
@@ -665,41 +722,84 @@
         }
 
         /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .pricing-container {
+                gap: 15px;
+            }
+
+            .pricing-box {
+                max-width: 200px;
+                min-width: 170px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .pricing-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .pricing-box {
+                max-width: 220px;
+                flex: 1 1 calc(50% - 15px);
+            }
+        }
+
         @media (max-width: 768px) {
             .sidebar {
-                width: 70px;
-                background: rgba(10, 10, 10, 0.9);
+                width: 55px;
+                background: rgba(10, 10, 10, 0.95);
             }
-            
+
             .sidebar:hover {
-                width: 70px;
+                width: 55px;
             }
-            
+
+            .sidebar a {
+                margin: 6px 0;
+                padding: 6px 3px;
+            }
+
+            .sidebar a .text {
+                font-size: 7px;
+            }
+
+            .sidebar a .icon {
+                font-size: 14px;
+            }
+
             .video-box {
                 flex-direction: column;
                 padding: 40px 20px;
             }
-            
+
             .video-box .video-container {
                 max-width: 100%;
             }
-            
+
             .pricing-box {
                 max-width: 100%;
+                min-width: 100%;
+                flex: 1 1 100%;
             }
-            
+
             .pricing-container {
                 flex-direction: column;
                 align-items: center;
+                padding: 0 20px;
             }
-            
+
             .features {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .feature {
                 max-width: 100%;
+            }
+
+            .section-title2 {
+                font-size: 1.8em;
             }
         }
 
@@ -735,6 +835,344 @@
         .pulse {
             animation: pulse 2s ease-in-out infinite;
         }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            border-radius: 50%;
+            color: var(--light);
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(16, 63, 247, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(16, 63, 247, 0.5);
+        }
+
+        /* Enhanced Footer */
+        footer {
+            background: var(--darker);
+            padding: 50px 20px 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.85em;
+            margin: 5px 0;
+        }
+
+        /* Limited Time Offer Badge on Pricing Box */
+        .pricing-box.has-offer {
+            position: relative;
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: white;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.55em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 6px rgba(255, 0, 0, 0.4);
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
+
+        .offer-countdown {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.2);
+            border-radius: 5px;
+            padding: 5px;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .offer-countdown .offer-label {
+            font-size: 0.6em;
+            color: #ff6666;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+
+        .offer-countdown .offer-label i {
+            font-size: 0.9em;
+        }
+
+        .offer-countdown .countdown-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85em;
+            font-weight: 700;
+            color: var(--light);
+        }
+
+        /* Stats Counter Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--dark-gray), var(--darker));
+            padding: 50px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--darker);
+            padding: 60px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonials-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            max-width: 320px;
+            min-width: 280px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial-stars {
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        .testimonial-text {
+            color: #bbb;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-weight: 700;
+        }
+
+        .testimonial-name {
+            color: var(--light);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .testimonial-tag {
+            color: var(--accent);
+            font-size: 0.75em;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--dark-gray);
+            padding: 60px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent);
+        }
+
+        .faq-question {
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--light);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--accent);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: var(--accent);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #bbb;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            padding: 0 20px 18px;
+            margin: 0;
+        }
+
+        /* Typing Effect for Hero */
+        .typing-text {
+            border-right: 2px solid var(--accent);
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
     </style>
 </head>
 <body>
@@ -742,7 +1180,7 @@
     <div class="sidebar">
         <a href="#buy">
             <span class="icon"><i class="fas fa-crown"></i></span>
-            <span class="text">VIP</span>
+            <span class="text">Purchase</span>
         </a>
 
         <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">
@@ -755,7 +1193,7 @@
             <span class="text">Showcase</span>
         </a>
         
-        <a href="TOS.html"target="_blank">
+        <a href="TOS.html" target="_blank">
             <span class="icon"><i class="fas fa-info-circle"></i></span>
             <span class="text">TOS</span>
         </a>
@@ -765,24 +1203,25 @@
             <span class="text">About</span>
         </a>
 
-
-
-
         <a href="download.html" target="_blank">
             <span class="icon"><i class="fas fa-download"></i></span>
             <span class="text">Download</span>
         </a>
-        
+
         <a href="fsl.html" target="_blank">
-            <span class="icon"><i class="fas fa-compact-disc"></i></span>
+            <span class="icon"><i class="fas fa-code"></i></span>
             <span class="text">FSL</span>
         </a>
 
-   <a href="https://www.nenyoocheats.com/lua/api" target="_blank">
-            <span class="icon"><i class="fas fa-compact-disc"></i></span>
-            <span class="text">Lua Api</span>
+        <a href="https://www.nenyoocheats.com/lua/api" target="_blank">
+            <span class="icon"><i class="fas fa-terminal"></i></span>
+            <span class="text">Lua API</span>
         </a>
 
+        <a href="https://proudlyauthentication.com/customers/613591817/Nenyooo" target="_blank">
+            <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+            <span class="text">Login</span>
+        </a>
     </div>
 
     <!-- Particles Background -->
@@ -826,25 +1265,47 @@
         </section>
     </section>
 
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number" data-target="50000">0</span>
+                <span class="stat-label">Active Users</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="500">0</span>
+                <span class="stat-label">Features</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="99">0</span>
+                <span class="stat-label">% Uptime</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="24">0</span>
+                <span class="stat-label">/7 Support</span>
+            </div>
+        </div>
+    </section>
+
     <!-- About Us Section -->
     <section id="about">
         <section class="about-us">
             <h2 class="section-title">Why Choose N3NY000?</h2>
             <p>N3NY000 began as a revolutionary free mod menu in 2021, quickly becoming the most trusted name in GTA V modifications. After extensive development, we've returned with a completely rebuilt, ultra-stable platform packed with exclusive features you won't find anywhere else.</p>
-            
+
             <div class="features">
                 <div class="feature">
                     <span><i class="fas fa-star"></i></span>
                     <h3>Exclusive Features</h3>
                     <p>Car prosthetics, lightsabers, aggressive planes, magical snowballs, and hundreds of unique options that set us apart from any other menu.</p>
                 </div>
-                
+
                 <div class="feature">
                     <span><i class="fas fa-tachometer-alt"></i></span>
                     <h3>Peak Performance</h3>
                     <p>Optimized codebase ensures maximum stability with minimal resource usage. Enjoy buttery smooth performance even with all features enabled.</p>
                 </div>
-                
+
                 <div class="feature">
                     <span><i class="fas fa-shield-alt"></i></span>
                     <h3>Advanced Protection</h3>
@@ -855,123 +1316,21 @@
     </section>
 
 
-
-<!-- Your existing pricing boxes should remain unchanged below this point -->
-
     <!-- Pricing Section -->
     <section id="buy">
         <h2 class="section-title2">Choose Your Package</h2>
-        
-        <h2 class="pricing-title" style="text-align: center;">GTA 5 Enhanced:</h2>
-
-      
-            
 
         <div class="pricing-container">
-           
-
-                   <!-- Free Version -->
-       
-                   <div class="pricing-box">
-                    <div class="left-logo">
-                        <img src="free.png" alt="N3NY000 Free">
-                    </div>
-                    <div class="plan-name">
-                        <h3>FREE VERSION</h3>
-                    </div>
-                    <div class="value">
-                        <h3>Key Resets Every 48 Hours</h3>
-                        <h3>Limited Feature Set</h3>
-                    </div>
-                    <ul>
-                        <li>Basic Player Options</li>
-                        <li>Essential Vehicle Features</li>
-                        <li>Limited Protections</li>
-                        <li>Basic Trolling Options</li>
-                        <li>Simple Money Methods</li>
-                        <li>Lua Engine / Scripts Support</li>
-                    </ul>
-                    <div class="button-group">
-                        <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">
-                            <i class="fas fa-key"></i> Get Free Key
-                        </a>
-                    </div>
-                </div>
-            
+            <!-- FREE -->
             <div class="pricing-box">
                 <div class="left-logo">
                     <img src="free.png" alt="N3NY000 Free">
                 </div>
                 <div class="plan-name">
-                    <h3>ENHANCED VERSION</h3>
-                </div>
-                <div class="value">
-                    <h3>7 Days: <span>$15</span></h3>
-                    <h3>Lifetime: <span>$25</span></h3>
-
-                    <h3>Upgrade from VIP: <span>$10</span></h3>
-                    <h3>Upgrade from VIP+: <span>$5.50</span></h3>
-                </div>
-                <ul>
-                    
-                    <li>Access to Legacy & Enhanced Versions </li>
-                    <li>Everything from Legacy VIP Plus </li>
-                    <li>Battle Eye Enabled & Disabled Support</li>
-                    <li>Fully Working in Public Lobbies / Missions/Heists/Races Etc</li>
-                    <li>Recovery Options > Money/Rank/Unlocks/Stats</li>
-                    <li>Trolling Options</li>
-                    <li>Lua Engine / Scripts Support</li>
-                    <li> </li>
-                </ul>
-                <div class="button-group">
-                    <a href="https://scoobyfunny.myshopify.com/products/nenyooo-enhanced-lifetime" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime With Card
-                    </a>
-
-                    <a href="https://dizzgaming.selly.store/product/2e85508f" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime with Crypto
-                    </a>
-
-
-                    <a href="https://scoobyfunny.myshopify.com/products/nenyooo-enhanced-7-days" target="_blank">
-                        <i class="fas fa-clock"></i> Purchase 7-Day 
-                    </a>
-              
-
-                    <a href="https://dizzgaming.selly.store/product/13a4ec37" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase 7-Day with Crypto
-                    </a>
-
-                    <a href="https://scoobyfunny.myshopify.com/products/nenyooo-vip-to-vip-upgrade-enhanced" target="_blank">
-                        <i class="fas fa-arrow-up"></i> Upgrade from VIP/VIP+
-                    </a>
-
-                    <a href="morepayments.html" target="_blank">
-                        <i class="fas fa-arrow-up"></i> More Payments
-                    </a>
-    
-                </div>
-            </div>
-
-        </div>
-
-
-<h2 class="pricing-title" style="text-align: center;">GTA 5 Legacy:</h2>
-
-
-        <div class="pricing-container">
-            <!-- Free Version -->
-       
-            <div class="pricing-box">
-                <div class="left-logo">
-                    <img src="free.png" alt="N3NY000 Free">
-                </div>
-                <div class="plan-name">
-                    <h3>FREE VERSION</h3>
+                    <h3>FREE</h3>
                 </div>
                 <div class="value">
                     <h3>Key Resets Every 48 Hours</h3>
-                    <h3>Limited Feature Set</h3>
                 </div>
                 <ul>
                     <li>Basic Player Options</li>
@@ -979,6 +1338,7 @@
                     <li>Limited Protections</li>
                     <li>Basic Trolling Options</li>
                     <li>Simple Money Methods</li>
+                    <li>Lua Engine Support</li>
                 </ul>
                 <div class="button-group">
                     <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">
@@ -986,95 +1346,117 @@
                     </a>
                 </div>
             </div>
-    
 
-            <!-- VIP Version -->
-            <div class="pricing-box">
+            <!-- VIP Legacy -->
+            <div class="pricing-box has-offer">
+                <span class="offer-badge">Sale</span>
                 <div class="left-logo">
-                    <img src="vip.png" alt="N3NY000 VIP">
+                    <img src="vip.png" alt="N3NY000 VIP Legacy">
                 </div>
                 <div class="plan-name">
-                    <h3>VIP EDITION</h3>
+                    <h3>VIP LEGACY</h3>
                 </div>
                 <div class="value">
-                    <h3>7 Days: <span>$5</span></h3>
-                    <h3>Lifetime: <span>$10</span></h3>
+                    <h3>Lifetime: <span class="strikethrough">$20</span> <span>$12.50</span></h3>
                 </div>
                 <ul>
-                    <li>Map & XML Vehicle Loader</li>
-                    <li>Advanced Vehicle Abilities</li>
-                    <li>Full Casino Rigging</li>
-                    <li>Complete Stat Editor</li>
-                    <li>All Unlocks & Rank Options</li>
-                    <li>Money/RP Drop System</li>
-                    <li>Session Bounty Loops</li>
-                    <li>Streamer Mode</li>
-                    <li>Player IP & Geo Location</li>
-                    <li>Save Vehicles & Outfits</li>
-                </ul>
-                <div class="button-group">
-                    <a href="https://scoobyfunny.myshopify.com/products/nenyooo-vip-lifetime-gta" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime VIP with Card
-                    </a>
-                   
-                    <a href="https://dizzgaming.selly.store/product/9a07ddff" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime VIP with Crypto
-                    </a>
-
-                    <a href="morepayments.html" target="_blank">
-                        <i class="fas fa-arrow-up"></i> More Payments
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- VIP Plus Version -->
-            <div class="pricing-box">
-                <div class="left-logo">
-                    <img src="vipplus.png" alt="N3NY000 VIP Plus">
-                </div>
-                <div class="plan-name">
-                    <h3>VIP PLUS</h3>
-                </div>
-                <div class="value">
-                    <h3>7 Days: <span>$10</span></h3>
-                    <h3>Lifetime: <span>$20</span></h3>
-                </div>
-                <ul>
-                    <li>All VIP Features Included</li>
+                    <li>All Free Features</li>
                     <li>ScriptHookV Integration</li>
                     <li>VFX Engine & Session Browser</li>
                     <li>Player Tracker & Magnet</li>
                     <li>DLC Loader & Business Manager</li>
-                    <li>Chat Spammer & Traffic Control</li>
                     <li>Advanced Crashes & Kicks</li>
-                    <li>Teleport All Players</li>
-                    <li>Rockstar ID Tools</li>
-                    <li>Battle Eye Support</li>
-                    <li>Protections</li>
+                    <li>Recovery Options</li>
+                    <li>Trolling Options</li>
+                    <li>Lua Engine Support</li>
                 </ul>
+                <div class="offer-countdown">
+                    <div class="offer-label"><i class="fas fa-clock"></i> Offer ends in</div>
+                    <div class="countdown-display" id="countdown-legacy">48:00:00</div>
+                </div>
                 <div class="button-group">
                     <a href="https://scoobyfunny.myshopify.com/products/nenyooo-vip-plus-lifetime" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime VIP+
+                        <i class="fas fa-crown"></i> Purchase with Card
                     </a>
-
-
-                    <a href="https://dizzgaming.selly.store/product/534851ce" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase Lifetime VIP+ with Crypto
+                    <a href="https://nenyooocrypto.shop/" target="_blank">
+                        <i class="fas fa-coins"></i> Purchase with Crypto
                     </a>
+                </div>
+            </div>
 
+            <!-- VIP Enhanced -->
+            <div class="pricing-box has-offer">
+                <span class="offer-badge">Sale</span>
+                <div class="left-logo">
+                    <img src="free.png" alt="N3NY000 VIP Enhanced">
+                </div>
+                <div class="plan-name">
+                    <h3>VIP ENHANCED</h3>
+                </div>
+                <div class="value">
+                    <h3>Lifetime: <span class="strikethrough">$25</span> <span>$12.50</span></h3>
+                </div>
+                <ul>
+                    <li>All Free Features</li>
+                    <li>ScriptHookV Integration</li>
+                    <li>VFX Engine & Session Browser</li>
+                    <li>Player Tracker & Magnet</li>
+                    <li>DLC Loader & Business Manager</li>
+                    <li>Advanced Crashes & Kicks</li>
+                    <li>Recovery Options</li>
+                    <li>Trolling Options</li>
+                    <li>Lua Engine Support</li>
+                </ul>
+                <div class="offer-countdown">
+                    <div class="offer-label"><i class="fas fa-clock"></i> Offer ends in</div>
+                    <div class="countdown-display" id="countdown-enhanced">48:00:00</div>
+                </div>
+                <div class="button-group">
+                    <a href="https://scoobyfunny.myshopify.com/products/nenyooo-enhanced-lifetime" target="_blank">
+                        <i class="fas fa-crown"></i> Purchase with Card
+                    </a>
+                    <a href="https://nenyooocrypto.shop/" target="_blank">
+                        <i class="fas fa-coins"></i> Purchase with Crypto
+                    </a>
+                </div>
+            </div>
 
-                    <a href="https://scoobyfunny.myshopify.com/products/nenyooo-vip-plus-7-days" target="_blank">
-                        <i class="fas fa-clock"></i> Purchase 7-Day VIP+
+            <!-- MVP -->
+            <div class="pricing-box featured has-offer">
+                <span class="offer-badge">50% OFF</span>
+                <div class="left-logo">
+                    <img src="vipplus.png" alt="N3NY000 MVP">
+                </div>
+                <div class="plan-name">
+                    <h3>MVP</h3>
+                </div>
+                <div class="value">
+                    <h3>Lifetime: <span class="strikethrough">$35</span> <span>$20</span></h3>
+                </div>
+                <ul>
+                    <li>All VIP Enhanced Features</li>
+                    <li>Battle Eye Enabled/Disabled</li>
+                    <li>Public Lobbies & Missions</li>
+                    <li>Early Access to Features</li>
+                    <li>Exclusive MVP Options</li>
+                    <li>Advanced Protection Suite</li>
+                    <li>Custom Script Support</li>
+                    <li>Lifetime Updates</li>
+                </ul>
+                <div class="offer-countdown">
+                    <div class="offer-label"><i class="fas fa-fire"></i> Limited Time</div>
+                    <div class="countdown-display" id="countdown-mvp">48:00:00</div>
+                </div>
+                <div class="button-group">
+                    <a href="https://scoobyfunny.myshopify.com/products/nenyooo-mvp-lifetime" target="_blank">
+                        <i class="fas fa-gem"></i> Purchase with Card
+                    </a>
+                    <a href="https://nenyooocrypto.shop/" target="_blank">
+                        <i class="fas fa-coins"></i> Purchase with Crypto
                     </a>
                     <a href="https://scoobyfunny.myshopify.com/products/nenyooo-vip-to-vip-upgrade-enhanced" target="_blank">
-                        <i class="fas fa-arrow-up"></i> Purchase Upgrade to VIP+
+                        <i class="fas fa-arrow-up"></i> Upgrade To MVP Key
                     </a>
-
-                    <a href="morepayments.html" target="_blank">
-                        <i class="fas fa-arrow-up"></i> More Payments
-                    </a>
-
                 </div>
             </div>
         </div>
@@ -1089,10 +1471,132 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2 class="section-title2">What Our Users Say</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Best mod menu I've ever used. The features are insane and it never crashes. Worth every penny!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">J</div>
+                    <div>
+                        <div class="testimonial-name">Jake</div>
+                        <div class="testimonial-tag">MVP User</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Started with free version, upgraded to VIP immediately. The support team is amazing and always helpful."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">M</div>
+                    <div>
+                        <div class="testimonial-name">Mike</div>
+                        <div class="testimonial-tag">VIP Enhanced</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Battle Eye support actually works! I can play in public lobbies without any issues. Highly recommend MVP."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">S</div>
+                    <div>
+                        <div class="testimonial-name">Shadow</div>
+                        <div class="testimonial-tag">MVP User</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2 class="section-title2">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is N3NY000 safe to use?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! Our menu is designed with safety as a top priority. We use advanced protection methods to keep you safe while playing.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What's the difference between Legacy and Enhanced?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>VIP Legacy works with the original GTA 5, while VIP Enhanced is designed for GTA 5 Enhanced Edition. Both have the same features!</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I get my key after purchase?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>After purchase, you'll receive your key instantly via email. You can also access it through our login portal.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you offer refunds?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Please check our Terms of Service for our refund policy. We handle each case individually through our Discord support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
-        <p>This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://discord.gg/uB4DM5GNQc" target="_blank" title="Discord">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://www.youtube.com/@n3ny000" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <div class="footer-links">
+                <a href="TOS.html" target="_blank">Terms of Service</a>
+                <a href="download.html" target="_blank">Download</a>
+                <a href="fsl.html" target="_blank">FSL</a>
+                <a href="https://proudlyauthentication.com/customers/613591817/Nenyooo" target="_blank">Login</a>
+            </div>
+            <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
+            <p>This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        </div>
     </footer>
 
     <!-- Scripts -->
@@ -1228,15 +1732,137 @@
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
+
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
-                    
+
                     if (targetElement) {
                         window.scrollTo({
                             top: targetElement.offsetTop,
                             behavior: 'smooth'
                         });
+                    }
+                });
+            });
+
+            // Scroll to top button
+            const scrollTopBtn = document.getElementById('scrollTop');
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Countdown Timer for offer boxes
+            function initCountdown() {
+                const countdownKey = 'nenyoo_countdown_end';
+                let endTime = localStorage.getItem(countdownKey);
+
+                if (!endTime) {
+                    endTime = new Date().getTime() + (48 * 60 * 60 * 1000);
+                    localStorage.setItem(countdownKey, endTime);
+                }
+
+                const countdownElements = [
+                    document.getElementById('countdown-legacy'),
+                    document.getElementById('countdown-enhanced'),
+                    document.getElementById('countdown-mvp')
+                ];
+
+                function updateCountdown() {
+                    const now = new Date().getTime();
+                    let distance = endTime - now;
+
+                    if (distance < 0) {
+                        endTime = new Date().getTime() + (48 * 60 * 60 * 1000);
+                        localStorage.setItem(countdownKey, endTime);
+                        distance = endTime - now;
+                    }
+
+                    const hours = Math.floor(distance / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    const timeString = hours.toString().padStart(2, '0') + ':' +
+                                      minutes.toString().padStart(2, '0') + ':' +
+                                      seconds.toString().padStart(2, '0');
+
+                    countdownElements.forEach(el => {
+                        if (el) el.textContent = timeString;
+                    });
+                }
+
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            }
+
+            initCountdown();
+
+            // Stats Counter Animation
+            function animateCounters() {
+                const counters = document.querySelectorAll('.stat-number');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current).toLocaleString();
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString();
+                            if (target === 50000) counter.textContent = '50K+';
+                            if (target === 500) counter.textContent = '500+';
+                            if (target === 99) counter.textContent = '99%';
+                            if (target === 24) counter.textContent = '24';
+                        }
+                    };
+                    updateCounter();
+                });
+            }
+
+            // Trigger counter animation when stats section is visible
+            const statsSection = document.querySelector('.stats-section');
+            let statsAnimated = false;
+
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !statsAnimated) {
+                        animateCounters();
+                        statsAnimated = true;
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            if (statsSection) statsObserver.observe(statsSection);
+
+            // FAQ Toggle
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    const isActive = item.classList.contains('active');
+
+                    // Close all other FAQ items
+                    document.querySelectorAll('.faq-item').forEach(faq => {
+                        faq.classList.remove('active');
+                    });
+
+                    // Toggle current item
+                    if (!isActive) {
+                        item.classList.add('active');
                     }
                 });
             });
