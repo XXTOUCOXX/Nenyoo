@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N3NY000 Portal - Login</title>
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="portal.css">
+    <style>
+        /* Sidebar Styles - Matching index.html */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 70px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 1001;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .sidebar:hover {
+            width: 80px;
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: var(--light-text);
+            margin: 8px 0;
+            padding: 8px 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .sidebar a:hover {
+            color: var(--secondary);
+        }
+
+        .sidebar a:hover .icon {
+            transform: scale(1.1);
+            color: var(--accent);
+        }
+
+        .sidebar a:hover::after {
+            width: 3px;
+            opacity: 1;
+        }
+
+        .sidebar a::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: var(--accent);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a .icon {
+            font-size: 16px;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a .text {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            display: block;
+            white-space: nowrap;
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Adjust main content for sidebar */
+        .portal-header {
+            margin-left: 70px;
+        }
+
+        .main-wrapper {
+            margin-left: 70px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portal-banner {
+            margin-left: 70px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 55px;
+                background: rgba(10, 10, 10, 0.95);
+            }
+
+            .sidebar:hover {
+                width: 55px;
+            }
+
+            .sidebar a {
+                margin: 6px 0;
+                padding: 6px 3px;
+            }
+
+            .sidebar a .text {
+                font-size: 7px;
+            }
+
+            .sidebar a .icon {
+                font-size: 14px;
+            }
+
+            .portal-header,
+            .main-wrapper,
+            .portal-banner {
+                margin-left: 55px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar - Matching index.html -->
+    <div class="sidebar">
+        <a href="index.html">
+            <span class="icon"><i class="fas fa-home"></i></span>
+            <span class="text">Home</span>
+        </a>
+
+        <a href="index.html#buy">
+            <span class="icon"><i class="fas fa-crown"></i></span>
+            <span class="text">Purchase</span>
+        </a>
+
+        <a href="https://bstlar.com/F/N3NYOOfreeKEY" target="_blank">
+            <span class="icon"><i class="fas fa-key"></i></span>
+            <span class="text">Free Key</span>
+        </a>
+
+        <a href="index.html#showcase">
+            <span class="icon"><i class="fas fa-video"></i></span>
+            <span class="text">Showcase</span>
+        </a>
+
+        <a href="TOS.html" target="_blank">
+            <span class="icon"><i class="fas fa-info-circle"></i></span>
+            <span class="text">TOS</span>
+        </a>
+
+        <a href="index.html#about">
+            <span class="icon"><i class="fas fa-info-circle"></i></span>
+            <span class="text">About</span>
+        </a>
+
+        <a href="download.html" target="_blank">
+            <span class="icon"><i class="fas fa-download"></i></span>
+            <span class="text">Download</span>
+        </a>
+
+        <a href="fsl.html" target="_blank">
+            <span class="icon"><i class="fas fa-code"></i></span>
+            <span class="text">FSL</span>
+        </a>
+
+        <a href="https://www.nenyoocheats.com/lua/api" target="_blank">
+            <span class="icon"><i class="fas fa-terminal"></i></span>
+            <span class="text">Lua API</span>
+        </a>
+
+        <a href="portal.html" class="active">
+            <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+            <span class="text">Portal</span>
+        </a>
+    </div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    <!-- API Configuration -->
+    <input type="hidden" id="apiUrl" value="https://proudlyauthentication.com/">
+    <input type="hidden" id="portalKey" value="pk_wq5QrTCJgdWbnTAI7eYzD4OAcXBkeCsE">
+
+    <!-- Header -->
+    <header class="portal-header">
+        <div class="header-top">
+            <a href="index.html" class="portal-logo">
+                <img src="images/logo.png" alt="Logo">
+                <span id="portalName">N3NY000</span>
+            </a>
+
+            <div class="header-actions">
+                <div class="social-links" id="socialLinks" style="display: none;"></div>
+
+                <!-- Guest Actions -->
+                <div id="guestActions">
+                    <button class="header-btn header-btn-login" onclick="showPage('login')">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </button>
+                    <button class="header-btn header-btn-register" onclick="showPage('register')">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Register</span>
+                    </button>
+                </div>
+
+                <!-- Notifications Bell -->
+                <div class="notification-bell" id="notificationBell" style="display: none;" onclick="toggleNotificationsPanel()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                </div>
+
+                <!-- Notifications Panel -->
+                <div class="notifications-panel" id="notificationsPanel" style="display: none;">
+                    <div class="notifications-header">
+                        <span>Notifications</span>
+                        <button class="mark-all-read-btn" onclick="markAllNotificationsRead()">Mark all read</button>
+                    </div>
+                    <div class="notifications-list" id="notificationsList">
+                        <div class="notifications-empty">No notifications</div>
+                    </div>
+                </div>
+
+                <!-- User Dropdown -->
+                <div class="user-dropdown" id="userDropdown" style="display: none;">
+                    <div class="user-avatar" id="headerAvatar">U</div>
+                    <span id="headerUsername">Username</span>
+                    <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" onclick="showPage('profile')">
+                            <i class="fas fa-user"></i> My Profile
+                        </div>
+                        <div class="dropdown-item" onclick="showPage('messages')">
+                            <i class="fas fa-envelope"></i> Messages
+                        </div>
+                        <div class="dropdown-item" onclick="showRedeemKeyModal()">
+                            <i class="fas fa-key"></i> Redeem Key
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-bar">
+            <div class="nav-container">
+                <div class="nav-tabs">
+                    <a class="nav-tab active" data-page="forum">
+                        <i class="fas fa-comments"></i>
+                        <span>Forums</span>
+                    </a>
+                    <a class="nav-tab" data-page="chat">
+                        <i class="fas fa-message"></i>
+                        <span>Chat</span>
+                    </a>
+                    <a class="nav-tab" data-page="messages" id="navMessages" style="display: none;">
+                        <i class="fas fa-envelope"></i>
+                        <span>Messages</span>
+                    </a>
+                    <a class="nav-tab" data-page="support" id="navSupport" style="display: none;">
+                        <i class="fas fa-life-ring"></i>
+                        <span>Support</span>
+                    </a>
+                    <a class="nav-tab" data-page="members">
+                        <i class="fas fa-users"></i>
+                        <span>Members</span>
+                    </a>
+                    <a class="nav-tab" data-page="badges">
+                        <i class="fas fa-award"></i>
+                        <span>Badges</span>
+                    </a>
+                    <a class="nav-tab" data-page="reports" id="navReports" style="display: none;">
+                        <i class="fas fa-flag"></i>
+                        <span>Reports</span>
+                        <span class="nav-badge" id="pendingReportsBadge" style="display: none;">0</span>
+                    </a>
+                </div>
+                <div class="nav-search">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="globalSearchInput" placeholder="Search..." oninput="onSearchInput()" onkeypress="if(event.key==='Enter')performSearch()">
+                        <button class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner -->
+    <div id="portalBanner" class="portal-banner">
+        <div class="banner-bg" id="bannerImage"></div>
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <h1 class="banner-title" id="bannerTitle"></h1>
+            <p class="banner-subtitle" id="bannerSubtitle"></p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+
+        <!-- LOGIN PAGE -->
+        <div class="page-view" id="page-login">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1>Welcome Back</h1>
+                        <p>Sign in to access the community</p>
+                    </div>
+                    <div class="auth-body">
+                        <div id="loginAlert"></div>
+                        <div id="loginOAuthButtons" class="oauth-buttons" style="display: none;"></div>
+                        <div id="loginOAuthDivider" class="auth-divider" style="display: none;">
+                            <span>or sign in with email</span>
+                        </div>
+                        <div class="form-row">
+                            <label>Username</label>
+                            <input type="text" class="form-input" id="loginEmail" placeholder="Enter your username">
+                        </div>
+                        <div class="form-row">
+                            <label>Password</label>
+                            <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" onkeypress="if(event.key==='Enter')login()">
+                        </div>
+                        <button class="btn btn-primary btn-block" onclick="login()">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </button>
+                    </div>
+                    <div class="auth-footer">
+                        Don't have an account? <a href="#" onclick="showPage('register'); return false;">Create one</a>
+                        <br>
+                        <a href="#" onclick="showPage('forgot-password'); return false;" style="font-size: 0.875rem; margin-top: 8px; display: inline-block;">Forgot Password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORGOT PASSWORD PAGE -->
+        <div class="page-view" id="page-forgot-password">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1>Reset Password</h1>
+                        <p>We'll send you a reset code</p>
+                    </div>
+                    <div class="auth-body">
+                        <div id="forgotPasswordAlert"></div>
+                        <div class="form-row">
+                            <label>Email or Username</label>
+                            <input type="text" class="form-input" id="forgotPasswordIdentifier" placeholder="Enter your email or username" onkeypress="if(event.key==='Enter')requestPasswordReset()">
+                        </div>
+                        <button class="btn btn-primary btn-block" onclick="requestPasswordReset()">
+                            <i class="fas fa-envelope"></i> Send Reset Code
+                        </button>
+                    </div>
+                    <div class="auth-footer">
+                        <a href="#" onclick="showPage('login'); return false;"><i class="fas fa-arrow-left"></i> Back to login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESET PASSWORD PAGE -->
+        <div class="page-view" id="page-reset-password">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1>New Password</h1>
+                        <p>Enter your reset code and new password</p>
+                    </div>
+                    <div class="auth-body">
+                        <div id="resetPasswordAlert"></div>
+                        <div class="form-row">
+                            <label>Reset Code</label>
+                            <input type="text" class="form-input" id="resetPasswordCode" placeholder="Enter reset code">
+                        </div>
+                        <div class="form-row">
+                            <label>New Password</label>
+                            <input type="password" class="form-input" id="resetPasswordNew" placeholder="Enter new password" onkeypress="if(event.key==='Enter')confirmPasswordReset()">
+                        </div>
+                        <button class="btn btn-primary btn-block" onclick="confirmPasswordReset()">
+                            <i class="fas fa-key"></i> Reset Password
+                        </button>
+                    </div>
+                    <div class="auth-footer">
+                        <a href="#" onclick="showPage('login'); return false;"><i class="fas fa-arrow-left"></i> Back to login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGISTER PAGE -->
+        <div class="page-view" id="page-register">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1>Create Account</h1>
+                        <p>Join the community</p>
+                    </div>
+                    <div class="auth-body">
+                        <div id="registerAlert"></div>
+                        <div id="registerOAuthButtons" class="oauth-buttons" style="display: none;"></div>
+                        <div id="registerOAuthDivider" class="auth-divider" style="display: none;">
+                            <span>or register with email</span>
+                        </div>
+                        <div class="form-row">
+                            <label>Username</label>
+                            <input type="text" class="form-input" id="registerUsername" placeholder="Choose a username">
+                        </div>
+                        <div class="form-row">
+                            <label>Email</label>
+                            <input type="email" class="form-input" id="registerEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="form-row">
+                            <label>Password</label>
+                            <input type="password" class="form-input" id="registerPassword" placeholder="Create a password">
+                        </div>
+                        <div class="form-row">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-input" id="registerPasswordConfirm" placeholder="Confirm your password" onkeypress="if(event.key==='Enter')register()">
+                        </div>
+                        <button class="btn btn-primary btn-block" onclick="register()">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </div>
+                    <div class="auth-footer">
+                        Already have an account? <a href="#" onclick="showPage('login'); return false;">Sign in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VERIFY EMAIL PAGE -->
+        <div class="page-view" id="page-verify">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1>Verify Email</h1>
+                        <p>Enter the verification code sent to your email</p>
+                    </div>
+                    <div class="auth-body">
+                        <div id="verifyAlert"></div>
+                        <div class="form-row">
+                            <label>Verification Code</label>
+                            <input type="text" class="form-input" id="verifyCode" placeholder="Enter 6-digit code" maxlength="6" onkeypress="if(event.key==='Enter')verifyEmail()">
+                        </div>
+                        <button class="btn btn-primary btn-block" onclick="verifyEmail()">
+                            <i class="fas fa-check"></i> Verify
+                        </button>
+                        <button class="btn btn-secondary btn-block" onclick="resendVerification()" style="margin-top: 12px;">
+                            <i class="fas fa-redo"></i> Resend Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH RESULTS PAGE -->
+        <div class="page-view" id="page-search">
+            <div class="page-title">
+                <h1><i class="fas fa-search"></i> Search Results</h1>
+                <p id="searchResultsSubtitle">Searching...</p>
+            </div>
+
+            <div class="search-filters" style="margin-bottom: 20px;">
+                <button class="search-filter-btn active" data-type="all" onclick="filterSearchResults('all')">All</button>
+                <button class="search-filter-btn" data-type="threads" onclick="filterSearchResults('threads')">
+                    <i class="fas fa-comment-alt"></i> Threads <span id="searchThreadsCount" class="filter-count"></span>
+                </button>
+                <button class="search-filter-btn" data-type="posts" onclick="filterSearchResults('posts')">
+                    <i class="fas fa-reply"></i> Posts <span id="searchPostsCount" class="filter-count"></span>
+                </button>
+                <button class="search-filter-btn" data-type="users" onclick="filterSearchResults('users')">
+                    <i class="fas fa-user"></i> Users <span id="searchUsersCount" class="filter-count"></span>
+                </button>
+            </div>
+
+            <div class="content-card">
+                <div id="searchResults">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Searching...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORUM PAGE (Categories) -->
+        <div class="page-view active" id="page-forum">
+            <div class="page-title">
+                <h1>Community Forums</h1>
+                <p>Discuss, share, and connect with other members</p>
+            </div>
+
+            <div class="forum-layout">
+                <div class="forum-main">
+                    <div class="content-card">
+                        <div id="categoryList">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                Loading forums...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="forum-sidebar">
+                    <div class="sidebar-card">
+                        <div class="sidebar-header">
+                            <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+                        </div>
+                        <div class="sidebar-body" id="recentActivityList">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORY PAGE (Threads) -->
+        <div class="page-view" id="page-category">
+            <div class="breadcrumbs">
+                <a href="#" onclick="showPage('forum'); return false;">Forums</a>
+                <span>/</span>
+                <span class="current" id="categoryBreadcrumb">Category</span>
+            </div>
+
+            <div class="page-title">
+                <h1 id="categoryTitle">Category Name</h1>
+                <p id="categoryDescription">Category description</p>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-list"></i> Threads</h2>
+                    <button class="btn btn-primary btn-sm" onclick="showCreateThreadModal()" id="createThreadBtn" style="display: none;">
+                        <i class="fas fa-plus"></i> New Thread
+                    </button>
+                </div>
+                <div id="threadList">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading threads...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- THREAD PAGE (Posts) -->
+        <div class="page-view" id="page-thread">
+            <div class="breadcrumbs">
+                <a href="#" onclick="showPage('forum'); return false;">Forums</a>
+                <span>/</span>
+                <a href="#" id="threadCategoryLink">Category</a>
+                <span>/</span>
+                <span class="current" id="threadBreadcrumb">Thread</span>
+            </div>
+
+            <div class="page-title" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                <h1 id="threadTitle">Thread Title</h1>
+                <button class="btn btn-secondary btn-sm" onclick="copyLinkToClipboard('thread/' + currentThreadId)" title="Copy link">
+                    <i class="fas fa-link"></i> Copy Link
+                </button>
+            </div>
+
+            <!-- Thread Watchers -->
+            <div class="thread-watchers" id="threadWatchers" style="display: none;">
+                <div class="watchers-label">
+                    <i class="fas fa-eye"></i>
+                    <span id="watchersCount">0</span> watching
+                </div>
+                <div class="watchers-avatars" id="watchersAvatars"></div>
+            </div>
+
+            <div class="content-card" style="margin-bottom: 24px;">
+                <div id="postList">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading posts...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reply Form -->
+            <div class="content-card" id="replySection" style="display: none;">
+                <div class="card-header">
+                    <h2><i class="fas fa-reply"></i> Post Reply</h2>
+                </div>
+                <div class="card-body">
+                    <div id="replyingToIndicator" class="replying-to-box" style="display: none;"></div>
+                    <div class="bbcode-toolbar">
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('replyContent', 'b')" title="Bold"><i class="fas fa-bold"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('replyContent', 'i')" title="Italic"><i class="fas fa-italic"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('replyContent', 'u')" title="Underline"><i class="fas fa-underline"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('replyContent', 's')" title="Strikethrough"><i class="fas fa-strikethrough"></i></button>
+                        <div class="bbcode-divider"></div>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('replyContent', 'code')" title="Code"><i class="fas fa-code"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('replyContent', 'quote')" title="Quote"><i class="fas fa-quote-right"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('replyContent', 'spoiler')" title="Spoiler"><i class="fas fa-eye-slash"></i></button>
+                        <div class="bbcode-divider"></div>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeUrl('replyContent')" title="Link"><i class="fas fa-link"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeImg('replyContent')" title="Image"><i class="fas fa-image"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('replyContent', 'list')" title="List"><i class="fas fa-list-ul"></i></button>
+                        <div class="bbcode-divider"></div>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeSize('replyContent')" title="Text Size"><i class="fas fa-text-height"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeColor('replyContent')" title="Text Color"><i class="fas fa-palette"></i></button>
+                    </div>
+                    <textarea class="form-input" id="replyContent" rows="5" placeholder="Write your reply..."></textarea>
+                    <button class="btn btn-primary" onclick="postReply()" style="margin-top: 16px;">
+                        <i class="fas fa-paper-plane"></i> Post Reply
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAT PAGE -->
+        <div class="page-view" id="page-chat">
+            <div class="page-title">
+                <h1>Global Chat</h1>
+                <p>Chat with the community in real-time</p>
+            </div>
+
+            <div class="chat-mod-panel" id="chatModPanel" style="display: none;">
+                <div class="content-card" style="margin-bottom: 16px;">
+                    <div class="card-header" style="cursor: pointer;" onclick="toggleMutedUsersPanel()">
+                        <h3><i class="fas fa-user-slash"></i> Muted Users</h3>
+                        <span id="mutedUsersToggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body" id="mutedUsersPanel" style="display: none;">
+                        <div id="mutedUsersList">
+                            <div class="empty-state"><p>Click to load muted users</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading chat...
+                    </div>
+                </div>
+                <div class="chat-guest-notice" id="chatGuestNotice" style="display: none;">
+                    <i class="fas fa-info-circle"></i>
+                    <span>You must <a href="#" onclick="showPage('login'); return false;">login</a> to send messages</span>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="form-input chat-input" id="chatInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendChatMessage()" disabled>
+                    <button class="btn btn-primary" onclick="sendChatMessage()" id="chatSendBtn" disabled>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MESSAGES PAGE -->
+        <div class="page-view" id="page-messages">
+            <div class="page-title">
+                <h1>Messages</h1>
+                <p>Your private conversations</p>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-inbox"></i> Inbox</h2>
+                </div>
+                <div id="conversationList" class="conversations-list">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading conversations...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONVERSATION PAGE -->
+        <div class="page-view" id="page-conversation">
+            <div class="breadcrumbs">
+                <a href="#" onclick="showPage('messages'); return false;">Messages</a>
+                <span>/</span>
+                <span class="current" id="conversationBreadcrumb">Conversation</span>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h2>
+                        <div class="conversation-avatar" id="convHeaderAvatar" style="width: 32px; height: 32px; font-size: 12px; cursor: pointer;" onclick="openConvParticipantProfile()" title="View Profile"></div>
+                        <span id="convHeaderName" style="cursor: pointer;" onclick="openConvParticipantProfile()" title="View Profile">Conversation</span>
+                    </h2>
+                </div>
+                <div id="conversationMessages" style="height: 400px; overflow-y: auto; padding: 20px;">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading messages...
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="form-input chat-input" id="dmInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendDM()">
+                    <button class="btn btn-primary" onclick="sendDM()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUPPORT PAGE -->
+        <div class="page-view" id="page-support">
+            <div class="page-title">
+                <h1>Support</h1>
+                <p>Get help from our team</p>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-ticket-alt"></i> Your Tickets</h2>
+                    <button class="btn btn-primary btn-sm" onclick="showCreateTicketModal()">
+                        <i class="fas fa-plus"></i> New Ticket
+                    </button>
+                </div>
+                <div id="ticketList" class="ticket-list">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading tickets...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TICKET PAGE -->
+        <div class="page-view" id="page-ticket">
+            <div class="breadcrumbs">
+                <a href="#" onclick="showPage('support'); return false;">Support</a>
+                <span>/</span>
+                <span class="current" id="ticketBreadcrumb">Ticket</span>
+            </div>
+
+            <div class="page-title">
+                <h1 id="ticketSubject">Ticket Subject</h1>
+                <p><span id="ticketStatus" class="ticket-badge">Open</span> <span id="ticketCategory" style="margin-left: 8px; color: var(--muted-text);"></span></p>
+            </div>
+
+            <div class="content-card" style="margin-bottom: 24px;">
+                <div id="ticketMessages">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading ticket...
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card" id="ticketReplySection">
+                <div class="card-header">
+                    <h2><i class="fas fa-reply"></i> Reply</h2>
+                </div>
+                <div class="card-body">
+                    <textarea class="form-input" id="ticketReplyContent" rows="4" placeholder="Write your reply..."></textarea>
+                    <div style="display: flex; gap: 12px; margin-top: 16px;">
+                        <button class="btn btn-primary" onclick="replyToTicket()">
+                            <i class="fas fa-paper-plane"></i> Send Reply
+                        </button>
+                        <button class="btn btn-danger" onclick="closeTicket()">
+                            <i class="fas fa-times"></i> Close Ticket
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEMBERS PAGE -->
+        <div class="page-view" id="page-members">
+            <div class="page-title">
+                <h1>Members</h1>
+                <p>Browse community members</p>
+            </div>
+
+            <div class="content-card" style="margin-bottom: 16px; padding: 16px 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 12px; height: 12px; background: var(--success); border-radius: 50%;"></div>
+                        <span><strong id="membersOnlineCount">0</strong> Members Online</span>
+                    </div>
+                    <input type="text" class="form-input" id="memberSearchInput" placeholder="Search members (min 3 chars)..." style="width: 250px;" oninput="onMemberSearchInput()">
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div id="membersList" class="members-grid">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading members...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BADGES PAGE -->
+        <div class="page-view" id="page-badges">
+            <div class="page-title">
+                <h1><i class="fas fa-award"></i> Badges</h1>
+                <p>Earn badges by participating in the community</p>
+            </div>
+
+            <div class="content-card">
+                <div id="allBadgesList" class="all-badges-grid">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading badges...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORTS PAGE -->
+        <div class="page-view" id="page-reports">
+            <div class="page-title">
+                <h1><i class="fas fa-flag"></i> Content Reports</h1>
+                <p>Review and manage user-submitted reports</p>
+            </div>
+
+            <div class="content-card" style="margin-bottom: 16px; padding: 16px 20px;">
+                <div class="reports-filters">
+                    <button class="report-filter-btn active" data-status="pending" onclick="filterReports('pending')">
+                        <i class="fas fa-clock"></i> Pending
+                        <span class="report-count" id="pendingReportsCount">0</span>
+                    </button>
+                    <button class="report-filter-btn" data-status="reviewed" onclick="filterReports('reviewed')">
+                        <i class="fas fa-eye"></i> Reviewed
+                    </button>
+                    <button class="report-filter-btn" data-status="resolved" onclick="filterReports('resolved')">
+                        <i class="fas fa-check-circle"></i> Resolved
+                    </button>
+                    <button class="report-filter-btn" data-status="dismissed" onclick="filterReports('dismissed')">
+                        <i class="fas fa-times-circle"></i> Dismissed
+                    </button>
+                    <button class="report-filter-btn" data-status="" onclick="filterReports('')">
+                        <i class="fas fa-list"></i> All
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div id="reportsList" class="reports-list">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading reports...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE PAGE -->
+        <div class="page-view" id="page-profile">
+            <div class="profile-header" id="profileHeader">
+                <div class="profile-avatar" id="profileAvatar" onclick="showAvatarModal()">U</div>
+                <div class="profile-info">
+                    <h1 class="profile-name" id="profileName">Username</h1>
+                    <p class="profile-username" id="profileUsername">@username</p>
+                    <span class="profile-role" id="profileRole">Member</span>
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profilePosts">0</div>
+                            <div class="profile-stat-label">Posts</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profileThreads">0</div>
+                            <div class="profile-stat-label">Threads</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profileReputation">0</div>
+                            <div class="profile-stat-label">Reputation</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profileJoined">-</div>
+                            <div class="profile-stat-label">Joined</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card profile-section" id="profileBadgesSection">
+                <div class="card-header">
+                    <h2><i class="fas fa-award"></i> Badges</h2>
+                </div>
+                <div class="card-body">
+                    <div id="profileBadgesList" class="badges-grid">
+                        <div class="badges-empty">No badges earned yet</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card profile-section">
+                <div class="card-header">
+                    <h2><i class="fas fa-user-circle"></i> About</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="showEditBioModal()">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                </div>
+                <div class="card-body">
+                    <p id="profileBio" style="color: var(--muted-text);">No bio set.</p>
+                </div>
+            </div>
+
+            <div class="content-card profile-section">
+                <div class="card-header">
+                    <h2><i class="fas fa-crown"></i> Subscriptions</h2>
+                </div>
+                <div class="card-body">
+                    <div id="subscriptionsList" class="subscriptions-grid">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            Loading subscriptions...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card profile-section">
+                <div class="card-header">
+                    <h2><i class="fas fa-user-friends"></i> Friends</h2>
+                </div>
+                <div class="card-body">
+                    <div id="friendRequestsSection" style="display: none; margin-bottom: 20px;">
+                        <h4 style="font-size: 0.875rem; color: var(--muted-text); margin-bottom: 12px;">
+                            <i class="fas fa-inbox" style="margin-right: 6px;"></i>Incoming Requests
+                        </h4>
+                        <div id="friendRequestsList"></div>
+                    </div>
+                    <div id="sentRequestsSection" style="display: none; margin-bottom: 20px;">
+                        <h4 style="font-size: 0.875rem; color: var(--muted-text); margin-bottom: 12px;">
+                            <i class="fas fa-paper-plane" style="margin-right: 6px;"></i>Sent Requests
+                        </h4>
+                        <div id="sentRequestsList"></div>
+                    </div>
+                    <div id="friendsList">
+                        <div class="empty-state">
+                            <i class="fas fa-user-friends"></i>
+                            <p>No friends yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card profile-section" id="hwidSection" style="display: none;">
+                <div class="card-header">
+                    <h2><i class="fas fa-microchip"></i> Hardware ID</h2>
+                </div>
+                <div class="card-body">
+                    <div class="hwid-card">
+                        <div class="hwid-row">
+                            <span class="hwid-label">Status</span>
+                            <span class="hwid-value" id="currentHwid">-</span>
+                        </div>
+                        <div class="hwid-row">
+                            <span class="hwid-label">Resets Used</span>
+                            <span class="hwid-value" id="hwidResets">0</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger btn-sm" onclick="resetHwid()" style="margin-top: 16px; display: none;" id="resetHwidBtn">
+                        <i class="fas fa-redo"></i> Reset HWID
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-card profile-section" id="profileOAuthStatus" style="display: none;">
+                <div class="card-header">
+                    <h2><i class="fas fa-link"></i> Linked Accounts</h2>
+                </div>
+                <div class="card-body"></div>
+            </div>
+
+            <div class="content-card profile-section" id="blockedUsersSection">
+                <div class="card-header">
+                    <h2><i class="fas fa-ban"></i> Blocked Users</h2>
+                </div>
+                <div class="card-body">
+                    <div id="blockedUsersList" class="blocked-users-list">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            Loading blocked users...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODALS -->
+    <!-- Create Thread Modal -->
+    <div class="modal-overlay" id="createThreadModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-pen"></i> Create Thread</h2>
+                <button class="modal-close" onclick="hideCreateThreadModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <label>Title</label>
+                    <input type="text" class="form-input" id="newThreadTitle" placeholder="Thread title">
+                </div>
+                <div class="form-row">
+                    <label>Message</label>
+                    <div class="bbcode-toolbar">
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('newThreadContent', 'b')" title="Bold"><i class="fas fa-bold"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('newThreadContent', 'i')" title="Italic"><i class="fas fa-italic"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('newThreadContent', 'u')" title="Underline"><i class="fas fa-underline"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('newThreadContent', 's')" title="Strikethrough"><i class="fas fa-strikethrough"></i></button>
+                        <div class="bbcode-divider"></div>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('newThreadContent', 'code')" title="Code"><i class="fas fa-code"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('newThreadContent', 'quote')" title="Quote"><i class="fas fa-quote-right"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('newThreadContent', 'spoiler')" title="Spoiler"><i class="fas fa-eye-slash"></i></button>
+                        <div class="bbcode-divider"></div>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeUrl('newThreadContent')" title="Link"><i class="fas fa-link"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeImg('newThreadContent')" title="Image"><i class="fas fa-image"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('newThreadContent', 'list')" title="List"><i class="fas fa-list-ul"></i></button>
+                        <div class="bbcode-divider"></div>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeSize('newThreadContent')" title="Text Size"><i class="fas fa-text-height"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeColor('newThreadContent')" title="Text Color"><i class="fas fa-palette"></i></button>
+                    </div>
+                    <textarea class="form-input" id="newThreadContent" rows="8" placeholder="Write your message..."></textarea>
+                </div>
+                <div class="form-row poll-section">
+                    <div class="poll-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pollEnabled" onchange="togglePollSection()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="poll-toggle-label"><i class="fas fa-poll"></i> Add a Poll</span>
+                    </div>
+                    <div id="pollFields" style="display: none;">
+                        <div class="form-row">
+                            <label>Poll Question</label>
+                            <input type="text" class="form-input" id="pollQuestion" placeholder="Ask your question...">
+                        </div>
+                        <div class="form-row">
+                            <label>Options (at least 2)</label>
+                            <div id="pollOptionsContainer">
+                                <div class="poll-option-row">
+                                    <input type="text" class="form-input poll-option-input" placeholder="Option 1">
+                                    <button type="button" class="poll-option-remove" onclick="removePollOption(this)" title="Remove option"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="poll-option-row">
+                                    <input type="text" class="form-input poll-option-input" placeholder="Option 2">
+                                    <button type="button" class="poll-option-remove" onclick="removePollOption(this)" title="Remove option"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-secondary" onclick="addPollOption()" id="addPollOptionBtn">
+                                <i class="fas fa-plus"></i> Add Option
+                            </button>
+                        </div>
+                        <div class="form-row poll-settings">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="pollAllowMultiple">
+                                <span>Allow multiple selections</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideCreateThreadModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="createThread()">Create Thread</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Ticket Modal -->
+    <div class="modal-overlay" id="createTicketModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-life-ring"></i> New Support Ticket</h2>
+                <button class="modal-close" onclick="hideCreateTicketModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="createTicketAlert"></div>
+                <div class="form-row">
+                    <label>Subject</label>
+                    <input type="text" class="form-input" id="ticketSubjectInput" placeholder="Brief description of your issue">
+                </div>
+                <div class="form-row">
+                    <label>Category</label>
+                    <select class="form-input" id="ticketCategoryInput">
+                        <option value="">Select a category...</option>
+                        <option value="general">General Question</option>
+                        <option value="technical">Technical Issue</option>
+                        <option value="billing">Billing</option>
+                        <option value="account">Account</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>Message</label>
+                    <textarea class="form-input" id="ticketBodyInput" rows="6" placeholder="Describe your issue in detail..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideCreateTicketModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="createTicket()">
+                    <i class="fas fa-paper-plane"></i> Submit Ticket
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal-overlay" id="reportModal">
+        <div class="modal" style="max-width: 480px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-flag"></i> Report Content</h2>
+                <button class="modal-close" onclick="hideReportModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="reportAlert"></div>
+                <p style="color: var(--muted-text); font-size: 0.875rem; margin-bottom: 16px;">
+                    Help us keep the community safe by reporting inappropriate content.
+                </p>
+                <input type="hidden" id="reportContentType">
+                <input type="hidden" id="reportContentId">
+                <div class="form-row">
+                    <label>Reason for Report</label>
+                    <select class="form-input" id="reportReason">
+                        <option value="">Select a reason...</option>
+                        <option value="spam">Spam or Advertising</option>
+                        <option value="harassment">Harassment or Bullying</option>
+                        <option value="inappropriate">Inappropriate Content</option>
+                        <option value="misinformation">Misinformation</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>Additional Details (optional)</label>
+                    <textarea class="form-input" id="reportDetails" rows="4" placeholder="Provide more context..." maxlength="1000"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideReportModal()">Cancel</button>
+                <button class="btn btn-danger" onclick="submitReport()">
+                    <i class="fas fa-flag"></i> Submit Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Redeem Key Modal -->
+    <div class="modal-overlay" id="redeemKeyModal">
+        <div class="modal" style="max-width: 420px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-key"></i> Redeem License Key</h2>
+                <button class="modal-close" onclick="hideRedeemKeyModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="redeemKeyAlert"></div>
+                <p style="color: var(--muted-text); font-size: 0.875rem; margin-bottom: 16px;">
+                    Enter your license key to activate your membership.
+                </p>
+                <div class="form-row">
+                    <label>License Key</label>
+                    <input type="text" class="form-input" id="redeemKeyInput" placeholder="XXXX-XXXX-XXXX-XXXX" style="font-family: 'JetBrains Mono', monospace; letter-spacing: 1px;" onkeypress="if(event.key==='Enter')redeemLicenseKey()">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideRedeemKeyModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="redeemLicenseKey()">
+                    <i class="fas fa-check"></i> Redeem Key
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Card Modal -->
+    <div class="modal-overlay" id="userCardModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-user"></i> User Profile</h2>
+                <button class="modal-close" onclick="hideUserCardModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 32px;">
+                <div id="userCardAvatar" style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 28px; margin: 0 auto 16px; overflow: hidden;"></div>
+                <h3 id="userCardName" style="margin: 0 0 4px; font-size: 1.25rem;"></h3>
+                <div id="userCardUsername" style="color: var(--muted-text); font-size: 0.875rem; margin-bottom: 8px;"></div>
+                <div id="userCardRole" style="display: inline-block; background: var(--success); color: white; padding: 3px 12px; border-radius: 100px; font-size: 0.6875rem; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;"></div>
+                <div id="userCardBadges" class="user-card-badges" style="margin-bottom: 16px;"></div>
+                <div id="userCardBio" style="color: var(--muted-text); font-size: 0.875rem; margin-bottom: 20px; display: none;"></div>
+                <div id="userCardActions" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-primary btn-sm" id="userCardMessageBtn" onclick="startConversationWithUser()">
+                        <i class="fas fa-envelope"></i> Message
+                    </button>
+                    <button class="btn btn-secondary btn-sm" id="userCardFriendBtn" onclick="toggleFriendFromCard()">
+                        <i class="fas fa-user-plus"></i> Add Friend
+                    </button>
+                    <button class="btn btn-secondary btn-sm" id="userCardBlockBtn" onclick="toggleBlockFromCard()" title="Block User">
+                        <i class="fas fa-ban"></i> Block
+                    </button>
+                    <button class="btn btn-danger btn-sm" id="userCardReportBtn" onclick="reportUserFromCard()" title="Report User">
+                        <i class="fas fa-flag"></i>
+                    </button>
+                </div>
+                <div id="userCardSelfNote" style="display: none; color: var(--muted-text); font-size: 0.8125rem; margin-top: 12px;">
+                    <i class="fas fa-info-circle"></i> This is your profile
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Send Message Modal -->
+    <div class="modal-overlay" id="sendMessageModal">
+        <div class="modal" style="max-width: 450px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-envelope"></i> Send Message</h2>
+                <button class="modal-close" onclick="hideSendMessageModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="sendMessageAlert"></div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255,255,255,0.02); border-radius: var(--radius-md); margin-bottom: 16px;">
+                    <div id="sendMsgRecipientAvatar" style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; overflow: hidden;"></div>
+                    <div>
+                        <div id="sendMsgRecipientName" style="font-weight: 600;"></div>
+                        <div id="sendMsgRecipientUsername" style="font-size: 0.75rem; color: var(--muted-text);"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>Message</label>
+                    <textarea class="form-input" id="newMessageContent" rows="4" placeholder="Type your message..." onkeypress="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendNewMessage();}"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideSendMessageModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="sendNewMessage()">
+                    <i class="fas fa-paper-plane"></i> Send
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Avatar Modal -->
+    <div class="modal-overlay" id="avatarModal">
+        <div class="modal" style="max-width: 450px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-camera"></i> Change Avatar</h2>
+                <button class="modal-close" onclick="hideAvatarModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="avatarModalAlert"></div>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div id="avatarPreview" style="width: 120px; height: 120px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; font-weight: 600; margin: 0 auto; overflow: hidden;">
+                        <span id="avatarPreviewInitial">U</span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>Image URL</label>
+                    <input type="text" class="form-input" id="avatarUrlInput" placeholder="https://example.com/image.jpg" oninput="previewAvatar()">
+                    <small style="color: var(--muted-text); display: block; margin-top: 6px;">Enter a direct link to an image</small>
+                </div>
+                <div style="text-align: center; margin: 16px 0; color: var(--muted-text);">- or -</div>
+                <div style="text-align: center;">
+                    <button class="btn btn-secondary" onclick="clearAvatar()">
+                        <i class="fas fa-trash"></i> Remove Avatar
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideAvatarModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveAvatar()">
+                    <i class="fas fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Bio Modal -->
+    <div class="modal-overlay" id="editBioModal">
+        <div class="modal" style="max-width: 450px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Edit Bio</h2>
+                <button class="modal-close" onclick="hideEditBioModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="editBioAlert"></div>
+                <div class="form-row">
+                    <label>Bio</label>
+                    <textarea class="form-input" id="editBioInput" rows="4" placeholder="Tell us about yourself..." maxlength="500"></textarea>
+                    <small style="color: var(--muted-text); display: block; margin-top: 6px;">Max 500 characters</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideEditBioModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveBio()">
+                    <i class="fas fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Move Thread Modal -->
+    <div class="modal-overlay" id="moveThreadModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-arrows-alt"></i> Move Thread</h2>
+                <button class="modal-close" onclick="hideMoveThreadModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="moveThreadId">
+                <div class="form-row">
+                    <label>Move to Category</label>
+                    <select class="form-input" id="moveThreadCategory">
+                        <option value="">Select category...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideMoveThreadModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="moveThread()">
+                    <i class="fas fa-check"></i> Move Thread
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Category Modal -->
+    <div class="modal-overlay" id="createCategoryModal">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-folder-plus"></i> Create Category</h2>
+                <button class="modal-close" onclick="hideCreateCategoryModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <label>Category Name</label>
+                    <input type="text" class="form-input" id="newCategoryName" placeholder="Enter category name">
+                </div>
+                <div class="form-row">
+                    <label>Description</label>
+                    <textarea class="form-input" id="newCategoryDescription" rows="3" placeholder="Brief description (optional)"></textarea>
+                </div>
+                <div class="form-row">
+                    <label>Parent Category</label>
+                    <select class="form-input" id="newCategoryParent">
+                        <option value="">None (Top Level)</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>View Permission</label>
+                    <select class="form-input" id="newCategoryViewPerm">
+                        <option value="view_all">Everyone</option>
+                        <option value="view_members">Members Only</option>
+                        <option value="view_moderators">Moderators Only</option>
+                        <option value="view_admins">Admins Only</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>Post Permission</label>
+                    <select class="form-input" id="newCategoryPostPerm">
+                        <option value="post_members">Members</option>
+                        <option value="post_moderators">Moderators Only</option>
+                        <option value="post_admins">Admins Only</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideCreateCategoryModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="createCategory()">
+                    <i class="fas fa-plus"></i> Create Category
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Category Modal -->
+    <div class="modal-overlay" id="editCategoryModal">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Edit Category</h2>
+                <button class="modal-close" onclick="hideEditCategoryModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editCategoryId">
+                <div class="form-row">
+                    <label>Category Name</label>
+                    <input type="text" class="form-input" id="editCategoryName" placeholder="Enter category name">
+                </div>
+                <div class="form-row">
+                    <label>Description</label>
+                    <textarea class="form-input" id="editCategoryDescription" rows="3" placeholder="Brief description (optional)"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideEditCategoryModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="editCategory()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mute User Modal -->
+    <div class="modal-overlay" id="muteUserModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-slash"></i> Mute User</h2>
+                <button class="modal-close" onclick="hideMuteUserModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="muteUserId">
+                <p style="margin-bottom: 16px;">
+                    Mute <strong id="muteUserName"></strong> from chat?
+                </p>
+                <div class="form-row">
+                    <label>Reason (optional)</label>
+                    <input type="text" class="form-input" id="muteUserReason" placeholder="Reason for mute">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideMuteUserModal()">Cancel</button>
+                <button class="btn btn-danger" onclick="confirmMuteUser()">
+                    <i class="fas fa-user-slash"></i> Mute User
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Reply Modal -->
+    <div class="modal-overlay" id="editReplyModal">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Edit Reply</h2>
+                <button class="modal-close" onclick="hideEditReplyModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editReplyThreadId">
+                <input type="hidden" id="editReplyId">
+                <div class="form-row">
+                    <label>Content</label>
+                    <textarea class="form-input" id="editReplyContent" rows="6" placeholder="Edit your reply..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideEditReplyModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEditedReply()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit History Modal -->
+    <div class="modal-overlay" id="editHistoryModal">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-history"></i> Edit History</h2>
+                <button class="modal-close" onclick="hideEditHistoryModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="editHistoryContent">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    Loading history...
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideEditHistoryModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- OAuth Link Modal -->
+    <div class="modal-overlay" id="oauthLinkModal">
+        <div class="modal" style="max-width: 420px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-link"></i> Link Account</h2>
+                <button class="modal-close" onclick="closeOAuthLinkModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="oauthLinkMessage" style="margin-bottom: 16px;">
+                    An account with this email already exists. Enter your password to link your <span id="oauthLinkProvider"></span> account.
+                </p>
+                <div id="oauthLinkAlert"></div>
+                <input type="hidden" id="oauthLinkToken">
+                <div class="form-row">
+                    <label>Password</label>
+                    <input type="password" class="form-input" id="oauthLinkPassword" placeholder="Enter your password" onkeypress="if(event.key==='Enter')confirmOAuthLink()">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeOAuthLinkModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="confirmOAuthLink()">
+                    <i class="fas fa-link"></i> Link Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dialog Modal -->
+    <div class="modal-overlay" id="dialogModal">
+        <div class="modal" style="max-width: 420px;">
+            <div class="modal-header">
+                <h2 id="dialogTitle"><i class="fas fa-question-circle" id="dialogIcon"></i> <span id="dialogTitleText">Confirm</span></h2>
+                <button class="modal-close" onclick="closeDialog(false)">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="dialogMessage" style="color: var(--light-text); font-size: 0.95rem; margin-bottom: 16px; line-height: 1.5;"></p>
+                <div id="dialogInputContainer" class="form-row" style="display: none;">
+                    <label id="dialogInputLabel"></label>
+                    <input type="text" class="form-input" id="dialogInput" onkeypress="if(event.key==='Enter')closeDialog(true)">
+                </div>
+                <div id="dialogOptionsContainer" style="display: none;"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="dialogCancelBtn" onclick="closeDialog(false)">Cancel</button>
+                <button class="btn btn-primary" id="dialogConfirmBtn" onclick="closeDialog(true)">
+                    <i class="fas fa-check" id="dialogConfirmIcon"></i> <span id="dialogConfirmText">Confirm</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="portal.js"></script>
+    <script>
+        // Initialize particles.js - Matching index.html
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#4a90e2"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": true,
+                            "anim": {
+                                "enable": true,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": true,
+                                "speed": 2,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#4a90e2",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": true,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": true,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+        });
+    </script>
+</body>
+</html>
