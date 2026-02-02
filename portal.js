@@ -635,7 +635,14 @@ async function login() {
             showToast('Welcome back!', 'success');
         }
     } else {
-        showAlert('loginAlert', result.data.message || 'Login failed', 'danger');
+        // Check if email verification is required (user registered but didn't verify)
+        if (result.data.verification_required || result.data.error_code === 'EMAIL_NOT_VERIFIED') {
+            pendingVerificationEmail = username;
+            showPage('verify');
+            showAlert('verifyAlert', 'Please verify your email to continue. Enter the code sent to your email or request a new one.', 'info');
+        } else {
+            showAlert('loginAlert', result.data.message || 'Login failed', 'danger');
+        }
     }
 }
 
