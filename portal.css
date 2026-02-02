@@ -1534,6 +1534,28 @@ a:hover {
     display: block;
 }
 
+.bb-youtube {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    margin: 12px 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: #000;
+}
+
+.bb-youtube iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--radius-md);
+}
+
 /* ==================== CHAT ==================== */
 .chat-container {
     display: flex;

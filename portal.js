@@ -4854,6 +4854,20 @@ function parseBBCode(text) {
         return '<ul>' + items.map(item => `<li>${item.trim()}</li>`).join('') + '</ul>';
     });
 
+    // YouTube BBCode - extract video ID from various formats
+    html = html.replace(/\[youtube\]([\s\S]*?)\[\/youtube\]/gi, (match, content) => {
+        const videoId = extractYouTubeId(content.trim());
+        if (videoId) {
+            return `<div class="bb-youtube"><iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+        }
+        return match;
+    });
+
+    // Auto-embed YouTube URLs (not already in tags)
+    html = html.replace(/(?<!src="|href="|">)(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})(?:[^\s<]*)?)/gi, (match, url, videoId) => {
+        return `<div class="bb-youtube"><iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+    });
+
     // Line breaks
     html = html.replace(/\n/g, '<br>');
 
@@ -4901,6 +4915,24 @@ function setFormLoading(formId, loading) {
 }
 
 // ==================== UTILITIES ====================
+function extractYouTubeId(input) {
+    if (!input) return null;
+    // If it's already just a video ID (11 characters)
+    if (/^[a-zA-Z0-9_-]{11}$/.test(input)) {
+        return input;
+    }
+    // Extract from various YouTube URL formats
+    const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/,
+        /^([a-zA-Z0-9_-]{11})$/
+    ];
+    for (const pattern of patterns) {
+        const match = input.match(pattern);
+        if (match) return match[1];
+    }
+    return null;
+}
+
 function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
