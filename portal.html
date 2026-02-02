@@ -1157,6 +1157,50 @@
         </div>
     </div>
 
+    <!-- Edit Thread Modal -->
+    <div class="modal-overlay" id="editThreadModal">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Edit Thread</h2>
+                <button class="modal-close" onclick="hideEditThreadModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editThreadId">
+                <div class="form-row">
+                    <label>Title</label>
+                    <input type="text" class="form-input" id="editThreadTitle" placeholder="Thread title">
+                </div>
+                <div class="form-row">
+                    <label>Content</label>
+                    <div class="bbcode-toolbar">
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('editThreadContent', 'b')" title="Bold"><i class="fas fa-bold"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('editThreadContent', 'i')" title="Italic"><i class="fas fa-italic"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('editThreadContent', 'u')" title="Underline"><i class="fas fa-underline"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('editThreadContent', 's')" title="Strikethrough"><i class="fas fa-strikethrough"></i></button>
+                        <div class="bbcode-divider"></div>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('editThreadContent', 'code')" title="Code"><i class="fas fa-code"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('editThreadContent', 'quote')" title="Quote"><i class="fas fa-quote-right"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('editThreadContent', 'spoiler')" title="Spoiler"><i class="fas fa-eye-slash"></i></button>
+                        <div class="bbcode-divider"></div>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeUrl('editThreadContent')" title="Link"><i class="fas fa-link"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeImg('editThreadContent')" title="Image"><i class="fas fa-image"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCode('editThreadContent', 'list')" title="List"><i class="fas fa-list-ul"></i></button>
+                        <div class="bbcode-divider"></div>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeSize('editThreadContent')" title="Text Size"><i class="fas fa-text-height"></i></button>
+                        <button type="button" class="bbcode-btn" onclick="insertBBCodeColor('editThreadContent')" title="Text Color"><i class="fas fa-palette"></i></button>
+                    </div>
+                    <textarea class="form-input" id="editThreadContent" rows="8" placeholder="Edit your thread content..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="hideEditThreadModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEditedThread()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Create Category Modal -->
     <div class="modal-overlay" id="createCategoryModal">
         <div class="modal" style="max-width: 500px;">

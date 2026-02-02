@@ -1778,8 +1778,25 @@ async function loadThread(threadId) {
         const threadReactions = thread.reactions || {};
         const threadUserReaction = thread.user_reaction || null;
         const threadReactionsHtml = renderReactions(threadReactions, threadUserReaction, 'thread', threadId);
+
+        // Check if user can edit this thread (owner or moderator/admin)
+        const isOwnThread = currentUser && threadAuthorId === `customer_${currentUser.id}`;
+        const canEditThread = isOwnThread || isPortalModerator();
+
+        // Build edited info for thread if it was edited
+        let threadEditedInfo = '';
+        if (thread.edited_by) {
+            const editedByName = thread.edited_by_name || 'Staff';
+            const editedAt = thread.updated_at ? formatDate(thread.updated_at) : '';
+            const editorId = thread.edited_by;
+            threadEditedInfo = `<div class="reply-edited-info" onclick="showEditHistory('thread', ${threadId})" style="cursor: pointer;" title="Click to view edit history"><i class="fas fa-pencil-alt"></i> Edited by <span class="edited-by-link" onclick="event.stopPropagation(); showUserCardById('${editorId}')">${escapeHtml(editedByName)}</span>${editedAt ? ' on ' + editedAt : ''} <i class="fas fa-history" style="margin-left: 4px; opacity: 0.6;"></i></div>`;
+        }
+
+        // Encode thread content for data attribute
+        const encodedThreadContent = btoa(encodeURIComponent(thread.content || thread.body || ''));
+
         html += `
-            <div class="message">
+            <div class="message" data-thread-id="${threadId}" data-thread-title="${escapeHtml(thread.title || '')}" data-thread-content="${encodedThreadContent}">
                 <div class="message-user">
                     <div class="message-avatar" onclick="showUserCardById('${threadAuthorId}')" style="cursor: pointer;" title="View Profile">
                         ${typeof threadAvatar === 'string' && threadAvatar.startsWith('<img') ? threadAvatar : threadAvatar}
@@ -1790,8 +1807,14 @@ async function loadThread(threadId) {
                 <div class="message-content">
                     <div class="message-header">
                         <div class="message-date">${formatDate(thread.created_at)}</div>
+                        ${canEditThread ? `
+                        <div class="reply-actions">
+                            <button class="reply-action-btn" onclick="showEditThreadModal(${threadId})" title="Edit Thread"><i class="fas fa-edit"></i></button>
+                        </div>
+                        ` : ''}
                     </div>
                     <div class="message-body">${parseBBCode(thread.content || thread.body || '')}</div>
+                    ${threadEditedInfo}
                     <div class="message-footer">
                         ${threadReactionsHtml}
                         ${currentUser ? `<button class="report-btn" onclick="showReportModal('thread', '${threadId}')" title="Report this thread"><i class="fas fa-flag"></i></button>` : ''}
@@ -5069,6 +5092,60 @@ async function deleteThreadMod(threadId) {
         }
     } else {
         showToast(result.data?.message || 'Failed to delete thread', 'error');
+    }
+}
+
+// ==================== THREAD EDITING ====================
+function showEditThreadModal(threadId) {
+    document.getElementById('editThreadId').value = threadId;
+
+    // Get title and content from data attributes
+    const threadEl = document.querySelector(`.message[data-thread-id="${threadId}"]`);
+    let title = '';
+    let content = '';
+    if (threadEl) {
+        title = threadEl.dataset.threadTitle || '';
+        const encodedContent = threadEl.dataset.threadContent;
+        if (encodedContent) {
+            try {
+                content = decodeURIComponent(atob(encodedContent));
+            } catch (e) {
+                console.error('Failed to decode thread content:', e);
+            }
+        }
+    }
+
+    document.getElementById('editThreadTitle').value = title;
+    document.getElementById('editThreadContent').value = content;
+    document.getElementById('editThreadModal').classList.add('active');
+}
+
+function hideEditThreadModal() {
+    document.getElementById('editThreadModal').classList.remove('active');
+}
+
+async function saveEditedThread() {
+    const threadId = document.getElementById('editThreadId').value;
+    const title = document.getElementById('editThreadTitle').value.trim();
+    const content = document.getElementById('editThreadContent').value.trim();
+
+    if (!title && !content) {
+        showToast('Title or content is required', 'warning');
+        return;
+    }
+
+    const payload = {};
+    if (title) payload.title = title;
+    if (content) payload.content = content;
+
+    const result = await api('PUT', `/forum/threads/${threadId}`, payload);
+    if (result.ok) {
+        showToast('Thread updated', 'success');
+        hideEditThreadModal();
+        // Reload the thread to show updated content
+        loadThread(parseInt(threadId));
+    } else {
+        showToast(result.data?.message || 'Failed to update thread', 'error');
     }
 }
 
