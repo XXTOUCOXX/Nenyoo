@@ -3189,14 +3189,29 @@ async function loadTicketDetail(ticketId) {
         for (const msg of messages) {
             const author = msg.author || {};
             const isStaff = author.role === 'admin' || author.role === 'moderator' || msg.is_staff;
+            const authorName = author.display_name || author.username || 'Support';
+            const profilePicture = author.profile_picture;
+            const authorId = author.id || msg.author_id;
+
+            // Render avatar with image or initials
+            let avatarContent;
+            if (profilePicture) {
+                avatarContent = `<img src="${escapeHtml(profilePicture)}" alt="${escapeHtml(authorName)}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+            } else {
+                avatarContent = getInitials(authorName);
+            }
+
+            // Make clickable if we have an author ID
+            const onClickAttr = authorId ? `onclick="showUserCardById(${authorId})"` : '';
+            const clickableStyle = authorId ? 'cursor: pointer;' : '';
 
             html += `
                 <div class="message">
                     <div class="message-user" style="background: ${isStaff ? 'rgba(225, 29, 72, 0.05)' : 'rgba(255,255,255,0.01)'};">
-                        <div class="message-avatar" style="background: ${isStaff ? 'var(--primary)' : 'var(--info)'};">
-                            ${getInitials(author.display_name || author.username || 'Support')}
+                        <div class="message-avatar" ${onClickAttr} title="${authorId ? 'View Profile' : ''}" style="background: ${isStaff ? 'var(--primary)' : 'var(--info)'}; overflow: hidden; ${clickableStyle}">
+                            ${avatarContent}
                         </div>
-                        <div class="message-username">${escapeHtml(author.display_name || author.username || 'Support')}</div>
+                        <div class="message-username" ${onClickAttr} style="${clickableStyle}" title="${authorId ? 'View Profile' : ''}">${escapeHtml(authorName)}</div>
                         <div class="message-role ${isStaff ? 'admin' : ''}">${isStaff ? 'Staff' : 'User'}</div>
                     </div>
                     <div class="message-content">
