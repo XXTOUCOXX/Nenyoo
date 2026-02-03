@@ -64,6 +64,30 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Particles Background */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#particles-js canvas {
+    pointer-events: auto;
+}
+
+/* Ensure content is above particles */
+.portal-header,
+.main-wrapper,
+.modal-overlay,
+.toast-container {
+    position: relative;
+    z-index: 1;
+}
+
 /* Subtle background gradient - matching index.html style */
 body::before {
     content: '';
