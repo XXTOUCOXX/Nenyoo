@@ -597,6 +597,10 @@ async function validateSession() {
     if (result.ok && result.data.valid) {
         currentUser = result.data.customer;
         updateUIForUser();
+        // If user has no password (OAuth-only), prompt them to set one
+        if (result.data.has_password === false) {
+            showSetPasswordModal();
+        }
     } else {
         sessionToken = '';
         localStorage.removeItem('portalSessionToken');
@@ -1195,6 +1199,49 @@ async function loadOAuthStatusForProfile() {
     }
 
     cardBody.innerHTML = html;
+}
+
+// ==================== SET PASSWORD (OAuth users) ====================
+function showSetPasswordModal() {
+    document.getElementById('setPasswordInput').value = '';
+    document.getElementById('setPasswordConfirmInput').value = '';
+    document.getElementById('setPasswordAlert').innerHTML = '';
+    document.getElementById('setPasswordModal').classList.add('active');
+    document.getElementById('setPasswordInput').focus();
+}
+
+async function submitSetPassword() {
+    const password = document.getElementById('setPasswordInput').value;
+    const confirm = document.getElementById('setPasswordConfirmInput').value;
+
+    if (!password || !confirm) {
+        showAlert('setPasswordAlert', 'Please fill in both fields', 'danger');
+        return;
+    }
+
+    if (password !== confirm) {
+        showAlert('setPasswordAlert', 'Passwords do not match', 'danger');
+        return;
+    }
+
+    if (password.length < 8) {
+        showAlert('setPasswordAlert', 'Password must be at least 8 characters', 'danger');
+        return;
+    }
+
+    const btn = document.querySelector('#setPasswordModal .btn-primary');
+    setButtonLoading(btn, true);
+
+    const result = await api('POST', '/auth/set-password', { password });
+
+    setButtonLoading(btn, false, '<i class="fas fa-check"></i> Set Password');
+
+    if (result.ok) {
+        document.getElementById('setPasswordModal').classList.remove('active');
+        showToast('Password set successfully! You can now log in to your application.', 'success');
+    } else {
+        showAlert('setPasswordAlert', result.data.message || 'Failed to set password', 'danger');
+    }
 }
 
 // ==================== FORUM - CATEGORIES ====================
