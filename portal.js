@@ -1194,7 +1194,9 @@ async function loadOAuthStatusForProfile() {
 
     html += '</div>';
 
-    if (!status.has_password && status.links.length === 1) {
+    if (status.created_via_oauth && status.links.length <= 1) {
+        html += '<p class="oauth-warning"><i class="fas fa-exclamation-triangle"></i> Cannot unlink your only OAuth provider on an account created with OAuth.</p>';
+    } else if (!status.has_password && status.links.length <= 1) {
         html += '<p class="oauth-warning"><i class="fas fa-exclamation-triangle"></i> Set a password before unlinking your only OAuth account.</p>';
     }
 
