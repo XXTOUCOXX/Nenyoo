@@ -475,6 +475,21 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Admin-only: Bulk Delete Messages -->
+                <div class="content-card" id="adminBulkDeleteCard" style="display:none; margin-bottom: 16px;">
+                    <div class="card-header" style="cursor:pointer;" onclick="toggleBulkDeletePanel()">
+                        <h3><i class="fas fa-trash-alt"></i> Bulk Delete Messages</h3>
+                        <span><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body" id="bulkDeletePanel" style="display:none;">
+                        <label style="display:block;font-size:.875rem;margin-bottom:6px;">Paste message IDs (comma-separated)</label>
+                        <textarea class="form-input" id="adminBulkDeleteIds" rows="3" placeholder="id1, id2, id3..."></textarea>
+                        <div style="margin-top:8px;">
+                            <button class="btn btn-danger btn-sm" onclick="adminBulkDeleteMessages()"><i class="fas fa-trash"></i> Delete Messages</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="chat-container">
@@ -608,6 +623,20 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Admin-only: Thread Tools -->
+            <div class="content-card" id="adminThreadToolsCard" style="display:none; margin-top:16px;">
+                <div class="card-header">
+                    <h3><i class="fas fa-tools"></i> Thread Tools</h3>
+                </div>
+                <div class="card-body">
+                    <label style="display:block;font-size:.875rem;margin-bottom:8px;">Delete all replies in a thread</label>
+                    <div style="display:flex;gap:8px;align-items:center;">
+                        <input type="text" class="form-input" id="adminThreadIdInput" placeholder="Thread ID" style="width:150px;">
+                        <button class="btn btn-danger btn-sm" onclick="adminDeleteThreadReplies()"><i class="fas fa-trash"></i> Delete All Replies</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- MEMBERS PAGE -->
@@ -650,6 +679,32 @@
                         <div class="spinner"></div>
                         Loading badges...
                     </div>
+                </div>
+            </div>
+
+            <!-- Admin-only: Ticket Management -->
+            <div class="content-card" id="adminTicketToolsCard" style="display:none; margin-top:16px;">
+                <div class="card-header">
+                    <h3><i class="fas fa-tools"></i> Ticket Management</h3>
+                </div>
+                <div class="card-body">
+                    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:16px;font-size:.875rem;">
+                        <div>Open: <strong id="tstatOpen">—</strong></div>
+                        <div>Pending: <strong id="tstatPending">—</strong></div>
+                        <div>Closed: <strong id="tstatClosed">—</strong></div>
+                        <div>Total: <strong id="tstatTotal">—</strong></div>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;">
+                        <input type="text" class="form-input" id="adminDeleteTicketId" placeholder="Ticket ID" style="width:180px;">
+                        <button class="btn btn-danger btn-sm" onclick="adminDeleteTicket()"><i class="fas fa-trash"></i> Delete Ticket</button>
+                    </div>
+                    <div style="margin-bottom:8px;">
+                        <div style="display:flex;gap:8px;">
+                            <button class="btn btn-secondary btn-sm" onclick="adminLoadOpenTickets()"><i class="fas fa-sync"></i> Refresh</button>
+                            <button class="btn btn-primary btn-sm" onclick="adminBulkCloseTickets()"><i class="fas fa-times-circle"></i> Close Selected</button>
+                        </div>
+                    </div>
+                    <div id="adminOpenTicketsList" style="font-size:.875rem;color:var(--muted-text);">Click Refresh to load open tickets.</div>
                 </div>
             </div>
         </div>
@@ -831,6 +886,55 @@
 
     <!-- MODALS -->
     <!-- Create Thread Modal -->
+    <!-- Admin Ban Modal -->
+    <div class="modal-overlay" id="adminBanModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-ban"></i> Ban User</h2>
+                <button class="modal-close" onclick="document.getElementById('adminBanModal').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:0.8125rem;color:var(--muted-text);margin-bottom:12px;"><i class="fas fa-info-circle"></i> Portal ban only — does not affect the user's KeyAuth account or license key.</p>
+                <input type="hidden" id="banTargetUserId">
+                <div class="form-group">
+                    <label class="form-label">Reason <span style="color:var(--danger)">*</span></label>
+                    <input type="text" class="form-input" id="banReason" placeholder="Reason for ban">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Banned Until (optional)</label>
+                    <input type="datetime-local" class="form-input" id="banUntil">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="document.getElementById('adminBanModal').classList.remove('active')">Cancel</button>
+                <button class="btn btn-danger" onclick="adminBanUserConfirm()">Ban</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin User Activity Modal -->
+    <div class="modal-overlay" id="adminUserActivityModal" style="z-index:2100;">
+        <div class="modal" style="max-width:680px;">
+            <div class="modal-header">
+                <div>
+                    <h2 style="margin:0;"><i class="fas fa-user-clock"></i> User Activity</h2>
+                    <div id="activityUserLabel" style="font-size:0.8125rem;color:var(--muted-text);margin-top:2px;"></div>
+                </div>
+                <button class="modal-close" onclick="document.getElementById('adminUserActivityModal').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-top:12px;">
+                <div style="display:flex;gap:6px;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:12px;">
+                    <button class="btn btn-sm active" id="activityBtnThreads" onclick="switchActivityTab('threads',this)">Threads <span id="activityCountThreads" style="opacity:.6;font-size:.75rem;"></span></button>
+                    <button class="btn btn-sm" id="activityBtnReplies" onclick="switchActivityTab('replies',this)">Replies <span id="activityCountReplies" style="opacity:.6;font-size:.75rem;"></span></button>
+                    <button class="btn btn-sm" id="activityBtnChat" onclick="switchActivityTab('chat',this)">Chat <span id="activityCountChat" style="opacity:.6;font-size:.75rem;"></span></button>
+                </div>
+                <div id="activityTab-threads" style="max-height:380px;overflow-y:auto;"></div>
+                <div id="activityTab-replies" style="max-height:380px;overflow-y:auto;display:none;"></div>
+                <div id="activityTab-chat" style="max-height:380px;overflow-y:auto;display:none;"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="createThreadModal">
         <div class="modal">
             <div class="modal-header">
@@ -1044,6 +1148,17 @@
                 </div>
             </div>
         </div>
+                <!-- Admin Actions — only visible to portal admins -->
+                <div id="userCardAdminSection" style="display:none; margin-top:20px; border-top:1px solid var(--border); padding-top:16px; text-align:left;">
+                    <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-text);margin-bottom:10px;"><i class="fas fa-shield-alt"></i> Admin Actions</div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+                        <button class="btn btn-sm btn-secondary" id="userCardBanBtn" onclick="adminBanFromCard()"><i class="fas fa-ban"></i> Ban</button>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <button class="btn btn-sm btn-secondary" onclick="adminViewActivityFromCard()"><i class="fas fa-history"></i> Activity</button>
+                        <button class="btn btn-sm btn-danger" onclick="adminWipeContentFromCard()"><i class="fas fa-trash-alt"></i> Wipe Content</button>
+                    </div>
+                </div>
     </div>
 
     <!-- Send Message Modal -->

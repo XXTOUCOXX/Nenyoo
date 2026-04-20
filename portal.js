@@ -563,6 +563,7 @@ function showPage(page, updateUrl = true) {
                 return;
             }
             loadTickets();
+            if (isPortalAdmin()) { loadTicketStats(); adminLoadOpenTickets(); }
             break;
         case 'members':
             if (!currentUser) {
@@ -848,6 +849,11 @@ function updateUIForUser() {
     if (isPortalModerator()) {
         document.getElementById('navReports').style.display = '';
         loadPendingReportsCount();
+    }
+
+    if (isPortalAdmin()) {
+        const adminCards = ['adminThreadToolsCard', 'adminTicketToolsCard', 'adminBulkDeleteCard'];
+        adminCards.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = ''; });
     }
 
     // Check badge system status and update visibility
@@ -4106,17 +4112,21 @@ async function fetchAndShowUserCard(userId) {
 
     if (result.ok && result.data.profile) {
         const profile = result.data.profile;
-        usersCache[userId] = {
-            id: userId,
+        usersCache[numericId] = {
+            id: numericId,
             username: profile.username || '',
             display_name: profile.display_name || profile.username || '',
             avatar: profile.avatar || profile.profile_picture || '',
             role: profile.role || '',
             bio: profile.bio || '',
             badges: profile.badges || [],
-            reputation: profile.reputation || 0
+            reputation: profile.reputation || 0,
+            banned: profile.banned || false
         };
-        showUserCard(usersCache[userId], result.data.friendship_status);
+        showUserCard(usersCache[numericId], result.data.friendship_status);
+    } else if (isPortalAdmin()) {
+        const stub = { id: numericId, username: '[deleted]', display_name: 'Deleted User', role: '', avatar: '', deleted: true, banned: false };
+        showUserCard(stub, null);
     } else {
         showToast('Failed to load user profile', 'error');
     }
@@ -4228,6 +4238,18 @@ function showUserCard(user, friendshipStatus) {
         } else {
             blockBtn.style.display = '';
             updateBlockButtonState();
+        }
+    }
+
+    // Admin section
+    const adminSection = document.getElementById('userCardAdminSection');
+    if (adminSection) {
+        if (isPortalAdmin() && !isSelf) {
+            adminSection.style.display = '';
+            const banBtn = document.getElementById('userCardBanBtn');
+            if (banBtn) banBtn.style.display = user.banned ? 'none' : '';
+        } else {
+            adminSection.style.display = 'none';
         }
     }
 
@@ -6000,4 +6022,233 @@ function showToast(message, type = 'info') {
         toast.classList.add('hiding');
         setTimeout(() => toast.remove(), 300);
     }, 4000);
+}
+
+
+// ============================================================
+// ADMIN PANEL
+// ============================================================
+
+// ── Admin actions wired into the user card modal ──────────────────────────────
+
+function adminBanFromCard() {
+    if (!currentUserCardUser) return;
+    document.getElementById('banTargetUserId').value = currentUserCardUser.id;
+    document.getElementById('banReason').value = '';
+    document.getElementById('banUntil').value = '';
+    document.getElementById('adminBanModal').classList.add('active');
+}
+
+function adminViewActivityFromCard() {
+    if (!currentUserCardUser) return;
+    adminViewActivity(currentUserCardUser.id);
+}
+
+async function adminWipeContentFromCard() {
+    if (!currentUserCardUser) return;
+    adminWipeContent(currentUserCardUser.id);
+}
+
+
+
+function toggleBulkDeletePanel() {
+    const p = document.getElementById('bulkDeletePanel');
+    if (p) p.style.display = p.style.display === 'none' ? '' : 'none';
+}
+
+function switchActivityTab(tab, btn) {
+    ['threads','replies','chat'].forEach(t => {
+        const el = document.getElementById('activityTab-' + t);
+        if (el) el.style.display = t === tab ? '' : 'none';
+    });
+    ['activityBtnThreads','activityBtnReplies','activityBtnChat'].forEach(id => {
+        const b = document.getElementById(id);
+        if (b) b.classList.remove('active');
+    });
+    if (btn) btn.classList.add('active');
+}
+
+
+function adminShowBanModal(uid) {
+    document.getElementById('banTargetUserId').value = uid;
+    document.getElementById('banReason').value = '';
+    document.getElementById('banUntil').value = '';
+    document.getElementById('adminBanModal').classList.add('active');
+}
+
+async function adminBanUserConfirm() {
+    const uid = document.getElementById('banTargetUserId').value;
+    const reason = document.getElementById('banReason').value.trim();
+    const until = document.getElementById('banUntil').value;
+    if (!reason) { showToast('Reason required', 'error'); return; }
+    const body = { reason };
+    if (until) body.banned_until = new Date(until).toISOString();
+    const res = await api('POST', `/users/${uid}/ban`, body);
+    if (res && res.data?.success) {
+        showToast('User banned', 'success');
+        document.getElementById('adminBanModal').classList.remove('active');
+        if (currentUserCardUser && currentUserCardUser.id == uid) {
+            currentUserCardUser.banned = true;
+            const banBtn = document.getElementById('userCardBanBtn');
+            if (banBtn) banBtn.style.display = 'none';
+        }
+    } else {
+        showToast(res?.data?.message || 'Failed', 'error');
+    }
+}
+
+async function adminViewActivity(uid) {
+    document.getElementById('adminUserActivityModal').classList.add('active');
+    document.getElementById('activityUserLabel').textContent = '';
+    ['threads','replies','chat'].forEach(t => {
+        document.getElementById('activityTab-' + t).innerHTML = '<p style="color:var(--muted-text);padding:12px;">Loading...</p>';
+        document.getElementById('activityCount' + t.charAt(0).toUpperCase() + t.slice(1)).textContent = '';
+    });
+    switchActivityTab('threads', document.getElementById('activityBtnThreads'));
+
+    const res = await api('GET', `/users/${uid}/activity`);
+    if (!res || !res.data?.success) {
+        showToast('Failed to load activity', 'error');
+        document.getElementById('adminUserActivityModal').classList.remove('active');
+        return;
+    }
+    const d = res.data;
+    const username = d.username || `#${uid}`;
+    document.getElementById('activityUserLabel').textContent = `@${username} — ${d.thread_count} threads · ${d.reply_count} replies · ${d.chat_message_count} chat msgs`;
+    document.getElementById('activityCountThreads').textContent = `(${d.thread_count})`;
+    document.getElementById('activityCountReplies').textContent = `(${d.reply_count})`;
+    document.getElementById('activityCountChat').textContent = `(${d.chat_message_count})`;
+
+    const fmtDate = iso => {
+        if (!iso) return '';
+        try { return new Date(iso).toLocaleDateString(undefined, {month:'short',day:'numeric',year:'numeric'}); } catch { return iso; }
+    };
+
+    const renderEmpty = () => '<p style="color:var(--muted-text);padding:16px;text-align:center;">Nothing found</p>';
+
+    // Threads
+    const threads = d.threads || [];
+    document.getElementById('activityTab-threads').innerHTML = threads.length ? threads.map(t => `
+        <div onclick="openThreadFromActivity(${t.id})" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background=''">
+            <i class="fas fa-comments" style="color:var(--primary);width:16px;flex-shrink:0;"></i>
+            <div style="flex:1;min-width:0;">
+                <div style="font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(t.title||'Untitled')}</div>
+                <div style="font-size:.75rem;color:var(--muted-text);">Thread #${t.id}${t.category_id ? ' · Category ' + t.category_id : ''}</div>
+            </div>
+            <div style="font-size:.75rem;color:var(--muted-text);flex-shrink:0;">${fmtDate(t.created_at)}</div>
+            <i class="fas fa-chevron-right" style="color:var(--muted-text);font-size:.7rem;flex-shrink:0;"></i>
+        </div>`).join('') : renderEmpty();
+
+    // Replies
+    const replies = d.replies || [];
+    document.getElementById('activityTab-replies').innerHTML = replies.length ? replies.map(r => `
+        <div onclick="openThreadFromActivity(${r.thread_id})" style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background=''">
+            <i class="fas fa-reply" style="color:var(--muted-text);width:16px;flex-shrink:0;margin-top:3px;"></i>
+            <div style="flex:1;min-width:0;">
+                <div style="font-size:.875rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(r.content||'')}</div>
+                <div style="font-size:.75rem;color:var(--muted-text);">In thread #${r.thread_id}</div>
+            </div>
+            <div style="font-size:.75rem;color:var(--muted-text);flex-shrink:0;">${fmtDate(r.created_at)}</div>
+            <i class="fas fa-chevron-right" style="color:var(--muted-text);font-size:.7rem;flex-shrink:0;margin-top:3px;"></i>
+        </div>`).join('') : renderEmpty();
+
+    // Chat
+    const chat = d.chat_messages || [];
+    document.getElementById('activityTab-chat').innerHTML = chat.length ? chat.map(m => `
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);">
+            <i class="fas fa-comment" style="color:var(--muted-text);width:16px;flex-shrink:0;margin-top:3px;"></i>
+            <div style="flex:1;min-width:0;">
+                <div style="font-size:.875rem;">${escapeHtml(m.content||'')}</div>
+            </div>
+            <div style="font-size:.75rem;color:var(--muted-text);flex-shrink:0;">${fmtDate(m.timestamp||m.created_at)}</div>
+        </div>`).join('') : renderEmpty();
+}
+
+function openThreadFromActivity(threadId) {
+    document.getElementById('adminUserActivityModal').classList.remove('active');
+    document.getElementById('userCardModal').classList.remove('active');
+    openThread(threadId);
+}
+
+
+async function adminWipeContent(uid) {
+    const ok = await showConfirm({ message: 'Permanently delete ALL content (threads, replies, chat) by this user?', danger: true });
+    if (!ok) return;
+    const res = await api('DELETE', `/users/${uid}/content`);
+    if (res && res.data?.success) { showToast('Content wiped', 'success'); setTimeout(() => location.reload(), 1200); }
+    else showToast(res?.data?.message || 'Failed', 'error');
+}
+
+
+async function adminDeleteThreadReplies(tid) {
+    tid = tid || parseInt(document.getElementById('adminThreadIdInput').value);
+    if (!tid) { showToast('Enter a thread ID', 'error'); return; }
+    const ok = await showConfirm({ message: `Delete all replies in thread ${tid}?`, danger: true });
+    if (!ok) return;
+    const res = await api('DELETE', `/forum/threads/${tid}/replies`);
+    if (res && res.data?.success) showToast(`Deleted ${res.data.deleted_count} replies`, 'success');
+    else showToast(res?.data?.message || 'Failed', 'error');
+}
+
+
+async function adminBulkDeleteMessages() {
+    const raw = document.getElementById('adminBulkDeleteIds').value;
+    const ids = raw.split(',').map(s => s.trim()).filter(Boolean);
+    if (!ids.length) { showToast('Enter message IDs', 'error'); return; }
+    const ok = await showConfirm({ message: `Delete ${ids.length} message(s)?`, danger: true });
+    if (!ok) return;
+    const res = await api('DELETE', '/chat/messages/bulk', { message_ids: ids });
+    if (res && res.data?.success) { showToast(`Deleted ${res.data.deleted_count} messages`, 'success'); document.getElementById('adminBulkDeleteIds').value = ''; }
+    else showToast(res?.data?.message || 'Failed', 'error');
+}
+
+async function adminClearChat() {
+    const ok = await showConfirm({ message: 'Clear ALL chat history? This cannot be undone.', danger: true });
+    if (!ok) return;
+    const ok2 = await showConfirm({ message: 'Are you absolutely sure? All messages will be permanently deleted.', danger: true });
+    if (!ok2) return;
+    const res = await api('DELETE', '/chat');
+    if (res && res.data?.success) showToast('Chat cleared', 'success');
+    else showToast(res?.data?.message || 'Failed', 'error');
+}
+
+async function loadTicketStats() {
+    const res = await api('GET', '/support/tickets/stats');
+    if (!res || !res.data?.success) return;
+    const s = res.data.stats || {};
+    document.getElementById('tstatOpen').textContent = s.open ?? '—';
+    document.getElementById('tstatPending').textContent = s.pending ?? '—';
+    document.getElementById('tstatClosed').textContent = s.closed ?? '—';
+    document.getElementById('tstatTotal').textContent = s.total ?? '—';
+}
+
+async function adminLoadOpenTickets() {
+    const res = await api('GET', '/support/tickets');
+    const container = document.getElementById('adminOpenTicketsList');
+    if (!res || !res.data?.tickets) { container.innerHTML = '<p>Failed.</p>'; return; }
+    const open = (res.data.tickets || []).filter(t => t.status === 'open' || t.status === 'pending');
+    if (!open.length) { container.innerHTML = '<p>No open tickets.</p>'; return; }
+    container.innerHTML = open.map(t =>
+        `<label style="display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px solid var(--border)">
+            <input type="checkbox" class="admin-ticket-cb" value="${escapeHtml(String(t.id))}">
+            <span><strong>${escapeHtml(t.id||'')}</strong> — ${escapeHtml(t.subject||t.title||'')} <small>(${escapeHtml(t.status||'')})</small></span>
+        </label>`).join('');
+}
+
+async function adminBulkCloseTickets() {
+    const ids = [...document.querySelectorAll('.admin-ticket-cb:checked')].map(c => c.value);
+    if (!ids.length) { showToast('Select tickets to close', 'error'); return; }
+    const res = await api('POST', '/support/tickets/bulk-close', { ticket_ids: ids });
+    if (res && res.data?.success) { showToast(`Closed ${res.data.closed_count} tickets`, 'success'); adminLoadOpenTickets(); loadTicketStats(); }
+    else showToast(res?.data?.message || 'Failed', 'error');
+}
+
+async function adminDeleteTicket() {
+    const tid = document.getElementById('adminDeleteTicketId').value.trim();
+    if (!tid) { showToast('Enter a ticket ID', 'error'); return; }
+    const ok = await showConfirm({ message: `Permanently delete ticket ${tid}?`, danger: true });
+    if (!ok) return;
+    const res = await api('DELETE', `/support/tickets/${encodeURIComponent(tid)}`);
+    if (res && res.data?.success) { showToast('Ticket deleted', 'success'); document.getElementById('adminDeleteTicketId').value = ''; loadTicketStats(); }
+    else showToast(res?.data?.message || 'Failed', 'error');
 }
