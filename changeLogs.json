@@ -1,0 +1,19 @@
+{
+  "changelogs": [
+    {
+      "version": "v2.4.1",
+      "date": "May 20, 2026",
+      "description": "Improved injection stability and reduced detection vectors."
+    },
+    {
+      "version": "v2.4.0",
+      "date": "May 02, 2026",
+      "description": "New rendering pipeline and configurable aim smoothing curves."
+    },
+    {
+      "version": "v2.3.5",
+      "date": "Apr 18, 2026",
+      "description": "General bug fixes and performance improvements."
+    }
+  ]
+}
