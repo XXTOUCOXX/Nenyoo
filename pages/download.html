@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nenyooo | N3NY000 - Download</title>
+    <meta name="description" content="Download the Nenyooo N3NY000 GTA 5 Mod Menu loader and follow the installation guide.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --secondary: #f4b400;
+            --accent: #a78bfa;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #ffffff;
+            --gray: #7f8c8d;
+            --dark-gray: #222;
+            --danger: #e74c3c;
+            --success: #27ae60;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--light);
+            background: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--gray);
+            font-size: 1em;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        /* Download Buttons */
+        .download-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1em;
+            color: var(--light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: 0.5s;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-loader {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-loader:hover {
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-folder {
+            background: linear-gradient(135deg, var(--success), #2ecc71);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-folder:hover {
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.5);
+        }
+
+        .btn-manual {
+            background: linear-gradient(135deg, var(--secondary), #f47c00);
+            box-shadow: 0 4px 15px rgba(244, 180, 0, 0.3);
+        }
+
+        .btn-manual:hover {
+            box-shadow: 0 8px 25px rgba(244, 180, 0, 0.5);
+        }
+
+        /* Troubleshooting */
+        .troubleshooting {
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--danger);
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 40px;
+        }
+
+        .troubleshooting h3 {
+            color: var(--danger);
+            font-size: 1em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .troubleshooting ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .troubleshooting li {
+            padding: 6px 0;
+            padding-left: 18px;
+            position: relative;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .troubleshooting li::before {
+            content: '\2022';
+            position: absolute;
+            left: 0;
+            color: var(--danger);
+        }
+
+        .troubleshooting a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .troubleshooting a:hover {
+            text-decoration: underline;
+        }
+
+        /* Guide Section */
+        .guide-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--light);
+        }
+
+        .guide-step {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .guide-step:hover {
+            border-color: rgba(167, 139, 250, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--light);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .step-image {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .step-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* V3 Banner */
+        .banner {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(167, 139, 250, 0.15));
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 10px;
+            padding: 15px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+
+        .banner i {
+            color: var(--secondary);
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.85em;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.6em;
+            }
+
+            .download-btn {
+                font-size: 0.9em;
+                padding: 14px 20px;
+            }
+
+            .guide-step {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+        <h1 class="page-title">DOWNLOAD</h1>
+        <p class="page-subtitle">Get started with N3NY000 in a few simple steps</p>
+
+        <div class="banner">
+            <i class="fas fa-wrench"></i> <strong>V3</strong> is currently being worked on — stay tuned for big changes and more!
+        </div>
+
+        <div class="download-grid">
+            <a href="https://mega.nz/file/QaVRUKgS#_61Huz_5_PZcRjtzI68mJT_GLWbznMtpS4aLMKfXkbk" target="_blank" class="download-btn btn-loader">
+                <i class="fas fa-download"></i> Download N3NY000 Loader & Auto Updater
+            </a>
+            <a href="https://updown.link/file/atygbt" target="_blank" class="download-btn btn-folder">
+                <i class="fas fa-folder-open"></i> Nenyooo Folder (Extract in C Drive)
+            </a>
+            <a href="https://bstlar.com/F/NenyoooFREEmanual" target="_blank" class="download-btn btn-manual">
+                <i class="fas fa-file-code"></i> Manual Inject with DLL (Only FREE Version)
+            </a>
+        </div>
+
+        <div class="troubleshooting">
+            <h3><i class="fas fa-exclamation-triangle"></i> Menu Crashing On Inject or having other issues:</h3>
+            <ul>
+                <li>Make Sure TO Install All VC Runtimes: <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one" target="_blank">Download</a></li>
+                <li>ID3DCOMPILER_43.DLL Error (Read The Steps On the Site): <a href="https://www.dll-files.com/download/0c20f567e2e586f6bcf3f0ce3ae64aab/d3dcompiler_43.dll.html?c=NEtlVFVZaHdDU2Y0USt3b0lOaVNUQT09" target="_blank">Download</a></li>
+                <li>Try Deleting C/N3NYOO Folder</li>
+            </ul>
+        </div>
+
+        <h2 class="guide-title">Installation Guide</h2>
+
+        <div class="guide-step">
+            <div class="step-header">
+                <span class="step-number">1</span>
+                <span class="step-text">Download the Loader from above</span>
+            </div>
+        </div>
+
+        <div class="guide-step">
+            <div class="step-header">
+                <span class="step-number">2</span>
+                <span class="step-text">Click the button to Login with your Key (FREE or VIP)</span>
+            </div>
+            <img src="../downloadGuides/1.webp" alt="Step 2" class="step-image">
+        </div>
+
+        <div class="guide-step">
+            <div class="step-header">
+                <span class="step-number">3</span>
+                <span class="step-text">Make sure BattlEye is OFF</span>
+            </div>
+            <img src="../downloadGuides/2.webp" alt="Step 3" class="step-image">
+        </div>
+
+        <div class="guide-step">
+            <div class="step-header">
+                <span class="step-number">4</span>
+                <span class="step-text">Start GTA V and go to the Main Loading Page</span>
+            </div>
+            <img src="../downloadGuides/3.webp" alt="Step 4" class="step-image">
+        </div>
+
+        <div class="guide-step">
+            <div class="step-header">
+                <span class="step-number">5</span>
+                <span class="step-text">Click Inject and wait for it to load</span>
+            </div>
+            <img src="../downloadGuides/4.webp" alt="Step 5" class="step-image">
+        </div>
+
+        <div class="guide-step">
+            <div class="step-header">
+                <span class="step-number">6</span>
+                <span class="step-text">Wait for the injection to complete</span>
+            </div>
+            <img src="../downloadGuides/5.webp" alt="Step 6" class="step-image">
+        </div>
+
+        <div class="guide-step">
+            <div class="step-header">
+                <span class="step-number">7</span>
+                <span class="step-text">When the game is loaded, press F4 to open the menu or R1 + Right D-Pad on controller</span>
+            </div>
+            <img src="../downloadGuides/6.webp" alt="Step 7" class="step-image">
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
+        <p style="margin-top: 8px;"><a href="../index.html">Home</a> &middot; <a href="free.html" target="_blank">Free Key</a> &middot; <a href="fsl.html" target="_blank">FSL</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#a78bfa" },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1 } },
+                    "size": { "value": 3, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1 } },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#a78bfa", "opacity": 0.4, "width": 1 },
+                    "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "out_mode": "out" }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": { "enable": true, "mode": "grab" },
+                        "onclick": { "enable": true, "mode": "push" },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                        "push": { "particles_nb": 4 }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // Animate steps on scroll
+            var steps = document.querySelectorAll('.guide-step');
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            steps.forEach(function(step) {
+                step.style.opacity = '0';
+                step.style.transform = 'translateY(20px)';
+                step.style.transition = 'all 0.5s ease-out';
+                observer.observe(step);
+            });
+        });
+    </script>
+</body>
+</html>
