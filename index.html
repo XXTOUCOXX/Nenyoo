@@ -1,1812 +1,317 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nenyooo | N3NY000 - Best Free & Paid GTA 5 Mod Menu</title>
-<meta name="description" content="Download the Nenyooo | N3NY000 GTA 5 Mod Menu - Free & Paid versions. Fully working in legit player sessions and playable with friends without problems. Battleye Supported & Bypassed. Supports GTA 5 Enhanced & Legacy Editions. Undetected, Safe, Premium Cheats for PC.">
-<meta name="keywords" content="GTA 5 Mod Menu, GTA V Mod Menu, GTA 5 Free Mod Menu, GTA 5 Paid Mod Menu, Nenyooo Mod Menu, N3NY000 Mod Menu, Best GTA 5 Mod Menu, Undetected GTA 5 Mod Menu, Free GTA 5 Mod Menu Download, Paid GTA 5 Mod Menu Download, Battleye Bypass GTA 5, Battleye Supported GTA 5 Mod Menu, Safe GTA 5 Mod Menu, GTA 5 Enhanced Mod Menu 2025, GTA 5 Legacy Mod Menu, GTA 5 Enhanced & Legacy Mods, Fully Working GTA 5 Mod Menu, Legit Player Session Mod Menu, Compatible With Friends GTA 5 Mod Menu, No Issues Mod Menu, Play with Friends GTA 5 Mods, Buy GTA 5 Mod Menu, Cheap GTA 5 Mod Menu, GTA 5 Mod Menu Instant Delivery, Nenyooo Free Mod Menu, N3NY000 Paid Mod Menu, Nenyooo GTA V Cheats, N3NY000 Safe Mod Menu, Battleye Bypass Supported, GTA 5 Enhanced Edition Support, GTA 5 Legacy Edition Support">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #7c3aed;
-            --secondary: #f4b400;
-            --accent: #a78bfa;
-            --dark: #0a0a0a;
-            --darker: #050505;
-            --light: #ffffff;
-            --gray: #7f8c8d;
-            --dark-gray: #222;
-        }
-
-        /* General Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--light);
-            background: var(--dark);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--darker);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 70px;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            z-index: 100;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            overflow-y: auto;
-        }
-
-        .sidebar:hover {
-            width: 80px;
-            background: rgba(10, 10, 10, 0.95);
-        }
-
-        .sidebar a {
-            text-decoration: none;
-            color: var(--light);
-            margin: 8px 0;
-            padding: 8px 5px;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            position: relative;
-        }
-
-        .sidebar a:hover {
-            color: var(--secondary);
-        }
-
-        .sidebar a:hover .icon {
-            transform: scale(1.1);
-            color: var(--accent);
-        }
-
-        .sidebar a:hover::after {
-            width: 3px;
-            opacity: 1;
-        }
-
-        .sidebar a::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            height: 100%;
-            width: 0;
-            background: var(--accent);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar a .icon {
-            font-size: 16px;
-            margin-bottom: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar a .text {
-            font-size: 9px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            display: block;
-            white-space: nowrap;
-        }
-
-        /* Showcase Section */
-        .showcase {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .showcase video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
-
-        .showcase .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
-            z-index: 1;
-        }
-
-        .showcase .text {
-            z-index: 2;
-            text-align: center;
-            padding: 0 20px;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards 0.5s;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .showcase .text h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
-            letter-spacing: 2px;
-        }
-
-        .showcase .text h3 {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: var(--gray);
-            margin-bottom: 25px;
-            font-weight: 400;
-            letter-spacing: 1px;
-        }
-
-        .showcase .text p {
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            color: var(--light);
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        .showcase .text a {
-            display: inline-block;
-            margin: 10px 15px;
-            padding: 12px 30px;
-            background-color: var(--accent);
-            color: var(--light);
-            text-decoration: none;
-            font-size: 1em;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(167, 139, 250, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .showcase .text a:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
-        }
-
-        .showcase .text a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .showcase .text a:hover::before {
-            left: 100%;
-        }
-
-        /* Video Box Section */
-        .video-box {
-            padding: 60px 20px;
-            background: var(--darker);
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .video-box .video-container {
-            flex: 1;
-            min-width: 300px;
-            max-width: 600px;
-            perspective: 1000px;
-        }
-
-        .video-box iframe {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border: 2px solid var(--primary);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: all 0.5s ease;
-            transform-style: preserve-3d;
-        }
-
-        .video-box iframe:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-        }
-
-        /* About Us Section */
-        .about-us {
-            padding: 80px 20px;
-            background: var(--dark-gray);
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .section-title {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 50px;
-            font-size: 2.5em;
-            color: var(--secondary);
-            font-weight: 700;
-			
-        }
-        .section-title2 {
-            position: relative;
-            display: block;
-            text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.5em;
-            color: var(--secondary);
-            font-weight: 700;
-        }
-
-        .section-title2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 3px;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 3px;
-        }
-
-        .about-us p {
-            margin-bottom: 40px;
-            font-size: 1.1em;
-            line-height: 1.8;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            color: #bbb;
-        }
-
-        .features {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .feature {
-            flex: 1;
-            min-width: 250px;
-            max-width: 350px;
-            text-align: center;
-            padding: 30px 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-        }
-
-        .feature:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border-color: var(--accent);
-        }
-
-        .feature h3 {
-            color: var(--secondary);
-            margin: 20px 0;
-            font-size: 1.3em;
-        }
-
-        .feature p {
-            color: #bbb;
-            font-size: 0.95em;
-            margin-bottom: 0;
-        }
-
-        .feature span {
-            font-size: 2.5em;
-            color: var(--accent);
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        .feature:hover span {
-            transform: scale(1.2);
-            color: var(--secondary);
-        }
-
-        /* Pricing Section */
-        #buy {
-            background: linear-gradient(to bottom, #111, #000);
-            padding: 80px 20px;
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-        }
-
-        #buy::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        .pricing-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 60px;
-            z-index: 2;
-            perspective: 1000px;
-        }
-
-        .pricing-box {
-            background: rgba(30, 30, 30, 0.8);
-            padding: 15px 12px;
-            border-radius: 10px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 260px;
-            min-width: 200px;
-            border: 1px solid rgba(167, 139, 250, 0.3);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            z-index: 2;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-            overflow: hidden;
-        }
-
-        .pricing-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(167, 139, 250, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-            opacity: 0;
-        }
-
-        .pricing-box:hover {
-            transform: translateY(-10px) rotateY(5deg);
-            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.3);
-            border-color: var(--accent);
-        }
-
-        .pricing-box:hover::before {
-            animation: shine 1.5s;
-        }
-
-        /* MVP Featured Box */
-        .pricing-box.featured {
-            border: 2px solid var(--secondary);
-            background: linear-gradient(135deg, rgba(40, 40, 40, 0.9), rgba(30, 30, 30, 0.95));
-            position: relative;
-            margin-top: 15px;
-        }
-
-        .pricing-box.featured::after {
-            content: 'BEST VALUE';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--secondary), #f47c00);
-            color: var(--dark);
-            padding: 3px 10px;
-            border-radius: 10px;
-            font-size: 0.55em;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 8px rgba(244, 180, 0, 0.4);
-            white-space: nowrap;
-            z-index: 5;
-        }
-
-        .pricing-box.featured:hover {
-            box-shadow: 0 15px 40px rgba(244, 180, 0, 0.3);
-            border-color: var(--secondary);
-        }
-
-        @keyframes shine {
-            0% {
-                left: -50%;
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.5;
-            }
-            100% {
-                left: 150%;
-                opacity: 0;
-            }
-        }
-
-        .pricing-box .left-logo {
-            display: block;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .pricing-box .left-logo img {
-            width: 55px;
-            height: auto;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
-            transition: all 0.3s ease;
-        }
-
-        .pricing-box:hover .left-logo img {
-            filter: drop-shadow(0 0 15px var(--accent));
-        }
-
-        .pricing-box .plan-name h3 {
-            color: var(--light);
-            font-size: 1em;
-            margin-bottom: 8px;
-            text-align: center;
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .pricing-box .plan-name h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 35px;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        .pricing-box .value h3 {
-            color: var(--light);
-            font-size: 0.8em;
-            margin: 8px 0;
-            text-align: center;
-            font-weight: 400;
-        }
-
-        .pricing-box .value h3 span {
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        .pricing-box .value h3 span.strikethrough {
-            text-decoration: line-through;
-            color: var(--gray);
-            font-weight: 400;
-            opacity: 0.7;
-        }
-
-        .pricing-box ul {
-            color: var(--light);
-            text-align: left;
-            list-style: none;
-            padding-left: 0;
-            margin: 12px 0;
-            flex-grow: 1;
-        }
-
-        .pricing-box ul li {
-            padding: 3px 0;
-            position: relative;
-            padding-left: 15px;
-            font-size: 0.7em;
-            line-height: 1.3;
-        }
-
-        .pricing-box ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .button-group a {
-            padding: 7px 10px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: var(--light);
-            text-decoration: none;
-            border-radius: 20px;
-            margin: 3px 0;
-            width: 100%;
-            text-align: center;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 0.7em;
-            letter-spacing: 0.2px;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-        }
-
-        .button-group a:nth-child(2) {
-            background: linear-gradient(135deg, var(--dark-gray), #333);
-        }
-
-        .button-group a:nth-child(3) {
-            background: linear-gradient(135deg, #f4b400, #f47c00);
-        }
-
-        .button-group a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5);
-        }
-
-        .button-group a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .button-group a:hover::before {
-            left: 100%;
-        }
-
-        /* Image Carousel */
-        .pricing-image-box {
-            width: 100%;
-            max-width: 600px;
-            margin: 30px auto 0;
-            position: relative;
-            z-index: 2;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(167, 139, 250, 0.3);
-        }
-
-        .image-carousel {
-            display: flex;
-            width: 400%;
-            animation: scrollImages 20s linear infinite;
-        }
-
-        .image-carousel img {
-            width: 25%;
-            height: auto;
-            aspect-ratio: 16/9;
-            object-fit: contain;
-            background: #000;
-        }
-
-        .pricing-image-box:hover .image-carousel {
-            animation-play-state: paused;
-        }
-
-        @keyframes scrollImages {
-            0% { transform: translateX(0); }
-            20% { transform: translateX(0); }
-            25% { transform: translateX(-25%); }
-            45% { transform: translateX(-25%); }
-            50% { transform: translateX(-50%); }
-            70% { transform: translateX(-50%); }
-            75% { transform: translateX(-75%); }
-            95% { transform: translateX(-75%); }
-            100% { transform: translateX(0); }
-        }
-
-        /* Footer */
-        footer {
-            background: var(--darker);
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        footer p {
-            color: var(--gray);
-            font-size: 0.9em;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 1200px) {
-            .pricing-container {
-                gap: 15px;
-            }
-
-            .pricing-box {
-                max-width: 200px;
-                min-width: 170px;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .pricing-container {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .pricing-box {
-                max-width: 220px;
-                flex: 1 1 calc(50% - 15px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 55px;
-                background: rgba(10, 10, 10, 0.95);
-            }
-
-            .sidebar:hover {
-                width: 55px;
-            }
-
-            .sidebar a {
-                margin: 6px 0;
-                padding: 6px 3px;
-            }
-
-            .sidebar a .text {
-                font-size: 7px;
-            }
-
-            .sidebar a .icon {
-                font-size: 14px;
-            }
-
-            .video-box {
-                flex-direction: column;
-                padding: 40px 20px;
-            }
-
-            .video-box .video-container {
-                max-width: 100%;
-            }
-
-            .pricing-box {
-                max-width: 100%;
-                min-width: 100%;
-                flex: 1 1 100%;
-            }
-
-            .pricing-container {
-                flex-direction: column;
-                align-items: center;
-                padding: 0 20px;
-            }
-
-            .features {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .feature {
-                max-width: 100%;
-            }
-
-            .section-title2 {
-                font-size: 1.8em;
-            }
-        }
-
-        /* Floating Animation */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* Glow Animation */
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px var(--primary); }
-            50% { text-shadow: 0 0 20px var(--accent); }
-            100% { text-shadow: 0 0 5px var(--primary); }
-        }
-
-        .glow {
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        /* Pulse Animation */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        /* Scroll to Top Button */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border: none;
-            border-radius: 50%;
-            color: var(--light);
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 5px 20px rgba(124, 58, 237, 0.4);
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
-        }
-
-        /* Enhanced Footer */
-        footer {
-            background: var(--darker);
-            padding: 50px 20px 30px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--gray);
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        footer p {
-            color: var(--gray);
-            font-size: 0.85em;
-            margin: 5px 0;
-        }
-
-        /* Limited Time Offer Badge on Pricing Box */
-        .pricing-box.has-offer {
-            position: relative;
-        }
-
-        .offer-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: linear-gradient(135deg, #ff4444, #cc0000);
-            color: white;
-            padding: 3px 6px;
-            border-radius: 4px;
-            font-size: 0.55em;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            box-shadow: 0 2px 6px rgba(255, 0, 0, 0.4);
-            z-index: 10;
-            animation: pulse 2s infinite;
-        }
-
-        .offer-countdown {
-            background: rgba(255, 68, 68, 0.1);
-            border: 1px solid rgba(255, 68, 68, 0.2);
-            border-radius: 5px;
-            padding: 5px;
-            margin-top: 8px;
-            text-align: center;
-        }
-
-        .offer-countdown .offer-label {
-            font-size: 0.6em;
-            color: #ff6666;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            margin-bottom: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 3px;
-        }
-
-        .offer-countdown .offer-label i {
-            font-size: 0.9em;
-        }
-
-        .offer-countdown .countdown-display {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85em;
-            font-weight: 700;
-            color: var(--light);
-        }
-
-        /* Stats Counter Section */
-        .stats-section {
-            background: linear-gradient(135deg, var(--dark-gray), var(--darker));
-            padding: 50px 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .stats-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .stat-item {
-            text-align: center;
-            min-width: 150px;
-        }
-
-        .stat-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em;
-            font-weight: 700;
-            color: var(--accent);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            background: var(--darker);
-            padding: 60px 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .testimonials-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 25px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .testimonial-card {
-            background: rgba(30, 30, 30, 0.8);
-            border: 1px solid rgba(167, 139, 250, 0.2);
-            border-radius: 10px;
-            padding: 25px;
-            max-width: 320px;
-            min-width: 280px;
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .testimonial-stars {
-            color: var(--secondary);
-            margin-bottom: 12px;
-        }
-
-        .testimonial-text {
-            color: #bbb;
-            font-size: 0.9em;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .testimonial-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-            font-weight: 700;
-        }
-
-        .testimonial-name {
-            color: var(--light);
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-
-        .testimonial-tag {
-            color: var(--accent);
-            font-size: 0.75em;
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            background: var(--dark-gray);
-            padding: 60px 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            border-color: var(--accent);
-        }
-
-        .faq-question {
-            padding: 18px 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--light);
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question:hover {
-            color: var(--accent);
-        }
-
-        .faq-question i {
-            transition: transform 0.3s ease;
-            color: var(--accent);
-        }
-
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            color: #bbb;
-            line-height: 1.7;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-        }
-
-        .faq-answer p {
-            padding: 0 20px 18px;
-            margin: 0;
-        }
-
-        /* Typing Effect for Hero */
-        .typing-text {
-            border-right: 2px solid var(--accent);
-            animation: blink 0.7s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nenyooo | N3NY000 — Best Free & Paid GTA 5 Mod Menu</title>
+<meta name="description" content="N3NY000 GTA 5 Mod Menu — Free & Paid. Works in legit player sessions, playable with friends. BattlEye Supported & Bypassed. GTA 5 Enhanced & Legacy. Undetected, safe, premium cheats for PC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <a href="#buy">
-            <span class="icon"><i class="fas fa-crown"></i></span>
-            <span class="text">Purchase</span>
-        </a>
+<div class="bg-root">
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
 
-        <a href="pages/free.html" target="_blank">
-            <span class="icon"><i class="fas fa-key"></i></span>
-            <span class="text">Free Key</span>
-        </a>
+<!-- ===================== MARKETING NAV ===================== -->
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,6,12,0.82);border-bottom:1px solid rgba(255,255,255,0.09);">
+  <div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="display:flex;align-items:center;gap:11px;cursor:pointer;">
+      <img src="uploads/Logo.png" alt="Nenyoo" style="width:34px;height:34px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.12);">
+      <a href="/download" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Download</a>
+      <a href="/store" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Store</a>
+      <a href="/help" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Help</a>
+      <a href="/login" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Login</a>
+      <a href="/signup" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Get Access</a>
+    </div>
+  </div>
+</header>
 
-        <a href="pages/download.html" target="_blank">
-            <span class="icon"><i class="fas fa-download"></i></span>
-            <span class="text">Download</span>
-        </a>
+<!-- ===================== LANDING ===================== -->
+<main style="position:relative;z-index:1;">
+  <!-- HERO -->
+  <section style="position:relative;max-width:1180px;margin:0 auto;padding:100px 24px 76px;text-align:center;">
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:760px;max-width:95vw;height:480px;background:radial-gradient(ellipse,rgba(124,58,237,0.26),transparent 60%);filter:blur(8px);pointer-events:none;z-index:0;"></div>
+    <div style="position:relative;z-index:1;">
+      <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(7,6,12,0.6);border:1px solid rgba(255,255,255,0.12);padding:8px 15px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.06em;color:#c8c1d6;margin-bottom:30px;text-transform:uppercase;">
+        <span style="width:8px;height:8px;background:#34d399;box-shadow:0 0 10px #34d399;animation:pulseDot 1.8s ease-in-out infinite;"></span>
+        Undetected · BattlEye Bypassed · Enhanced & Legacy
+      </div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:66px;line-height:1.02;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 18px;max-width:880px;margin-left:auto;margin-right:auto;text-wrap:balance;">
+        The ultimate <span style="background:linear-gradient(180deg,#b388f7,#7c3aed);-webkit-background-clip:text;background-clip:text;color:transparent;">GTA&nbsp;V</span> mod menu
+      </h1>
+      <p style="font-size:18px;line-height:1.6;color:#9b94ab;max-width:620px;margin:0 auto 36px;text-wrap:pretty;">
+        Experience unparalleled control with our feature-packed mod menu. Dominate Los Santos with unique options, superior performance, and an intuitive interface designed for power users.
+      </p>
+      <div style="display:flex;gap:0;justify-content:center;flex-wrap:wrap;margin-bottom:54px;">
+        <a href="#plans" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:15px 30px;">View Plans</a>
+        <a href="/download" style="cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.14);border-left:none;color:#ECEAF2;font-family:inherit;font-size:15px;font-weight:600;padding:15px 30px;">Download Loader</a>
+      </div>
+      <div style="display:flex;gap:0;justify-content:center;flex-wrap:wrap;border:1px solid rgba(255,255,255,0.09);max-width:680px;margin:0 auto;">
+        <div style="flex:1;text-align:center;padding:18px 10px;"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;">7K+</div><div style="font-size:12px;color:#7d768c;margin-top:4px;letter-spacing:0.04em;">ACTIVE USERS</div></div>
+        <div style="flex:1;text-align:center;padding:18px 10px;border-left:1px solid rgba(255,255,255,0.09);"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;">500+</div><div style="font-size:12px;color:#7d768c;margin-top:4px;letter-spacing:0.04em;">FEATURES</div></div>
+        <div style="flex:1;text-align:center;padding:18px 10px;border-left:1px solid rgba(255,255,255,0.09);"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;">99%</div><div style="font-size:12px;color:#7d768c;margin-top:4px;letter-spacing:0.04em;">UPTIME</div></div>
+        <div style="flex:1;text-align:center;padding:18px 10px;border-left:1px solid rgba(255,255,255,0.09);"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;">24/7</div><div style="font-size:12px;color:#7d768c;margin-top:4px;letter-spacing:0.04em;">SUPPORT</div></div>
+      </div>
+    </div>
+  </section>
 
-        <a href="pages/fsl.html" target="_blank">
-            <span class="icon"><i class="fas fa-code"></i></span>
-            <span class="text">FSL</span>
-        </a>
-
-        <a href="https://www.nenyoocheats.com/lua/api" target="_blank">
-            <span class="icon"><i class="fas fa-terminal"></i></span>
-            <span class="text">Lua API</span>
-        </a>
-
-        <a href="portal.html" target="_blank">
-            <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
-            <span class="text">Login</span>
-        </a>
+  <!-- PLANS -->
+  <section id="plans" style="max-width:1180px;margin:0 auto;padding:40px 24px 30px;scroll-margin-top:90px;">
+    <div style="text-align:center;margin-bottom:44px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;letter-spacing:0.16em;color:#8b5cf6;margin-bottom:14px;">[ PRICING ]</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:42px;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 12px;">Choose your package</h2>
+      <p style="font-size:16px;color:#9b94ab;margin:0;">One-time payment. Lifetime access. No subscriptions.</p>
     </div>
 
-    <!-- Particles Background -->
-    <div id="particles-js"></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,0.1);">
 
-    <!-- Showcase Section -->
-    <section class="showcase">
-        <video src="media/video.mp4" muted loop autoplay playsinline></video>
-        <div class="overlay"></div>
-        <div class="text">
-            <h2 class="glow">N3NY000</h2>
-            <h3>ULTIMATE GTA V MOD MENU</h3>
-            <p>Experience unparalleled control with our feature-packed mod menu. Dominate Los Santos with unique options, superior performance, and an intuitive interface designed for power users.</p>
-            <a href="https://discord.gg/uB4DM5GNQc" target="_blank" class="pulse">
-                <i class="fab fa-discord"></i> Join Our Discord
-            </a>
-
-            
+      <!-- FREE -->
+      <div style="display:flex;flex-direction:column;padding:34px 30px;">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:5px;">Free</div>
+        <div style="font-size:14px;color:#9b94ab;margin-bottom:24px;">Get started at no cost.</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:38px;letter-spacing:-0.02em;">$0</span>
         </div>
-    </section>
-
-    <!-- Video Showcase Section -->
-    <section id="showcase">
-        <section class="video-box">
-            <div class="video-container floating">
-                <iframe src="https://www.youtube.com/embed/c95i0i87Hvw?si=N7aOV0Y7UYNDdMct"
-                        title="N3NY000 Showcase"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
-            </div>
-            <div class="video-container floating" style="animation-delay: 0.5s;">
-                <iframe src="https://www.youtube.com/embed/q-fxzRr1BDE?si=c5bBCKl-46dQ-Mzv"
-                        title="N3NY000 Features"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
-            </div>
-        </section>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="stats-container">
-            <div class="stat-item">
-                <span class="stat-number" data-target="50000">0</span>
-                <span class="stat-label">Active Users</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="500">0</span>
-                <span class="stat-label">Features</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="99">0</span>
-                <span class="stat-label">% Uptime</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="24">0</span>
-                <span class="stat-label">/7 Support</span>
-            </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin-bottom:26px;letter-spacing:0.04em;">KEY RESETS EVERY 48 HOURS</div>
+        <a href="/freekey" style="display:block;text-align:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);color:#ECEAF2;font-family:inherit;font-size:15px;font-weight:600;padding:13px;margin-bottom:28px;cursor:pointer;">Get Free Key</a>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:14px;color:#c4bdd1;">
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>GTA 5 Enhanced &amp; Legacy Support</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Basic Player Options</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Essential Vehicle Features</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Limited Protections</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Basic Trolling Options</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Simple Money Methods</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Lua Engine Support</div>
         </div>
-    </section>
+      </div>
 
-    <!-- About Us Section -->
-    <section id="about">
-        <section class="about-us">
-            <h2 class="section-title">Why Choose N3NY000?</h2>
-            <p>N3NY000 began as a revolutionary free mod menu in 2021, quickly becoming the most trusted name in GTA V modifications. After extensive development, we've returned with a completely rebuilt, ultra-stable platform packed with exclusive features you won't find anywhere else.</p>
-
-            <div class="features">
-                <div class="feature">
-                    <span><i class="fas fa-star"></i></span>
-                    <h3>Exclusive Features</h3>
-                    <p>Car prosthetics, lightsabers, aggressive planes, magical snowballs, and hundreds of unique options that set us apart from any other menu.</p>
-                </div>
-
-                <div class="feature">
-                    <span><i class="fas fa-tachometer-alt"></i></span>
-                    <h3>Peak Performance</h3>
-                    <p>Optimized codebase ensures maximum stability with minimal resource usage. Enjoy buttery smooth performance even with all features enabled.</p>
-                </div>
-
-                <div class="feature">
-                    <span><i class="fas fa-shield-alt"></i></span>
-                    <h3>Advanced Protection</h3>
-                    <p>Multiple layers of anti-detection keep you safe while our crash protections defend against hostile menus.</p>
-                </div>
-            </div>
-        </section>
-    </section>
-
-
-    <!-- Pricing Section -->
-    <section id="buy">
-        <h2 class="section-title2">Choose Your Package</h2>
-
-        <div class="pricing-container">
-            <!-- FREE -->
-            <div class="pricing-box">
-                <div class="left-logo">
-                    <img src="images/free.png" alt="N3NY000 Free">
-                </div>
-                <div class="plan-name">
-                    <h3>FREE</h3>
-                </div>
-                <div class="value">
-                    <h3>Key Resets Every 48 Hours</h3>
-                </div>
-                <ul>
-                    <li>GTA 5 Enhanced & Legacy Support</li>
-                    <li>Basic Player Options</li>
-                    <li>Essential Vehicle Features</li>
-                    <li>Limited Protections</li>
-                    <li>Basic Trolling Options</li>
-                    <li>Simple Money Methods</li>
-                    <li>Lua Engine Support</li>
-                </ul>
-                <div class="button-group">
-                    <a href="pages/free.html" target="_blank">
-                        <i class="fas fa-key"></i> Get Free Key
-                    </a>
-                </div>
-            </div>
-
-            <!-- VIP -->
-            <div class="pricing-box has-offer">
-                <span class="offer-badge">Sale</span>
-                <div class="left-logo">
-                    <img src="images/vip.png" alt="N3NY000 VIP">
-                </div>
-                <div class="plan-name">
-                    <h3>VIP</h3>
-                </div>
-                <div class="value">
-                    <h3>Lifetime: <span class="strikethrough">$25</span> <span>$12.50</span></h3>
-                </div>
-                <ul>
-                    <li>All Free Features</li>
-                    <li>GTA 5 Enhanced & Legacy Support</li>
-                    <li>ScriptHookV Integration</li>
-                    <li>VFX Engine & Session Browser</li>
-                    <li>Player Tracker & Magnet</li>
-                    <li>DLC Loader & Business Manager</li>
-                    <li>Advanced Crashes & Kicks</li>
-                    <li>Recovery Options</li>
-                    <li>Trolling Options</li>
-                    <li>Lua Engine Support</li>
-                </ul>
-                <div class="offer-countdown">
-                    <div class="offer-label"><i class="fas fa-clock"></i> Offer ends in</div>
-                    <div class="countdown-display" id="countdown-vip">48:00:00</div>
-                </div>
-                <div class="button-group">
-                    <a href="pages/store.html" target="_blank">
-                        <i class="fas fa-crown"></i> Purchase VIP
-                    </a>
-                </div>
-            </div>
-
-            <!-- MVP -->
-            <div class="pricing-box featured has-offer">
-                <span class="offer-badge">50% OFF</span>
-                <div class="left-logo">
-                    <img src="images/vipplus.png" alt="N3NY000 MVP">
-                </div>
-                <div class="plan-name">
-                    <h3>MVP</h3>
-                </div>
-                <div class="value">
-                    <h3>Lifetime: <span class="strikethrough">$35</span> <span>$20</span></h3>
-                </div>
-                <ul>
-                    <li>All VIP Features</li>
-                    <li>Battle Eye Enabled/Disabled</li>
-                    <li>Public Lobbies & Missions</li>
-                    <li>Early Access to Features</li>
-                    <li>Exclusive MVP Options</li>
-                    <li>Advanced Protection Suite</li>
-                    <li>Custom Script Support</li>
-                    <li>Lifetime Updates</li>
-                </ul>
-                <div class="offer-countdown">
-                    <div class="offer-label"><i class="fas fa-fire"></i> Limited Time</div>
-                    <div class="countdown-display" id="countdown-mvp">48:00:00</div>
-                </div>
-                <div class="button-group">
-                    <a href="pages/store.html" target="_blank">
-                        <i class="fas fa-gem"></i> Purchase MVP
-                    </a>
-                </div>
-            </div>
+      <!-- VIP (featured) -->
+      <div style="position:relative;display:flex;flex-direction:column;padding:34px 30px;border-left:1px solid rgba(255,255,255,0.1);border-right:1px solid rgba(255,255,255,0.1);background:rgba(139,92,246,0.06);">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#9a6cf3,#7c3aed);"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.02em;text-transform:uppercase;">VIP</div>
+          <span style="background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:4px 9px;">SALE</span>
         </div>
-
-        <div class="pricing-image-box">
-            <div class="image-carousel">
-                <img src="images/menu.png" alt="Menu Preview 1">
-                <img src="images/dance.gif" alt="Feature Showcase 1">
-                <img src="images/menu2.png" alt="Menu Preview 2">
-                <img src="images/dance2.gif" alt="Feature Showcase 2">
-            </div>
+        <div style="font-size:14px;color:#9b94ab;margin-bottom:24px;">The complete package for serious players.</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:38px;letter-spacing:-0.02em;">$12.50</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#6b6479;text-decoration:line-through;">$25</span>
         </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <h2 class="section-title2">What Our Users Say</h2>
-        <div class="testimonials-container">
-            <div class="testimonial-card">
-                <div class="testimonial-stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p class="testimonial-text">"Best mod menu I've ever used. The features are insane and it never crashes. Worth every penny!"</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">J</div>
-                    <div>
-                        <div class="testimonial-name">Jake</div>
-                        <div class="testimonial-tag">MVP User</div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="testimonial-stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p class="testimonial-text">"Started with free version, upgraded to VIP immediately. The support team is amazing and always helpful."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">M</div>
-                    <div>
-                        <div class="testimonial-name">Mike</div>
-                        <div class="testimonial-tag">VIP Enhanced</div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="testimonial-stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p class="testimonial-text">"Battle Eye support actually works! I can play in public lobbies without any issues. Highly recommend MVP."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">S</div>
-                    <div>
-                        <div class="testimonial-name">Shadow</div>
-                        <div class="testimonial-tag">MVP User</div>
-                    </div>
-                </div>
-            </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin-bottom:14px;letter-spacing:0.04em;">LIFETIME · ONE-TIME</div>
+        <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:9px 12px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7d768c;letter-spacing:0.06em;">OFFER ENDS IN</span>
+          <span id="countdown-vip" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#a78bfa;">48:00:00</span>
         </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <h2 class="section-title2">Frequently Asked Questions</h2>
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Is N3NY000 safe to use?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes! Our menu is designed with safety as a top priority. We use advanced protection methods to keep you safe while playing.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>What's the difference between Legacy and Enhanced?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>VIP Legacy works with the original GTA 5, while VIP Enhanced is designed for GTA 5 Enhanced Edition. Both have the same features!</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>How do I get my key after purchase?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>After purchase, you'll receive your key instantly via email. You can also access it through our login portal.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Do you offer refunds?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Please check our Terms of Service for our refund policy. We handle each case individually through our Discord support.</p>
-                </div>
-            </div>
+        <a href="/store" style="display:block;text-align:center;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:1px solid transparent;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:13px;margin-bottom:28px;cursor:pointer;box-shadow:0 8px 26px rgba(124,58,237,0.4);">Purchase VIP</a>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:14px;color:#c4bdd1;">
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#a78bfa" stroke-width="2.6" stroke-linecap="square"/></svg><span style="color:#ECEAF2;font-weight:600;">All Free Features, plus:</span></div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#a78bfa" stroke-width="2.6" stroke-linecap="square"/></svg>ScriptHookV Integration</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#a78bfa" stroke-width="2.6" stroke-linecap="square"/></svg>VFX Engine &amp; Session Browser</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#a78bfa" stroke-width="2.6" stroke-linecap="square"/></svg>Player Tracker &amp; Magnet</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#a78bfa" stroke-width="2.6" stroke-linecap="square"/></svg>DLC Loader &amp; Business Manager</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#a78bfa" stroke-width="2.6" stroke-linecap="square"/></svg>Advanced Crashes &amp; Kicks</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#a78bfa" stroke-width="2.6" stroke-linecap="square"/></svg>Recovery &amp; Trolling Options</div>
         </div>
-    </section>
+      </div>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="https://discord.gg/uB4DM5GNQc" target="_blank" title="Discord">
-                    <i class="fab fa-discord"></i>
-                </a>
-                <a href="https://www.youtube.com/@n3ny000" target="_blank" title="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-            <div class="footer-links">
-                <a href="pages/TOS.html" target="_blank">Terms of Service</a>
-                <a href="pages/download.html" target="_blank">Download</a>
-                <a href="pages/fsl.html" target="_blank">FSL</a>
-                <a href="portal.html" target="_blank">Login</a>
-            </div>
-            <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
-            <p>This content is not affiliated with Rockstar Games or Take-Two Interactive.</p>
+      <!-- MVP -->
+      <div style="position:relative;display:flex;flex-direction:column;padding:34px 30px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.02em;text-transform:uppercase;">MVP</div>
+          <span style="background:rgba(245,158,66,0.16);border:1px solid rgba(245,158,66,0.34);color:#f0b35d;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:3px 9px;">50% OFF</span>
         </div>
-    </footer>
+        <div style="font-size:14px;color:#9b94ab;margin-bottom:24px;">Best value — the full arsenal.</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:38px;letter-spacing:-0.02em;">$20</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#6b6479;text-decoration:line-through;">$35</span>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin-bottom:14px;letter-spacing:0.04em;">LIFETIME · ONE-TIME</div>
+        <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:9px 12px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7d768c;letter-spacing:0.06em;">LIMITED TIME</span>
+          <span id="countdown-mvp" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#f0b35d;">48:00:00</span>
+        </div>
+        <a href="/store" style="display:block;text-align:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);color:#ECEAF2;font-family:inherit;font-size:15px;font-weight:600;padding:13px;margin-bottom:28px;cursor:pointer;">Purchase MVP</a>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:14px;color:#c4bdd1;">
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg><span style="color:#ECEAF2;font-weight:600;">All VIP Features, plus:</span></div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Battle Eye Enabled/Disabled</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Public Lobbies &amp; Missions</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Early Access to Features</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Exclusive MVP Options</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Advanced Protection Suite</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><path d="M20 6L9 17l-5-5" stroke="#8b5cf6" stroke-width="2.6" stroke-linecap="square"/></svg>Custom Script Support · Lifetime Updates</div>
+        </div>
+      </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // Initialize particles.js
-        document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#a78bfa"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 2,
-                            "size_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#a78bfa",
-                        "opacity": 0.4,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": true,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 200,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
+      <!-- MVP PLUS (upcoming) -->
+      <div style="position:relative;display:flex;flex-direction:column;padding:34px 30px;border-left:1px solid rgba(255,255,255,0.1);background:repeating-linear-gradient(135deg,rgba(255,255,255,0.015) 0,rgba(255,255,255,0.015) 8px,transparent 8px,transparent 16px);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.02em;text-transform:uppercase;color:#cdc6da;">MVP Plus</div>
+          <span style="background:rgba(139,92,246,0.14);border:1px solid rgba(139,92,246,0.3);color:#b9a4f5;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:3px 9px;">SOON</span>
+        </div>
+        <div style="font-size:14px;color:#7d768c;margin-bottom:24px;">The next generation. Built different.</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:38px;letter-spacing:-0.02em;color:#6b6479;">TBA</span>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6b6479;margin-bottom:26px;letter-spacing:0.04em;">COMING SOON</div>
+        <button disabled style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);color:#6b6479;font-family:inherit;font-size:15px;font-weight:600;padding:13px;margin-bottom:28px;cursor:not-allowed;">Notify me</button>
+        <div style="display:flex;flex-direction:column;gap:13px;font-size:14px;color:#7d768c;">
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><rect x="5" y="5" width="14" height="14" stroke="#5d5670" stroke-width="2"/></svg>Everything in MVP, supercharged</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><rect x="5" y="5" width="14" height="14" stroke="#5d5670" stroke-width="2"/></svg>Next-gen feature set</div>
+          <div style="display:flex;gap:11px;align-items:flex-start;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:2px;"><rect x="5" y="5" width="14" height="14" stroke="#5d5670" stroke-width="2"/></svg>Full details revealed soon</div>
+        </div>
+      </div>
 
-            // Add scroll animation for sections
-            const sections = document.querySelectorAll('section');
-            
-            function checkScroll() {
-                sections.forEach(section => {
-                    const sectionTop = section.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (sectionTop < windowHeight * 0.75) {
-                        section.style.opacity = '1';
-                        section.style.transform = 'translateY(0)';
-                    }
-                });
-            }
-            
-            // Initial check
-            checkScroll();
-            
-            // Check on scroll
-            window.addEventListener('scroll', checkScroll);
-            
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
+    </div>
+  </section>
 
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
+  <!-- WHY -->
+  <section style="max-width:1180px;margin:0 auto;padding:56px 24px 30px;">
+    <div style="text-align:center;margin-bottom:34px;">
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 12px;">Why choose N3NY000?</h2>
+      <p style="font-size:15.5px;color:#9b94ab;margin:0 auto;max-width:720px;line-height:1.6;">N3NY000 began as a revolutionary free mod menu in 2021, quickly becoming the most trusted name in GTA V modifications. After extensive development, we've returned with a completely rebuilt, ultra-stable platform packed with exclusive features you won't find anywhere else.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(255,255,255,0.09);">
+      <div style="padding:28px 24px;">
+        <div style="width:40px;height:40px;border:1px solid rgba(139,92,246,0.3);background:rgba(139,92,246,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:18px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.1l6.9-.8L12 2z" stroke="#a78bfa" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div style="font-weight:700;font-size:16px;margin-bottom:7px;">Exclusive Features</div>
+        <div style="font-size:13.5px;color:#8b8499;line-height:1.55;">Car prosthetics, lightsabers, aggressive planes, magical snowballs, and hundreds of unique options that set us apart from any other menu.</div>
+      </div>
+      <div style="padding:28px 24px;border-left:1px solid rgba(255,255,255,0.09);">
+        <div style="width:40px;height:40px;border:1px solid rgba(139,92,246,0.3);background:rgba(139,92,246,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:18px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M12 4a8 8 0 018 8M12 12l5-3M5 19a9 9 0 1114 0" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="round"/></svg></div>
+        <div style="font-weight:700;font-size:16px;margin-bottom:7px;">Peak Performance</div>
+        <div style="font-size:13.5px;color:#8b8499;line-height:1.55;">Optimized codebase ensures maximum stability with minimal resource usage. Enjoy buttery smooth performance even with all features enabled.</div>
+      </div>
+      <div style="padding:28px 24px;border-left:1px solid rgba(255,255,255,0.09);">
+        <div style="width:40px;height:40px;border:1px solid rgba(139,92,246,0.3);background:rgba(139,92,246,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:18px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" stroke="#a78bfa" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <div style="font-weight:700;font-size:16px;margin-bottom:7px;">Advanced Protection</div>
+        <div style="font-size:13.5px;color:#8b8499;line-height:1.55;">Multiple layers of anti-detection keep you safe while our crash protections defend against hostile menus.</div>
+      </div>
+    </div>
+  </section>
 
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+  <!-- TESTIMONIALS -->
+  <section style="max-width:1180px;margin:0 auto;padding:50px 24px 30px;">
+    <div style="text-align:center;margin-bottom:34px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;letter-spacing:0.16em;color:#8b5cf6;margin-bottom:14px;">[ REVIEWS ]</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;letter-spacing:-0.02em;text-transform:uppercase;margin:0;">What our users say</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
+        <div style="color:#f0b35d;font-size:15px;letter-spacing:2px;margin-bottom:12px;">★★★★★</div>
+        <p style="font-size:14.5px;color:#d4cfe0;line-height:1.6;margin:0 0 18px;">"Best mod menu I've ever used. The features are insane and it never crashes. Worth every penny!"</p>
+        <div style="display:flex;align-items:center;gap:11px;">
+          <div style="width:36px;height:36px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;">J</div>
+          <div><div style="font-weight:700;font-size:14px;">Jake</div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;">MVP USER</div></div>
+        </div>
+      </div>
+      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
+        <div style="color:#f0b35d;font-size:15px;letter-spacing:2px;margin-bottom:12px;">★★★★★</div>
+        <p style="font-size:14.5px;color:#d4cfe0;line-height:1.6;margin:0 0 18px;">"Started with free version, upgraded to VIP immediately. The support team is amazing and always helpful."</p>
+        <div style="display:flex;align-items:center;gap:11px;">
+          <div style="width:36px;height:36px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;">M</div>
+          <div><div style="font-weight:700;font-size:14px;">Mike</div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;">VIP ENHANCED</div></div>
+        </div>
+      </div>
+      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
+        <div style="color:#f0b35d;font-size:15px;letter-spacing:2px;margin-bottom:12px;">★★★★★</div>
+        <p style="font-size:14.5px;color:#d4cfe0;line-height:1.6;margin:0 0 18px;">"Battle Eye support actually works! I can play in public lobbies without any issues. Highly recommend MVP."</p>
+        <div style="display:flex;align-items:center;gap:11px;">
+          <div style="width:36px;height:36px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;">S</div>
+          <div><div style="font-weight:700;font-size:14px;">Shadow</div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;">MVP USER</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            // Scroll to top button
-            const scrollTopBtn = document.getElementById('scrollTop');
+  <!-- FAQ -->
+  <section style="max-width:860px;margin:0 auto;padding:50px 24px 30px;">
+    <div style="text-align:center;margin-bottom:34px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;letter-spacing:0.16em;color:#8b5cf6;margin-bottom:14px;">[ FAQ ]</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;letter-spacing:-0.02em;text-transform:uppercase;margin:0;">Frequently asked questions</h2>
+    </div>
+    <div style="border:1px solid rgba(255,255,255,0.1);">
+      <details style="border-bottom:1px solid rgba(255,255,255,0.09);" open>
+        <summary style="cursor:pointer;list-style:none;padding:20px 24px;font-weight:600;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;">Is N3NY000 safe to use?<span style="color:#8b5cf6;">+</span></summary>
+        <div style="padding:0 24px 20px;font-size:14px;color:#9b94ab;line-height:1.6;">Yes! Our menu is designed with safety as a top priority. We use advanced protection methods to keep you safe while playing.</div>
+      </details>
+      <details style="border-bottom:1px solid rgba(255,255,255,0.09);">
+        <summary style="cursor:pointer;list-style:none;padding:20px 24px;font-weight:600;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;">What's the difference between Legacy and Enhanced?<span style="color:#8b5cf6;">+</span></summary>
+        <div style="padding:0 24px 20px;font-size:14px;color:#9b94ab;line-height:1.6;">VIP Legacy works with the original GTA 5, while VIP Enhanced is designed for GTA 5 Enhanced Edition. Both have the same features!</div>
+      </details>
+      <details style="border-bottom:1px solid rgba(255,255,255,0.09);">
+        <summary style="cursor:pointer;list-style:none;padding:20px 24px;font-weight:600;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;">How do I get my key after purchase?<span style="color:#8b5cf6;">+</span></summary>
+        <div style="padding:0 24px 20px;font-size:14px;color:#9b94ab;line-height:1.6;">After purchase, you'll receive your key instantly via email. You can also access it through our login portal.</div>
+      </details>
+      <details>
+        <summary style="cursor:pointer;list-style:none;padding:20px 24px;font-weight:600;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;">Do you offer refunds?<span style="color:#8b5cf6;">+</span></summary>
+        <div style="padding:0 24px 20px;font-size:14px;color:#9b94ab;line-height:1.6;">Please check our Terms of Service for our refund policy. We handle each case individually through our Discord support.</div>
+      </details>
+    </div>
+  </section>
 
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    scrollTopBtn.classList.add('visible');
-                } else {
-                    scrollTopBtn.classList.remove('visible');
-                }
-            });
+  <!-- CTA / DOWNLOAD -->
+  <section style="max-width:1180px;margin:0 auto;padding:50px 24px 90px;">
+    <div style="position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1130,#0d0a16);border:1px solid rgba(139,92,246,0.3);padding:56px 40px;text-align:center;">
+      <div style="position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(circle,rgba(124,58,237,0.32),transparent 65%);filter:blur(10px);pointer-events:none;"></div>
+      <div style="position:relative;">
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:36px;letter-spacing:-0.01em;text-transform:uppercase;margin:0 0 14px;">Ready to dominate?</h2>
+        <p style="font-size:17px;color:#9b94ab;margin:0 auto 30px;max-width:460px;">Grab the loader, log in with your key, and you're in. Free and paid keys both supported.</p>
+        <div style="display:flex;gap:0;justify-content:center;flex-wrap:wrap;">
+          <a href="/download" style="cursor:pointer;display:inline-block;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:16px;font-weight:600;padding:15px 34px;box-shadow:0 12px 36px rgba(124,58,237,0.5);">Download Loader</a>
+          <a href="/signup" style="cursor:pointer;display:inline-block;background:transparent;border:1px solid rgba(255,255,255,0.14);border-left:none;color:#ECEAF2;font-family:inherit;font-size:16px;font-weight:600;padding:15px 34px;">Create Account</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            scrollTopBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid rgba(255,255,255,0.09);">
+    <div style="max-width:1180px;margin:0 auto;padding:34px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;">
+      <div style="display:flex;align-items:center;gap:11px;">
+        <img src="uploads/Logo.png" alt="Nenyoo" style="width:30px;height:30px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</div>
+          <div style="font-size:12px;color:#6b6479;">© 2025 N3NY000 Mod Menu. Not affiliated with Rockstar Games or Take-Two.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:26px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.04em;color:#8b8499;">
+        <a href="https://discord.gg/mwMcEDUjaa" target="_blank">DISCORD</a><a href="/download">DOWNLOAD</a><a href="/store">STORE</a><a href="/tos">TERMS</a>
+      </div>
+    </div>
+  </footer>
+</main>
 
-            // Countdown Timer for offer boxes
-            function initCountdown() {
-                const countdownKey = 'nenyoo_countdown_end';
-                let endTime = localStorage.getItem(countdownKey);
-
-                if (!endTime) {
-                    endTime = new Date().getTime() + (48 * 60 * 60 * 1000);
-                    localStorage.setItem(countdownKey, endTime);
-                }
-
-                const countdownElements = [
-                    document.getElementById('countdown-vip'),
-                    document.getElementById('countdown-mvp')
-                ];
-
-                function updateCountdown() {
-                    const now = new Date().getTime();
-                    let distance = endTime - now;
-
-                    if (distance < 0) {
-                        endTime = new Date().getTime() + (48 * 60 * 60 * 1000);
-                        localStorage.setItem(countdownKey, endTime);
-                        distance = endTime - now;
-                    }
-
-                    const hours = Math.floor(distance / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                    const timeString = hours.toString().padStart(2, '0') + ':' +
-                                      minutes.toString().padStart(2, '0') + ':' +
-                                      seconds.toString().padStart(2, '0');
-
-                    countdownElements.forEach(el => {
-                        if (el) el.textContent = timeString;
-                    });
-                }
-
-                updateCountdown();
-                setInterval(updateCountdown, 1000);
-            }
-
-            initCountdown();
-
-            // Stats Counter Animation
-            function animateCounters() {
-                const counters = document.querySelectorAll('.stat-number');
-                counters.forEach(counter => {
-                    const target = parseInt(counter.getAttribute('data-target'));
-                    const duration = 2000;
-                    const step = target / (duration / 16);
-                    let current = 0;
-
-                    const updateCounter = () => {
-                        current += step;
-                        if (current < target) {
-                            counter.textContent = Math.floor(current).toLocaleString();
-                            requestAnimationFrame(updateCounter);
-                        } else {
-                            counter.textContent = target.toLocaleString();
-                            if (target === 50000) counter.textContent = '50K+';
-                            if (target === 500) counter.textContent = '500+';
-                            if (target === 99) counter.textContent = '99%';
-                            if (target === 24) counter.textContent = '24';
-                        }
-                    };
-                    updateCounter();
-                });
-            }
-
-            // Trigger counter animation when stats section is visible
-            const statsSection = document.querySelector('.stats-section');
-            let statsAnimated = false;
-
-            const statsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !statsAnimated) {
-                        animateCounters();
-                        statsAnimated = true;
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            if (statsSection) statsObserver.observe(statsSection);
-
-            // FAQ Toggle
-            document.querySelectorAll('.faq-question').forEach(question => {
-                question.addEventListener('click', () => {
-                    const item = question.parentElement;
-                    const isActive = item.classList.contains('active');
-
-                    // Close all other FAQ items
-                    document.querySelectorAll('.faq-item').forEach(faq => {
-                        faq.classList.remove('active');
-                    });
-
-                    // Toggle current item
-                    if (!isActive) {
-                        item.classList.add('active');
-                    }
-                });
-            });
-        });
-    </script>
+</div>
+<script src="app.js"></script>
+<script>
+// 48h sale countdown — shared end time in localStorage (ported from main site)
+(function(){
+  var KEY = 'nenyoo_countdown_end';
+  var end = parseInt(localStorage.getItem(KEY), 10);
+  if(!end || isNaN(end) || end < Date.now()){
+    end = Date.now() + 48*60*60*1000;
+    localStorage.setItem(KEY, end);
+  }
+  var els = [document.getElementById('countdown-vip'), document.getElementById('countdown-mvp')];
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var rem = end - Date.now();
+    if(rem < 0) rem = 0;
+    var h = Math.floor(rem/3600000);
+    var m = Math.floor((rem%3600000)/60000);
+    var s = Math.floor((rem%60000)/1000);
+    var txt = pad(h) + ':' + pad(m) + ':' + pad(s);
+    els.forEach(function(el){ if(el) el.textContent = txt; });
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 </body>
 </html>

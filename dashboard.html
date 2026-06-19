@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard · N3NY000</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-root">
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
+
+<div style="position:relative;z-index:1;">
+  <!-- dashboard nav -->
+  <header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,6,12,0.82);border-bottom:1px solid rgba(255,255,255,0.09);">
+    <div style="max-width:1120px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;">
+      <a href="/" style="display:flex;align-items:center;gap:11px;cursor:pointer;">
+        <img src="uploads/Logo.png" alt="Nenyoo" style="width:32px;height:32px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.1);">
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 12px;border-right:1px solid rgba(255,255,255,0.1);">
+          <div id="navAvatar" style="width:28px;height:28px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#fff;">·</div>
+          <span id="navUsername" style="font-size:14px;font-weight:600;">…</span>
+        </div>
+        <button id="logoutBtn" style="cursor:pointer;background:transparent;border:none;color:#c4bdd1;font-family:inherit;font-size:13.5px;font-weight:600;padding:8px 14px;">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1120px;margin:0 auto;padding:38px 24px 80px;">
+    <div style="margin-bottom:26px;">
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-spacing:-0.01em;text-transform:uppercase;margin:0 0 6px;">Welcome back, <span id="welcomeName">…</span></h1>
+      <p style="font-size:15px;color:#9b94ab;margin:0;">Here's everything about your account.</p>
+    </div>
+
+    <!-- status banner -->
+    <div style="display:flex;align-items:center;gap:12px;background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.28);padding:15px 20px;margin-bottom:22px;">
+      <span style="width:9px;height:9px;background:#34d399;box-shadow:0 0 10px #34d399;animation:pulseDot 1.8s ease-in-out infinite;"></span>
+      <span style="font-size:14.5px;font-weight:600;color:#5ee0a8;">All systems operational</span>
+      <span style="font-size:14px;color:#7d9c8c;">· Cheat status is currently <strong style="color:#9ff0c8;">Undetected</strong></span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:16px;">
+
+      <!-- Account info -->
+      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;margin-bottom:20px;">[ ACCOUNT ]</div>
+        <div style="display:flex;align-items:center;gap:15px;margin-bottom:22px;">
+          <div id="accAvatar" style="width:54px;height:54px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;color:#fff;box-shadow:0 8px 22px rgba(124,58,237,0.4);overflow:hidden;">·</div>
+          <div>
+            <div style="display:flex;align-items:center;gap:9px;">
+              <span id="accUsername" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;">…</span>
+              <span id="accPlan" style="background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 8px;">—</span>
+            </div>
+            <div id="accEmail" style="font-size:13.5px;color:#9b94ab;margin-top:3px;">…</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Member since</span><span id="accMemberSince" style="font-weight:600;font-family:'JetBrains Mono',monospace;font-size:13px;">—</span></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Account status</span><span style="font-weight:600;color:#5ee0a8;">Active</span></div>
+      </div>
+
+      <!-- Subscription -->
+      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;margin-bottom:20px;">[ SUBSCRIPTION ]</div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
+          <span id="subPlanName" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;text-transform:uppercase;">…</span>
+          <span id="subBadge" style="background:rgba(52,211,153,0.14);color:#5ee0a8;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 9px;">ACTIVE</span>
+        </div>
+        <div id="subLine" style="font-size:14px;color:#9b94ab;margin-bottom:20px;">Lifetime license · one-time purchase</div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Plan type</span><span style="font-weight:600;">Lifetime</span></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Expires</span><span style="font-weight:600;color:#a78bfa;">Never</span></div>
+        <a id="upgradeLink" href="/store" style="display:block;text-align:center;margin-top:16px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#c4b5fd;font-family:inherit;font-size:14px;font-weight:600;padding:11px;cursor:pointer;">Browse the store</a>
+      </div>
+
+      <!-- HWID reset -->
+      <div id="hwidCard" style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ HWID RESET ]</div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 11A8 8 0 006 5.3L3 8M4 13a8 8 0 0014 5.7l3-2.7M3 4v4h4M21 20v-4h-4" stroke="#7d768c" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="round"/></svg>
+        </div>
+        <p style="font-size:13.5px;color:#9b94ab;line-height:1.55;margin:0 0 20px;">Reset your hardware ID to use your license on a new device.</p>
+
+        <!-- eligible -->
+        <div id="hwidEligible" style="display:none;">
+          <div style="display:flex;align-items:center;gap:9px;background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.24);padding:13px 15px;margin-bottom:16px;">
+            <span style="width:8px;height:8px;background:#34d399;"></span>
+            <span style="font-size:13.5px;font-weight:600;color:#5ee0a8;">Reset available now</span>
+          </div>
+          <button id="hwidResetBtn" style="cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:13px;box-shadow:0 8px 24px rgba(124,58,237,0.4);">Reset HWID</button>
+        </div>
+        <!-- cooldown -->
+        <div id="hwidCooldown" style="display:none;">
+          <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:16px;margin-bottom:16px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;margin-bottom:8px;letter-spacing:0.06em;">NEXT RESET AVAILABLE IN</div>
+            <div id="hwidCountdown" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:25px;letter-spacing:0.02em;color:#ECEAF2;">—</div>
+          </div>
+          <button disabled style="width:100%;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);color:#6b6479;font-family:inherit;font-size:15px;font-weight:600;padding:13px;cursor:not-allowed;">On cooldown</button>
+        </div>
+        <!-- disabled / unknown -->
+        <div id="hwidDisabled" style="display:none;">
+          <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:14px 16px;font-size:13px;color:#8b8499;">HWID resets are not available on your account.</div>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#7d768c;margin-top:14px;text-align:center;letter-spacing:0.04em;">RESETS USED: <span id="hwidResets">0</span></div>
+      </div>
+
+      <!-- Download -->
+      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ DOWNLOAD ]</div>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:#5ee0a8;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.28);padding:2px 9px;"><span style="width:7px;height:7px;background:#34d399;box-shadow:0 0 8px #34d399;"></span>ONLINE</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+          <div style="width:50px;height:50px;border:1px solid rgba(139,92,246,0.3);background:rgba(139,92,246,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="#a78bfa" stroke-width="1.9" stroke-linecap="square" stroke-linejoin="round"/></svg></div>
+          <div>
+            <div style="font-weight:700;font-size:15.5px;">Nenyoo Loader</div>
+            <div style="font-size:13px;color:#9b94ab;margin-top:2px;">Windows 10/11 · 64-bit</div>
+          </div>
+        </div>
+        <a href="/download" style="cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:13px;box-shadow:0 8px 24px rgba(124,58,237,0.4);display:flex;align-items:center;justify-content:center;gap:9px;margin-top:auto;text-align:center;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="#fff" stroke-width="1.9" stroke-linecap="square" stroke-linejoin="round"/></svg>
+          Download &amp; Install Guide
+        </a>
+        <div style="font-size:12px;color:#7d768c;margin-top:12px;text-align:center;">Make sure BattlEye is OFF before injecting.</div>
+      </div>
+
+    </div>
+
+    <!-- Redeem license -->
+    <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;margin-top:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ REDEEM LICENSE ]</div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 7a4 4 0 11-3.9 5H7v3H4v-3H2v-3h9.1A4 4 0 0115 7z" stroke="#7d768c" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      </div>
+      <p style="font-size:13.5px;color:#9b94ab;line-height:1.55;margin:0 0 18px;max-width:560px;">Got a key from a reseller or giveaway? Enter it below to activate it on your account instantly.</p>
+      <div style="display:flex;gap:0;max-width:560px;">
+        <input id="licenseInput" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" style="flex:1;min-width:0;background:#07060c;border:1px solid rgba(255,255,255,0.12);border-right:none;padding:13px 15px;color:#ECEAF2;font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.06em;" />
+        <button id="redeemBtn" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px 24px;white-space:nowrap;box-shadow:0 8px 24px rgba(124,58,237,0.35);">Redeem</button>
+      </div>
+      <div id="redeemMsg" style="display:none;margin-top:14px;font-size:13.5px;font-weight:600;"></div>
+    </div>
+
+    <!-- Link Discord -->
+    <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;margin-top:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ DISCORD ]</div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#7d768c"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg>
+      </div>
+
+      <!-- not linked -->
+      <div id="discordUnlinked" style="display:none;">
+        <p style="font-size:13.5px;color:#9b94ab;line-height:1.55;margin:0 0 18px;max-width:560px;">Link your Discord account to get your role automatically, post in the community chat and receive update pings.</p>
+        <button id="linkDiscordBtn" style="cursor:pointer;background:#5865F2;border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px 22px;display:flex;align-items:center;gap:10px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg>
+          Link Discord
+        </button>
+      </div>
+
+      <!-- linked -->
+      <div id="discordLinked" style="display:none;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="width:46px;height:46px;background:#5865F2;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg></div>
+            <div>
+              <div style="display:flex;align-items:center;gap:9px;">
+                <span id="discordName" style="font-weight:700;font-size:15.5px;">Discord</span>
+                <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.14);color:#5ee0a8;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 8px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#5ee0a8" stroke-width="3" stroke-linecap="square"/></svg>LINKED</span>
+              </div>
+              <div style="font-size:13px;color:#9b94ab;margin-top:3px;">Roles synced · update pings enabled</div>
+            </div>
+          </div>
+          <button id="unlinkDiscordBtn" style="cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.14);color:#c4bdd1;font-family:inherit;font-size:13.5px;font-weight:600;padding:10px 18px;white-space:nowrap;">Unlink</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Announcements + Chat -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start;">
+
+      <!-- Announcements (static) -->
+      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ ANNOUNCEMENTS ]</div>
+          <span style="width:8px;height:8px;background:#a78bfa;box-shadow:0 0 9px #a78bfa;"></span>
+        </div>
+        <div style="display:flex;flex-direction:column;">
+          <div style="padding:14px 0;border-top:1px solid rgba(255,255,255,0.07);">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:7px;">
+              <span style="background:rgba(139,92,246,0.14);border:1px solid rgba(139,92,246,0.3);color:#b9a4f5;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 7px;">v2.4.1</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;">LATEST</span>
+            </div>
+            <div style="font-weight:700;font-size:14.5px;margin-bottom:4px;">Performance update</div>
+            <div style="font-size:13px;color:#9b94ab;line-height:1.5;">Improved stability and performance. Recommended for everyone.</div>
+          </div>
+          <div style="padding:14px 0;border-top:1px solid rgba(255,255,255,0.07);">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:7px;">
+              <span style="background:rgba(139,92,246,0.14);border:1px solid rgba(139,92,246,0.3);color:#b9a4f5;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 7px;">v2.4.0</span>
+            </div>
+            <div style="font-weight:700;font-size:14.5px;margin-bottom:4px;">New rendering pipeline</div>
+            <div style="font-size:13px;color:#9b94ab;line-height:1.5;">Added a new rendering pipeline and configurable smoothing.</div>
+          </div>
+          <div style="padding:14px 0;border-top:1px solid rgba(255,255,255,0.07);">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:7px;">
+              <span style="background:rgba(245,158,66,0.14);border:1px solid rgba(245,158,66,0.32);color:#f0b35d;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 7px;">NOTICE</span>
+            </div>
+            <div style="font-weight:700;font-size:14.5px;margin-bottom:4px;">Keep BattlEye off</div>
+            <div style="font-size:13px;color:#9b94ab;line-height:1.5;">Always disable BattlEye before injecting the loader.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community chat (live) -->
+      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 26px 16px;border-bottom:1px solid rgba(255,255,255,0.07);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ COMMUNITY CHAT ]</div>
+          <div style="display:flex;align-items:center;gap:7px;"><span style="width:7px;height:7px;background:#34d399;box-shadow:0 0 8px #34d399;"></span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d9c8c;">LIVE</span></div>
+        </div>
+        <div id="chatScroll" style="height:248px;overflow-y:auto;padding:18px 26px;display:flex;flex-direction:column;">
+          <div style="margin:auto;color:#6b6479;font-size:13px;">Loading chat…</div>
+        </div>
+        <div style="display:flex;gap:0;padding:0;border-top:1px solid rgba(255,255,255,0.07);">
+          <input id="chatInput" type="text" placeholder="Type a message..." style="flex:1;min-width:0;background:transparent;border:none;padding:15px 20px;color:#ECEAF2;font-family:inherit;font-size:14px;" />
+          <button id="chatSend" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:0 22px;white-space:nowrap;">Send</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Support -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;background:linear-gradient(135deg,#15122a,#0d0a16);border:1px solid rgba(88,101,242,0.28);padding:24px 28px;margin-top:16px;">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div style="width:48px;height:48px;background:#5865F2;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg></div>
+        <div>
+          <div style="font-weight:700;font-size:16px;">Need help?</div>
+          <div style="font-size:13.5px;color:#9b94ab;margin-top:2px;">Join our Discord for setup help, updates and priority support.</div>
+        </div>
+      </div>
+      <a href="https://discord.gg/mwMcEDUjaa" target="_blank" style="cursor:pointer;background:#5865F2;border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:12px 22px;white-space:nowrap;">Join Discord</a>
+    </div>
+  </main>
+</div>
+
+</div>
+
+<!-- toast -->
+<div id="toast" style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:200;display:none;background:#0b0813;border:1px solid rgba(139,92,246,0.4);color:#ECEAF2;font-size:13.5px;font-weight:600;padding:12px 20px;box-shadow:0 10px 30px rgba(0,0,0,0.5);"></div>
+
+<script src="app.js"></script>
+<script src="auth.js"></script>
+<script>
+(function(){
+  var A = window.NenyooAuth;
+  var currentUser = null;
+  var hwidTimer = null, chatTimer = null;
+
+  function $(id){ return document.getElementById(id); }
+  function toast(msg, ok){
+    var t = $('toast');
+    t.textContent = msg;
+    t.style.borderColor = ok === false ? 'rgba(240,133,125,0.5)' : 'rgba(139,92,246,0.4)';
+    t.style.display = 'block';
+    clearTimeout(t._h); t._h = setTimeout(function(){ t.style.display = 'none'; }, 3200);
+  }
+  function busy(btn, on, label){ if(!btn) return; btn.disabled = on; btn.style.opacity = on ? '0.6' : '1'; if(label!=null) btn.textContent = label; }
+
+  function ownedKeys(u){
+    var types = u.subscription_types || u.subscriptions || [];
+    var grants = (u.subscription_grants || []).filter(function(g){ return g.status === 'active'; }).map(function(g){ return g.public_id || g.name; });
+    return types.concat(grants).map(function(x){ return String(x).toLowerCase(); });
+  }
+
+  function renderUser(u){
+    var name = u.display_name || u.username || 'User';
+    var initials = A.getInitials(name);
+    $('navUsername').textContent = name;
+    $('welcomeName').textContent = name;
+    $('accUsername').textContent = name;
+    $('accEmail').textContent = u.email || '—';
+    $('accMemberSince').textContent = A.formatDate(u.created_at || u.join_date);
+    var pic = u.profile_picture || u.avatar;
+    if(pic){
+      $('navAvatar').innerHTML = '<img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;">';
+      $('accAvatar').innerHTML = '<img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;">';
+    } else {
+      $('navAvatar').textContent = initials;
+      $('accAvatar').textContent = initials;
+    }
+  }
+
+  async function loadSubscriptions(){
+    var owned = ownedKeys(currentUser);
+    var cfg = [];
+    var r = await A.api('GET', '/subscriptions');
+    if(r.ok && r.data && r.data.subscriptions){
+      cfg = r.data.subscriptions.map(function(s){ return { key: String(s.public_id).toLowerCase(), name: s.display_name || s.name || s.public_id }; });
+    }
+    var ownedNames = cfg.filter(function(s){ return owned.indexOf(s.key) !== -1; }).map(function(s){ return s.name; });
+    if(ownedNames.length === 0){
+      // fall back to whatever the customer object reports, else Free
+      ownedNames = (currentUser.subscription_types || []).slice();
+    }
+    var primary = ownedNames[0] || 'Free';
+    $('accPlan').textContent = String(primary).toUpperCase();
+    $('subPlanName').textContent = String(primary).toUpperCase();
+    if(ownedNames.length === 0 || primary === 'Free'){
+      $('subBadge').textContent = 'FREE';
+      $('subBadge').style.background = 'rgba(255,255,255,0.06)';
+      $('subBadge').style.color = '#9b94ab';
+      $('subLine').textContent = 'No paid plan active yet.';
+    } else if(ownedNames.length > 1){
+      $('subLine').textContent = 'Active: ' + ownedNames.join(' · ');
+    }
+  }
+
+  function renderHwid(u){
+    var st = u.hwid_state;
+    var policy = u.hwid_policy;
+    if(hwidTimer){ clearInterval(hwidTimer); hwidTimer = null; }
+    if(!policy || !policy.enabled){ $('hwidCard').style.display = 'none'; return; }
+    $('hwidCard').style.display = '';
+    $('hwidEligible').style.display = 'none';
+    $('hwidCooldown').style.display = 'none';
+    $('hwidDisabled').style.display = 'none';
+    $('hwidResets').textContent = (st && st.manual_reset_count != null) ? st.manual_reset_count : 0;
+
+    var status = st ? st.status : 'unknown';
+    if(status === 'eligible' && st && st.can_reset){
+      $('hwidEligible').style.display = 'block';
+    } else if(status === 'cooldown'){
+      $('hwidCooldown').style.display = 'block';
+      var remaining = (st && st.cooldown_remaining_seconds) || 0;
+      var paint = function(){ $('hwidCountdown').textContent = A.formatDuration(remaining); };
+      paint();
+      hwidTimer = setInterval(function(){
+        remaining -= 1;
+        if(remaining <= 0){ clearInterval(hwidTimer); hwidTimer = null; reloadSession(); return; }
+        paint();
+      }, 1000);
+    } else {
+      $('hwidDisabled').style.display = 'block';
+    }
+  }
+
+  async function reloadSession(){
+    var r = await A.api('GET', '/auth/session');
+    var cust = A.pickCustomer(r.data);
+    if(r.ok && cust){ currentUser = cust; renderHwid(currentUser); loadSubscriptions(); }
+  }
+
+  function showFatal(msg){
+    var m = document.querySelector('main');
+    if(m) m.innerHTML = '<div style="max-width:520px;margin:80px auto;text-align:center;background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:40px 30px;">' +
+      '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;margin-bottom:12px;">Can\'t load dashboard</div>' +
+      '<p style="font-size:14px;color:#9b94ab;line-height:1.6;margin:0 0 24px;">' + A.escapeHtml(msg) + '</p>' +
+      '<a href="/login" style="display:inline-block;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-weight:600;font-size:14px;padding:12px 26px;">Back to login</a></div>';
+  }
+
+  async function doHwidReset(){
+    var btn = $('hwidResetBtn');
+    busy(btn, true, 'Resetting…');
+    var r = await A.api('POST', '/auth/hwid/reset');
+    busy(btn, false, 'Reset HWID');
+    if(r.ok){ toast('HWID reset successfully!'); reloadSession(); }
+    else { toast(r.data.message || 'Failed to reset HWID', false); }
+  }
+
+  async function doRedeem(){
+    var input = $('licenseInput');
+    var key = input.value.trim();
+    var msg = $('redeemMsg');
+    msg.style.display = 'none';
+    if(!key){ msg.style.display = 'block'; msg.style.color = '#f0857d'; msg.textContent = 'Enter a valid license key to redeem.'; return; }
+    var btn = $('redeemBtn');
+    busy(btn, true, '…');
+    var r = await A.api('POST', '/auth/redeem-key', { key: key });
+    busy(btn, false, 'Redeem');
+    msg.style.display = 'block';
+    if(r.ok){
+      msg.style.color = '#5ee0a8';
+      msg.textContent = 'License redeemed successfully — your plan has been updated.';
+      input.value = '';
+      reloadSession();
+    } else {
+      msg.style.color = '#f0857d';
+      msg.textContent = r.data.message || 'Invalid license key.';
+    }
+  }
+
+  async function loadOAuthStatus(){
+    var r = await A.api('GET', '/auth/oauth/status');
+    var linked = false, name = 'Discord';
+    if(r.ok && r.data && Array.isArray(r.data.links)){
+      var link = r.data.links.find(function(l){ return l.provider === 'discord'; });
+      if(link){ linked = true; name = link.display_name || link.username || link.provider_username || 'Discord'; }
+    }
+    $('discordLinked').style.display = linked ? 'block' : 'none';
+    $('discordUnlinked').style.display = linked ? 'none' : 'block';
+    if(linked) $('discordName').textContent = name;
+  }
+
+  async function doUnlinkDiscord(){
+    var btn = $('unlinkDiscordBtn');
+    busy(btn, true, '…');
+    var r = await A.api('POST', '/auth/oauth/unlink', { provider: 'discord' });
+    busy(btn, false, 'Unlink');
+    if(r.ok){ toast('Discord unlinked'); loadOAuthStatus(); }
+    else { toast(r.data.message || 'Failed to unlink', false); }
+  }
+
+  // ---- live chat ----
+  var CHAT_COLORS = ['#f0857d','#6cb6f0','#7ee0a8','#a78bfa','#f0b35d','#e88bd0'];
+  function colorFor(name){ var h = 0; name = String(name); for(var i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) >>> 0; return CHAT_COLORS[h % CHAT_COLORS.length]; }
+
+  async function loadChat(){
+    var r = await A.api('GET', '/chat/messages?limit=50');
+    var box = $('chatScroll');
+    if(r.ok && r.data && Array.isArray(r.data.messages)){
+      if(r.data.messages.length === 0){ box.innerHTML = '<div style="margin:auto;color:#6b6479;font-size:13px;">No messages yet. Start the conversation!</div>'; return; }
+      var html = '';
+      r.data.messages.forEach(function(m){
+        var s = m.sender || {};
+        var nm = s.display_name || s.username || 'Unknown';
+        var text = m.content || m.message || '';
+        html += '<div style="margin-bottom:14px;">' +
+          '<div style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;margin-bottom:3px;color:' + colorFor(nm) + ';">' + A.escapeHtml(nm) + '</div>' +
+          '<div style="font-size:13.5px;color:#d4cfe0;line-height:1.5;">' + A.escapeHtml(text) + '</div></div>';
+      });
+      box.innerHTML = html;
+      box.scrollTop = box.scrollHeight;
+    } else if(r.data && (r.data.error_code === 'LOGIN_REQUIRED')){
+      A.clearToken(); window.location.href = '/login';
+    } else if(r.data && r.data.error_code === 'MEMBERSHIP_REQUIRED'){
+      box.innerHTML = '<div style="margin:auto;color:#7d768c;font-size:13px;text-align:center;">Redeem a membership key to join the community chat.</div>';
+    }
+  }
+
+  async function sendChat(){
+    var input = $('chatInput');
+    var v = input.value.trim();
+    if(!v) return;
+    input.value = '';
+    var r = await A.api('POST', '/chat/messages', { content: v });
+    if(r.ok){ loadChat(); }
+    else { toast(r.data.message || 'Failed to send message', false); if(r.data && r.data.error_code === 'MEMBERSHIP_REQUIRED') loadChat(); }
+  }
+
+  async function doLogout(){
+    try { await A.api('POST', '/auth/logout'); } catch(e){}
+    A.clearToken();
+    window.location.href = '/';
+  }
+
+  // ---- init ----
+  (async function(){
+    // returning from a Discord link?
+    var cb = A.handleOAuthCallback();
+    if(cb && cb.type === 'error') toast(cb.message || 'Discord error', false);
+    if(cb && cb.type === 'success') toast(cb.message || 'Discord linked');
+
+    if(!A.getToken()){ window.location.href = '/login'; return; }
+    var r = await A.api('GET', '/auth/session');
+    console.log('[dashboard] /auth/session →', r.status, r.data);
+
+    // Network / CORS failure — don't loop back to login, explain it.
+    if(r.status === 0){
+      showFatal('Could not reach the authentication server. If you opened this page directly from a file, host it on your site instead — the API blocks other origins (CORS).');
+      return;
+    }
+    // Explicitly invalid session (expired / bad token) — clear and go to login.
+    if(r.status === 401 || (r.data && (r.data.valid === false || r.data.success === false))){
+      A.clearToken();
+      window.location.href = '/login';
+      return;
+    }
+    var cust = A.pickCustomer(r.data);
+    if(!cust){
+      // Logged in but the response shape was unexpected — surface it instead of looping.
+      showFatal('Signed in, but the account data came back in an unexpected format. Open the browser console and send me the "/auth/session →" line so I can map the fields.');
+      return;
+    }
+    currentUser = cust;
+
+    renderUser(currentUser);
+    renderHwid(currentUser);
+    loadSubscriptions();
+    loadOAuthStatus();
+    loadChat();
+    chatTimer = setInterval(loadChat, 5000);
+
+    $('logoutBtn').addEventListener('click', doLogout);
+    $('hwidResetBtn').addEventListener('click', doHwidReset);
+    $('redeemBtn').addEventListener('click', doRedeem);
+    $('licenseInput').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); doRedeem(); } });
+    $('linkDiscordBtn').addEventListener('click', function(){ A.startOAuth('discord', 'link'); });
+    $('unlinkDiscordBtn').addEventListener('click', doUnlinkDiscord);
+    $('chatSend').addEventListener('click', sendChat);
+    $('chatInput').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); sendChat(); } });
+  })();
+})();
+</script>
+</body>
+</html>
