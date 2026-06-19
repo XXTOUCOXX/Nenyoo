@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nenyooo | N3NY000 - Store</title>
+    <meta name="description" content="Purchase Nenyooo N3NY000 GTA 5 Mod Menu VIP or MVP. Lifetime access, instant delivery.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --secondary: #f4b400;
+            --accent: #a78bfa;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #ffffff;
+            --gray: #7f8c8d;
+            --dark-gray: #222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--light);
+            background: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--gray);
+            font-size: 1em;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .store-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .store-card {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 15px;
+            padding: 30px 25px;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 380px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(167, 139, 250, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.3);
+            border-color: var(--accent);
+        }
+
+        .store-card:hover::before {
+            opacity: 1;
+        }
+
+        .store-card.featured {
+            border: 2px solid var(--secondary);
+        }
+
+        .store-card.featured:hover {
+            box-shadow: 0 15px 40px rgba(244, 180, 0, 0.3);
+            border-color: var(--secondary);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--light);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+
+        .store-card.featured .card-badge {
+            background: linear-gradient(135deg, var(--secondary), #f47c00);
+            color: var(--dark);
+        }
+
+        .card-logo {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .card-logo img {
+            width: 70px;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+        }
+
+        .card-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .card-price {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card-price .original {
+            text-decoration: line-through;
+            color: var(--gray);
+            font-size: 0.9em;
+            margin-right: 8px;
+        }
+
+        .card-price .current {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .card-price .period {
+            color: var(--gray);
+            font-size: 0.85em;
+            display: block;
+            margin-top: 3px;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .card-features li {
+            padding: 6px 0;
+            padding-left: 22px;
+            position: relative;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .card-features li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .store-card.featured .card-features li::before {
+            color: var(--secondary);
+        }
+
+        .card-countdown {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .card-countdown .label {
+            font-size: 0.8em;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .card-countdown .timer {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            color: var(--accent);
+        }
+
+        .store-card.featured .card-countdown .timer {
+            color: var(--secondary);
+        }
+
+        .card-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95em;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            color: var(--light);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-card {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-card:hover {
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-crypto {
+            background: linear-gradient(135deg, var(--dark-gray), #333);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-crypto:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-more {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-more:hover {
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.5);
+        }
+
+        .btn-upgrade {
+            background: linear-gradient(135deg, #f4b400, #f47c00);
+            box-shadow: 0 4px 12px rgba(244, 180, 0, 0.3);
+        }
+
+        .btn-upgrade:hover {
+            box-shadow: 0 6px 20px rgba(244, 180, 0, 0.5);
+        }
+
+        .divider {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.85em;
+            margin: 8px 0;
+        }
+
+        footer {
+            background: var(--darker);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.85em;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* More Payments Popup */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-overlay.active {
+            display: flex;
+        }
+
+        .popup {
+            background: rgba(30, 30, 30, 0.95);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 15px;
+            padding: 35px 30px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .popup-close:hover {
+            color: var(--light);
+        }
+
+        .popup h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-tag {
+            background: rgba(167, 139, 250, 0.15);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            color: var(--light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .popup-note {
+            color: var(--gray);
+            font-size: 0.8em;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .popup .btn {
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.6em;
+            }
+
+            .store-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .store-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+        <h1 class="page-title">STORE</h1>
+        <p class="page-subtitle">Choose your plan and unlock the full power of N3NY000</p>
+
+        <div class="store-grid">
+            <!-- VIP -->
+            <div class="store-card">
+                <span class="card-badge">Sale</span>
+                <div class="card-logo">
+                    <img src="../images/vip.png" alt="N3NY000 VIP">
+                </div>
+                <h2 class="card-name">VIP</h2>
+                <div class="card-price">
+                    <span class="original">$25</span>
+                    <span class="current">$12.50</span>
+                    <span class="period">Lifetime Access</span>
+                </div>
+                <ul class="card-features">
+                    <li>All Free Features</li>
+                    <li>GTA 5 Enhanced & Legacy Support</li>
+                    <li>ScriptHookV Integration</li>
+                    <li>VFX Engine & Session Browser</li>
+                    <li>Player Tracker & Magnet</li>
+                    <li>DLC Loader & Business Manager</li>
+                    <li>Advanced Crashes & Kicks</li>
+                    <li>Recovery Options</li>
+                    <li>Trolling Options</li>
+                    <li>Lua Engine Support</li>
+                </ul>
+                <div class="card-countdown">
+                    <div class="label"><i class="fas fa-clock"></i> Offer ends in</div>
+                    <div class="timer" id="countdown-vip">48:00:00</div>
+                </div>
+                <div class="card-buttons">
+                    <a href="https://fusiondash.myshopify.com/products/nenyooo-vip" target="_blank" class="btn btn-card">
+                        <i class="fas fa-credit-card"></i> Purchase with Card
+                    </a>
+                    <a href="https://nenyooocrypto.shop/" target="_blank" class="btn btn-crypto">
+                        <i class="fab fa-bitcoin"></i> Purchase with Crypto
+                    </a>
+                    <a href="#" onclick="document.getElementById('paymentsPopup').classList.add('active'); return false;" class="btn btn-more">
+                        <i class="fas fa-wallet"></i> More Payments
+                    </a>
+                </div>
+            </div>
+
+            <!-- MVP -->
+            <div class="store-card featured">
+                <span class="card-badge">50% OFF</span>
+                <div class="card-logo">
+                    <img src="../images/vipplus.png" alt="N3NY000 MVP">
+                </div>
+                <h2 class="card-name">MVP</h2>
+                <div class="card-price">
+                    <span class="original">$35</span>
+                    <span class="current">$20</span>
+                    <span class="period">Lifetime Access</span>
+                </div>
+                <ul class="card-features">
+                    <li>All VIP Features</li>
+                    <li>Battle Eye Enabled/Disabled</li>
+                    <li>Public Lobbies & Missions</li>
+                    <li>Early Access to Features</li>
+                    <li>Exclusive MVP Options</li>
+                    <li>Advanced Protection Suite</li>
+                    <li>Custom Script Support</li>
+                    <li>Lifetime Updates</li>
+                </ul>
+                <div class="card-countdown">
+                    <div class="label"><i class="fas fa-fire"></i> Limited Time</div>
+                    <div class="timer" id="countdown-mvp">48:00:00</div>
+                </div>
+                <div class="card-buttons">
+                    <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp" target="_blank" class="btn btn-card">
+                        <i class="fas fa-credit-card"></i> Purchase with Card
+                    </a>
+                    <a href="https://nenyooocrypto.shop/" target="_blank" class="btn btn-crypto">
+                        <i class="fab fa-bitcoin"></i> Purchase with Crypto
+                    </a>
+                    <a href="#" onclick="document.getElementById('paymentsPopup').classList.add('active'); return false;" class="btn btn-more">
+                        <i class="fas fa-wallet"></i> More Payments
+                    </a>
+                    <div class="divider">Already VIP?</div>
+                    <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-to-mvp" target="_blank" class="btn btn-upgrade">
+                        <i class="fas fa-arrow-up"></i> Upgrade to MVP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- More Payments Popup -->
+    <div class="popup-overlay" id="paymentsPopup" onclick="if(event.target===this)this.classList.remove('active')">
+        <div class="popup">
+            <button class="popup-close" onclick="document.getElementById('paymentsPopup').classList.remove('active')">&times;</button>
+            <h3>More Payment Methods</h3>
+            <div class="payment-methods">
+                <span class="payment-tag">PayPal F&F (Family & Friends ONLY)</span>
+                <span class="payment-tag">Skrill</span>
+                <span class="payment-tag">Paysafe</span>
+                <span class="payment-tag">Steam Gift Cards</span>
+            </div>
+            <p class="popup-note">For any other payment method, purchase a <strong>Steam Gift Card (EUROPE/EURO)</strong></p>
+            <a href="https://discord.gg/mwMcEDUjaa" target="_blank" class="btn btn-more">
+                <i class="fab fa-discord"></i> Open a Ticket on Discord
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
+        <p style="margin-top: 8px;"><a href="../index.html">Home</a> &middot; <a href="TOS.html">Terms of Service</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#a78bfa" },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1 } },
+                    "size": { "value": 3, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1 } },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#a78bfa", "opacity": 0.4, "width": 1 },
+                    "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "out_mode": "out" }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": { "enable": true, "mode": "grab" },
+                        "onclick": { "enable": true, "mode": "push" },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                        "push": { "particles_nb": 4 }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // Countdown Timer
+            var countdownKey = 'nenyoo_countdown_end';
+            var endTime = localStorage.getItem(countdownKey);
+
+            if (!endTime) {
+                endTime = new Date().getTime() + (48 * 60 * 60 * 1000);
+                localStorage.setItem(countdownKey, endTime);
+            }
+
+            var countdownElements = [
+                document.getElementById('countdown-vip'),
+                document.getElementById('countdown-mvp')
+            ];
+
+            function updateCountdown() {
+                var now = new Date().getTime();
+                var distance = endTime - now;
+
+                if (distance < 0) {
+                    endTime = new Date().getTime() + (48 * 60 * 60 * 1000);
+                    localStorage.setItem(countdownKey, endTime);
+                    distance = endTime - now;
+                }
+
+                var hours = Math.floor(distance / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                var timeString = hours.toString().padStart(2, '0') + ':' +
+                                minutes.toString().padStart(2, '0') + ':' +
+                                seconds.toString().padStart(2, '0');
+
+                countdownElements.forEach(function(el) {
+                    if (el) el.textContent = timeString;
+                });
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>

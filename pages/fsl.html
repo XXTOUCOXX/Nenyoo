@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nenyooo | N3NY000 - FSL</title>
+    <meta name="description" content="Nenyooo FSL - Store online save data locally, gain infinite money, and more.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <script src="https://aloudalimonyexplosion.com/0b/19/f1/0b19f1ed214bb714d5f45520aef807cc.js"></script>
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --secondary: #f4b400;
+            --accent: #a78bfa;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #ffffff;
+            --gray: #7f8c8d;
+            --dark-gray: #222;
+            --danger: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--light);
+            background: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: var(--gray);
+            font-size: 0.95em;
+            text-align: center;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .page-desc {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.9em;
+            text-align: center;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        /* Download Cards */
+        .download-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .dl-card {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            padding: 20px 25px;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .dl-card:hover {
+            border-color: rgba(167, 139, 250, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .dl-card-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dl-card-info i {
+            font-size: 1.3em;
+            color: var(--accent);
+        }
+
+        .dl-card-info h3 {
+            font-size: 1em;
+        }
+
+        .dl-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: var(--light);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 3px 10px rgba(124, 58, 237, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dl-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .dl-btn:hover::before {
+            left: 100%;
+        }
+
+        .dl-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.5);
+        }
+
+        .dl-btn.btn-vc {
+            background: linear-gradient(135deg, var(--dark-gray), #444);
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--danger);
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-bottom: 35px;
+        }
+
+        .warning-box h3 {
+            color: var(--danger);
+            font-size: 0.95em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box p {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        /* Guide Section */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4em;
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--light);
+        }
+
+        .step {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            border-color: rgba(167, 139, 250, 0.35);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .step-num {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--light);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8em;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .step-text code {
+            background: rgba(167, 139, 250, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--accent);
+        }
+
+        .step-text strong {
+            color: var(--secondary);
+        }
+
+        /* Ad banner */
+        .ad-banner {
+            margin: 30px auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.85em;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.6em;
+            }
+
+            .dl-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step-text {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+        <h1 class="page-title">FSL</h1>
+        <p class="page-subtitle">A powerful tool that allows you to store your online save data locally, gain infinite money, and much more!</p>
+        <p class="page-desc">Stay in public sessions, start a new public session & use the player magnet to pull players into your sessions. Your friends can join you as well. Nothing saves to your real GTA 5 account.</p>
+
+        <div class="download-grid">
+            <div class="dl-card">
+                <div class="dl-card-info">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Enhanced Version</h3>
+                </div>
+                <a href="https://bstlar.com/F/FSLgtaEH" target="_blank" class="dl-btn">
+                    <i class="fas fa-download"></i> Download
+                </a>
+            </div>
+
+            <div class="dl-card">
+                <div class="dl-card-info">
+                    <i class="fas fa-history"></i>
+                    <h3>Legacy Version</h3>
+                </div>
+                <a href="https://bstlar.com/F/FSLgta" target="_blank" class="dl-btn">
+                    <i class="fas fa-download"></i> Download
+                </a>
+            </div>
+
+            <div class="dl-card">
+                <div class="dl-card-info">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Required: VC Runtimes</h3>
+                </div>
+                <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/" target="_blank" class="dl-btn btn-vc">
+                    <i class="fas fa-download"></i> Install
+                </a>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
+            <p>Your friends can join you in these sessions, but remember nothing saves to your real GTA 5 account.</p>
+        </div>
+
+        <h2 class="section-title">How To Bypass BattlEye Anti-Cheat</h2>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">1</span>
+                <span class="step-text">Make sure BattlEye is disabled in the Rockstar Games Launcher settings.</span>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">2</span>
+                <span class="step-text">Input the command <code>-nobattleeye</code> in <code>commandline.txt</code> located in your game directory (EPIC GAMES/STEAM etc.).</span>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">3</span>
+                <span class="step-text">Start Command Prompt as Administrator and enter <code>sc delete BEService</code> to remove the BattleEye service completely.</span>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">4</span>
+                <span class="step-text">Let the game load to the main menu. Do not load story mode or online.</span>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">5</span>
+                <span class="step-text">If auto-loading into story or online mode is enabled, disable it in game settings. After disabling, restart the game.</span>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">6</span>
+                <span class="step-text">Once the game is at the main menu, inject Nenyooo.</span>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">7</span>
+                <span class="step-text"><strong>AFTER THE DLL IS INJECTED, GO TO STORY MODE FIRST.</strong></span>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-header">
+                <span class="step-num">8</span>
+                <span class="step-text">Once in story mode, open Nenyooo, select <strong>Network > Session Starter</strong> and join a public or invite-only session.</span>
+            </div>
+        </div>
+
+        <!-- Native Banner Ad -->
+        <div class="ad-banner">
+            <script async="async" data-cfasync="false" src="https://aloudalimonyexplosion.com/1c31b0fbf9c2123d551301d55bc6dc08/invoke.js"></script>
+            <div id="container-1c31b0fbf9c2123d551301d55bc6dc08"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 N3NY000 Mod Menu. All rights reserved.</p>
+        <p style="margin-top: 8px;"><a href="../index.html">Home</a> &middot; <a href="download.html" target="_blank">Download</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#a78bfa" },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1 } },
+                    "size": { "value": 3, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1 } },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#a78bfa", "opacity": 0.4, "width": 1 },
+                    "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "out_mode": "out" }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": { "enable": true, "mode": "grab" },
+                        "onclick": { "enable": true, "mode": "push" },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                        "push": { "particles_nb": 4 }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+    <script src="https://aloudalimonyexplosion.com/04/79/bb/0479bb09632f097b9b4dbbc54eec3bb3.js"></script>
+</body>
+</html>
