@@ -53,8 +53,11 @@
       <!-- Account info -->
       <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
         <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;margin-bottom:20px;">[ ACCOUNT ]</div>
-        <div style="display:flex;align-items:center;gap:15px;margin-bottom:22px;">
-          <div id="accAvatar" style="width:54px;height:54px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;color:#fff;box-shadow:0 8px 22px rgba(124,58,237,0.4);overflow:hidden;">·</div>
+        <div style="display:flex;align-items:center;gap:15px;margin-bottom:18px;">
+          <button id="accAvatarBtn" title="Change profile picture" style="position:relative;width:54px;height:54px;padding:0;border:none;background:transparent;cursor:pointer;flex-shrink:0;">
+            <div id="accAvatar" style="width:54px;height:54px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;color:#fff;box-shadow:0 8px 22px rgba(124,58,237,0.4);overflow:hidden;">·</div>
+            <span style="position:absolute;right:-3px;bottom:-3px;width:20px;height:20px;background:#0b0813;border:1px solid rgba(255,255,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M4 7h3l2-2h6l2 2h3v12H4V7z" stroke="#c4b5fd" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" stroke="#c4b5fd" stroke-width="1.8"/></svg></span>
+          </button>
           <div>
             <div style="display:flex;align-items:center;gap:9px;">
               <span id="accUsername" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;">…</span>
@@ -62,6 +65,15 @@
             </div>
             <div id="accEmail" style="font-size:13.5px;color:#9b94ab;margin-top:3px;">…</div>
           </div>
+        </div>
+        <div id="pfpEditor" style="display:none;margin-bottom:18px;">
+          <div style="display:flex;gap:0;">
+            <input id="pfpInput" type="text" placeholder="https://image-url.png" style="flex:1;min-width:0;background:#07060c;border:1px solid rgba(255,255,255,0.12);border-right:none;padding:10px 12px;color:#ECEAF2;font-family:'JetBrains Mono',monospace;font-size:12.5px;" />
+            <button id="pfpSave" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:13px;font-weight:600;padding:10px 16px;white-space:nowrap;">Save</button>
+            <button id="pfpCancel" style="cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.12);border-left:none;color:#9b94ab;font-family:inherit;font-size:13px;font-weight:600;padding:10px 14px;white-space:nowrap;">Cancel</button>
+          </div>
+          <div id="pfpMsg" style="display:none;margin-top:8px;font-size:12.5px;font-weight:600;"></div>
+          <div style="font-size:11.5px;color:#7d768c;margin-top:6px;">Paste a direct image URL (PNG/JPG/GIF). Leave empty to remove.</div>
         </div>
         <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Member since</span><span id="accMemberSince" style="font-weight:600;font-family:'JetBrains Mono',monospace;font-size:13px;">—</span></div>
         <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Account status</span><span style="font-weight:600;color:#5ee0a8;">Active</span></div>
@@ -495,6 +507,36 @@
     }
   }
 
+  function togglePfp(show){
+    var ed = $('pfpEditor');
+    var on = (show == null) ? (ed.style.display === 'none') : show;
+    ed.style.display = on ? 'block' : 'none';
+    $('pfpMsg').style.display = 'none';
+    if(on){
+      $('pfpInput').value = (currentUser && (currentUser.profile_picture || currentUser.avatar)) || '';
+      $('pfpInput').focus();
+    }
+  }
+  async function doUpdatePfp(){
+    var url = $('pfpInput').value.trim();
+    var msg = $('pfpMsg');
+    msg.style.display = 'none';
+    var btn = $('pfpSave');
+    busy(btn, true, '…');
+    var r = await A.api('PUT', '/profile', { profile_picture: url });
+    busy(btn, false, 'Save');
+    if(r.ok){
+      if(currentUser){ currentUser.profile_picture = url; currentUser.avatar = url; }
+      renderUser(currentUser);
+      togglePfp(false);
+      toast('Profile picture updated');
+    } else {
+      msg.style.display = 'block';
+      msg.style.color = '#f0857d';
+      msg.textContent = (r.data && r.data.message) || 'Failed to update profile picture.';
+    }
+  }
+
   async function loadOAuthStatus(){
     var r = await A.api('GET', '/auth/oauth/status');
     var linked = false, name = 'Discord';
@@ -570,7 +612,8 @@
   }
 
   // ---- presence (online members) ----
-  var onlineSet = {};   // 'id:..' / 'un:..' -> true, for the green dots
+  var onlineSet = {};     // 'id:..' / 'un:..' -> true, for the green dots
+  var avatarCache = {};   // 'id:..' / 'un:..' -> profile picture url
   function isOnline(s){
     s = s || {};
     if(s.id != null && onlineSet['id:' + s.id]) return true;
@@ -596,6 +639,11 @@
     members.forEach(function(m){
       if(m.id != null) set['id:' + m.id] = true;
       if(m.username) set['un:' + String(m.username).toLowerCase()] = true;
+      var pic = m.profile_picture || m.avatar;
+      if(pic){
+        if(m.id != null) avatarCache['id:' + m.id] = pic;
+        if(m.username) avatarCache['un:' + String(m.username).toLowerCase()] = pic;
+      }
     });
     onlineSet = set;
     setOnlineCount(count != null ? count : members.length);
@@ -626,6 +674,34 @@
     }
     list.innerHTML = html;
     strip.style.display = 'flex';
+  }
+
+  function cacheSenderPic(s){
+    s = s || {};
+    var pic = s.profile_picture || s.avatar;
+    if(!pic) return;
+    if(s.id != null) avatarCache['id:' + s.id] = pic;
+    if(s.username) avatarCache['un:' + String(s.username).toLowerCase()] = pic;
+  }
+  function senderPic(s){
+    s = s || {};
+    if(s.profile_picture) return s.profile_picture;
+    if(s.avatar) return s.avatar;
+    if(isMine(s)) return (currentUser && (currentUser.profile_picture || currentUser.avatar)) || '';
+    if(s.id != null && avatarCache['id:' + s.id]) return avatarCache['id:' + s.id];
+    if(s.username && avatarCache['un:' + String(s.username).toLowerCase()]) return avatarCache['un:' + String(s.username).toLowerCase()];
+    return '';
+  }
+  function chatAvatar(pic, name, online){
+    var inner = pic
+      ? '<img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">'
+      : '<span style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:12px;color:#0b0813;background:' + colorFor(name) + ';">' + A.escapeHtml(A.getInitials(name)) + '</span>';
+    var dot = online
+      ? '<span title="Online" style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-radius:50%;background:#34d399;border:1.5px solid #0b0813;"></span>'
+      : '';
+    return '<span style="position:relative;display:block;width:30px;height:30px;flex-shrink:0;">' +
+      '<span style="display:block;width:30px;height:30px;overflow:hidden;border-radius:50%;border:1px solid rgba(255,255,255,0.1);">' + inner + '</span>' +
+      dot + '</span>';
   }
 
   function msgFields(m){
@@ -680,17 +756,18 @@
         var replyBtn = f.id != null
           ? '<button class="chatReplyBtn" data-id="' + A.escapeHtml(f.id) + '" data-name="' + A.escapeHtml(f.name) + '" data-text="' + A.escapeHtml(f.text) + '" style="background:none;border:none;color:#7d768c;font-family:\'JetBrains Mono\',monospace;font-size:10.5px;font-weight:600;cursor:pointer;padding:0;letter-spacing:0.04em;">↩ REPLY</button>'
           : '';
-        var dot = isOnline(m.sender)
-          ? '<span title="Online" style="width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 6px #34d399;flex-shrink:0;display:inline-block;"></span>'
-          : '';
-        html += '<div style="margin-bottom:14px;">' +
-          quote +
-          '<div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">' +
-            dot +
-            '<span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;color:' + colorFor(f.name) + ';">' + A.escapeHtml(f.name) + '</span>' +
-            replyBtn +
-          '</div>' +
-          '<div style="font-size:13.5px;color:#d4cfe0;line-height:1.5;">' + A.escapeHtml(f.text) + '</div></div>';
+        cacheSenderPic(m.sender);
+        var av = chatAvatar(senderPic(m.sender), f.name, isOnline(m.sender));
+        html += '<div style="display:flex;gap:10px;margin-bottom:14px;">' +
+          av +
+          '<div style="flex:1;min-width:0;">' +
+            quote +
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">' +
+              '<span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;color:' + colorFor(f.name) + ';">' + A.escapeHtml(f.name) + '</span>' +
+              replyBtn +
+            '</div>' +
+            '<div style="font-size:13.5px;color:#d4cfe0;line-height:1.5;">' + A.escapeHtml(f.text) + '</div>' +
+          '</div></div>';
       });
       box.innerHTML = html;
       box.scrollTop = box.scrollHeight;
@@ -764,6 +841,10 @@
     presenceTimer = setInterval(loadPresence, 20000);
 
     $('logoutBtn').addEventListener('click', doLogout);
+    $('accAvatarBtn').addEventListener('click', function(){ togglePfp(); });
+    $('pfpSave').addEventListener('click', doUpdatePfp);
+    $('pfpCancel').addEventListener('click', function(){ togglePfp(false); });
+    $('pfpInput').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); doUpdatePfp(); } else if(e.key === 'Escape'){ togglePfp(false); } });
     $('hwidResetBtn').addEventListener('click', doHwidReset);
     $('redeemBtn').addEventListener('click', doRedeem);
     $('licenseInput').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); doRedeem(); } });
