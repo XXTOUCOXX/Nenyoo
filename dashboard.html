@@ -277,6 +277,14 @@
 <!-- toast -->
 <div id="toast" style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:200;display:none;background:#0b0813;border:1px solid rgba(139,92,246,0.4);color:#ECEAF2;font-size:13.5px;font-weight:600;padding:12px 20px;box-shadow:0 10px 30px rgba(0,0,0,0.5);"></div>
 
+<!-- profile modal -->
+<div id="profileModal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(3,2,7,0.66);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px;">
+  <div style="width:100%;max-width:380px;background:#0b0813;border:1px solid rgba(255,255,255,0.12);position:relative;box-shadow:0 24px 70px rgba(0,0,0,0.6);">
+    <button id="profileClose" title="Close" style="position:absolute;top:10px;right:10px;z-index:2;cursor:pointer;background:transparent;border:none;color:#9b94ab;font-size:22px;line-height:1;padding:6px 9px;">&times;</button>
+    <div id="profileBody" style="padding:32px 26px 26px;"></div>
+  </div>
+</div>
+
 <script src="app.js"></script>
 <script src="auth.js"></script>
 <script>
@@ -537,6 +545,58 @@
     }
   }
 
+  // ---- view another user's profile ----
+  function closeProfile(){ $('profileModal').style.display = 'none'; }
+  function pickProfile(d){
+    if(!d) return null;
+    return d.profile || d.user || d.customer || (d.data && (d.data.profile || d.data.user || d.data.customer)) || d;
+  }
+  async function openProfile(uid, uname){
+    var modal = $('profileModal'), body = $('profileBody');
+    modal.style.display = 'flex';
+    body.innerHTML = '<div style="padding:30px 0;text-align:center;color:#6b6479;font-size:13px;">Loading profile…</div>';
+    var ep = (uid != null && uid !== '')
+      ? '/profile/' + encodeURIComponent(uid)
+      : '/users/by-username/' + encodeURIComponent(uname);
+    var r = await A.api('GET', ep);
+    var p = (r.ok) ? pickProfile(r.data) : null;
+    if(!p || (!p.username && !p.display_name)){
+      body.innerHTML = '<div style="padding:24px 0;text-align:center;"><div style="font-weight:700;font-size:16px;margin-bottom:6px;">Profile unavailable</div><div style="font-size:13px;color:#9b94ab;">' + A.escapeHtml((r.data && r.data.message) || 'Could not load this user\'s profile.') + '</div></div>';
+      return;
+    }
+    cacheSenderPic(p);
+    var name = p.display_name || p.username || 'User';
+    var pic = p.profile_picture || p.avatar;
+    var online = isOnline({ id: p.id, username: p.username });
+    var avatar = pic
+      ? '<span style="width:84px;height:84px;display:block;overflow:hidden;border-radius:50%;border:1px solid rgba(255,255,255,0.12);"><img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></span>'
+      : '<span style="width:84px;height:84px;border-radius:50%;background:' + colorFor(name) + ';display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:30px;color:#0b0813;">' + A.escapeHtml(A.getInitials(name)) + '</span>';
+
+    var rows = '';
+    function row(label, value){
+      if(!value) return;
+      rows += '<div style="display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:13.5px;"><span style="color:#9b94ab;flex-shrink:0;">' + label + '</span><span style="font-weight:600;text-align:right;word-break:break-word;">' + A.escapeHtml(value) + '</span></div>';
+    }
+    row('Location', p.location);
+    row('Member since', (p.created_at || p.join_date) ? A.formatDate(p.created_at || p.join_date) : '');
+    if(p.friendship_status && p.friendship_status !== 'none' && p.friendship_status !== 'self'){
+      row('Friendship', String(p.friendship_status).replace(/_/g, ' '));
+    }
+
+    body.innerHTML =
+      '<div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:18px;">' +
+        '<div style="position:relative;margin-bottom:14px;">' + avatar +
+          (online ? '<span title="Online" style="position:absolute;right:4px;bottom:4px;width:15px;height:15px;border-radius:50%;background:#34d399;border:2.5px solid #0b0813;"></span>' : '') +
+        '</div>' +
+        '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:21px;">' + A.escapeHtml(name) + '</div>' +
+        (p.username ? '<div style="font-family:\'JetBrains Mono\',monospace;font-size:12.5px;color:#7d768c;margin-top:2px;">@' + A.escapeHtml(p.username) + '</div>' : '') +
+        '<div style="font-size:12px;font-weight:600;color:' + (online ? '#5ee0a8' : '#7d768c') + ';margin-top:8px;">' + (online ? '● Online' : '○ Offline') + '</div>' +
+        (p.status ? '<div style="font-size:13.5px;color:#c4bdd1;margin-top:10px;font-style:italic;">"' + A.escapeHtml(p.status) + '"</div>' : '') +
+      '</div>' +
+      (p.bio ? '<div style="font-size:13.5px;color:#d4cfe0;line-height:1.55;background:#07060c;border:1px solid rgba(255,255,255,0.08);padding:13px 15px;margin-bottom:6px;">' + A.escapeHtml(p.bio) + '</div>' : '') +
+      rows;
+  }
+
   async function loadOAuthStatus(){
     var r = await A.api('GET', '/auth/oauth/status');
     var linked = false, name = 'Discord';
@@ -661,7 +721,7 @@
       var av = pic
         ? '<span style="width:20px;height:20px;display:block;overflow:hidden;border-radius:50%;flex-shrink:0;"><img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></span>'
         : '<span style="width:20px;height:20px;border-radius:50%;background:' + colorFor(nm) + ';display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:9px;color:#0b0813;flex-shrink:0;">' + A.escapeHtml(A.getInitials(nm)) + '</span>';
-      html += '<span title="' + A.escapeHtml(nm) + '" style="display:inline-flex;align-items:center;gap:6px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.22);padding:3px 9px 3px 4px;border-radius:999px;flex-shrink:0;">' +
+      html += '<span' + profileAttrs(m) + ' style="display:inline-flex;align-items:center;gap:6px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.22);padding:3px 9px 3px 4px;border-radius:999px;flex-shrink:0;cursor:pointer;">' +
         '<span style="position:relative;display:flex;flex-shrink:0;">' + av +
           '<span style="position:absolute;right:-1px;bottom:-1px;width:7px;height:7px;border-radius:50%;background:#34d399;border:1.5px solid #0b0813;"></span>' +
         '</span>' +
@@ -692,14 +752,24 @@
     if(s.username && avatarCache['un:' + String(s.username).toLowerCase()]) return avatarCache['un:' + String(s.username).toLowerCase()];
     return '';
   }
-  function chatAvatar(pic, name, online){
+  // Returns 'class/data/title' attrs (no style) when the sender is openable, else ''.
+  function profileAttrs(s){
+    s = s || {};
+    var uid = s.id != null ? s.id : (s.customer_id != null ? s.customer_id : '');
+    var uname = s.username || '';
+    if(uid === '' && uname === '') return '';
+    return ' class="chatProfile" data-uid="' + A.escapeHtml(uid) + '" data-uname="' + A.escapeHtml(uname) + '" title="View profile"';
+  }
+  function chatAvatar(pic, name, online, sender){
     var inner = pic
       ? '<img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">'
       : '<span style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:12px;color:#0b0813;background:' + colorFor(name) + ';">' + A.escapeHtml(A.getInitials(name)) + '</span>';
     var dot = online
       ? '<span title="Online" style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-radius:50%;background:#34d399;border:1.5px solid #0b0813;"></span>'
       : '';
-    return '<span style="position:relative;display:block;width:30px;height:30px;flex-shrink:0;">' +
+    var attrs = profileAttrs(sender);
+    var cur = attrs ? 'cursor:pointer;' : '';
+    return '<span' + attrs + ' style="position:relative;display:block;width:30px;height:30px;flex-shrink:0;' + cur + '">' +
       '<span style="display:block;width:30px;height:30px;overflow:hidden;border-radius:50%;border:1px solid rgba(255,255,255,0.1);">' + inner + '</span>' +
       dot + '</span>';
   }
@@ -757,13 +827,15 @@
           ? '<button class="chatReplyBtn" data-id="' + A.escapeHtml(f.id) + '" data-name="' + A.escapeHtml(f.name) + '" data-text="' + A.escapeHtml(f.text) + '" style="background:none;border:none;color:#7d768c;font-family:\'JetBrains Mono\',monospace;font-size:10.5px;font-weight:600;cursor:pointer;padding:0;letter-spacing:0.04em;">↩ REPLY</button>'
           : '';
         cacheSenderPic(m.sender);
-        var av = chatAvatar(senderPic(m.sender), f.name, isOnline(m.sender));
+        var av = chatAvatar(senderPic(m.sender), f.name, isOnline(m.sender), m.sender);
+        var nameAttrs = profileAttrs(m.sender);
+        var nameCur = nameAttrs ? 'cursor:pointer;' : '';
         html += '<div style="display:flex;gap:10px;margin-bottom:14px;">' +
           av +
           '<div style="flex:1;min-width:0;">' +
             quote +
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">' +
-              '<span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;color:' + colorFor(f.name) + ';">' + A.escapeHtml(f.name) + '</span>' +
+              '<span' + nameAttrs + ' style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;color:' + colorFor(f.name) + ';' + nameCur + '">' + A.escapeHtml(f.name) + '</span>' +
               replyBtn +
             '</div>' +
             '<div style="font-size:13.5px;color:#d4cfe0;line-height:1.5;">' + A.escapeHtml(f.text) + '</div>' +
@@ -861,6 +933,15 @@
       if(!btn) return;
       setReply(btn.getAttribute('data-id'), btn.getAttribute('data-name'), btn.getAttribute('data-text'));
     });
+    // open a user's profile from any chat avatar/name or online-strip chip
+    document.addEventListener('click', function(e){
+      var el = e.target.closest && e.target.closest('.chatProfile');
+      if(!el) return;
+      openProfile(el.getAttribute('data-uid'), el.getAttribute('data-uname'));
+    });
+    $('profileClose').addEventListener('click', closeProfile);
+    $('profileModal').addEventListener('click', function(e){ if(e.target === this) closeProfile(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeProfile(); });
   })();
 })();
 </script>
