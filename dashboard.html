@@ -511,11 +511,58 @@
     else { toast(r.data.message || 'Failed to unlink', false); }
   }
 
+  // ---- chat sounds (WebAudio — no asset needed) ----
+  var sndCtx = null;
+  function audioCtx(){
+    if(sndCtx) return sndCtx;
+    try { sndCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ sndCtx = null; }
+    return sndCtx;
+  }
+  // Browsers start the context suspended until a user gesture; resume on first interaction.
+  ['click','keydown'].forEach(function(ev){
+    window.addEventListener(ev, function(){ var c = audioCtx(); if(c && c.state === 'suspended') c.resume(); }, { once: true });
+  });
+  function beep(freqs, dur, vol){
+    var ctx = audioCtx(); if(!ctx) return;
+    if(ctx.state === 'suspended'){ try { ctx.resume(); } catch(e){} }
+    var t0 = ctx.currentTime;
+    freqs.forEach(function(f, i){
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      var start = t0 + i * 0.07;
+      g.gain.setValueAtTime(0.0001, start);
+      g.gain.linearRampToValueAtTime(vol, start + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(start); o.stop(start + dur + 0.02);
+    });
+  }
+  function playSend(){ beep([660], 0.12, 0.10); }            // short blip
+  function playReceive(){ beep([523.25, 783.99], 0.16, 0.09); } // soft two-tone
+
   // ---- live chat ----
   var CHAT_COLORS = ['#f0857d','#6cb6f0','#7ee0a8','#a78bfa','#f0b35d','#e88bd0'];
   function colorFor(name){ var h = 0; name = String(name); for(var i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) >>> 0; return CHAT_COLORS[h % CHAT_COLORS.length]; }
 
-  var replyTo = null; // { id, name, preview }
+  var replyTo = null;          // { id, name, preview }
+  var lastChatId = null;       // highest message id seen
+  var chatPrimed = false;      // don't beep on the first load
+
+  function myChatId(){
+    var u = currentUser || {};
+    if(u.id != null) return 'id:' + u.id;
+    if(u.customer_id != null) return 'id:' + u.customer_id;
+    if(u.username) return 'un:' + String(u.username).toLowerCase();
+    return null;
+  }
+  function isMine(s){
+    s = s || {};
+    var mine = myChatId(); if(!mine) return false;
+    if(s.id != null && ('id:' + s.id) === mine) return true;
+    if(s.customer_id != null && ('id:' + s.customer_id) === mine) return true;
+    if(s.username && ('un:' + String(s.username).toLowerCase()) === mine) return true;
+    return false;
+  }
 
   function msgFields(m){
     var s = m.sender || {};
@@ -545,8 +592,15 @@
     if(r.ok && r.data && Array.isArray(r.data.messages)){
       if(r.data.messages.length === 0){ box.innerHTML = '<div style="margin:auto;color:#6b6479;font-size:13px;">No messages yet. Start the conversation!</div>'; return; }
       var html = '';
+      var maxId = lastChatId;
+      var gotNewFromOther = false;
       r.data.messages.forEach(function(m){
         var f = msgFields(m);
+        var idn = parseInt(f.id, 10);
+        if(!isNaN(idn)){
+          if(lastChatId != null && idn > lastChatId && !isMine(m.sender)) gotNewFromOther = true;
+          if(maxId == null || idn > maxId) maxId = idn;
+        }
         var quote = '';
         var rt = m.reply_to;
         if(rt){
@@ -572,6 +626,9 @@
       });
       box.innerHTML = html;
       box.scrollTop = box.scrollHeight;
+      if(chatPrimed && gotNewFromOther) playReceive();
+      lastChatId = maxId;
+      chatPrimed = true;
     } else if(r.data && (r.data.error_code === 'LOGIN_REQUIRED')){
       A.clearToken(); window.location.href = '/login';
     } else if(r.data && r.data.error_code === 'MEMBERSHIP_REQUIRED'){
@@ -588,7 +645,7 @@
     if(replyTo && replyTo.id != null){ var pid = parseInt(replyTo.id, 10); body.parent_id = isNaN(pid) ? replyTo.id : pid; }
     clearReply();
     var r = await A.api('POST', '/chat/messages', body);
-    if(r.ok){ loadChat(); }
+    if(r.ok){ playSend(); loadChat(); }
     else { toast(r.data.message || 'Failed to send message', false); if(r.data && r.data.error_code === 'MEMBERSHIP_REQUIRED') loadChat(); }
   }
 
