@@ -72,8 +72,8 @@
           <span id="subBadge" style="background:rgba(52,211,153,0.14);color:#5ee0a8;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 9px;">ACTIVE</span>
         </div>
         <div id="subLine" style="font-size:14px;color:#9b94ab;margin-bottom:20px;">Lifetime license · one-time purchase</div>
-        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Plan type</span><span style="font-weight:600;">Lifetime</span></div>
-        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Expires</span><span style="font-weight:600;color:#a78bfa;">Never</span></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Plan type</span><span id="subPlanType" style="font-weight:600;">Lifetime</span></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Expires</span><span id="subExpires" style="font-weight:600;color:#a78bfa;">Never</span></div>
         <a id="upgradeLink" href="/store" style="display:block;text-align:center;margin-top:16px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#c4b5fd;font-family:inherit;font-size:14px;font-weight:600;padding:11px;cursor:pointer;">Browse the store</a>
       </div>
 
@@ -277,10 +277,49 @@
   }
   function busy(btn, on, label){ if(!btn) return; btn.disabled = on; btn.style.opacity = on ? '0.6' : '1'; if(label!=null) btn.textContent = label; }
 
-  function ownedKeys(u){
-    var types = u.subscription_types || u.subscriptions || [];
-    var grants = (u.subscription_grants || []).filter(function(g){ return g.status === 'active'; }).map(function(g){ return g.public_id || g.name; });
-    return types.concat(grants).map(function(x){ return String(x).toLowerCase(); });
+  // public_id -> display name for the plans configured on the portal.
+  // Used as a fallback if the /subscriptions API doesn't carry display_name.
+  var SUB_NAMES = { '1': 'VIP Enhanced', '2': 'VIP Legacy', '3': 'MVP', '4': 'MVP Plus' };
+
+  function fullDate(ts){
+    if(!ts) return '';
+    var d = new Date(ts);
+    if(isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  // Normalize whatever shape the customer object reports into
+  // [{ key, name, expiresAt }], resolving display names via cfgMap / SUB_NAMES.
+  function ownedSubs(u, cfgMap){
+    var out = [];
+    function resolve(key){
+      var k = String(key);
+      // Our clean names win over whatever the portal config carries.
+      return SUB_NAMES[k] || cfgMap[k.toLowerCase()] || k;
+    }
+    function push(key, expiresAt){
+      if(key == null || key === '') return;
+      out.push({ key: String(key), name: resolve(key), expiresAt: expiresAt || null });
+    }
+    // grant objects (most detailed): subscription_grants or session "subscriptions"
+    var grants = u.subscription_grants || u.subscriptions || [];
+    if(Array.isArray(grants)){
+      grants.forEach(function(g){
+        if(g == null) return;
+        if(typeof g === 'string' || typeof g === 'number'){ push(g, null); return; }
+        if(g.status && g.status !== 'active') return;
+        var key = g.public_id != null ? g.public_id : (g.id != null ? g.id : g.name);
+        push(key, g.expires_at || g.expiresAt);
+      });
+    }
+    // plain name strings
+    if(Array.isArray(u.subscription_types)){
+      u.subscription_types.forEach(function(t){ push(t, null); });
+    }
+    // dedupe by key (case-insensitive), first occurrence wins
+    var seen = {}, dedup = [];
+    out.forEach(function(o){ var k = o.key.toLowerCase(); if(!seen[k]){ seen[k] = 1; dedup.push(o); } });
+    return dedup;
   }
 
   function renderUser(u){
@@ -302,27 +341,58 @@
   }
 
   async function loadSubscriptions(){
-    var owned = ownedKeys(currentUser);
-    var cfg = [];
+    // Build a name lookup from the portal's configured subscriptions.
+    // Keyed by public_id, name AND display_name (all lowercased) so any of
+    // them resolves to the human-readable label.
+    var cfgMap = {};
     var r = await A.api('GET', '/subscriptions');
-    if(r.ok && r.data && r.data.subscriptions){
-      cfg = r.data.subscriptions.map(function(s){ return { key: String(s.public_id).toLowerCase(), name: s.display_name || s.name || s.public_id }; });
+    if(r.ok && r.data && Array.isArray(r.data.subscriptions)){
+      r.data.subscriptions.forEach(function(s){
+        var disp = s.display_name || s.name || s.public_id;
+        [s.public_id, s.name, s.display_name].forEach(function(k){
+          if(k != null) cfgMap[String(k).toLowerCase()] = disp;
+        });
+      });
     }
-    var ownedNames = cfg.filter(function(s){ return owned.indexOf(s.key) !== -1; }).map(function(s){ return s.name; });
-    if(ownedNames.length === 0){
-      // fall back to whatever the customer object reports, else Free
-      ownedNames = (currentUser.subscription_types || []).slice();
-    }
-    var primary = ownedNames[0] || 'Free';
-    $('accPlan').textContent = String(primary).toUpperCase();
-    $('subPlanName').textContent = String(primary).toUpperCase();
-    if(ownedNames.length === 0 || primary === 'Free'){
+
+    var owned = ownedSubs(currentUser, cfgMap);
+
+    if(owned.length === 0){
+      $('accPlan').textContent = 'FREE';
+      $('subPlanName').textContent = 'FREE';
       $('subBadge').textContent = 'FREE';
       $('subBadge').style.background = 'rgba(255,255,255,0.06)';
       $('subBadge').style.color = '#9b94ab';
       $('subLine').textContent = 'No paid plan active yet.';
-    } else if(ownedNames.length > 1){
-      $('subLine').textContent = 'Active: ' + ownedNames.join(' · ');
+      $('subPlanType').textContent = 'Free';
+      $('subExpires').textContent = '—';
+      $('subExpires').style.color = '#9b94ab';
+      return;
+    }
+
+    var primary = owned[0];
+    $('accPlan').textContent = primary.name.toUpperCase();
+    $('subPlanName').textContent = primary.name.toUpperCase();
+    $('subBadge').textContent = 'ACTIVE';
+    $('subBadge').style.background = 'rgba(52,211,153,0.14)';
+    $('subBadge').style.color = '#5ee0a8';
+
+    if(owned.length > 1){
+      $('subLine').textContent = 'Active: ' + owned.map(function(o){ return o.name; }).join(' · ');
+    } else if(primary.expiresAt){
+      $('subLine').textContent = 'Subscription · active until ' + fullDate(primary.expiresAt);
+    } else {
+      $('subLine').textContent = 'Lifetime license · one-time purchase';
+    }
+
+    if(primary.expiresAt){
+      $('subPlanType').textContent = 'Subscription';
+      $('subExpires').textContent = fullDate(primary.expiresAt) || '—';
+      $('subExpires').style.color = '#f0b35d';
+    } else {
+      $('subPlanType').textContent = 'Lifetime';
+      $('subExpires').textContent = 'Never';
+      $('subExpires').style.color = '#a78bfa';
     }
   }
 
