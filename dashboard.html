@@ -352,6 +352,8 @@
       $('navAvatar').textContent = initials;
       $('accAvatar').textContent = initials;
     }
+    // cache for the marketing-nav profile pill (nav-auth.js) on other pages
+    try { localStorage.setItem('nenyooProfile', JSON.stringify({ name: name, pic: pic || '' })); } catch(e){}
   }
 
   async function loadSubscriptions(){
@@ -591,6 +593,7 @@
   async function doLogout(){
     try { await A.api('POST', '/auth/logout'); } catch(e){}
     A.clearToken();
+    try { localStorage.removeItem('nenyooProfile'); } catch(e){}
     window.location.href = '/';
   }
 
