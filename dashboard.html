@@ -796,6 +796,25 @@
     $('chatReplyBar').style.display = 'none';
   }
 
+  function jumpToMessage(id){
+    if(id == null || id === '') return;
+    var box = $('chatScroll');
+    var target = box.querySelector('[data-mid="' + String(id).replace(/"/g, '\\"') + '"]');
+    if(!target){ toast('Original message is no longer loaded', false); return; }
+    // center it within the scroll box (without scrolling the whole page)
+    var br = box.getBoundingClientRect(), tr = target.getBoundingClientRect();
+    box.scrollTop += (tr.top - br.top) - (box.clientHeight / 2 - target.clientHeight / 2);
+    // brief highlight flash
+    target.style.transition = 'background-color 0.25s, box-shadow 0.25s';
+    target.style.backgroundColor = 'rgba(167,139,250,0.12)';
+    target.style.boxShadow = '0 0 0 6px rgba(167,139,250,0.12)';
+    clearTimeout(target._flash);
+    target._flash = setTimeout(function(){
+      target.style.backgroundColor = '';
+      target.style.boxShadow = '';
+    }, 1200);
+  }
+
   async function loadChat(){
     var r = await A.api('GET', '/chat/messages?limit=50');
     var box = $('chatScroll');
@@ -816,10 +835,13 @@
         if(rt){
           var rAuthor = rt.author || rt.display_name || rt.username || 'Unknown';
           var rPreview = rt.preview || rt.content || rt.message || '';
-          quote = '<div style="display:flex;gap:7px;align-items:stretch;margin-bottom:4px;opacity:0.85;">' +
+          var rId = rt.id != null ? rt.id : (rt.message_id != null ? rt.message_id : '');
+          var jumpAttrs = (rId !== '') ? ' class="chatJump" data-target="' + A.escapeHtml(rId) + '" title="Jump to replied message"' : '';
+          var jumpCur = (rId !== '') ? 'cursor:pointer;' : '';
+          quote = '<div' + jumpAttrs + ' style="display:flex;gap:7px;align-items:stretch;margin-bottom:4px;opacity:0.85;' + jumpCur + '">' +
             '<span style="width:2px;background:#a78bfa;flex-shrink:0;"></span>' +
             '<div style="min-width:0;font-size:11.5px;line-height:1.4;">' +
-              '<span style="color:' + colorFor(rAuthor) + ';font-weight:700;">' + A.escapeHtml(rAuthor) + '</span> ' +
+              '<span style="color:' + colorFor(rAuthor) + ';font-weight:700;">↩ ' + A.escapeHtml(rAuthor) + '</span> ' +
               '<span style="color:#8b8499;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + A.escapeHtml(rPreview) + '</span>' +
             '</div></div>';
         }
@@ -830,7 +852,7 @@
         var av = chatAvatar(senderPic(m.sender), f.name, isOnline(m.sender), m.sender);
         var nameAttrs = profileAttrs(m.sender);
         var nameCur = nameAttrs ? 'cursor:pointer;' : '';
-        html += '<div style="display:flex;gap:10px;margin-bottom:14px;">' +
+        html += '<div data-mid="' + A.escapeHtml(f.id != null ? f.id : '') + '" style="display:flex;gap:10px;margin-bottom:14px;border-radius:6px;">' +
           av +
           '<div style="flex:1;min-width:0;">' +
             quote +
@@ -929,6 +951,8 @@
     });
     $('chatReplyCancel').addEventListener('click', clearReply);
     $('chatScroll').addEventListener('click', function(e){
+      var jump = e.target.closest && e.target.closest('.chatJump');
+      if(jump){ jumpToMessage(jump.getAttribute('data-target')); return; }
       var btn = e.target.closest && e.target.closest('.chatReplyBtn');
       if(!btn) return;
       setReply(btn.getAttribute('data-id'), btn.getAttribute('data-name'), btn.getAttribute('data-text'));
