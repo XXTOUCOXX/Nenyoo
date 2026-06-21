@@ -66,14 +66,13 @@
 
       <!-- Subscription -->
       <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;margin-bottom:20px;">[ SUBSCRIPTION ]</div>
-        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px;">
-          <span id="subPlanName" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;text-transform:uppercase;">…</span>
-          <span id="subBadge" style="background:rgba(52,211,153,0.14);color:#5ee0a8;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 9px;">ACTIVE</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ SUBSCRIPTIONS ]</div>
+          <span id="subCount" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;"></span>
         </div>
-        <div id="subLine" style="font-size:14px;color:#9b94ab;margin-bottom:20px;">Lifetime license · one-time purchase</div>
-        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Plan type</span><span id="subPlanType" style="font-weight:600;">Lifetime</span></div>
-        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Expires</span><span id="subExpires" style="font-weight:600;color:#a78bfa;">Never</span></div>
+        <div id="subList">
+          <div style="padding:20px 0;color:#6b6479;font-size:13px;">Loading…</div>
+        </div>
         <a id="upgradeLink" href="/store" style="display:block;text-align:center;margin-top:16px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#c4b5fd;font-family:inherit;font-size:14px;font-weight:600;padding:11px;cursor:pointer;">Browse the store</a>
       </div>
 
@@ -277,9 +276,22 @@
   }
   function busy(btn, on, label){ if(!btn) return; btn.disabled = on; btn.style.opacity = on ? '0.6' : '1'; if(label!=null) btn.textContent = label; }
 
-  // public_id -> display name for the plans configured on the portal.
-  // Used as a fallback if the /subscriptions API doesn't carry display_name.
-  var SUB_NAMES = { '1': 'VIP Enhanced', '2': 'VIP Legacy', '3': 'MVP', '4': 'MVP Plus' };
+  // Plan metadata. Keyed by public_id; slug points at the products/ artwork.
+  // Clean names here win over whatever the portal config carries.
+  var SUB_META = {
+    '1': { name: 'VIP Enhanced', slug: 'vip_enhanced' },
+    '2': { name: 'VIP Legacy',   slug: 'vip_legacy' },
+    '3': { name: 'MVP',          slug: 'mvp' },
+    '4': { name: 'MVP Plus',     slug: 'mvp_plus' }
+  };
+  // Reverse lookup so a grant identified by public_id, slug OR name resolves.
+  var SUB_LOOKUP = {};
+  Object.keys(SUB_META).forEach(function(id){
+    var m = SUB_META[id];
+    SUB_LOOKUP[id.toLowerCase()] = m;
+    SUB_LOOKUP[m.slug.toLowerCase()] = m;
+    SUB_LOOKUP[m.name.toLowerCase()] = m;
+  });
 
   function fullDate(ts){
     if(!ts) return '';
@@ -289,17 +301,19 @@
   }
 
   // Normalize whatever shape the customer object reports into
-  // [{ key, name, expiresAt }], resolving display names via cfgMap / SUB_NAMES.
+  // [{ key, name, slug, expiresAt }], resolving names/art via SUB_LOOKUP / cfgMap.
   function ownedSubs(u, cfgMap){
     var out = [];
-    function resolve(key){
-      var k = String(key);
-      // Our clean names win over whatever the portal config carries.
-      return SUB_NAMES[k] || cfgMap[k.toLowerCase()] || k;
-    }
     function push(key, expiresAt){
       if(key == null || key === '') return;
-      out.push({ key: String(key), name: resolve(key), expiresAt: expiresAt || null });
+      var k = String(key);
+      var meta = SUB_LOOKUP[k.toLowerCase()];
+      out.push({
+        key: k,
+        name: meta ? meta.name : (cfgMap[k.toLowerCase()] || k),
+        slug: meta ? meta.slug : null,
+        expiresAt: expiresAt || null
+      });
     }
     // grant objects (most detailed): subscription_grants or session "subscriptions"
     var grants = u.subscription_grants || u.subscriptions || [];
@@ -356,44 +370,46 @@
     }
 
     var owned = ownedSubs(currentUser, cfgMap);
+    var list = $('subList');
 
     if(owned.length === 0){
       $('accPlan').textContent = 'FREE';
-      $('subPlanName').textContent = 'FREE';
-      $('subBadge').textContent = 'FREE';
-      $('subBadge').style.background = 'rgba(255,255,255,0.06)';
-      $('subBadge').style.color = '#9b94ab';
-      $('subLine').textContent = 'No paid plan active yet.';
-      $('subPlanType').textContent = 'Free';
-      $('subExpires').textContent = '—';
-      $('subExpires').style.color = '#9b94ab';
+      $('subCount').textContent = '';
+      list.innerHTML =
+        '<div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 10px;">' +
+          '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;color:#9b94ab;margin-bottom:6px;">No plan yet</div>' +
+          '<div style="font-size:13.5px;color:#7d768c;line-height:1.5;">You\'re on the free tier. Redeem a key or grab a plan to unlock the loader.</div>' +
+        '</div>';
       return;
     }
 
-    var primary = owned[0];
-    $('accPlan').textContent = primary.name.toUpperCase();
-    $('subPlanName').textContent = primary.name.toUpperCase();
-    $('subBadge').textContent = 'ACTIVE';
-    $('subBadge').style.background = 'rgba(52,211,153,0.14)';
-    $('subBadge').style.color = '#5ee0a8';
+    // primary plan label feeds the [ ACCOUNT ] badge
+    $('accPlan').textContent = owned[0].name.toUpperCase();
+    $('subCount').textContent = owned.length + (owned.length === 1 ? ' PLAN' : ' PLANS');
 
-    if(owned.length > 1){
-      $('subLine').textContent = 'Active: ' + owned.map(function(o){ return o.name; }).join(' · ');
-    } else if(primary.expiresAt){
-      $('subLine').textContent = 'Subscription · active until ' + fullDate(primary.expiresAt);
-    } else {
-      $('subLine').textContent = 'Lifetime license · one-time purchase';
-    }
-
-    if(primary.expiresAt){
-      $('subPlanType').textContent = 'Subscription';
-      $('subExpires').textContent = fullDate(primary.expiresAt) || '—';
-      $('subExpires').style.color = '#f0b35d';
-    } else {
-      $('subPlanType').textContent = 'Lifetime';
-      $('subExpires').textContent = 'Never';
-      $('subExpires').style.color = '#a78bfa';
-    }
+    var html = '';
+    owned.forEach(function(o){
+      var lifetime = !o.expiresAt;
+      var expLabel = lifetime ? 'Lifetime · never expires' : 'Active until ' + (fullDate(o.expiresAt) || '—');
+      var badgeBase = 'font-family:\'JetBrains Mono\',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:4px 9px;flex-shrink:0;';
+      var badge = lifetime
+        ? '<span style="' + badgeBase + 'background:rgba(167,139,250,0.16);color:#c4b5fd;">LIFETIME</span>'
+        : '<span style="' + badgeBase + 'background:rgba(52,211,153,0.14);color:#5ee0a8;">ACTIVE</span>';
+      // animated GIF with PNG fallback if art is missing
+      var art = o.slug
+        ? '<img src="products/' + o.slug + '@128.gif" alt="" onerror="this.onerror=null;this.src=\'products/' + o.slug + '.png\';" style="width:48px;height:48px;object-fit:contain;flex-shrink:0;" />'
+        : '<div style="width:48px;height:48px;flex-shrink:0;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:18px;color:#fff;">' + A.escapeHtml(A.getInitials(o.name)) + '</div>';
+      html +=
+        '<div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid rgba(255,255,255,0.08);">' +
+          art +
+          '<div style="flex:1;min-width:0;">' +
+            '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:0.01em;">' + A.escapeHtml(o.name) + '</div>' +
+            '<div style="font-size:12.5px;color:#9b94ab;margin-top:3px;">' + A.escapeHtml(expLabel) + '</div>' +
+          '</div>' +
+          badge +
+        '</div>';
+    });
+    list.innerHTML = html;
   }
 
   function renderHwid(u){
