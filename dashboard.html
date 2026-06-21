@@ -222,6 +222,16 @@
         <div id="chatScroll" style="height:248px;overflow-y:auto;padding:18px 26px;display:flex;flex-direction:column;">
           <div style="margin:auto;color:#6b6479;font-size:13px;">Loading chat…</div>
         </div>
+        <div id="chatReplyBar" style="display:none;align-items:center;justify-content:space-between;gap:10px;padding:9px 20px;border-top:1px solid rgba(255,255,255,0.07);background:rgba(139,92,246,0.06);">
+          <div style="min-width:0;display:flex;align-items:center;gap:9px;">
+            <span style="width:3px;align-self:stretch;background:#a78bfa;flex-shrink:0;"></span>
+            <div style="min-width:0;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;color:#b9a4f5;letter-spacing:0.04em;">REPLYING TO <span id="chatReplyName">—</span></div>
+              <div id="chatReplyPreview" style="font-size:12px;color:#9b94ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px;">…</div>
+            </div>
+          </div>
+          <button id="chatReplyCancel" style="cursor:pointer;background:transparent;border:none;color:#9b94ab;font-family:inherit;font-size:18px;line-height:1;padding:4px 6px;flex-shrink:0;" title="Cancel reply">&times;</button>
+        </div>
         <div style="display:flex;gap:0;padding:0;border-top:1px solid rgba(255,255,255,0.07);">
           <input id="chatInput" type="text" placeholder="Type a message..." style="flex:1;min-width:0;background:transparent;border:none;padding:15px 20px;color:#ECEAF2;font-family:inherit;font-size:14px;" />
           <button id="chatSend" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:0 22px;white-space:nowrap;">Send</button>
@@ -415,6 +425,30 @@
   var CHAT_COLORS = ['#f0857d','#6cb6f0','#7ee0a8','#a78bfa','#f0b35d','#e88bd0'];
   function colorFor(name){ var h = 0; name = String(name); for(var i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) >>> 0; return CHAT_COLORS[h % CHAT_COLORS.length]; }
 
+  var replyTo = null; // { id, name, preview }
+
+  function msgFields(m){
+    var s = m.sender || {};
+    return {
+      id: m.id != null ? m.id : m.message_id,
+      name: s.display_name || s.username || m.display_name || m.username || 'Unknown',
+      text: m.content || m.message || ''
+    };
+  }
+
+  function setReply(id, name, preview){
+    if(id == null) return;
+    replyTo = { id: id, name: name, preview: preview };
+    $('chatReplyName').textContent = name;
+    $('chatReplyPreview').textContent = preview;
+    $('chatReplyBar').style.display = 'flex';
+    $('chatInput').focus();
+  }
+  function clearReply(){
+    replyTo = null;
+    $('chatReplyBar').style.display = 'none';
+  }
+
   async function loadChat(){
     var r = await A.api('GET', '/chat/messages?limit=50');
     var box = $('chatScroll');
@@ -422,12 +456,29 @@
       if(r.data.messages.length === 0){ box.innerHTML = '<div style="margin:auto;color:#6b6479;font-size:13px;">No messages yet. Start the conversation!</div>'; return; }
       var html = '';
       r.data.messages.forEach(function(m){
-        var s = m.sender || {};
-        var nm = s.display_name || s.username || 'Unknown';
-        var text = m.content || m.message || '';
+        var f = msgFields(m);
+        var quote = '';
+        var rt = m.reply_to;
+        if(rt){
+          var rAuthor = rt.author || rt.display_name || rt.username || 'Unknown';
+          var rPreview = rt.preview || rt.content || rt.message || '';
+          quote = '<div style="display:flex;gap:7px;align-items:stretch;margin-bottom:4px;opacity:0.85;">' +
+            '<span style="width:2px;background:#a78bfa;flex-shrink:0;"></span>' +
+            '<div style="min-width:0;font-size:11.5px;line-height:1.4;">' +
+              '<span style="color:' + colorFor(rAuthor) + ';font-weight:700;">' + A.escapeHtml(rAuthor) + '</span> ' +
+              '<span style="color:#8b8499;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + A.escapeHtml(rPreview) + '</span>' +
+            '</div></div>';
+        }
+        var replyBtn = f.id != null
+          ? '<button class="chatReplyBtn" data-id="' + A.escapeHtml(f.id) + '" data-name="' + A.escapeHtml(f.name) + '" data-text="' + A.escapeHtml(f.text) + '" style="background:none;border:none;color:#7d768c;font-family:\'JetBrains Mono\',monospace;font-size:10.5px;font-weight:600;cursor:pointer;padding:0;letter-spacing:0.04em;">↩ REPLY</button>'
+          : '';
         html += '<div style="margin-bottom:14px;">' +
-          '<div style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;margin-bottom:3px;color:' + colorFor(nm) + ';">' + A.escapeHtml(nm) + '</div>' +
-          '<div style="font-size:13.5px;color:#d4cfe0;line-height:1.5;">' + A.escapeHtml(text) + '</div></div>';
+          quote +
+          '<div style="display:flex;align-items:center;gap:9px;margin-bottom:3px;">' +
+            '<span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;color:' + colorFor(f.name) + ';">' + A.escapeHtml(f.name) + '</span>' +
+            replyBtn +
+          '</div>' +
+          '<div style="font-size:13.5px;color:#d4cfe0;line-height:1.5;">' + A.escapeHtml(f.text) + '</div></div>';
       });
       box.innerHTML = html;
       box.scrollTop = box.scrollHeight;
@@ -443,7 +494,10 @@
     var v = input.value.trim();
     if(!v) return;
     input.value = '';
-    var r = await A.api('POST', '/chat/messages', { content: v });
+    var body = { content: v };
+    if(replyTo && replyTo.id != null){ var pid = parseInt(replyTo.id, 10); body.parent_id = isNaN(pid) ? replyTo.id : pid; }
+    clearReply();
+    var r = await A.api('POST', '/chat/messages', body);
     if(r.ok){ loadChat(); }
     else { toast(r.data.message || 'Failed to send message', false); if(r.data && r.data.error_code === 'MEMBERSHIP_REQUIRED') loadChat(); }
   }
@@ -498,7 +552,16 @@
     $('linkDiscordBtn').addEventListener('click', function(){ A.startOAuth('discord', 'link'); });
     $('unlinkDiscordBtn').addEventListener('click', doUnlinkDiscord);
     $('chatSend').addEventListener('click', sendChat);
-    $('chatInput').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); sendChat(); } });
+    $('chatInput').addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); sendChat(); }
+      else if(e.key === 'Escape'){ clearReply(); }
+    });
+    $('chatReplyCancel').addEventListener('click', clearReply);
+    $('chatScroll').addEventListener('click', function(e){
+      var btn = e.target.closest && e.target.closest('.chatReplyBtn');
+      if(!btn) return;
+      setReply(btn.getAttribute('data-id'), btn.getAttribute('data-name'), btn.getAttribute('data-text'));
+    });
   })();
 })();
 </script>
