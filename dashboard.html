@@ -385,8 +385,8 @@
       return;
     }
 
-    // primary plan label feeds the [ ACCOUNT ] badge
-    $('accPlan').textContent = owned[0].name.toUpperCase();
+    // [ ACCOUNT ] chip summarizes the count instead of duplicating one plan
+    $('accPlan').textContent = owned.length + (owned.length === 1 ? ' PLAN' : ' PLANS');
     $('subCount').textContent = owned.length + (owned.length === 1 ? ' PLAN' : ' PLANS');
 
     var html = '';
