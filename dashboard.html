@@ -221,6 +221,10 @@
           <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ COMMUNITY CHAT ]</div>
           <div style="display:flex;align-items:center;gap:7px;"><span style="width:7px;height:7px;background:#34d399;box-shadow:0 0 8px #34d399;"></span><span id="chatLive" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d9c8c;">LIVE</span></div>
         </div>
+        <div id="onlineStrip" style="display:none;align-items:center;gap:8px;padding:11px 26px;border-bottom:1px solid rgba(255,255,255,0.07);overflow-x:auto;white-space:nowrap;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;color:#7d768c;flex-shrink:0;">ONLINE</span>
+          <div id="onlineList" style="display:flex;align-items:center;gap:7px;"></div>
+        </div>
         <div id="chatScroll" style="height:248px;overflow-y:auto;padding:18px 26px;display:flex;flex-direction:column;">
           <div style="margin:auto;color:#6b6479;font-size:13px;">Loading chat…</div>
         </div>
@@ -595,6 +599,33 @@
     });
     onlineSet = set;
     setOnlineCount(count != null ? count : members.length);
+    renderOnlineStrip(members, count);
+  }
+
+  function renderOnlineStrip(members, count){
+    var strip = $('onlineStrip'), list = $('onlineList');
+    if(!members.length){ strip.style.display = 'none'; return; }
+    var SHOWN = 12;
+    var html = '';
+    members.slice(0, SHOWN).forEach(function(m){
+      var nm = m.display_name || m.username || 'User';
+      var pic = m.profile_picture || m.avatar;
+      var av = pic
+        ? '<span style="width:20px;height:20px;display:block;overflow:hidden;border-radius:50%;flex-shrink:0;"><img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></span>'
+        : '<span style="width:20px;height:20px;border-radius:50%;background:' + colorFor(nm) + ';display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:9px;color:#0b0813;flex-shrink:0;">' + A.escapeHtml(A.getInitials(nm)) + '</span>';
+      html += '<span title="' + A.escapeHtml(nm) + '" style="display:inline-flex;align-items:center;gap:6px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.22);padding:3px 9px 3px 4px;border-radius:999px;flex-shrink:0;">' +
+        '<span style="position:relative;display:flex;flex-shrink:0;">' + av +
+          '<span style="position:absolute;right:-1px;bottom:-1px;width:7px;height:7px;border-radius:50%;background:#34d399;border:1.5px solid #0b0813;"></span>' +
+        '</span>' +
+        '<span style="font-size:11.5px;font-weight:600;color:#d4cfe0;max-width:96px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + A.escapeHtml(nm) + '</span>' +
+      '</span>';
+    });
+    var total = (count != null) ? count : members.length;
+    if(total > SHOWN){
+      html += '<span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:600;color:#7d9c8c;flex-shrink:0;padding-left:2px;">+' + (total - SHOWN) + '</span>';
+    }
+    list.innerHTML = html;
+    strip.style.display = 'flex';
   }
 
   function msgFields(m){
