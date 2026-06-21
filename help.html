@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help · N3NY000</title>
+<meta http-equiv="refresh" content="0; url=https://discord.gg/mwMcEDUjaa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-root">
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
+
+<main style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 24px;position:relative;z-index:1;">
+  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:680px;max-width:95vw;height:420px;background:radial-gradient(ellipse,rgba(88,101,242,0.22),transparent 60%);filter:blur(10px);pointer-events:none;"></div>
+  <div style="position:relative;width:100%;max-width:440px;text-align:center;animation:fadeUp .5s ease both;">
+    <div style="width:64px;height:64px;margin:0 auto 22px;background:#5865F2;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(88,101,242,0.5);">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.14em;color:#8b5cf6;margin-bottom:10px;">[ HELP &amp; SUPPORT ]</div>
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;text-transform:uppercase;margin:0 0 10px;">Taking you to Discord…</h1>
+    <p style="font-size:14.5px;color:#9b94ab;line-height:1.6;margin:0 0 26px;">All support, setup help and updates live in our Discord. You'll be redirected automatically — if nothing happens, use the button below.</p>
+    <a href="https://discord.gg/mwMcEDUjaa" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#5865F2;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:14px 28px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg>
+      Open Discord
+    </a>
+    <p style="margin-top:22px;"><a href="/" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#a78bfa;font-weight:600;">← Back to home</a></p>
+  </div>
+</main>
+
+</div>
+<script src="app.js"></script>
+<script>
+  // Belt-and-suspenders redirect (in addition to the <meta refresh>).
+  setTimeout(function(){ window.location.href = 'https://discord.gg/mwMcEDUjaa'; }, 400);
+</script>
+</body>
+</html>

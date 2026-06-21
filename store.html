@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Store · N3NY000</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-root">
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
+
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,6,12,0.82);border-bottom:1px solid rgba(255,255,255,0.09);">
+  <div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="display:flex;align-items:center;gap:11px;cursor:pointer;">
+      <img src="uploads/Logo.png" alt="Nenyoo" style="width:34px;height:34px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.12);">
+      <a href="/download" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Download</a>
+      <a href="/store" style="cursor:pointer;background:rgba(139,92,246,0.12);border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Store</a>
+      <a href="/help" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Help</a>
+      <a href="/login" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Login</a>
+      <a href="/signup" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Get Access</a>
+    </div>
+  </div>
+</header>
+
+<div style="position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:40px 24px 80px;">
+  <div style="text-align:center;margin-bottom:44px;">
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:46px;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 12px;">Store</h1>
+    <p style="font-size:16px;color:#9b94ab;margin:0;">Choose your plan and unlock the full power of N3NY000.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;">
+
+    <!-- VIP -->
+    <div style="position:relative;background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:34px 30px;display:flex;flex-direction:column;">
+      <span style="position:absolute;top:18px;right:18px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:4px 9px;">SALE</span>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:6px;">VIP</div>
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:38px;letter-spacing:-0.02em;">$12.50</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#6b6479;text-decoration:line-through;">$25</span>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin-bottom:18px;letter-spacing:0.04em;">LIFETIME ACCESS</div>
+      <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:9px 12px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7d768c;letter-spacing:0.06em;">OFFER ENDS IN</span>
+        <span id="countdown-vip" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#a78bfa;">48:00:00</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px;color:#c4bdd1;margin-bottom:26px;">
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>All Free Features</div>
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>GTA 5 Enhanced &amp; Legacy Support</div>
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>ScriptHookV Integration</div>
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>VFX Engine &amp; Session Browser</div>
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>Player Tracker &amp; Magnet</div>
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>DLC Loader &amp; Business Manager</div>
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>Advanced Crashes &amp; Kicks</div>
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>Recovery Options</div>
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>Trolling Options</div>
+        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>Lua Engine Support</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0;margin-top:auto;">
+        <a href="https://fusiondash.myshopify.com/products/nenyooo-vip" target="_blank" style="text-align:center;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 22px rgba(124,58,237,0.35);">💳 Purchase with Card</a>
+        <a href="https://nenyooocrypto.shop/" target="_blank" style="text-align:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);border-top:none;color:#ECEAF2;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;">₿ Purchase with Crypto</a>
+        <button onclick="document.getElementById('paymentsPopup').classList.add('active')" style="cursor:pointer;text-align:center;background:transparent;border:1px solid rgba(255,255,255,0.14);border-top:none;color:#c4bdd1;font-family:inherit;font-size:14px;font-weight:600;padding:12px;">More Payments</button>
+      </div>
+    </div>
+
+    <!-- MVP (featured) -->
+    <div style="position:relative;background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.34);padding:34px 30px;display:flex;flex-direction:column;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#9a6cf3,#7c3aed);"></div>
+      <span style="position:absolute;top:18px;right:18px;background:rgba(245,158,66,0.16);border:1px solid rgba(245,158,66,0.34);color:#f0b35d;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:3px 9px;">50% OFF</span>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:6px;">MVP</div>
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:38px;letter-spacing:-0.02em;">$20</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#6b6479;text-decoration:line-through;">$35</span>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin-bottom:18px;letter-spacing:0.04em;">LIFETIME ACCESS</div>
+      <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:9px 12px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7d768c;letter-spacing:0.06em;">LIMITED TIME</span>
+        <span id="countdown-mvp" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#f0b35d;">48:00:00</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px;color:#c4bdd1;margin-bottom:26px;">
+        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>All VIP Features</div>
+        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Battle Eye Enabled/Disabled</div>
+        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Public Lobbies &amp; Missions</div>
+        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Early Access to Features</div>
+        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Exclusive MVP Options</div>
+        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Advanced Protection Suite</div>
+        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Custom Script Support</div>
+        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Lifetime Updates</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0;margin-top:auto;">
+        <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp" target="_blank" style="text-align:center;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 22px rgba(124,58,237,0.35);">💳 Purchase with Card</a>
+        <a href="https://nenyooocrypto.shop/" target="_blank" style="text-align:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);border-top:none;color:#ECEAF2;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;">₿ Purchase with Crypto</a>
+        <button onclick="document.getElementById('paymentsPopup').classList.add('active')" style="cursor:pointer;text-align:center;background:transparent;border:1px solid rgba(255,255,255,0.14);border-top:none;color:#c4bdd1;font-family:inherit;font-size:14px;font-weight:600;padding:12px;">More Payments</button>
+      </div>
+      <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;margin:18px 0 10px;letter-spacing:0.04em;">ALREADY VIP?</div>
+      <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-to-mvp" target="_blank" style="text-align:center;background:rgba(245,158,66,0.1);border:1px solid rgba(245,158,66,0.34);color:#f0b35d;font-family:inherit;font-size:14px;font-weight:600;padding:12px;">↑ Upgrade to MVP</a>
+    </div>
+
+  </div>
+
+  <p style="text-align:center;font-size:13px;color:#6b6479;margin-top:34px;">Looking for the free version? <a href="/freekey" style="color:#a78bfa;font-weight:600;">Get a free key →</a></p>
+  <p style="text-align:center;font-size:12px;color:#6b6479;margin-top:14px;">By purchasing you agree to our <a href="/tos" style="color:#a78bfa;">Terms of Service &amp; Refund Policy</a>.</p>
+</div>
+
+<!-- More Payments popup -->
+<div id="paymentsPopup" style="position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(3,2,8,0.78);backdrop-filter:blur(6px);padding:24px;" onclick="if(event.target===this)this.classList.remove('active')">
+  <div style="position:relative;width:100%;max-width:420px;background:#0b0813;border:1px solid rgba(139,92,246,0.34);padding:32px;">
+    <button onclick="document.getElementById('paymentsPopup').classList.remove('active')" style="position:absolute;top:14px;right:16px;background:transparent;border:none;color:#9b94ab;font-size:22px;cursor:pointer;line-height:1;">&times;</button>
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;margin:0 0 18px;">More Payment Methods</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);padding:6px 11px;color:#c4bdd1;">PayPal F&amp;F (Family &amp; Friends ONLY)</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);padding:6px 11px;color:#c4bdd1;">Skrill</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);padding:6px 11px;color:#c4bdd1;">Paysafe</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);padding:6px 11px;color:#c4bdd1;">Steam Gift Cards</span>
+    </div>
+    <p style="font-size:13px;color:#9b94ab;line-height:1.55;margin:0 0 20px;">For any other payment method, purchase a <strong style="color:#ECEAF2;">Steam Gift Card (EUROPE/EURO)</strong>.</p>
+    <a href="https://discord.gg/mwMcEDUjaa" target="_blank" style="display:block;text-align:center;background:#5865F2;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;">Open a Ticket on Discord</a>
+  </div>
+</div>
+
+</div>
+<script src="app.js"></script>
+<script>
+(function(){
+  // popup show/hide via .active class
+  var style = document.createElement('style');
+  style.textContent = '#paymentsPopup.active{display:flex !important;}';
+  document.head.appendChild(style);
+  // 48h sale countdown (shared key with landing)
+  var KEY = 'nenyoo_countdown_end';
+  var end = parseInt(localStorage.getItem(KEY), 10);
+  if(!end || isNaN(end) || end < Date.now()){
+    end = Date.now() + 48*60*60*1000;
+    localStorage.setItem(KEY, end);
+  }
+  var els = [document.getElementById('countdown-vip'), document.getElementById('countdown-mvp')];
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var rem = end - Date.now(); if(rem < 0) rem = 0;
+    var txt = pad(Math.floor(rem/3600000)) + ':' + pad(Math.floor((rem%3600000)/60000)) + ':' + pad(Math.floor((rem%60000)/1000));
+    els.forEach(function(el){ if(el) el.textContent = txt; });
+  }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>

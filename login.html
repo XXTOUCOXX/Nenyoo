@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login · N3NY000</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-root">
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
+
+<main style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 24px;position:relative;z-index:1;">
+  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:680px;max-width:95vw;height:420px;background:radial-gradient(ellipse,rgba(124,58,237,0.2),transparent 60%);filter:blur(10px);pointer-events:none;"></div>
+  <div style="position:relative;width:100%;max-width:410px;animation:fadeUp .5s ease both;">
+    <a href="/" style="display:flex;align-items:center;justify-content:center;gap:11px;cursor:pointer;margin-bottom:28px;">
+      <img src="uploads/Logo.png" alt="Nenyoo" style="width:40px;height:40px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</span>
+    </a>
+
+    <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:36px;">
+
+      <!-- ===== LOGIN FORM ===== -->
+      <div id="loginView">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.14em;color:#8b5cf6;margin-bottom:10px;text-align:center;">[ LOGIN ]</div>
+        <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:25px;text-transform:uppercase;margin:0 0 6px;text-align:center;">Welcome back</h1>
+        <p style="font-size:14px;color:#9b94ab;margin:0 0 26px;text-align:center;">Log in to access your dashboard.</p>
+
+        <button id="discordBtn" type="button" style="cursor:pointer;width:100%;background:#5865F2;border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg>
+          Continue with Discord
+        </button>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;color:#5d5670;font-family:'JetBrains Mono',monospace;font-size:11px;">
+          <span style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></span>OR<span style="flex:1;height:1px;background:rgba(255,255,255,0.1);"></span>
+        </div>
+
+        <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.06em;color:#c4bdd1;margin-bottom:8px;">USERNAME OR EMAIL</label>
+        <input id="loginUser" type="text" placeholder="Enter your username or email" style="width:100%;background:#07060c;border:1px solid rgba(255,255,255,0.12);padding:13px 14px;color:#ECEAF2;font-family:inherit;font-size:15px;margin-bottom:18px;" />
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <label style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.06em;color:#c4bdd1;">PASSWORD</label>
+          <a href="/forgot" style="font-size:12.5px;color:#a78bfa;font-weight:500;cursor:pointer;">Forgot?</a>
+        </div>
+        <input id="loginPass" type="password" placeholder="••••••••" style="width:100%;background:#07060c;border:1px solid rgba(255,255,255,0.12);padding:13px 14px;color:#ECEAF2;font-family:inherit;font-size:15px;margin-bottom:14px;" />
+        <div id="loginError" style="display:none;font-size:12.5px;color:#f0857d;font-weight:600;margin-bottom:12px;"></div>
+        <button id="loginBtn" type="button" style="cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:14px;box-shadow:0 8px 26px rgba(124,58,237,0.4);">Log in</button>
+      </div>
+
+      <!-- ===== VERIFY EMAIL (shown when account needs verification) ===== -->
+      <div id="verifyView" style="display:none;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.14em;color:#8b5cf6;margin-bottom:10px;text-align:center;">[ VERIFY ]</div>
+        <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:25px;text-transform:uppercase;margin:0 0 6px;text-align:center;">Verify your email</h1>
+        <p style="font-size:14px;color:#9b94ab;margin:0 0 24px;text-align:center;line-height:1.55;">Enter the code we sent to your email to finish signing in.</p>
+        <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.06em;color:#c4bdd1;margin-bottom:8px;">VERIFICATION CODE</label>
+        <input id="verifyCode" type="text" inputmode="numeric" placeholder="000000" style="width:100%;background:#07060c;border:1px solid rgba(255,255,255,0.12);padding:13px 14px;color:#ECEAF2;font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:0.3em;text-align:center;margin-bottom:14px;" />
+        <div id="verifyMsg" style="display:none;font-size:12.5px;font-weight:600;margin-bottom:12px;"></div>
+        <button id="verifyBtn" type="button" style="cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:14px;box-shadow:0 8px 26px rgba(124,58,237,0.4);margin-bottom:12px;">Verify &amp; continue</button>
+        <button id="resendBtn" type="button" style="cursor:pointer;width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:12px;">Resend code</button>
+      </div>
+
+    </div>
+    <p style="text-align:center;font-size:14px;color:#9b94ab;margin-top:22px;">Don't have an account? <a href="/signup" style="color:#a78bfa;font-weight:600;cursor:pointer;">Sign up</a></p>
+  </div>
+</main>
+
+</div>
+<script src="app.js"></script>
+<script src="auth.js"></script>
+<script>
+(function(){
+  var A = window.NenyooAuth;
+  var loginView = document.getElementById('loginView');
+  var verifyView = document.getElementById('verifyView');
+  var userEl = document.getElementById('loginUser');
+  var passEl = document.getElementById('loginPass');
+  var errEl = document.getElementById('loginError');
+  var loginBtn = document.getElementById('loginBtn');
+  var verifyCodeEl = document.getElementById('verifyCode');
+  var verifyMsg = document.getElementById('verifyMsg');
+  var pendingIdentifier = '';
+
+  function showErr(el, msg, ok){
+    el.style.display = 'block';
+    el.style.color = ok ? '#5ee0a8' : '#f0857d';
+    el.textContent = msg;
+  }
+  function busy(btn, on, label){ btn.disabled = on; btn.style.opacity = on ? '0.6' : '1'; if(label!=null) btn.textContent = label; }
+
+  // ---- standard login ----
+  async function doLogin(){
+    var username = userEl.value.trim();
+    var password = passEl.value;
+    errEl.style.display = 'none';
+    if(!username || !password){ showErr(errEl, 'Please enter username and password.'); return; }
+    busy(loginBtn, true, 'Logging in…');
+    var r = await A.api('POST', '/auth/login', { username: username, password: password });
+    busy(loginBtn, false, 'Log in');
+    if(r.status === 0){ showErr(errEl, 'Could not reach the server. If you opened this page as a file, host it on your site (CORS).'); return; }
+    var token = A.pickToken(r.data);
+    if(token){
+      A.setToken(token);
+      window.location.href = '/dashboard';
+      return;
+    }
+    if(r.data.requires_verification || r.data.verification_required || r.data.error_code === 'EMAIL_NOT_VERIFIED'){
+      pendingIdentifier = username;
+      loginView.style.display = 'none';
+      verifyView.style.display = 'block';
+      showErr(verifyMsg, 'Please verify your email. Enter the code we sent, or resend a new one.', true);
+      return;
+    }
+    showErr(errEl, r.data.message || 'Login failed.');
+  }
+
+  // ---- verify email ----
+  async function doVerify(){
+    var code = verifyCodeEl.value.trim();
+    verifyMsg.style.display = 'none';
+    if(!code){ showErr(verifyMsg, 'Please enter the verification code.'); return; }
+    var body = { code: code };
+    if(pendingIdentifier.indexOf('@') !== -1) body.email = pendingIdentifier; else body.username = pendingIdentifier;
+    var btn = document.getElementById('verifyBtn');
+    busy(btn, true, 'Verifying…');
+    var r = await A.api('POST', '/auth/register/verify', body);
+    busy(btn, false, 'Verify & continue');
+    if(r.ok){
+      showErr(verifyMsg, 'Verified! You can now log in.', true);
+      verifyView.style.display = 'none';
+      loginView.style.display = 'block';
+    } else {
+      showErr(verifyMsg, r.data.message || 'Verification failed.');
+    }
+  }
+
+  async function doResend(){
+    var body = {};
+    if(pendingIdentifier.indexOf('@') !== -1) body.email = pendingIdentifier; else body.username = pendingIdentifier;
+    var btn = document.getElementById('resendBtn');
+    busy(btn, true, 'Sending…');
+    var r = await A.api('POST', '/auth/register/resend', body);
+    busy(btn, false, 'Resend code');
+    showErr(verifyMsg, r.ok ? 'Verification email sent!' : (r.data.message || 'Failed to resend code.'), r.ok);
+  }
+
+  loginBtn.addEventListener('click', doLogin);
+  passEl.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); doLogin(); } });
+  document.getElementById('verifyBtn').addEventListener('click', doVerify);
+  verifyCodeEl.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); doVerify(); } });
+  document.getElementById('resendBtn').addEventListener('click', doResend);
+  document.getElementById('discordBtn').addEventListener('click', function(){ A.startOAuth('discord', 'login'); });
+
+  // ---- OAuth callback (returning from Discord) ----
+  (async function(){
+    var cb = A.handleOAuthCallback();
+    if(!cb) return;
+    if(cb.type === 'session'){
+      A.setToken(cb.token);
+      window.location.href = '/dashboard';
+    } else if(cb.type === 'error'){
+      showErr(errEl, cb.message || 'Discord sign-in failed.');
+    } else if(cb.type === 'link_required'){
+      // An account with this email already exists — ask for the password to link Discord.
+      var pw = window.prompt('An account with ' + (cb.email || 'this email') + ' already exists. Enter its password to link Discord:');
+      if(pw){
+        var r = await A.api('POST', '/auth/oauth/link', { link_token: cb.linkToken, password: pw });
+        var lt = A.pickToken(r.data);
+        if(lt){ A.setToken(lt); window.location.href = '/dashboard'; }
+        else if(r.ok){ showErr(errEl, 'Discord linked. Please log in.', true); }
+        else { showErr(errEl, r.data.message || 'Failed to link Discord.'); }
+      }
+    }
+  })();
+})();
+</script>
+</body>
+</html>
