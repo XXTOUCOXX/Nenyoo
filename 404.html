@@ -4,66 +4,18 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>404 · N3NY000</title>
-<link rel="icon" href="brand/Logo.png" />
+<title>404 — Page Not Found | N3NY000</title>
+<meta name="description" content="The page you requested could not be found.">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="brand/Logo.png" />
+<link rel="apple-touch-icon" href="brand/Logo.png" />
+<link rel="stylesheet" href="style.css" />
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    background:#07060c;
-    color:#ECEAF2;
-    font-family:'Plus Jakarta Sans',sans-serif;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    overflow-x:hidden;
-    position:relative;
-  }
-  /* subtle radial atmosphere behind canvas */
-  body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-2;
-    background:
-      radial-gradient(circle at 50% 38%, rgba(124,58,237,0.16), transparent 55%),
-      radial-gradient(circle at 50% 100%, rgba(154,108,243,0.08), transparent 60%);
-    pointer-events:none;
-  }
-  /* scanline overlay */
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:40;
-    pointer-events:none;
-    background:repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.018) 0px,
-      rgba(255,255,255,0.018) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    mix-blend-mode:overlay;
-  }
-  #bgCanvas{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    width:100%;
-    height:100%;
-    display:block;
-    pointer-events:none;
-  }
-  a{text-decoration:none}
-
-  .mono{font-family:'JetBrains Mono',monospace}
-
-  /* main */
-  main{
+  /* 404-specific layout — background/effects come from style.css + app.js */
+  .bg-root{display:flex;flex-direction:column;min-height:100vh;}
+  .err-main{
     flex:1;
     display:flex;
     align-items:center;
@@ -72,7 +24,7 @@
     position:relative;
     z-index:1;
   }
-  .wrap{
+  .err-wrap{
     width:100%;
     max-width:760px;
     display:flex;
@@ -80,7 +32,7 @@
     align-items:center;
     text-align:center;
   }
-  .badge{
+  .err-badge{
     font-family:'JetBrains Mono',monospace;
     font-size:12px;
     letter-spacing:0.28em;
@@ -88,59 +40,58 @@
     color:#c8c1d6;
     border:1px solid rgba(255,255,255,0.14);
     padding:8px 16px;
-    background:rgba(255,255,255,0.02);
+    background:rgba(7,6,12,0.6);
     margin-bottom:30px;
   }
-  .badge .dot{
+  .err-badge .dot{
     display:inline-block;
     width:7px;height:7px;
     background:linear-gradient(180deg,#9a6cf3,#7c3aed);
+    box-shadow:0 0 10px rgba(124,58,237,0.8);
     margin-right:10px;
     vertical-align:middle;
   }
-  .four{
+  .err-four{
     font-family:'Space Grotesk',sans-serif;
     font-weight:700;
     font-size:clamp(120px,22vw,200px);
     line-height:0.9;
     letter-spacing:0.02em;
-    background:linear-gradient(180deg,#9a6cf3,#7c3aed);
+    background:linear-gradient(180deg,#b388f7,#7c3aed);
     -webkit-background-clip:text;
     background-clip:text;
     -webkit-text-fill-color:transparent;
     color:#7c3aed;
-    text-shadow:0 0 60px rgba(124,58,237,0.5), 0 0 120px rgba(124,58,237,0.25);
     margin:0;
-    filter:drop-shadow(0 0 40px rgba(124,58,237,0.35));
+    filter:drop-shadow(0 0 50px rgba(124,58,237,0.45));
   }
-  .title{
+  .err-title{
     font-family:'Space Grotesk',sans-serif;
     font-weight:700;
     text-transform:uppercase;
-    letter-spacing:0.06em;
-    font-size:clamp(20px,3.4vw,30px);
-    margin-top:14px;
+    letter-spacing:0.04em;
+    font-size:clamp(22px,3.6vw,32px);
+    margin-top:10px;
     color:#ECEAF2;
   }
-  .sub{
+  .err-sub{
     color:#9b94ab;
-    font-size:15px;
+    font-size:15.5px;
     line-height:1.6;
-    max-width:440px;
+    max-width:460px;
     margin-top:14px;
   }
-
   /* terminal block */
-  .terminal{
+  .err-terminal{
     width:100%;
     max-width:520px;
     text-align:left;
     margin-top:32px;
     border:1px solid rgba(255,255,255,0.12);
-    background:linear-gradient(180deg, rgba(13,11,22,0.9), rgba(9,8,16,0.9));
+    background:linear-gradient(180deg, rgba(13,11,22,0.92), rgba(9,8,16,0.92));
     box-shadow:inset 0 0 40px rgba(124,58,237,0.06);
   }
-  .terminal .bar{
+  .err-terminal .bar{
     display:flex;
     align-items:center;
     gap:10px;
@@ -152,13 +103,11 @@
     text-transform:uppercase;
     color:#9b94ab;
   }
-  .terminal .bar i{
-    width:9px;height:9px;display:inline-block;background:rgba(255,255,255,0.18);
-  }
-  .terminal .bar i:nth-child(2){background:rgba(154,108,243,0.55)}
-  .terminal .bar i:nth-child(3){background:rgba(124,58,237,0.85)}
-  .terminal .bar span{margin-left:auto}
-  .terminal pre{
+  .err-terminal .bar i{ width:9px;height:9px;display:inline-block;background:rgba(255,255,255,0.18); }
+  .err-terminal .bar i:nth-child(2){background:rgba(154,108,243,0.55)}
+  .err-terminal .bar i:nth-child(3){background:rgba(124,58,237,0.85)}
+  .err-terminal .bar span{margin-left:auto}
+  .err-terminal pre{
     font-family:'JetBrains Mono',monospace;
     font-size:13px;
     line-height:1.85;
@@ -166,74 +115,47 @@
     color:#c8c1d6;
     white-space:pre-wrap;
     word-break:break-word;
+    margin:0;
   }
-  .terminal .g{color:#7ee0a6}
-  .terminal .p{color:#b69cf6}
-  .terminal .m{color:#9b94ab}
-  .terminal .arrow{color:#7c3aed}
-
+  .err-terminal .g{color:#7ee0a6}
+  .err-terminal .p{color:#b69cf6}
+  .err-terminal .m{color:#9b94ab}
+  .err-terminal .arrow{color:#7c3aed}
   /* CTAs */
-  .ctas{
+  .err-ctas{
     display:flex;
     margin-top:34px;
     border:1px solid rgba(255,255,255,0.14);
   }
-  .ctas a{
+  .err-ctas a{
     font-family:'Plus Jakarta Sans',sans-serif;
     font-weight:600;
     font-size:14px;
     padding:13px 28px;
     color:#ECEAF2;
-    letter-spacing:0.01em;
-    transition:background .15s ease,color .15s ease;
+    transition:background .15s ease;
   }
-  .ctas a.primary{
+  .err-ctas a.primary{
     background:linear-gradient(180deg,#9a6cf3,#7c3aed);
     color:#fff;
     border-right:1px solid rgba(255,255,255,0.14);
   }
-  .ctas a.ghost{background:transparent}
-  .ctas a.ghost:hover{background:rgba(255,255,255,0.05)}
-  .ctas a.primary:hover{background:linear-gradient(180deg,#a87cf6,#8b46f0)}
-
-  /* footer quick links */
-  footer{
-    position:relative;
-    z-index:1;
-    border-top:1px solid rgba(255,255,255,0.09);
-    padding:18px 24px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .quick{
-    display:flex;
-    align-items:center;
-  }
-  .quick a{
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:#9b94ab;
-    padding:0 16px;
-    border-right:1px solid rgba(255,255,255,0.12);
-    transition:color .15s ease;
-  }
-  .quick a:last-child{border-right:none}
-  .quick a:hover{color:#ECEAF2}
-
+  .err-ctas a.ghost{background:transparent}
+  .err-ctas a.ghost:hover{background:rgba(255,255,255,0.05)}
+  .err-ctas a.primary:hover{background:linear-gradient(180deg,#a87cf6,#8b46f0)}
   @media (max-width:520px){
-    .ctas{flex-direction:column;width:100%;max-width:320px}
-    .ctas a{text-align:center;border-right:none}
-    .ctas a.primary{border-right:none;border-bottom:1px solid rgba(255,255,255,0.14)}
-    .quick a{padding:0 11px;font-size:11px}
+    .err-ctas{flex-direction:column;width:100%;max-width:320px}
+    .err-ctas a{text-align:center;border-right:none}
+    .err-ctas a.primary{border-right:none;border-bottom:1px solid rgba(255,255,255,0.14)}
   }
 </style>
 </head>
 <body>
-<canvas id="bgCanvas"></canvas>
+<div class="bg-root">
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
 
+<!-- ===================== MARKETING NAV ===================== -->
 <header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,6,12,0.82);border-bottom:1px solid rgba(255,255,255,0.09);">
   <div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
     <a href="/" style="display:flex;align-items:center;gap:11px;cursor:pointer;">
@@ -250,14 +172,15 @@
   </div>
 </header>
 
-<main>
-  <div class="wrap">
-    <div class="badge"><span class="dot"></span>Error · Page Not Found</div>
-    <div class="four">404</div>
-    <h1 class="title">Signal Lost</h1>
-    <p class="sub">The page you requested has been moved, removed, or never existed in this build. Reroute to a known endpoint below.</p>
+<!-- ===================== 404 ===================== -->
+<main class="err-main">
+  <div class="err-wrap">
+    <div class="err-badge"><span class="dot"></span>Error · Page Not Found</div>
+    <div class="err-four">404</div>
+    <h1 class="err-title">Page Not Found</h1>
+    <p class="err-sub">The page you're looking for doesn't exist or may have been moved. Double-check the URL or head back to safety.</p>
 
-    <div class="terminal" aria-hidden="true">
+    <div class="err-terminal" aria-hidden="true">
       <div class="bar"><i></i><i></i><i></i>n3ny000 · console<span>404</span></div>
       <pre><span class="arrow">&gt;</span> <span class="p">REQUEST</span> <span class="m">/[invalid-path] HTTP/1.1</span>
 <span class="arrow">&gt;</span> <span class="p">STATUS</span>  <span class="m">404 NOT_FOUND</span>
@@ -265,105 +188,30 @@
 <span class="arrow">&gt;</span> <span class="g">_</span></pre>
     </div>
 
-    <div class="ctas">
+    <div class="err-ctas">
       <a href="/" class="primary">Go Home</a>
       <a href="/help" class="ghost">Get Help</a>
     </div>
   </div>
 </main>
 
-<footer>
-  <nav class="quick">
-    <a href="/download">Download</a>
-    <a href="/store">Store</a>
-    <a href="/login">Login</a>
-    <a href="/signup">Signup</a>
-  </nav>
+<!-- ===================== FOOTER ===================== -->
+<footer style="border-top:1px solid rgba(255,255,255,0.09);position:relative;z-index:1;">
+  <div style="max-width:1180px;margin:0 auto;padding:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;">
+    <div style="display:flex;align-items:center;gap:11px;">
+      <img src="brand/Logo.png" alt="Nenyoo" style="width:30px;height:30px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+      <div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</div>
+        <div style="font-size:12px;color:#6b6479;">© 2025 N3NY000 Mod Menu. Not affiliated with Rockstar Games or Take-Two.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:26px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.04em;color:#8b8499;">
+      <a href="https://discord.gg/mwMcEDUjaa" target="_blank">DISCORD</a><a href="/download">DOWNLOAD</a><a href="/store">STORE</a><a href="/tos">TERMS</a>
+    </div>
+  </div>
 </footer>
-
-<script>
-(function(){
-  var canvas = document.getElementById('bgCanvas');
-  if(!canvas || !canvas.getContext) return;
-  var ctx = canvas.getContext('2d');
-  var w, h, dpr, particles = [];
-  var COUNT = 70;
-
-  function rand(a,b){ return a + Math.random()*(b-a); }
-
-  function resize(){
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-
-  function init(){
-    particles = [];
-    for(var i=0;i<COUNT;i++){
-      particles.push({
-        x: Math.random()*w,
-        y: Math.random()*h,
-        r: rand(0.6, 2.2),
-        vx: rand(-0.18, 0.18),
-        vy: rand(-0.12, 0.12),
-        ph: rand(0, Math.PI*2),
-        sp: rand(0.005, 0.02)
-      });
-    }
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    for(var i=0;i<particles.length;i++){
-      var p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.ph += p.sp;
-      if(p.x < -10) p.x = w+10;
-      if(p.x > w+10) p.x = -10;
-      if(p.y < -10) p.y = h+10;
-      if(p.y > h+10) p.y = -10;
-      var a = 0.18 + Math.sin(p.ph)*0.14;
-      if(a < 0) a = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(124,58,237,' + a.toFixed(3) + ')';
-      ctx.shadowColor = 'rgba(154,108,243,0.6)';
-      ctx.shadowBlur = 6;
-      ctx.fill();
-    }
-    ctx.shadowBlur = 0;
-
-    // faint connecting lines for depth
-    for(var j=0;j<particles.length;j++){
-      for(var k=j+1;k<particles.length;k++){
-        var dx = particles[j].x - particles[k].x;
-        var dy = particles[j].y - particles[k].y;
-        var dist = dx*dx + dy*dy;
-        if(dist < 13000){
-          var la = (1 - dist/13000) * 0.08;
-          ctx.strokeStyle = 'rgba(124,58,237,' + la.toFixed(3) + ')';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(particles[j].x, particles[j].y);
-          ctx.lineTo(particles[k].x, particles[k].y);
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  init();
-  window.addEventListener('resize', function(){ resize(); init(); });
-  requestAnimationFrame(draw);
-})();
-</script>
+</div>
+<script src="app.js"></script>
+<script src="nav-auth.js"></script>
 </body>
 </html>
