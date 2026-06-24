@@ -237,7 +237,10 @@ function reverseString(key, e){
   var cands = [id, nm, sing + '_' + id, dm + '_' + id, id + '_' + sing,
                'platform:/textures/' + id, 'platform:/textures/' + nm];  // Enhanced txd store keys joaat the mount path
   for(var i=0;i<cands.length;i++){
-    if(cands[i] && joaat(cands[i]) === Number(key)) return {str:cands[i], verified:true};
+    if(cands[i] && joaat(cands[i]) === Number(key)){
+      // Verified against the full source string, but show it without the engine mount prefix.
+      return {str:cands[i].replace(/^platform:\/textures\//,''), verified:true};
+    }
   }
   return id ? {str:id, verified:false} : null;  // best-guess, unverified
 }
