@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools · N3NY000</title>
+<meta name="description" content="Developer tools for N3NY000 — hex/int calculator, string to JOAAT (GTA u32 hash), and hash reverse lookup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="brand/Logo.png">
+<link rel="apple-touch-icon" href="brand/Logo.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  .tool-card{background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:28px;margin-bottom:22px;}
+  .tool-tag{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.14em;color:#8b5cf6;margin-bottom:10px;}
+  .tool-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;margin:0 0 4px;}
+  .tool-sub{font-size:13.5px;color:#9b94ab;margin:0 0 20px;}
+  .fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+  .fld label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#7d768c;text-transform:uppercase;}
+  .inp{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.14);color:#ECEAF2;font-family:'JetBrains Mono',monospace;font-size:14px;padding:11px 13px;outline:none;}
+  .inp:focus{border-color:#7c3aed;}
+  .seg{display:flex;border:1px solid rgba(255,255,255,0.14);margin-bottom:14px;}
+  .seg button{flex:1;cursor:pointer;background:transparent;border:none;color:#9b94ab;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;padding:10px;}
+  .seg button.on{background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;}
+  .btn{cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 26px rgba(124,58,237,0.4);}
+  .out{margin-top:16px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);padding:0;display:none;}
+  .out.show{display:block;}
+  .out-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.07);}
+  .out-row:last-child{border-bottom:none;}
+  .out-k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#7d768c;text-transform:uppercase;}
+  .out-v{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5ee0a8;cursor:pointer;word-break:break-all;text-align:right;}
+  .out-v:hover{color:#9af3c4;}
+  .err{color:#f0857d!important;}
+</style>
+</head>
+<body>
+<div class="bg-root">
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
+
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,6,12,0.82);border-bottom:1px solid rgba(255,255,255,0.09);">
+  <div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="display:flex;align-items:center;gap:11px;cursor:pointer;">
+      <img src="brand/Logo.png" alt="Nenyoo" style="width:34px;height:34px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.12);">
+      <a href="/download" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Download</a>
+      <a href="/store" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Store</a>
+      <a href="/guides" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Guides</a>
+      <a href="/login" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Login</a>
+      <a href="/signup" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Get Access</a>
+    </div>
+  </div>
+</header>
+
+<main style="min-height:calc(100vh - 64px);padding:48px 24px 60px;position:relative;z-index:1;">
+  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:680px;max-width:95vw;height:420px;background:radial-gradient(ellipse,rgba(124,58,237,0.2),transparent 60%);filter:blur(10px);pointer-events:none;"></div>
+  <div style="position:relative;width:100%;max-width:520px;margin:0 auto;animation:fadeUp .5s ease both;">
+
+    <div style="text-align:center;margin-bottom:32px;">
+      <div class="tool-tag" style="margin-bottom:8px;">[ DEVELOPER TOOLS ]</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;text-transform:uppercase;margin:0;">Tools</h1>
+      <p style="font-size:14px;color:#9b94ab;margin:6px 0 0;">Hex calculator · JOAAT hashing · hash reverse lookup</p>
+    </div>
+
+    <!-- ============ HEX / INT CALCULATOR ============ -->
+    <div class="tool-card">
+      <div class="tool-tag">[ HEX / INT CALCULATOR ]</div>
+      <h2 class="tool-h">Hex Calculator</h2>
+      <p class="tool-sub">Add or subtract two values. Prefix with <b>0x</b> for hex, otherwise it's read as a decimal integer. You can mix the two.</p>
+
+      <div class="fld">
+        <label>Value A</label>
+        <input id="cA" class="inp" placeholder="0x1F00 or 7936" oninput="calc()">
+      </div>
+      <div class="seg">
+        <button id="opPlus" class="on" onclick="setOp('+')">+ Add</button>
+        <button id="opMinus" onclick="setOp('-')">− Subtract</button>
+      </div>
+      <div class="fld">
+        <label>Value B</label>
+        <input id="cB" class="inp" placeholder="0x10 or 16" oninput="calc()">
+      </div>
+
+      <div id="calcOut" class="out">
+        <div class="out-row"><span class="out-k">Hex</span><span id="calcHex" class="out-v" onclick="copyText(this)"></span></div>
+        <div class="out-row"><span class="out-k">Decimal</span><span id="calcDec" class="out-v" onclick="copyText(this)"></span></div>
+        <div class="out-row"><span class="out-k">u32 (wrapped)</span><span id="calcU32" class="out-v" onclick="copyText(this)"></span></div>
+      </div>
+    </div>
+
+    <!-- ============ STRING -> JOAAT ============ -->
+    <div class="tool-card">
+      <div class="tool-tag">[ STRING → JOAAT ]</div>
+      <h2 class="tool-h">JOAAT Hash</h2>
+      <p class="tool-sub">Jenkins one-at-a-time u32 hash used by GTA. Input is lowercased before hashing (RAGE behavior).</p>
+
+      <div class="fld">
+        <label>String</label>
+        <input id="jIn" class="inp" placeholder="PLAYER_PED_ID" oninput="doJoaat()">
+      </div>
+
+      <div id="joaatOut" class="out">
+        <div class="out-row"><span class="out-k">Hex</span><span id="jHex" class="out-v" onclick="copyText(this)"></span></div>
+        <div class="out-row"><span class="out-k">Unsigned (u32)</span><span id="jU32" class="out-v" onclick="copyText(this)"></span></div>
+        <div class="out-row"><span class="out-k">Signed (i32)</span><span id="jI32" class="out-v" onclick="copyText(this)"></span></div>
+      </div>
+    </div>
+
+    <!-- ============ HASH REVERSE ============ -->
+    <div class="tool-card">
+      <div class="tool-tag">[ HASH → STRING ]</div>
+      <h2 class="tool-h">Hash Reverse</h2>
+      <p class="tool-sub">Look up a u32 hash in the GTA Discovery API. Prefix with <b>0x</b> for hex, otherwise decimal.</p>
+
+      <div class="fld">
+        <label>Hash</label>
+        <input id="rIn" class="inp" placeholder="0xC2B82BE4 or 3266348004" onkeydown="if(event.key==='Enter')doReverse()">
+      </div>
+      <button class="btn" onclick="doReverse()">Reverse Lookup</button>
+
+      <div id="revOut" class="out">
+        <div class="out-row"><span class="out-k">Name</span><span id="rName" class="out-v" onclick="copyText(this)"></span></div>
+        <div class="out-row"><span class="out-k">Domain</span><span id="rDomain" class="out-v" onclick="copyText(this)"></span></div>
+        <div class="out-row"><span class="out-k">ID</span><span id="rId" class="out-v" onclick="copyText(this)"></span></div>
+        <div class="out-row"><span class="out-k">Decimal Key</span><span id="rKey" class="out-v" onclick="copyText(this)"></span></div>
+      </div>
+    </div>
+
+    <p style="text-align:center;margin-top:8px;"><a href="/" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#a78bfa;font-weight:600;">← Back to home</a></p>
+  </div>
+</main>
+
+</div>
+<script src="app.js"></script>
+<script src="nav-auth.js"></script>
+<script>
+/* ---------- helpers ---------- */
+// Parse a value: "0x..." => hex, else decimal int. Returns BigInt or null.
+function parseVal(s){
+  s = (s||'').trim();
+  if(!s) return null;
+  var neg = false;
+  if(s[0]==='-'){ neg = true; s = s.slice(1).trim(); }
+  if(s[0]==='+'){ s = s.slice(1).trim(); }
+  var v;
+  if(/^0x[0-9a-fA-F]+$/.test(s)){
+    v = BigInt(s);
+  } else if(/^[0-9]+$/.test(s)){
+    v = BigInt(s);
+  } else {
+    return null;
+  }
+  return neg ? -v : v;
+}
+function toU32(big){
+  var m = big % 4294967296n;          // mod 2^32
+  if(m < 0n) m += 4294967296n;
+  return m;
+}
+function hex32(u32){
+  return '0x' + u32.toString(16).toUpperCase().padStart(8,'0');
+}
+function copyText(el){
+  var t = el.textContent;
+  navigator.clipboard && navigator.clipboard.writeText(t);
+  var old = el.textContent;
+  el.textContent = 'copied ✓';
+  setTimeout(function(){ el.textContent = old; }, 700);
+}
+
+/* ---------- hex calculator ---------- */
+var curOp = '+';
+function setOp(op){
+  curOp = op;
+  document.getElementById('opPlus').classList.toggle('on', op==='+');
+  document.getElementById('opMinus').classList.toggle('on', op==='-');
+  calc();
+}
+function calc(){
+  var a = parseVal(document.getElementById('cA').value);
+  var b = parseVal(document.getElementById('cB').value);
+  var out = document.getElementById('calcOut');
+  if(a===null || b===null){ out.classList.remove('show'); return; }
+  var res = curOp==='+' ? a + b : a - b;
+  out.classList.add('show');
+  var u = toU32(res);
+  // For non-negative results show clean hex; for negative, show signed decimal + u32 hex.
+  document.getElementById('calcHex').textContent = res < 0n ? '-0x' + (-res).toString(16).toUpperCase() : '0x' + res.toString(16).toUpperCase();
+  document.getElementById('calcDec').textContent = res.toString();
+  document.getElementById('calcU32').textContent = hex32(u) + '  (' + u.toString() + ')';
+}
+
+/* ---------- JOAAT ---------- */
+function joaat(str){
+  str = str.toLowerCase();
+  var hash = 0;
+  for(var i=0;i<str.length;i++){
+    hash = (hash + str.charCodeAt(i)) >>> 0;
+    hash = (hash + (hash << 10)) >>> 0;
+    hash = (hash ^ (hash >>> 6)) >>> 0;
+  }
+  hash = (hash + (hash << 3)) >>> 0;
+  hash = (hash ^ (hash >>> 11)) >>> 0;
+  hash = (hash + (hash << 15)) >>> 0;
+  return hash >>> 0;
+}
+function doJoaat(){
+  var s = document.getElementById('jIn').value;
+  var out = document.getElementById('joaatOut');
+  if(!s){ out.classList.remove('show'); return; }
+  var h = joaat(s);
+  out.classList.add('show');
+  document.getElementById('jHex').textContent = '0x' + h.toString(16).toUpperCase().padStart(8,'0');
+  document.getElementById('jU32').textContent = h.toString();
+  document.getElementById('jI32').textContent = (h | 0).toString();
+}
+
+/* ---------- hash reverse ---------- */
+var hashData = null, hashLoading = null;
+function loadHashes(){
+  if(hashData) return Promise.resolve(hashData);
+  if(hashLoading) return hashLoading;
+  hashLoading = fetch('https://cdn.jsdelivr.net/gh/Rendererrr/gtaDiscoveryApi@main/api/hashes.json')
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(j){ hashData = j; return j; });
+  return hashLoading;
+}
+function showRevError(msg){
+  var out = document.getElementById('revOut');
+  out.classList.add('show');
+  document.getElementById('rName').innerHTML = '<span class="err">' + msg + '</span>';
+  document.getElementById('rDomain').textContent = '—';
+  document.getElementById('rId').textContent = '—';
+  document.getElementById('rKey').textContent = '—';
+}
+function doReverse(){
+  var raw = document.getElementById('rIn').value.trim();
+  var v = parseVal(raw);
+  if(v===null){ showRevError('Invalid input'); return; }
+  var key = toU32(v).toString(); // API keys are unsigned decimal strings
+  document.getElementById('rName').textContent = 'Loading…';
+  document.getElementById('revOut').classList.add('show');
+  loadHashes().then(function(data){
+    var res = data.hashes ? data.hashes[key] : null;
+    if(res){
+      document.getElementById('rName').textContent = res.name || '—';
+      document.getElementById('rDomain').textContent = res.domain || '—';
+      document.getElementById('rId').textContent = (res.id!=null ? res.id : '—');
+      document.getElementById('rKey').textContent = key;
+    } else {
+      showRevError('No match for ' + (raw || key));
+      document.getElementById('rKey').innerHTML = '<span style="color:#7d768c;">' + key + '</span>';
+    }
+  }).catch(function(e){
+    showRevError('Lookup failed: ' + e.message);
+  });
+}
+</script>
+</body>
+</html>
