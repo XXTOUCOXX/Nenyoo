@@ -1,3 +1,16 @@
+/* ===== Nenyoo — clean URLs =====
+   GitHub Pages serves /guides from guides.html, but a visitor who lands on a
+   ".html" link would see it in the address bar. Strip it (and map index -> /)
+   without reloading. Runs on every page since app.js is included everywhere. */
+(function(){
+  try {
+    var p = location.pathname, clean = p;
+    if(/\/index\.html$/i.test(p)) clean = p.replace(/\/index\.html$/i, '/');
+    else if(/\.html$/i.test(p)) clean = p.replace(/\.html$/i, '');
+    if(clean !== p) history.replaceState(null, '', clean + location.search + location.hash);
+  } catch(e){}
+})();
+
 /* ===== Nenyoo — shared background FX + draggable cat easter egg =====
    Ported from the original DataCore component to plain vanilla JS so it can
    run on every standalone page. Looks for <canvas id="fx"> and <canvas id="catFx">. */
