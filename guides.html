@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guides · N3NY000</title>
+<meta name="description" content="Setup guides, troubleshooting and fixes for N3NY000 — synced live from our Discord help forum.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="brand/Logo.png">
+<link rel="apple-touch-icon" href="brand/Logo.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ---- guides page local styles ---- */
+  .g-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:36px 24px 90px;}
+  .g-search{width:100%;background:#0b0813;border:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:15px;padding:14px 16px 14px 44px;outline:none;}
+  .g-search:focus{border-color:rgba(139,92,246,0.5);}
+  .g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px;}
+  @media(max-width:720px){.g-grid{grid-template-columns:1fr;}}
+  .g-card{position:relative;text-align:left;background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:22px 22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:10px;transition:border-color .15s,transform .15s;font-family:inherit;}
+  .g-card:hover{border-color:rgba(139,92,246,0.45);transform:translateY(-2px);}
+  .g-card h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:#ECEAF2;margin:0;line-height:1.3;}
+  .g-snip{font-size:13px;color:#9b94ab;line-height:1.55;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .g-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.04em;color:#7d768c;}
+  .g-chip{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:3px 8px;}
+  .g-chip.img{color:#a78bfa;border-color:rgba(139,92,246,0.3);background:rgba(139,92,246,0.08);}
+  /* article view */
+  .g-article{max-width:820px;margin:0 auto;}
+  .g-back{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid rgba(255,255,255,0.14);color:#c4bdd1;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;padding:9px 15px;cursor:pointer;margin-bottom:24px;}
+  .g-back:hover{border-color:rgba(139,92,246,0.45);color:#ECEAF2;}
+  .g-msg{background:#0b0813;border:1px solid rgba(255,255,255,0.09);padding:22px 24px;margin-bottom:14px;}
+  .g-msg-head{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .g-av{width:36px;height:36px;border-radius:50%;background:#5865F2;flex:none;object-fit:cover;}
+  .g-author{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:#ECEAF2;}
+  .g-time{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6479;}
+  .g-body{font-size:14.5px;color:#cfc8db;line-height:1.7;word-wrap:break-word;}
+  .g-body strong{color:#fff;font-weight:700;}
+  .g-body a{color:#a78bfa;font-weight:600;word-break:break-all;}
+  .g-body a.g-xlink{display:inline-block;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);padding:2px 9px;word-break:normal;text-decoration:none;}
+  .g-body a.g-xlink:hover{background:rgba(139,92,246,0.18);}
+  .g-body h1,.g-body h2,.g-body h3{font-family:'Space Grotesk',sans-serif;color:#fff;margin:16px 0 8px;line-height:1.25;}
+  .g-body h1{font-size:21px;}.g-body h2{font-size:18px;}.g-body h3{font-size:16px;}
+  .g-body .sub{font-size:12.5px;color:#8d869c;}
+  .g-body ul{margin:8px 0;padding-left:20px;}
+  .g-body li{margin:3px 0;}
+  .g-emoji{height:1.35em;width:auto;vertical-align:-0.28em;margin:0 1px;display:inline-block;}
+  .g-body code{font-family:'JetBrains Mono',monospace;font-size:12.5px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);padding:1px 5px;}
+  .g-body pre{font-family:'JetBrains Mono',monospace;font-size:12.5px;background:#07060c;border:1px solid rgba(255,255,255,0.12);padding:12px 14px;overflow-x:auto;margin:10px 0;white-space:pre-wrap;color:#c4bdd1;}
+  .g-video{position:relative;width:100%;max-width:560px;aspect-ratio:16/9;margin-top:14px;border:1px solid rgba(255,255,255,0.12);background:#000;}
+  .g-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .g-imgs{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .g-imgs img{max-width:200px;max-height:150px;border:1px solid rgba(255,255,255,0.12);cursor:zoom-in;object-fit:cover;}
+  .g-file{display:inline-flex;align-items:center;gap:8px;background:#07060c;border:1px solid rgba(255,255,255,0.12);padding:9px 13px;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#a78bfa;text-decoration:none;}
+  /* lightbox */
+  #lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(3,2,8,0.92);backdrop-filter:blur(6px);padding:30px;cursor:zoom-out;}
+  #lightbox.on{display:flex;}
+  #lightbox img{max-width:95vw;max-height:92vh;border:1px solid rgba(255,255,255,0.15);}
+  .g-state{text-align:center;padding:80px 20px;color:#9b94ab;}
+  .g-spin{width:34px;height:34px;border:3px solid rgba(255,255,255,0.12);border-top-color:#8b5cf6;border-radius:50%;margin:0 auto 18px;animation:gspin 0.8s linear infinite;}
+  @keyframes gspin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div class="bg-root">
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
+
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,6,12,0.82);border-bottom:1px solid rgba(255,255,255,0.09);">
+  <div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="display:flex;align-items:center;gap:11px;cursor:pointer;">
+      <img src="brand/Logo.png" alt="Nenyoo" style="width:34px;height:34px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.12);">
+      <a href="/download" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Download</a>
+      <a href="/store" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Store</a>
+      <a href="/guides" style="cursor:pointer;background:rgba(139,92,246,0.12);border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Guides</a>
+      <a href="/login" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Login</a>
+      <a href="/signup" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Get Access</a>
+    </div>
+  </div>
+</header>
+
+<div class="g-wrap">
+  <!-- LIST VIEW -->
+  <div id="listView">
+    <div style="text-align:center;margin-bottom:30px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.14em;color:#8b5cf6;margin-bottom:10px;">[ KNOWLEDGE BASE ]</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:44px;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 12px;">Guides &amp; Troubleshooting</h1>
+      <p style="font-size:16px;color:#9b94ab;margin:0;">Setup help, fixes and common issues — synced live from our Discord help forum.</p>
+    </div>
+    <div style="position:relative;max-width:560px;margin:0 auto;">
+      <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#6b6479;">&#128269;</span>
+      <input id="search" class="g-search" type="text" placeholder="Search guides… (e.g. crash, HWID, login)" autocomplete="off">
+    </div>
+    <div id="cards"></div>
+  </div>
+
+  <!-- ARTICLE VIEW -->
+  <div id="articleView" style="display:none;"></div>
+
+  <!-- still stuck CTA -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;background:linear-gradient(135deg,#15122a,#0d0a16);border:1px solid rgba(88,101,242,0.28);padding:22px 26px;margin-top:40px;">
+    <div style="font-size:14px;color:#c4bdd1;">Still stuck? Our team is one message away on Discord.</div>
+    <a href="https://discord.gg/mwMcEDUjaa" target="_blank" style="background:#5865F2;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:11px 20px;white-space:nowrap;">Join Discord</a>
+  </div>
+</div>
+
+<div id="lightbox"><img id="lightboxImg" src="" alt=""></div>
+
+<script src="app.js"></script>
+<script src="auth.js"></script>
+<script src="nav-auth.js"></script>
+<script>
+(function(){
+  'use strict';
+  var ENDPOINT = '/data-variables/discord_fourms';
+  var listView = document.getElementById('listView');
+  var articleView = document.getElementById('articleView');
+  var cardsEl = document.getElementById('cards');
+  var searchEl = document.getElementById('search');
+  var esc = (window.NenyooAuth && NenyooAuth.escapeHtml) || function(s){
+    return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  };
+  var POSTS = [];
+  var THREAD_SLUG = {}; // discord thread_id -> internal guide slug
+
+  // ---------- fetch + parse the (double-encoded) data variable ----------
+  function loadingState(){
+    cardsEl.innerHTML = '<div class="g-state"><div class="g-spin"></div>Loading guides…</div>';
+  }
+  function errorState(msg){
+    cardsEl.innerHTML = '<div class="g-state"><div style="font-size:34px;margin-bottom:12px;">&#9888;&#65039;</div>'+
+      '<div style="color:#ECEAF2;font-weight:600;margin-bottom:6px;">Couldn\'t load guides</div>'+
+      '<div style="font-size:13px;">'+esc(msg||'')+'</div>'+
+      '<div style="margin-top:18px;"><a href="https://discord.gg/mwMcEDUjaa" target="_blank" style="color:#a78bfa;font-weight:600;">Get help on Discord →</a></div></div>';
+  }
+
+  async function load(){
+    loadingState();
+    var res;
+    try {
+      res = await NenyooAuth.api('GET', ENDPOINT);
+    } catch(e){ return errorState('Network error.'); }
+    if(!res || !res.ok){
+      return errorState(res && res.data && res.data.message ? res.data.message : 'Request failed ('+(res?res.status:'?')+').');
+    }
+    var value = res.data && res.data.value;
+    var parsed;
+    try { parsed = (typeof value === 'string') ? JSON.parse(value) : value; }
+    catch(e){ return errorState('Guide data is malformed.'); }
+    if(!parsed || !Array.isArray(parsed.posts)) return errorState('No guides found.');
+    // newest first
+    POSTS = parsed.posts.slice().sort(function(a,b){
+      return new Date(b.created_at||0) - new Date(a.created_at||0);
+    });
+    // assign a readable, unique slug to each guide for clean deep-link URLs
+    var seen = {};
+    POSTS.forEach(function(p){
+      var base = slugify(p.title) || ('guide-'+p.thread_id);
+      var s = base, i = 2;
+      while(seen[s]){ s = base+'-'+(i++); }
+      seen[s] = true; p.__slug = s;
+      THREAD_SLUG[p.thread_id] = { slug: s, title: p.title || 'guide' };
+    });
+    render(POSTS);
+    routeFromHash();
+  }
+
+  function slugify(s){
+    return String(s||'').toLowerCase()
+      .replace(/[^\w\s-]/g,'')      // drop punctuation/emoji
+      .replace(/[\s_]+/g,'-')        // spaces -> dashes
+      .replace(/-+/g,'-')
+      .replace(/^-+|-+$/g,'')
+      .slice(0,60).replace(/-+$/,'');
+  }
+
+  // ---------- helpers ----------
+  function firstText(post){
+    var msgs = post.messages || [];
+    for(var i=0;i<msgs.length;i++){ if(msgs[i].content) return msgs[i].content; }
+    return '';
+  }
+  function imgCount(post){
+    var n=0;(post.messages||[]).forEach(function(m){
+      (m.attachments||[]).forEach(function(a){ if(isImage(a)) n++; });
+    });return n;
+  }
+  function isImage(a){
+    var t = (a.original_content_type || a.content_type || '');
+    return /^image\//.test(t) || /\.(png|jpe?g|gif|webp|bmp)$/i.test(a.filename||'');
+  }
+  function authorName(m){
+    var a = m && m.author; if(!a) return 'N3NY000';
+    return a.global_name || a.username || 'N3NY000';
+  }
+  function avatarUrl(m){
+    var a = m && m.author; if(!a) return '';
+    if(a.avatar && a.id) return 'https://cdn.discordapp.com/avatars/'+a.id+'/'+a.avatar+'.png?size=64';
+    return '';
+  }
+  function fmtDate(ts){
+    var d = new Date(ts); if(isNaN(d)) return '';
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  }
+  // pull unique YouTube videos (id + optional start time) out of message text
+  function youtubeEmbeds(content){
+    var re = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/))([\w-]{6,})([^\s<)]*)/gi;
+    var out = [], seen = {}, m;
+    while((m = re.exec(String(content||'')))){
+      var id = m[1], rest = m[2] || '', start = 0;
+      var t = rest.match(/[?&]t=(\d+)/); if(t) start = +t[1];
+      if(!seen[id]){ seen[id] = 1; out.push({ id: id, start: start }); }
+    }
+    return out;
+  }
+
+  // remove Discord-only inline tokens for plain-text snippets:
+  // custom emoji <a:name:id>, mentions <@user>/<#channel>/<@&role>, timestamps <t:..>
+  function stripDiscordTokens(s){
+    return String(s||'')
+      .replace(/<a?:\w+:\d+>/g,'')
+      .replace(/<(?:@[!&]?|#)\d+>/g,'')
+      .replace(/<t:\d+(?::[a-zA-Z])?>/g,'');
+  }
+  // strip discord markdown to a plain snippet (for cards)
+  function snippet(txt){
+    return stripDiscordTokens(String(txt||''))
+      .replace(/```[\s\S]*?```/g,' ')
+      .replace(/[*_~`>#]/g,'')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1')
+      .replace(/\s+/g,' ').trim();
+  }
+
+  // ---------- lightweight discord markdown renderer ----------
+  function renderMarkdown(raw){
+    if(!raw) return '';
+    // pull out code blocks first (placeholder @@CB<n>@@ survives escaping/markdown)
+    var blocks = [];
+    raw = raw.replace(/```(?:[a-zA-Z0-9]+\n)?([\s\S]*?)```/g, function(_,c){
+      blocks.push('<pre>'+esc(c.replace(/\n$/,''))+'</pre>'); return '@@CB'+(blocks.length-1)+'@@';
+    });
+    // ``double-backtick`` inline code spans, extracted at content level with a
+    // lazy match so adjacent spans don't merge and multi-line spans still work.
+    raw = raw.replace(/``([\s\S]+?)``/g, function(_,c){
+      c = c.trim();
+      var tag = c.indexOf('\n') >= 0 ? ('<pre>'+esc(c)+'</pre>') : ('<code>'+esc(c)+'</code>');
+      blocks.push(tag); return '@@CB'+(blocks.length-1)+'@@';
+    });
+    var lines = raw.split('\n');
+    var out = [], inList = false;
+    function closeList(){ if(inList){ out.push('</ul>'); inList=false; } }
+    for(var i=0;i<lines.length;i++){
+      var ln = lines[i];
+      var m;
+      if(/^@@CB\d+@@$/.test(ln.trim())){ closeList(); out.push(ln.trim()); continue; }
+      if(ln.trim()===''){ closeList(); out.push('<div style="height:8px"></div>'); continue; }
+      if((m=ln.match(/^###\s+(.*)/))){ closeList(); out.push('<h3>'+inline(m[1])+'</h3>'); continue; }
+      if((m=ln.match(/^##\s+(.*)/))){ closeList(); out.push('<h2>'+inline(m[1])+'</h2>'); continue; }
+      if((m=ln.match(/^#\s+(.*)/))){ closeList(); out.push('<h1>'+inline(m[1])+'</h1>'); continue; }
+      if((m=ln.match(/^-#\s+(.*)/))){ closeList(); out.push('<div class="sub">'+inline(m[1])+'</div>'); continue; }
+      if((m=ln.match(/^\s*[-*]\s+(.*)/))){ if(!inList){ out.push('<ul>'); inList=true; } out.push('<li>'+inline(m[1])+'</li>'); continue; }
+      if((m=ln.match(/^>\s?(.*)/))){ closeList(); out.push('<div style="border-left:3px solid rgba(139,92,246,0.5);padding-left:12px;color:#b8b1c6;">'+inline(m[1])+'</div>'); continue; }
+      closeList(); out.push('<div>'+inline(ln)+'</div>');
+    }
+    closeList();
+    var html = out.join('');
+    html = html.replace(/@@CB(\d+)@@/g, function(_,n){ return blocks[+n]; });
+    return html;
+  }
+
+  function inline(s){
+    s = String(s||'');
+    // mentions / timestamps: strip (no name resolution available client-side)
+    s = s.replace(/<(?:@[!&]?|#)\d+>/g,'').replace(/<t:\d+(?::[a-zA-Z])?>/g,'');
+    // custom emoji -> placeholder now, real <img> after escaping.
+    // <a:name:id> = animated (.gif), <:name:id> = static (.png).
+    var emojis = [];
+    s = s.replace(/<(a)?:(\w+):(\d+)>/g, function(_, anim, name, id){
+      var ext = anim ? 'gif' : 'png';
+      emojis.push('<img class="g-emoji" src="https://cdn.discordapp.com/emojis/'+id+'.'+ext+'?size=48" alt=":'+esc(name)+':" title=":'+esc(name)+':" loading="lazy" onerror="this.style.display=\'none\'">');
+      return '@@EMO'+(emojis.length-1)+'@@';
+    });
+    s = esc(s);
+    // inline code (handles single AND multi-backtick spans like ``code``)
+    s = s.replace(/(`+)([^`]+?)\1/g,'<code>$2</code>');
+    // masked links [text](url)
+    s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // bold / italic / strike
+    s = s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    s = s.replace(/(^|[^*])\*([^*]+)\*/g,'$1<em>$2</em>');
+    s = s.replace(/__([^_]+)__/g,'<strong>$1</strong>');
+    s = s.replace(/~~([^~]+)~~/g,'<s>$1</s>');
+    // bare urls — protect existing <a>/<code> spans, then linkify every URL
+    // regardless of the preceding char (handles URLs glued to </code>, etc.),
+    // then restore the protected spans. Avoids nested/broken anchors.
+    var prot = [];
+    s = s.replace(/<(a|code)\b[^>]*>[\s\S]*?<\/\1>/g, function(m){
+      prot.push(m); return '@@P'+(prot.length-1)+'@@';
+    });
+    s = s.replace(/(https?:\/\/[^\s<)]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+    s = s.replace(/@@P(\d+)@@/g, function(_,n){ return prot[+n]; });
+    // rewrite Discord channel links that point to one of our guides into
+    // internal #slug links (so they navigate within the site, not to Discord).
+    // discord.com/channels/<guild>/<thread>[/<message>]
+    s = s.replace(/<a href="https?:\/\/(?:www\.|canary\.|ptb\.)?discord(?:app)?\.com\/channels\/\d+\/(\d+)(?:\/\d+)?[^"]*"[^>]*>([\s\S]*?)<\/a>/g,
+      function(full, threadId, text){
+        var g = THREAD_SLUG[threadId];
+        if(!g) return full; // not one of our guides -> leave as external Discord link
+        // if the visible text was just the raw URL, show the guide title instead
+        var label = /^https?:\/\//.test(text.trim()) ? ('&#128279; '+esc(g.title)) : text;
+        return '<a href="#'+g.slug+'" class="g-xlink">'+label+'</a>';
+      });
+    // restore custom-emoji images
+    s = s.replace(/@@EMO(\d+)@@/g, function(_,n){ return emojis[+n]; });
+    return s;
+  }
+
+  // ---------- list render ----------
+  function render(posts){
+    if(!posts.length){ cardsEl.innerHTML = '<div class="g-state">No guides match your search.</div>'; return; }
+    var grid = document.createElement('div'); grid.className='g-grid';
+    posts.forEach(function(p){
+      var imgs = imgCount(p);
+      var btn = document.createElement('button');
+      btn.className='g-card';
+      btn.onclick = function(){ location.hash = p.__slug; };
+      btn.innerHTML =
+        '<h3>'+esc(p.title||'Untitled')+'</h3>'+
+        '<p class="g-snip">'+esc(snippet(firstText(p)).slice(0,160))+'</p>'+
+        '<div class="g-meta">'+
+          '<span class="g-chip">'+(p.message_count||(p.messages||[]).length||0)+' replies</span>'+
+          (imgs?'<span class="g-chip img">&#128247; '+imgs+'</span>':'')+
+          '<span class="g-chip">'+esc(fmtDate(p.created_at))+'</span>'+
+        '</div>';
+      grid.appendChild(btn);
+    });
+    cardsEl.innerHTML=''; cardsEl.appendChild(grid);
+  }
+
+  // ---------- article render ----------
+  function openArticle(post){
+    var html = '<div class="g-article">'+
+      '<button class="g-back" onclick="location.hash=\'\'">&larr; All guides</button>'+
+      '<h1 style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:30px;line-height:1.2;margin:0 0 8px;">'+esc(post.title||'Untitled')+'</h1>'+
+      '<div style="font-family:\'JetBrains Mono\',monospace;font-size:11.5px;color:#7d768c;margin-bottom:26px;">'+esc(fmtDate(post.created_at))+' · '+(post.message_count||(post.messages||[]).length||0)+' messages</div>';
+
+    (post.messages||[]).forEach(function(m){
+      var av = avatarUrl(m);
+      var imgs = (m.attachments||[]).filter(isImage);
+      var files = (m.attachments||[]).filter(function(a){ return !isImage(a); });
+      html += '<div class="g-msg">'+
+        '<div class="g-msg-head">'+
+          (av?'<img class="g-av" src="'+esc(av)+'" alt="" onerror="this.style.display=\'none\'">':'<div class="g-av"></div>')+
+          '<div><div class="g-author">'+esc(authorName(m))+'</div>'+
+          '<div class="g-time">'+esc(fmtDate(m.timestamp))+'</div></div>'+
+        '</div>'+
+        '<div class="g-body">'+renderMarkdown(m.content)+'</div>';
+      // embed any YouTube videos referenced in this message
+      youtubeEmbeds(m.content).forEach(function(vd){
+        html += '<div class="g-video"><iframe src="https://www.youtube-nocookie.com/embed/'+esc(vd.id)+
+          (vd.start?('?start='+vd.start):'')+'" title="YouTube video" loading="lazy" '+
+          'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '+
+          'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>';
+      });
+      if(imgs.length){
+        html += '<div class="g-imgs">';
+        imgs.forEach(function(a){
+          var u = a.url || a.proxy_url;
+          html += '<img loading="lazy" src="'+esc(u)+'" alt="'+esc(a.filename||'')+'" onclick="window.__lb(this.src)" onerror="this.style.display=\'none\'">';
+        });
+        html += '</div>';
+      }
+      files.forEach(function(a){
+        html += '<a class="g-file" href="'+esc(a.url||a.proxy_url||'#')+'" target="_blank" rel="noopener">&#128206; '+esc(a.filename||'attachment')+'</a>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+    articleView.innerHTML = html;
+    listView.style.display='none';
+    articleView.style.display='';
+    window.scrollTo(0,0);
+  }
+
+  // ---------- routing (deep links) ----------
+  function routeFromHash(){
+    var h = decodeURIComponent(location.hash.replace(/^#/,''));
+    if(h){
+      // match by slug, with backward-compat for old guide/<thread_id> links
+      var legacy = h.match(/^guide\/(\d+)$/);
+      var post = POSTS.filter(function(p){
+        return p.__slug === h || (legacy && String(p.thread_id) === legacy[1]);
+      })[0];
+      if(post){
+        if(legacy) { location.replace('#'+post.__slug); return; } // upgrade old URL
+        openArticle(post); return;
+      }
+    }
+    // list
+    articleView.style.display='none';
+    listView.style.display='';
+  }
+  window.addEventListener('hashchange', routeFromHash);
+
+  // ---------- search ----------
+  var t;
+  searchEl.addEventListener('input', function(){
+    clearTimeout(t);
+    t = setTimeout(function(){
+      var q = searchEl.value.trim().toLowerCase();
+      if(!q){ render(POSTS); return; }
+      render(POSTS.filter(function(p){
+        var hay = (p.title||'')+' '+firstText(p);
+        return hay.toLowerCase().indexOf(q) !== -1;
+      }));
+    }, 120);
+  });
+
+  // ---------- lightbox ----------
+  var lb = document.getElementById('lightbox'), lbImg = document.getElementById('lightboxImg');
+  window.__lb = function(src){ lbImg.src=src; lb.classList.add('on'); };
+  lb.addEventListener('click', function(){ lb.classList.remove('on'); lbImg.src=''; });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') lb.classList.remove('on'); });
+
+  load();
+})();
+</script>
+</body>
+</html>
