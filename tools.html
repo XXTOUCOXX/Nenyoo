@@ -122,6 +122,7 @@
       <button class="btn" onclick="doReverse()">Reverse Lookup</button>
 
       <div id="revOut" class="out">
+        <div class="out-row"><span class="out-k">Hash String</span><span id="rStr" class="out-v" onclick="copyText(this)"></span></div>
         <div class="out-row"><span class="out-k">Name</span><span id="rName" class="out-v" onclick="copyText(this)"></span></div>
         <div class="out-row"><span class="out-k">Domain</span><span id="rDomain" class="out-v" onclick="copyText(this)"></span></div>
         <div class="out-row"><span class="out-k">ID</span><span id="rId" class="out-v" onclick="copyText(this)"></span></div>
@@ -228,9 +229,21 @@ function loadHashes(){
     .then(function(j){ hashData = j; return j; });
   return hashLoading;
 }
+// Reconstruct the original joaat source string from API metadata and VERIFY it
+// hashes back to the key. Returns {str, verified} or null.
+function reverseString(key, e){
+  var id = e.id || '', nm = e.name || '', dm = e.domain || '';
+  var sing = dm.replace(/s$/, '');           // weapons -> weapon
+  var cands = [id, nm, sing + '_' + id, dm + '_' + id, id + '_' + sing];
+  for(var i=0;i<cands.length;i++){
+    if(cands[i] && joaat(cands[i]) === Number(key)) return {str:cands[i], verified:true};
+  }
+  return id ? {str:id, verified:false} : null;  // best-guess, unverified
+}
 function showRevError(msg){
   var out = document.getElementById('revOut');
   out.classList.add('show');
+  document.getElementById('rStr').innerHTML = '<span class="err">' + msg + '</span>';
   document.getElementById('rName').innerHTML = '<span class="err">' + msg + '</span>';
   document.getElementById('rDomain').textContent = '—';
   document.getElementById('rId').textContent = '—';
@@ -246,6 +259,15 @@ function doReverse(){
   loadHashes().then(function(data){
     var res = data.hashes ? data.hashes[key] : null;
     if(res){
+      var rs = reverseString(key, res);
+      var strEl = document.getElementById('rStr');
+      if(rs && rs.verified){
+        strEl.textContent = rs.str;
+      } else if(rs){
+        strEl.innerHTML = rs.str + '<span style="color:#7d768c;"> (unverified)</span>';
+      } else {
+        strEl.textContent = '—';
+      }
       document.getElementById('rName').textContent = res.name || '—';
       document.getElementById('rDomain').textContent = res.domain || '—';
       document.getElementById('rId').textContent = (res.id!=null ? res.id : '—');
