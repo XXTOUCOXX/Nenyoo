@@ -234,7 +234,8 @@ function loadHashes(){
 function reverseString(key, e){
   var id = e.id || '', nm = e.name || '', dm = e.domain || '';
   var sing = dm.replace(/s$/, '');           // weapons -> weapon
-  var cands = [id, nm, sing + '_' + id, dm + '_' + id, id + '_' + sing];
+  var cands = [id, nm, sing + '_' + id, dm + '_' + id, id + '_' + sing,
+               'platform:/textures/' + id, 'platform:/textures/' + nm];  // Enhanced txd store keys joaat the mount path
   for(var i=0;i<cands.length;i++){
     if(cands[i] && joaat(cands[i]) === Number(key)) return {str:cands[i], verified:true};
   }
