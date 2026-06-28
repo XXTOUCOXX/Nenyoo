@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap · N3NY000</title>
+<meta name="description" content="N3NY000 development roadmap — what's shipped, what's in progress, and what's coming next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="brand/Logo.png">
+<link rel="apple-touch-icon" href="brand/Logo.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ===== Roadmap timeline ===== */
+  .rm-wrap{position:relative;max-width:780px;margin:0 auto;padding:10px 0 30px;}
+
+  /* the animated serpentine S-curve that weaves down the timeline.
+     It's an SVG overlay sitting behind the cards/nodes, inset to span
+     exactly the rows region so its viewBox y-fractions line up with nodes. */
+  .rm-svg{position:absolute;left:0;right:0;top:10px;bottom:30px;width:100%;z-index:1;pointer-events:none;overflow:visible;}
+  .rm-track{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:3;vector-effect:non-scaling-stroke;}
+  .rm-progress{fill:none;stroke:url(#rmGrad);stroke-width:3.5;stroke-linecap:round;vector-effect:non-scaling-stroke;
+    filter:drop-shadow(0 0 6px rgba(124,58,237,0.55));
+    stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.2s cubic-bezier(.4,0,.2,1);}
+  .rm-pulse{fill:#c4a6ff;filter:drop-shadow(0 0 7px rgba(167,139,250,0.95));}
+
+  .rm-row{position:relative;display:flex;align-items:center;margin:0 0 38px;min-height:54px;}
+  .rm-row .rm-card{width:calc(50% - 46px);}
+  /* alternate sides */
+  .rm-row.left{justify-content:flex-start;}
+  .rm-row.right{justify-content:flex-end;}
+
+  /* the node sitting on the curve — alternating sides match the S swing */
+  .rm-node{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:26px;height:26px;border-radius:50%;z-index:3;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+    border:3px solid #07060c;}
+  .rm-node.done{background:#5ee0a8;color:#06281b;box-shadow:0 0 0 4px rgba(94,224,168,0.18),0 0 22px rgba(94,224,168,0.5);}
+  .rm-node.prog{background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;box-shadow:0 0 0 4px rgba(124,58,237,0.22),0 0 22px rgba(124,58,237,0.55);animation:pulseDot 1.8s ease-in-out infinite;}
+  .rm-node.todo{background:#1a1426;color:#6b6480;box-shadow:0 0 0 4px rgba(255,255,255,0.04);}
+  /* push nodes onto the curve's swing (x=38% / x=62% — must match the path d) */
+  .rm-row.left  .rm-node{left:38%;}
+  .rm-row.right .rm-node{left:62%;}
+
+  /* little connector from node to card */
+  .rm-row.left  .rm-card::after,
+  .rm-row.right .rm-card::after{content:"";position:absolute;top:50%;width:34px;height:2px;background:rgba(255,255,255,0.14);}
+  .rm-row.left  .rm-card{position:relative;}
+  .rm-row.right .rm-card{position:relative;}
+  .rm-row.left  .rm-card::after{right:-34px;}
+  .rm-row.right .rm-card::after{left:-34px;}
+
+  .rm-card{position:relative;z-index:2;background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:16px 18px;transition:border-color .2s,transform .2s;}
+  .rm-card:hover{border-color:rgba(124,58,237,0.55);transform:translateY(-2px);}
+  .rm-card.done{border-left:3px solid #5ee0a8;}
+  .rm-card.prog{border-left:3px solid #9a6cf3;}
+  .rm-card.todo{border-left:3px solid rgba(255,255,255,0.18);}
+
+  .rm-stat{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;display:inline-block;}
+  .rm-stat.done{color:#5ee0a8;}
+  .rm-stat.prog{color:#a78bfa;}
+  .rm-stat.todo{color:#7d768c;}
+  .rm-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;margin:0 0 5px;}
+  .rm-desc{font-size:13px;color:#9b94ab;margin:0;line-height:1.5;}
+  .rm-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;}
+  .rm-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.05em;color:#b9b2c8;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:3px 8px;}
+
+  /* progress summary bar */
+  .rm-prog{max-width:520px;margin:0 auto 44px;}
+  .rm-prog-track{height:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);overflow:hidden;}
+  .rm-prog-fill{height:100%;width:0;background:linear-gradient(90deg,#5ee0a8,#7c3aed);transition:width 1s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 18px rgba(124,58,237,0.45);}
+  .rm-legend{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:14px;}
+  .rm-leg{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#9b94ab;}
+  .rm-leg i{width:11px;height:11px;border-radius:50%;display:inline-block;}
+
+  /* mobile: curve collapses to a straight line pinned left, cards on the right */
+  @media (max-width:680px){
+    .rm-svg{left:21px;right:auto;width:3px;}      /* squeeze viewBox so the S flattens to a vertical line */
+    .rm-row .rm-node,
+    .rm-row.left .rm-node,
+    .rm-row.right .rm-node{left:21px;}
+    .rm-row{margin-bottom:26px;}
+    .rm-row.left,.rm-row.right{justify-content:flex-end;}
+    .rm-row .rm-card{width:calc(100% - 56px);}
+    .rm-row.left  .rm-card::after,
+    .rm-row.right .rm-card::after{left:-34px;right:auto;}
+  }
+</style>
+</head>
+<body>
+<div class="bg-root">
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
+
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,6,12,0.82);border-bottom:1px solid rgba(255,255,255,0.09);">
+  <div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="display:flex;align-items:center;gap:11px;cursor:pointer;">
+      <img src="brand/Logo.png" alt="Nenyoo" style="width:34px;height:34px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.12);">
+      <a href="/download" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Download</a>
+      <a href="/store" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Store</a>
+      <a href="/guides" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Guides</a>
+      <a href="/login" style="cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.12);color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Login</a>
+      <a href="/signup" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:10px 18px;">Get Access</a>
+    </div>
+  </div>
+</header>
+
+<main style="min-height:calc(100vh - 64px);padding:48px 24px 70px;position:relative;z-index:1;">
+  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:680px;max-width:95vw;height:420px;background:radial-gradient(ellipse,rgba(124,58,237,0.2),transparent 60%);filter:blur(10px);pointer-events:none;"></div>
+  <div style="position:relative;width:100%;max-width:820px;margin:0 auto;animation:fadeUp .5s ease both;">
+
+    <div style="text-align:center;margin-bottom:30px;">
+      <div class="rm-stat prog" style="margin-bottom:8px;">[ ROADMAP ]</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;text-transform:uppercase;margin:0;">What we're building</h1>
+      <p style="font-size:14px;color:#9b94ab;margin:8px 0 0;">Shipped, in progress, and what's coming next.</p>
+    </div>
+
+    <!-- progress summary -->
+    <div class="rm-prog">
+      <div class="rm-prog-track"><div class="rm-prog-fill" id="rmFill"></div></div>
+      <div class="rm-legend">
+        <span class="rm-leg"><i style="background:#5ee0a8;"></i> Complete</span>
+        <span class="rm-leg"><i style="background:#9a6cf3;"></i> In progress</span>
+        <span class="rm-leg"><i style="background:#1a1426;border:1px solid rgba(255,255,255,0.2);"></i> Planned</span>
+      </div>
+      <p id="rmPct" style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin:12px 0 0;"></p>
+    </div>
+
+    <!-- ============ TIMELINE ============ -->
+    <div class="rm-wrap">
+      <!-- Animated S-curve. viewBox is 0..100 wide, 0..100 tall (stretched to the
+           rows region via preserveAspectRatio=none). The path weaves x=38<->62 and
+           passes through each node's y-fraction. One curve segment per row. -->
+      <svg class="rm-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="rmGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#5ee0a8"/>
+            <stop offset="55%" stop-color="#9a6cf3"/>
+            <stop offset="100%" stop-color="#7c3aed"/>
+          </linearGradient>
+        </defs>
+        <!-- faint full track -->
+        <path class="rm-track" pathLength="1" d="M38,4.5
+          C38,12.05 62,12.05 62,19.6
+          C62,27.2 38,27.2 38,34.8
+          C38,42.4 62,42.4 62,50
+          C62,57.6 38,57.6 38,65.2
+          C38,72.8 62,72.8 62,80.4
+          C62,87.95 38,87.95 38,95.5"/>
+        <!-- coloured, draw-in progress path (shares the same id'd geometry for the pulse) -->
+        <path id="rmPath" class="rm-progress" pathLength="1" d="M38,4.5
+          C38,12.05 62,12.05 62,19.6
+          C62,27.2 38,27.2 38,34.8
+          C38,42.4 62,42.4 62,50
+          C62,57.6 38,57.6 38,65.2
+          C38,72.8 62,72.8 62,80.4
+          C62,87.95 38,87.95 38,95.5"/>
+        <!-- glowing pulse travelling along the built span -->
+        <circle class="rm-pulse" r="2.2">
+          <animateMotion id="rmMotion" dur="3.4s" repeatCount="indefinite"
+            keyPoints="0;0.5;0" keyTimes="0;0.5;1" calcMode="linear">
+            <mpath href="#rmPath" xlink:href="#rmPath"/>
+          </animateMotion>
+        </circle>
+      </svg>
+
+      <!-- 1 -->
+      <div class="rm-row left">
+        <div class="rm-node done">✓</div>
+        <div class="rm-card done">
+          <span class="rm-stat done">Complete</span>
+          <h3 class="rm-title">Core menu &amp; injection</h3>
+          <p class="rm-desc">Base loader, secure injection, and the main feature menu shipped and stable.</p>
+          <div class="rm-tags"><span class="rm-tag">loader</span><span class="rm-tag">core</span></div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="rm-row right">
+        <div class="rm-node done">✓</div>
+        <div class="rm-card done">
+          <span class="rm-stat done">Complete</span>
+          <h3 class="rm-title">Website &amp; store</h3>
+          <p class="rm-desc">Landing page, store, guides, dev tools, and the auth flow are all live.</p>
+          <div class="rm-tags"><span class="rm-tag">web</span><span class="rm-tag">store</span><span class="rm-tag">auth</span></div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="rm-row left">
+        <div class="rm-node done">✓</div>
+        <div class="rm-card done">
+          <span class="rm-stat done">Complete</span>
+          <h3 class="rm-title">Developer tools</h3>
+          <p class="rm-desc">Hex calculator, JOAAT hashing, and hash reverse lookup released on /tools.</p>
+          <div class="rm-tags"><span class="rm-tag">tools</span><span class="rm-tag">joaat</span></div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="rm-row right">
+        <div class="rm-node prog">●</div>
+        <div class="rm-card prog">
+          <span class="rm-stat prog">In progress</span>
+          <h3 class="rm-title">Dashboard &amp; account panel</h3>
+          <p class="rm-desc">User dashboard for keys, subscriptions, and downloads — currently being polished.</p>
+          <div class="rm-tags"><span class="rm-tag">dashboard</span><span class="rm-tag">keys</span></div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="rm-row left">
+        <div class="rm-node todo">5</div>
+        <div class="rm-card todo">
+          <span class="rm-stat todo">Planned</span>
+          <h3 class="rm-title">Auto-updater</h3>
+          <p class="rm-desc">Silent background updates so users always run the latest build automatically.</p>
+          <div class="rm-tags"><span class="rm-tag">updater</span></div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="rm-row right">
+        <div class="rm-node todo">6</div>
+        <div class="rm-card todo">
+          <span class="rm-stat todo">Planned</span>
+          <h3 class="rm-title">Lua / script API</h3>
+          <p class="rm-desc">Public scripting interface so the community can build and share custom scripts.</p>
+          <div class="rm-tags"><span class="rm-tag">lua</span><span class="rm-tag">api</span></div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="rm-row left">
+        <div class="rm-node todo">7</div>
+        <div class="rm-card todo">
+          <span class="rm-stat todo">Planned</span>
+          <h3 class="rm-title">Mobile companion</h3>
+          <p class="rm-desc">Remote control and status from your phone — long-term goal on the horizon.</p>
+          <div class="rm-tags"><span class="rm-tag">mobile</span><span class="rm-tag">future</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="text-align:center;margin-top:24px;"><a href="/" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#a78bfa;font-weight:600;">← Back to home</a></p>
+  </div>
+</main>
+
+</div>
+<script src="app.js"></script>
+<script src="nav-auth.js"></script>
+<script>
+/* Compute progress from the cards on the page and animate the bar + line fill. */
+(function(){
+  var rows  = document.querySelectorAll('.rm-row');
+  var total = rows.length;
+  var done  = document.querySelectorAll('.rm-card.done').length;
+  var prog  = document.querySelectorAll('.rm-card.prog').length;
+  // in-progress items count as half-done for the headline percentage
+  var pct = Math.round(((done + prog * 0.5) / total) * 100);
+
+  // fraction of the curve that's "built" (done fully + in-progress halfway)
+  var frac = (done + prog * 0.5) / total;
+  // clamp so the pulse/draw never hit exactly 0 or 1 (keeps the curve visible & looping)
+  var f = Math.max(0.04, Math.min(0.99, frac));
+
+  // draw the coloured progress path in up to the built point (dashoffset 1 -> 1-f)
+  var path = document.getElementById('rmPath');
+  // cap the travelling pulse to the built span, then ease back (0 -> f -> 0)
+  var motion = document.getElementById('rmMotion');
+  if(motion){
+    motion.setAttribute('keyPoints', '0;' + f.toFixed(3) + ';0');
+  }
+
+  document.getElementById('rmPct').textContent = done + ' of ' + total + ' milestones complete · ' + pct + '%';
+  requestAnimationFrame(function(){
+    setTimeout(function(){
+      document.getElementById('rmFill').style.width = pct + '%';
+      if(path) path.style.strokeDashoffset = (1 - f).toFixed(3);
+    }, 120);
+  });
+})();
+</script>
+</body>
+</html>
