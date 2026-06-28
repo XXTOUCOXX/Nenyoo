@@ -87,6 +87,55 @@
     .rm-row.left  .rm-card::after,
     .rm-row.right .rm-card::after{left:-34px;right:auto;}
   }
+
+  /* ===== Feature browser (subtabs) ===== */
+  .ft-sec{margin-top:64px;}
+  .ft-search{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.14);color:#ECEAF2;font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:11px 13px;outline:none;margin-bottom:16px;}
+  .ft-search:focus{border-color:#7c3aed;}
+  .ft-search::placeholder{color:#5d5670;}
+
+  /* subtab strip — horizontal, scrolls on small screens */
+  .ft-tabs{display:flex;gap:0;flex-wrap:wrap;border:1px solid rgba(255,255,255,0.12);margin-bottom:20px;}
+  .ft-tab{flex:1 1 auto;cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.1);
+    color:#9b94ab;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;
+    padding:10px 12px;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:7px;justify-content:center;transition:background .15s,color .15s;}
+  .ft-tab:last-child{border-right:none;}
+  .ft-tab:hover{color:#ECEAF2;background:rgba(255,255,255,0.03);}
+  .ft-tab.on{background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;}
+  .ft-tab .ft-cnt{font-size:10px;background:rgba(0,0,0,0.22);padding:1px 6px;border-radius:10px;color:inherit;opacity:.85;}
+  .ft-tab.on .ft-cnt{background:rgba(255,255,255,0.22);}
+
+  .ft-panel{animation:fadeUp .35s ease both;}
+  .ft-cat-head{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;margin:0 0 2px;}
+  .ft-cat-sub{font-size:13px;color:#9b94ab;margin:0 0 18px;}
+
+  /* a group (submenu) of features */
+  .ft-group{border:1px solid rgba(255,255,255,0.09);margin-bottom:12px;background:#0b0813;}
+  .ft-group-h{display:flex;align-items:center;gap:10px;cursor:pointer;padding:13px 16px;user-select:none;}
+  .ft-group-h:hover{background:rgba(255,255,255,0.02);}
+  .ft-caret{color:#7c3aed;font-size:11px;transition:transform .2s;flex:0 0 auto;}
+  .ft-group.open .ft-caret{transform:rotate(90deg);}
+  .ft-group-n{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px;flex:1;}
+  .ft-group-d{font-size:11.5px;color:#7d768c;}
+  .ft-group-body{display:none;padding:0 8px 8px;}
+  .ft-group.open .ft-group-body{display:block;}
+  .ft-nest{margin-left:14px;border-left:1px solid rgba(124,58,237,0.25);padding-left:8px;}
+
+  /* a single feature row */
+  .ft-feat{display:flex;align-items:flex-start;gap:11px;padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .ft-feat:last-child{border-bottom:none;}
+  .ft-feat-main{flex:1;min-width:0;}
+  .ft-feat-n{font-size:13.5px;font-weight:600;color:#ECEAF2;}
+  .ft-feat-d{font-size:12px;color:#9b94ab;margin-top:2px;line-height:1.45;}
+  .ft-badge{flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.05em;text-transform:uppercase;
+    padding:3px 7px;border-radius:3px;margin-top:1px;border:1px solid transparent;}
+  .ft-b-toggle{color:#5ee0a8;background:rgba(94,224,168,0.1);border-color:rgba(94,224,168,0.3);}
+  .ft-b-action{color:#a78bfa;background:rgba(124,58,237,0.14);border-color:rgba(124,58,237,0.35);}
+  .ft-b-float{color:#f0c47d;background:rgba(240,196,125,0.12);border-color:rgba(240,196,125,0.3);}
+  .ft-b-array{color:#7db8f0;background:rgba(125,184,240,0.12);border-color:rgba(125,184,240,0.3);}
+  .ft-b-default{color:#9b94ab;background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.12);}
+  .ft-dyn{font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;padding:10px 14px;font-style:italic;}
+  .ft-empty{text-align:center;color:#7d768c;font-family:'JetBrains Mono',monospace;font-size:12.5px;padding:30px 0;}
 </style>
 </head>
 <body>
@@ -248,13 +297,27 @@
 
     </div>
 
-    <p style="text-align:center;margin-top:24px;"><a href="/" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#a78bfa;font-weight:600;">← Back to home</a></p>
+    <!-- ============ FEATURE BROWSER (SUBTABS) ============ -->
+    <section class="ft-sec">
+      <div style="text-align:center;margin-bottom:24px;">
+        <div class="rm-stat done" style="margin-bottom:8px;">[ FEATURES ]</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;text-transform:uppercase;margin:0;">Full feature list</h2>
+        <p style="font-size:14px;color:#9b94ab;margin:8px 0 0;">Browse everything in the menu by category. <span id="ftTotal"></span></p>
+      </div>
+
+      <input id="ftSearch" class="ft-search" type="text" placeholder="Search features…  (e.g. godmode, teleport, vehicle)">
+      <div class="ft-tabs" id="ftTabs"></div>
+      <div class="ft-panel" id="ftPanel"></div>
+    </section>
+
+    <p style="text-align:center;margin-top:40px;"><a href="/" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#a78bfa;font-weight:600;">← Back to home</a></p>
   </div>
 </main>
 
 </div>
 <script src="app.js"></script>
 <script src="nav-auth.js"></script>
+<script src="features-data.js"></script>
 <script>
 /* Compute progress from the cards on the page and animate the bar + line fill. */
 (function(){
@@ -285,6 +348,104 @@
       if(path) path.style.strokeDashoffset = (1 - f).toFixed(3);
     }, 120);
   });
+})();
+
+/* ===== Feature browser: subtabs + search ===== */
+(function(){
+  var DATA = window.NENYOO_FEATURES;
+  var tabsEl = document.getElementById('ftTabs');
+  var panelEl = document.getElementById('ftPanel');
+  if(!DATA || !DATA.cats || !tabsEl){ return; }
+
+  var cats = DATA.cats;
+  var active = 0;
+  var query = '';
+
+  // total count in the header
+  var grand = cats.reduce(function(s,c){ return s + (c.cnt||0); }, 0);
+  var tot = document.getElementById('ftTotal');
+  if(tot) tot.textContent = grand + ' features across ' + cats.length + ' categories.';
+
+  function esc(s){ return (s||'').replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+
+  function badge(t){
+    var cls = 'ft-b-default', lbl = (t||'').replace(/_/g,' ');
+    if(t==='toggle'){ cls='ft-b-toggle'; lbl='toggle'; }
+    else if(t==='action'){ cls='ft-b-action'; lbl='action'; }
+    else if(t && t.indexOf('float')>-1){ cls='ft-b-float'; }
+    else if(t && t.indexOf('array')>-1){ cls='ft-b-array'; }
+    if(!lbl) return '';
+    return '<span class="ft-badge '+cls+'">'+esc(lbl)+'</span>';
+  }
+
+  // does a node (or any descendant) match the search query?
+  function matches(node){
+    if(!query) return true;
+    var hay = ((node.n||'') + ' ' + (node.d||'')).toLowerCase();
+    if(hay.indexOf(query) > -1) return true;
+    if(node.c) return node.c.some(matches);
+    return false;
+  }
+
+  function renderNode(node, nested){
+    if(node.g){  // a group (submenu)
+      if(!matches(node)) return '';
+      var open = query ? ' open' : '';   // auto-expand while searching
+      var body = (node.c||[]).map(function(ch){ return renderNode(ch, true); }).join('');
+      if(node.dyn && !body){ body = '<div class="ft-dyn">Built at runtime — entries appear in-game.</div>'; }
+      return '<div class="ft-group'+open+'">'
+        + '<div class="ft-group-h" onclick="this.parentNode.classList.toggle(\'open\')">'
+        +   '<span class="ft-caret">▶</span>'
+        +   '<span class="ft-group-n">'+esc(node.n)+'</span>'
+        +   (node.d ? '<span class="ft-group-d">'+esc(node.d)+'</span>' : '')
+        + '</div>'
+        + '<div class="ft-group-body'+(nested?' ft-nest':'')+'">'+body+'</div>'
+        + '</div>';
+    }
+    // a single feature
+    if(!matches(node)) return '';
+    return '<div class="ft-feat">'
+      + '<div class="ft-feat-main"><div class="ft-feat-n">'+esc(node.n)+'</div>'
+      +   (node.d ? '<div class="ft-feat-d">'+esc(node.d)+'</div>' : '')
+      + '</div>'
+      + badge(node.t)
+      + '</div>';
+  }
+
+  function renderPanel(){
+    var c = cats[active];
+    var inner = (c.c||[]).map(function(ch){ return renderNode(ch, false); }).join('');
+    if(!inner){
+      inner = c.dyn
+        ? '<div class="ft-dyn">This menu is built at runtime — entries appear in-game.</div>'
+        : '<div class="ft-empty">No features match “'+esc(query)+'”.</div>';
+    }
+    panelEl.innerHTML = '<h3 class="ft-cat-head">'+esc(c.n)+'</h3>'
+      + (c.d ? '<p class="ft-cat-sub">'+esc(c.d)+'</p>' : '')
+      + inner;
+  }
+
+  function renderTabs(){
+    tabsEl.innerHTML = cats.map(function(c,i){
+      return '<button class="ft-tab'+(i===active?' on':'')+'" data-i="'+i+'">'
+        + esc(c.n) + '<span class="ft-cnt">'+(c.cnt||0)+'</span></button>';
+    }).join('');
+    Array.prototype.forEach.call(tabsEl.querySelectorAll('.ft-tab'), function(b){
+      b.addEventListener('click', function(){ active = +b.getAttribute('data-i'); renderTabs(); renderPanel(); });
+    });
+  }
+
+  var searchEl = document.getElementById('ftSearch');
+  if(searchEl){
+    var tmr;
+    searchEl.addEventListener('input', function(){
+      clearTimeout(tmr);
+      tmr = setTimeout(function(){ query = searchEl.value.trim().toLowerCase(); renderPanel(); }, 120);
+    });
+  }
+
+  renderTabs();
+  renderPanel();
 })();
 </script>
 </body>
