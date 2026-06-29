@@ -41,10 +41,26 @@
 
   <!-- download buttons -->
   <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:30px;">
-    <a href="https://wormhole.app/3oAX9W#Xh2XaZV0duvcEe8Parb9aA" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:11px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:inherit;font-size:15.5px;font-weight:700;padding:17px;box-shadow:0 10px 30px rgba(124,58,237,0.4);">
+    <a href="https://download.filehosteverything.xyz/Loader.zip" id="loaderDl" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:11px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:inherit;font-size:15.5px;font-weight:700;padding:17px;box-shadow:0 10px 30px rgba(124,58,237,0.4);">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="#fff" stroke-width="1.9" stroke-linecap="square" stroke-linejoin="round"/></svg>
       Download N3NY000 Loader &amp; Auto Updater
     </a>
+    <script>
+      // Fetch the current rotated filename from the origin and rewrite the
+      // download button's href so each visitor downloads from a fresh URL.
+      // Falls back to the stable /Loader.zip if the pointer can't be reached.
+      (function(){
+        fetch('https://download.filehosteverything.xyz/current.json', { cache: 'no-store' })
+          .then(function(r){ return r.ok ? r.json() : null; })
+          .then(function(j){
+            if (j && j.file) {
+              var el = document.getElementById('loaderDl');
+              if (el) el.href = 'https://download.filehosteverything.xyz/' + j.file;
+            }
+          })
+          .catch(function(){ /* keep fallback href */ });
+      })();
+    </script>
     <a href="https://updown.link/file/atygbt" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:11px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);color:#ECEAF2;font-family:inherit;font-size:14.5px;font-weight:600;padding:15px;">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 7h6l2 2h10v10a1 1 0 01-1 1H3a1 1 0 01-1-1V8a1 1 0 011-1z" stroke="#a78bfa" stroke-width="1.7" stroke-linejoin="round"/></svg>
       Nenyooo Folder (Extract in C Drive)
