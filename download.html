@@ -53,9 +53,9 @@
         fetch('https://download.filehosteverything.xyz/current.json', { cache: 'no-store' })
           .then(function(r){ return r.ok ? r.json() : null; })
           .then(function(j){
-            if (j && j.file) {
+            if (j && j.loader) {
               var el = document.getElementById('loaderDl');
-              if (el) el.href = 'https://download.filehosteverything.xyz/' + j.file;
+              if (el) el.href = 'https://download.filehosteverything.xyz/' + j.loader;
             }
           })
           .catch(function(){ /* keep fallback href */ });
