@@ -50,12 +50,12 @@
       // download button's href so each visitor downloads from a fresh URL.
       // Falls back to the stable /Loader.zip if the pointer can't be reached.
       (function(){
-        fetch('https://download.filehosteverything.xyz/current.json', { cache: 'no-store' })
+        fetch('https://download.fijson', { cache: 'no-store' })
           .then(function(r){ return r.ok ? r.json() : null; })
           .then(function(j){
             if (j && j.loader) {
               var el = document.getElementById('loaderDl');
-              if (el) el.href = 'https://download.filehosteverything.xyz/' + j.loader;
+              if (el) el.href = 'https://downloything.xyz/' + j.loader;
             }
           })
           .catch(function(){ /* keep fallback href */ });
