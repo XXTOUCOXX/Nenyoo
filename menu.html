@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Try the menu · N3NY000 MVP Plus</title>
-<meta name="description" content="A live, playable replica of the N3NY000 MVP Plus in-game menu — real fonts, real textures, real option tree. Navigate it and retheme it in your browser.">
+<meta name="description" content="A live, playable replica of the N3NY000 MVP Plus in-game menu — real fonts, real textures, real option tree. Navigate all 2,259 options in your browser.">
 <link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin.woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css">
@@ -25,8 +25,7 @@
   @font-face{font-family:'ChaletLondon';src:url('menu-assets/Chalet LondonNineteenSixty_Regular.otf') format('opentype');font-display:swap;}
 
   .mn-wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,44px) 24px 80px;}
-  .mn-split{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(24px,3vw,44px);align-items:start;}
-  @media(max-width:1000px){.mn-split{grid-template-columns:1fr;}}
+  .mn-split{max-width:760px;margin:0 auto;}
 
   /* ---------- the menu ---------- */
   .mn-stage{
@@ -137,27 +136,6 @@
     font-size:var(--dsize);color:var(--dtxt);line-height:1.4;
   }
 
-  /* ---------- controls ---------- */
-  .mn-panel{border:1px solid var(--line);background:var(--panel);position:sticky;top:calc(var(--nav-h) + 16px);}
-  .mn-ptitle{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--brand-3);padding:16px 18px 12px;display:flex;align-items:center;gap:9px;}
-  .mn-ptitle::after{content:'';flex:1;height:1px;background:var(--line);}
-  .mn-grp{border-top:1px solid var(--line);}
-  .mn-ghead{width:100%;background:none;border:none;color:var(--ink);font-family:var(--font-mono);
-    font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:12px 18px;text-align:left;
-    cursor:pointer;display:flex;align-items:center;gap:9px;transition:background .2s;}
-  .mn-ghead:hover{background:rgba(168,85,247,.06);}
-  .mn-ghead .c{width:8px;height:8px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);
-    transform:rotate(-45deg);transition:transform .25s;}
-  .mn-grp.open .mn-ghead .c{transform:rotate(45deg);}
-  .mn-gbody{display:none;padding:4px 18px 16px;}
-  .mn-grp.open .mn-gbody{display:block;}
-  .mn-ctl{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:12.5px;color:var(--ink-2);}
-  .mn-ctl label{flex:1;min-width:0;}
-  .mn-ctl input[type=range]{width:112px;accent-color:var(--brand-2);}
-  .mn-ctl input[type=color]{width:34px;height:24px;padding:0;border:1px solid var(--line-2);background:none;cursor:pointer;}
-  .mn-ctl output{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);width:40px;text-align:right;}
-  .mn-presets{display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 16px;}
   .mn-keys{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
   .mn-key{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
     border:1px solid var(--line-2);padding:4px 8px;background:rgba(255,255,255,.03);}
@@ -206,7 +184,7 @@
   <div class="sec-head reveal" style="margin-bottom:30px;">
     <span class="kicker">MVP Plus</span>
     <h1 class="h-sec">The menu, in your browser</h1>
-    <p class="h-sub">The real thing — same fonts, same textures, same 2,259 options. Navigate it with your keyboard, then retheme it with the same controls the in-game theme editor gives you.</p>
+    <p class="h-sub">The real thing &mdash; same fonts, same textures, same 2,259 options, laid out to the exact metrics the in-game theme uses. Drive it with your keyboard or mouse.</p>
   </div>
 
   <div class="mn-split">
@@ -243,16 +221,6 @@
       </div>
     </div>
 
-    <aside class="mn-panel">
-      <div class="mn-ptitle">Theme editor</div>
-      <div class="mn-presets">
-        <button class="btn btn-ghost btn-sm" data-preset="default">Default</button>
-        <button class="btn btn-ghost btn-sm" data-preset="pink">Pink</button>
-        <button class="btn btn-ghost btn-sm" data-preset="mono">Mono</button>
-        <button class="btn btn-primary btn-sm" id="mnCopy">Copy .ini</button>
-      </div>
-      <div id="mnControls"></div>
-    </aside>
   </div>
 
   <a class="dc" href="/store" style="margin-top:36px;">
