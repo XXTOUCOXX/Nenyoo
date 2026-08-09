@@ -240,6 +240,42 @@
   }
 
   /* ---------------------------------------------------------
+     7b. 3D TILT  (opt in with data-tilt, optional data-tilt-max)
+     --------------------------------------------------------- */
+  function initTilt() {
+    if (reduced || window.matchMedia('(hover: none)').matches) return;
+    var els = document.querySelectorAll('[data-tilt]');
+    if (!els.length) return;
+
+    Array.prototype.forEach.call(els, function (el) {
+      var max = parseFloat(el.getAttribute('data-tilt-max')) || 7;
+      var frame = 0;
+
+      el.addEventListener('pointermove', function (e) {
+        if (frame) return;
+        frame = requestAnimationFrame(function () {
+          frame = 0;
+          var r = el.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          el.classList.add('is-tilting');
+          el.style.setProperty('--ry', (px * max * 2).toFixed(2) + 'deg');
+          el.style.setProperty('--rx', (-py * max * 2).toFixed(2) + 'deg');
+          el.style.setProperty('--tz', '14px');
+        });
+      });
+
+      el.addEventListener('pointerleave', function () {
+        if (frame) { cancelAnimationFrame(frame); frame = 0; }
+        el.classList.remove('is-tilting');
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+        el.style.setProperty('--tz', '0px');
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------
      8. PARALLAX  (opt in with data-parallax="0.15")
      --------------------------------------------------------- */
   function initParallax() {
@@ -319,6 +355,7 @@
     safe(initProgress)();
     safe(initSpotlight)();
     safe(initMagnet)();
+    safe(initTilt)();
     safe(initParallax)();
     safe(initMarquee)();
     safe(initCountdown)();

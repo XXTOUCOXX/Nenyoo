@@ -59,6 +59,15 @@ input::placeholder{color:#5d5670;}
 ::-webkit-scrollbar-thumb:hover{background:#3a2a58;}
 :focus-visible{outline:2px solid var(--brand-2);outline-offset:3px;}
 
+/* ---------- skip link ---------- */
+.skip{
+  position:fixed;top:-100px;left:16px;z-index:10000;
+  background:var(--grad);color:#fff;font-weight:600;font-size:14px;
+  padding:12px 20px;transition:top .25s var(--ease-out-expo);
+}
+.skip:focus{top:16px;}
+main:focus,[id="main"]:focus{outline:none;}
+
 /* ---------- root canvas / page shell ---------- */
 .bg-root{
   min-height:100vh;
@@ -480,6 +489,48 @@ body.intro-lock{overflow:hidden;}
   [style*="font-size:42px"]{font-size:29px !important;line-height:1.1  !important;}
 }
 
+/* ============================================================
+   CROSS-DOCUMENT PAGE TRANSITIONS
+   Progressive enhancement: browsers without the View Transitions
+   API just do a normal navigation.
+   ============================================================ */
+@view-transition{navigation:auto;}
+::view-transition-old(root){animation:vtOut .28s var(--ease) both;}
+::view-transition-new(root){animation:vtIn .42s var(--ease-out-expo) both;}
+@keyframes vtOut{to{opacity:0;transform:translateY(-8px) scale(.995);filter:blur(2px);}}
+@keyframes vtIn{from{opacity:0;transform:translateY(10px) scale(1.004);}}
+/* the nav is the one thing that should feel nailed down between pages */
+.nav{view-transition-name:nav;}
+::view-transition-old(nav),::view-transition-new(nav){animation:none;mix-blend-mode:normal;}
+
+/* ============================================================
+   3D TILT  (site.js feeds --rx/--ry/--tz on [data-tilt])
+   ============================================================ */
+.tilt-scene{perspective:1400px;}
+[data-tilt]{
+  transform:perspective(1400px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(var(--tz,0));
+  transform-style:preserve-3d;
+  transition:transform .5s var(--ease-out-expo);
+}
+[data-tilt].is-tilting{transition:transform .08s linear;}
+
+/* ============================================================
+   GLITCH HOVER — chromatic split on nav links and headings
+   ============================================================ */
+@media (hover:hover){
+  .nav-links a:hover,.foot-links a:hover,.brand:hover .brand-name{
+    animation:rgbSplit .4s steps(2,end) 1;
+  }
+  .h-sec:hover{animation:rgbSplit .5s steps(3,end) 1;}
+}
+@keyframes rgbSplit{
+  0%  {text-shadow:none;}
+  25% {text-shadow:-2px 0 var(--magenta), 2px 0 var(--cyan);}
+  50% {text-shadow: 2px 0 var(--magenta),-2px 0 var(--cyan);}
+  75% {text-shadow:-1px 0 var(--magenta), 1px 0 var(--cyan);}
+  100%{text-shadow:none;}
+}
+
 /* ---------- motion opt-out ---------- */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
@@ -488,4 +539,6 @@ body.intro-lock{overflow:hidden;}
   }
   .reveal,.reveal-l,.reveal-r,.reveal-s{opacity:1 !important;transform:none !important;}
   .reveal-clip{clip-path:none !important;}
+  [data-tilt]{transform:none !important;}
+  @view-transition{navigation:none;}
 }

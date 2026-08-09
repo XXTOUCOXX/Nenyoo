@@ -6,12 +6,18 @@
 <meta name="robots" content="noindex" />
 <title>404 — Page Not Found | N3NY000</title>
 <meta name="description" content="The page you requested could not be found.">
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin.woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <link rel="icon" type="image/png" href="brand/Logo.png" />
 <link rel="apple-touch-icon" href="brand/Logo.png" />
 <link rel="preload" as="image" href="brand/Logo@512.gif" />
+<meta property="og:title" content="404 — Page Not Found | N3NY000">
+<meta property="og:description" content="The page you requested could not be found.">
+<meta property="og:image" content="https://www.nenyoocheats.net/brand/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#05040a">
 <link rel="stylesheet" href="style.css" />
 <script>document.documentElement.className+=" js";</script>
 <style>
@@ -153,6 +159,7 @@
 </style>
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 <div class="bg-root">
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 <canvas id="fx" class="fx-canvas"></canvas>
@@ -191,7 +198,7 @@
 </div>
 
 <!-- ===================== 404 ===================== -->
-<main class="err-main">
+<main id="main" tabindex="-1" class="err-main">
   <div class="err-wrap">
     <div class="err-badge"><span class="dot"></span>Error · Page Not Found</div>
     <div class="err-four">404</div>

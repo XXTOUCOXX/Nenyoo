@@ -8,14 +8,16 @@
 <meta name="theme-color" content="#05040a">
 <meta property="og:title" content="N3NY000 — The ultimate GTA V mod menu">
 <meta property="og:description" content="Undetected · BattlEye bypassed · Enhanced &amp; Legacy. Free and lifetime paid keys.">
-<meta property="og:image" content="https://www.nenyoocheats.net/brand/Logo.png">
+<meta property="og:image" content="https://www.nenyoocheats.net/brand/og.png">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin.woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <link rel="preload" as="image" href="brand/Logo@512.gif">
 <link rel="icon" type="image/png" href="brand/Logo.png">
 <link rel="apple-touch-icon" href="brand/Logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.nenyoocheats.net/">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.className+=" js";</script>
 <style>
@@ -33,6 +35,25 @@
     animation:heroFloat 7s ease-in-out infinite;
   }
   @keyframes heroFloat{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-14px) scale(1.015);}}
+  .hero-logo-wrap{transform-origin:50% 30%;}
+  /* Scroll-driven: the mark recedes as you move down. Chrome/Edge 115+;
+     everywhere else the hero just stays put, which is fine. */
+  @supports (animation-timeline: view()){
+    @media (prefers-reduced-motion: no-preference){
+      .hero-logo-wrap{
+        animation:heroRecede linear both;
+        animation-timeline:view();
+        animation-range:exit-crossing 0% exit-crossing 90%;
+      }
+      .hero h1,.hero-sub{
+        animation:heroLift linear both;
+        animation-timeline:view();
+        animation-range:exit-crossing 10% exit-crossing 100%;
+      }
+    }
+  }
+  @keyframes heroRecede{to{opacity:.12;transform:translateY(-40px) scale(.82);filter:blur(3px);}}
+  @keyframes heroLift{to{opacity:.25;transform:translateY(-22px);}}
   .hero h1{max-width:940px;margin-left:auto;margin-right:auto;}
   .hero-sub{max-width:600px;margin:0 auto clamp(28px,4vw,40px);}
   .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:clamp(38px,5vw,54px);}
@@ -87,6 +108,124 @@
   .rev-who{display:flex;align-items:center;gap:12px;}
   .rev-av{width:38px;height:38px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:15px;color:#fff;}
 
+  /* ---- comparison table ---- */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  .cmp{border:1px solid var(--line);overflow-x:auto;}
+  .cmp table{width:100%;min-width:720px;border-collapse:collapse;text-align:left;}
+  /* not sticky: the wrapper is an overflow-x scroller, so a sticky
+     thead would anchor to it rather than the viewport and do nothing */
+  .cmp thead th{
+    position:relative;background:#0a0713;border-bottom:1px solid var(--line-2);
+    padding:30px 14px 16px;vertical-align:bottom;text-align:center;
+  }
+  .cmp thead th:first-child{text-align:left;}
+  .ch-lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-4);}
+  .ch-n{display:block;font-family:var(--font-display);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.03em;}
+  .ch-p{display:block;font-family:var(--font-mono);font-size:13px;color:var(--brand-3);margin-top:3px;}
+  /* pinned so the tag never shifts the MVP column's baseline */
+  .ch-tag{
+    position:absolute;top:7px;left:50%;transform:translateX(-50%);
+    font-family:var(--font-mono);font-size:9px;font-weight:700;white-space:nowrap;
+    letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;background:var(--grad);color:#fff;
+  }
+  .cmp tbody th{
+    font-weight:500;font-size:14px;color:var(--ink-2);padding:12px 16px;
+    border-bottom:1px solid var(--line);white-space:nowrap;
+    position:sticky;left:0;background:var(--bg-2);z-index:1;
+  }
+  .cmp td{
+    text-align:center;padding:12px 14px;border-bottom:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
+  .cmp .cf{background:rgba(139,92,246,.05);}
+  .cmp tbody tr:hover th{background:var(--panel-2);color:var(--ink);}
+  .cmp tbody tr:hover td{background:rgba(168,85,247,.07);}
+  .cmp tr.cg th{
+    background:#08060f;color:var(--brand-3);font-family:var(--font-mono);font-size:10.5px;
+    letter-spacing:.18em;text-transform:uppercase;padding:11px 16px;border-bottom:1px solid var(--line-2);
+  }
+  .cmp tr.cg:hover th{background:#08060f;color:var(--brand-3);}
+  .cmp tfoot td{padding:16px 12px;border-bottom:0;}
+  /* tick / cross marks */
+  .cy,.cn{display:inline-block;vertical-align:middle;}
+  .cy{width:15px;height:9px;border-left:2.4px solid #a855f7;border-bottom:2.4px solid #a855f7;transform:rotate(-45deg) translateY(-2px);}
+  .cn{width:12px;height:12px;position:relative;opacity:.45;}
+  .cn::before,.cn::after{content:'';position:absolute;top:5px;left:0;width:12px;height:1.6px;background:var(--ink-4);}
+  .cn::before{transform:rotate(45deg);}
+  .cn::after{transform:rotate(-45deg);}
+  .ct{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.04em;}
+  .cmp-hint{display:none;margin:12px 0 0;font-size:11px;color:var(--ink-4);letter-spacing:.08em;text-align:center;}
+  @media (max-width:760px){.cmp-hint{display:block;}}
+
+  /* ---- feature explorer ---- */
+  .fx{border:1px solid var(--line);background:rgba(255,255,255,.015);}
+  .fx-bar{display:flex;align-items:center;gap:12px;padding:0 18px;border-bottom:1px solid var(--line);}
+  .fx-mag{flex-shrink:0;}
+  .fx-bar input{
+    flex:1;min-width:0;background:transparent;border:none;color:var(--ink);
+    font-family:var(--font-body);font-size:15px;padding:18px 0;
+  }
+  .fx-bar input::-webkit-search-cancel-button{display:none;}
+  .fx-bar button{
+    background:transparent;border:none;color:var(--ink-3);font-size:22px;line-height:1;
+    cursor:pointer;padding:4px 6px;transition:color .2s;
+  }
+  .fx-bar button:hover{color:var(--ink);}
+
+  .fx-cats{
+    display:flex;gap:0;overflow-x:auto;border-bottom:1px solid var(--line);
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .fx-cats::-webkit-scrollbar{display:none;}
+  .fx-cat{
+    flex:0 0 auto;background:transparent;border:none;border-right:1px solid var(--line);
+    color:var(--ink-3);font-family:var(--font-mono);font-size:11.5px;letter-spacing:.09em;
+    text-transform:uppercase;padding:13px 16px;cursor:pointer;white-space:nowrap;
+    display:flex;align-items:center;gap:8px;position:relative;transition:color .25s,background .25s;
+  }
+  .fx-cat:hover{color:var(--ink);background:rgba(168,85,247,.06);}
+  .fx-cat b{font-weight:500;color:var(--ink-4);font-size:10.5px;}
+  .fx-cat.on{color:var(--ink);background:rgba(168,85,247,.1);}
+  .fx-cat.on::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--grad);}
+  .fx-cat.on b{color:var(--brand-3);}
+
+  .fx-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+    min-height:220px;max-height:440px;overflow-y:auto;
+  }
+  .fx-grid::-webkit-scrollbar{width:8px;}
+  .fx-grid::-webkit-scrollbar-thumb{background:#2a1f42;}
+  .fx-item{
+    background:var(--bg-2);padding:15px 17px;
+    animation:fxIn .35s var(--ease-out-expo) both;
+    transition:background .25s;
+  }
+  .fx-item:hover{background:var(--panel-2);}
+  @keyframes fxIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .fx-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px;}
+  .fx-name{font-size:14px;font-weight:600;color:var(--ink);}
+  .fx-name mark{background:rgba(168,85,247,.32);color:#fff;padding:0 1px;}
+  .fx-desc{font-size:12.5px;color:var(--ink-3);line-height:1.5;}
+  .fx-path{font-family:var(--font-mono);font-size:10px;color:var(--ink-4);letter-spacing:.05em;margin-top:7px;}
+  .fx-type{
+    font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 7px;flex-shrink:0;border:1px solid;
+  }
+  .t-toggle{color:#6ee7c4;border-color:rgba(52,211,153,.32);background:rgba(52,211,153,.09);}
+  .t-action{color:#f0b35d;border-color:rgba(240,179,93,.32);background:rgba(240,179,93,.09);}
+  .t-value {color:#7dd7ec;border-color:rgba(34,211,238,.3);background:rgba(34,211,238,.08);}
+  .t-option{color:#c7a2ff;border-color:rgba(168,85,247,.32);background:rgba(168,85,247,.09);}
+  .fx-empty{grid-column:1/-1;background:var(--bg-2);padding:52px 20px;text-align:center;color:var(--ink-3);font-size:14px;}
+  .fx-foot{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    padding:14px 18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--ink-3);letter-spacing:.05em;
+  }
+  .fx-more{color:var(--brand-3);font-weight:600;font-size:13px;transition:gap .3s;}
+  .fx-more:hover{color:#fff;}
+  @media (max-width:900px){.fx-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:640px){.fx-grid{grid-template-columns:1fr;max-height:400px;}}
+
   /* ---- final cta ---- */
   .cta{
     position:relative;overflow:hidden;text-align:center;padding:clamp(48px,7vw,72px) 32px;
@@ -95,8 +234,109 @@
   .cta-glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:min(680px,100%);height:340px;background:radial-gradient(circle,rgba(124,58,237,.38),transparent 65%);filter:blur(14px);pointer-events:none;}
   .cta-logo{width:130px;margin:0 auto 22px;display:block;opacity:.92;filter:drop-shadow(0 0 22px rgba(168,85,247,.5));}
 </style>
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "N3NY000",
+  "url": "https://www.nenyoocheats.net/",
+  "inLanguage": "en"
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "N3NY000 Mod Menu",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Windows",
+  "url": "https://www.nenyoocheats.net/",
+  "image": "https://www.nenyoocheats.net/brand/og.png",
+  "description": "GTA 5 mod menu with 1,216 features across 13 categories. Free and lifetime paid keys, Enhanced and Legacy support.",
+  "offers": {
+   "@type": "AggregateOffer",
+   "priceCurrency": "USD",
+   "lowPrice": "0",
+   "highPrice": "50",
+   "offerCount": "4",
+   "offers": [
+    {
+     "@type": "Offer",
+     "name": "Free",
+     "price": "0.00",
+     "priceCurrency": "USD",
+     "url": "https://www.nenyoocheats.net/freekey",
+     "availability": "https://schema.org/InStock"
+    },
+    {
+     "@type": "Offer",
+     "name": "VIP",
+     "price": "12.50",
+     "priceCurrency": "USD",
+     "url": "https://www.nenyoocheats.net/store",
+     "availability": "https://schema.org/InStock"
+    },
+    {
+     "@type": "Offer",
+     "name": "MVP",
+     "price": "20.00",
+     "priceCurrency": "USD",
+     "url": "https://www.nenyoocheats.net/store",
+     "availability": "https://schema.org/InStock"
+    },
+    {
+     "@type": "Offer",
+     "name": "MVP Plus",
+     "price": "50.00",
+     "priceCurrency": "USD",
+     "url": "https://www.nenyoocheats.net/store",
+     "availability": "https://schema.org/InStock"
+    }
+   ]
+  }
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+   {
+    "@type": "Question",
+    "name": "Is N3NY000 safe to use?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Yes. Safety is the top priority — we use advanced protection methods and layered anti-detection to keep you safe while playing."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "What's the difference between Legacy and Enhanced?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Legacy works with the original GTA 5, Enhanced is built for GTA 5 Enhanced Edition. Both ship the same feature set."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "How do I get my key after purchase?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Your key is emailed instantly after purchase. You can also pull it from the login portal at any time."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Do you offer refunds?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Check our Terms of Service for the refund policy. Every case is handled individually through Discord support."
+    }
+   }
+  ]
+ }
+]
+</script>
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 <div class="bg-root">
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 <canvas id="fx" class="fx-canvas"></canvas>
@@ -134,13 +374,15 @@
   <a href="/signup" class="btn btn-primary btn-block">Get Access</a>
 </div>
 
-<main style="position:relative;z-index:1;">
+<main id="main" tabindex="-1" style="position:relative;z-index:1;">
 
   <!-- ===================== HERO ===================== -->
   <section class="hero">
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="wrap">
-      <img class="hero-logo reveal-s" src="brand/Logo@512.gif" alt="N3NY000" width="512" height="339">
+      <div class="hero-logo-wrap reveal-s">
+        <img class="hero-logo" src="brand/Logo@512.gif" alt="N3NY000" width="512" height="339">
+      </div>
 
       <div class="reveal" style="margin-bottom:26px;">
         <span class="pill"><span class="dot"></span>Undetected · BattlEye bypassed · Enhanced &amp; Legacy</span>
@@ -151,7 +393,7 @@
       </h1>
 
       <p class="h-sub hero-sub reveal">
-        Unparalleled control, 500+ options and a build that just doesn't crash.
+        Unparalleled control, 1,200+ options and a build that just doesn't crash.
         Dominate Los Santos in legit player sessions — solo or with friends.
       </p>
 
@@ -162,7 +404,7 @@
 
       <div class="stat-row reveal" style="max-width:760px;margin:0 auto;">
         <div class="stat"><b data-count="7000" data-suffix="+">0</b><s>Active users</s></div>
-        <div class="stat"><b data-count="500" data-suffix="+">0</b><s>Features</s></div>
+        <div class="stat"><b data-count="1216" data-suffix="+">0</b><s>Features</s></div>
         <div class="stat"><b data-count="99" data-suffix="%">0</b><s>Uptime</s></div>
         <div class="stat"><b>24/7</b><s>Support</s></div>
       </div>
@@ -188,10 +430,10 @@
         <p class="h-sub">One-time payment. Lifetime access. No subscriptions, ever.</p>
       </div>
 
-      <div class="gridline cols-4">
+      <div class="gridline cols-4 tilt-scene">
 
         <!-- FREE -->
-        <div class="plan spot reveal">
+        <div class="plan spot reveal" data-tilt data-tilt-max="4">
           <img class="plan-icon" src="brand/Logo@192.gif" alt="" loading="lazy" style="opacity:.9;">
           <div class="plan-name">Free</div>
           <div class="plan-desc">Get started at no cost.</div>
@@ -210,7 +452,7 @@
         </div>
 
         <!-- VIP -->
-        <div class="plan plan-feat spot reveal">
+        <div class="plan plan-feat spot reveal" data-tilt data-tilt-max="4">
           <img class="plan-icon" src="products/vip_enhanced@128.gif" alt="" loading="lazy" onerror="this.onerror=null;this.src='products/vip_enhanced.png';">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
             <div class="plan-name">VIP</div>
@@ -231,7 +473,7 @@
         </div>
 
         <!-- MVP -->
-        <div class="plan spot reveal">
+        <div class="plan spot reveal" data-tilt data-tilt-max="4">
           <img class="plan-icon" src="products/mvp@128.gif" alt="" loading="lazy" onerror="this.onerror=null;this.src='products/mvp.png';">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
             <div class="plan-name">MVP</div>
@@ -258,7 +500,7 @@
         </div>
 
         <!-- MVP PLUS -->
-        <div class="plan plan-feat spot reveal">
+        <div class="plan plan-feat spot reveal" data-tilt data-tilt-max="4">
           <img class="plan-icon" src="products/mvp_plus@128.gif" alt="" loading="lazy" onerror="this.onerror=null;this.src='products/mvp_plus.png';">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
             <div class="plan-name">MVP Plus</div>
@@ -287,6 +529,148 @@
     </div>
   </section>
 
+  <!-- ===================== COMPARE ===================== -->
+  <section class="sec" id="compare" style="padding-top:0;scroll-margin-top:90px;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Side by side</span>
+        <h2 class="h-sec">What you get, per tier</h2>
+        <p class="h-sub">Every tier includes everything to its left. MVP is where most people land.</p>
+      </div>
+
+      <div class="cmp reveal">
+        <table>
+          <caption class="sr-only">Feature comparison across the Free, VIP, MVP and MVP Plus tiers</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="ch-lbl">Feature</span></th>
+              <th scope="col"><span class="ch-n">Free</span><span class="ch-p">$0</span></th>
+              <th scope="col" class="cf"><span class="ch-n">VIP</span><span class="ch-p">$12.50</span></th>
+              <th scope="col"><span class="ch-n">MVP</span><span class="ch-p">$20</span><span class="ch-tag">Best value</span></th>
+              <th scope="col" class="cf"><span class="ch-n">MVP+</span><span class="ch-p">$50</span></th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr class="cg"><th colspan="5" scope="colgroup">Core</th></tr>
+        <tr>
+          <th scope="row">GTA 5 Enhanced &amp; Legacy support</th>
+          <td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Player options</th>
+          <td><span class="ct">Basic</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Vehicle features</th>
+          <td><span class="ct">Essential</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Trolling options</th>
+          <td><span class="ct">Basic</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Money methods</th>
+          <td><span class="ct">Simple</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Lua engine support</th>
+          <td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Protections</th>
+          <td><span class="ct">Limited</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><span class="ct">Advanced suite</span></td><td class="cf"><span class="ct">Advanced suite</span></td>
+        </tr>
+        <tr>
+          <th scope="row">ScriptHookV integration</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Recovery options</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr class="cg"><th colspan="5" scope="colgroup">Power tools</th></tr>
+        <tr>
+          <th scope="row">VFX engine &amp; session browser</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Player tracker &amp; magnet</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">DLC loader / addons</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Business manager</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Advanced crashes &amp; kicks</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">BattlEye enabled / disabled</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Public lobbies &amp; missions</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Custom script support</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Exclusive MVP options</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Early access to features</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr class="cg"><th colspan="5" scope="colgroup">Next generation</th></tr>
+        <tr>
+          <th scope="row">Undetected</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Private BattlEye bypass</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Next-gen exclusive feature set</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr>
+          <th scope="row">Priority support &amp; early builds</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+        <tr class="cg"><th colspan="5" scope="colgroup">Access</th></tr>
+        <tr>
+          <th scope="row">Key validity</th>
+          <td><span class="ct">Resets 48h</span></td><td class="cf"><span class="ct">Lifetime</span></td><td><span class="ct">Lifetime</span></td><td class="cf"><span class="ct">Lifetime</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Lifetime updates</th>
+          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+        </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td><a href="/freekey" class="btn btn-ghost btn-sm btn-block">Get free key</a></td>
+              <td class="cf"><a href="/store" class="btn btn-ghost btn-sm btn-block">Buy VIP</a></td>
+              <td><a href="/store" class="btn btn-primary btn-sm btn-block">Buy MVP</a></td>
+              <td class="cf"><a href="https://fusiondash.myshopify.com/products/nenyooo-mvp-plus" target="_blank" rel="noopener" class="btn btn-ghost btn-sm btn-block">Pre-order</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="cmp-hint mono">Scroll the table sideways on small screens &rarr;</p>
+    </div>
+  </section>
+
   <!-- ===================== WHY ===================== -->
   <section class="sec" style="padding-top:0;">
     <div class="wrap">
@@ -311,6 +695,35 @@
           <div class="fcard-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" stroke="#c7a2ff" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
           <h3>Advanced protection</h3>
           <p>Layered anti-detection keeps you safe, and crash protections shut down hostile menus before they touch you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURE EXPLORER ===================== -->
+  <section class="sec" id="features" style="padding-top:0;scroll-margin-top:90px;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">The arsenal</span>
+        <h2 class="h-sec"><span id="fxTotal">1,216</span> features. Go ahead, search them.</h2>
+        <p class="h-sub">Every toggle, slider and action in the menu — pulled live from the build.</p>
+      </div>
+
+      <div class="fx reveal-s">
+        <div class="fx-bar">
+          <svg class="fx-mag" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#7e7791" stroke-width="2"/><path d="M20 20l-4-4" stroke="#7e7791" stroke-width="2" stroke-linecap="square"/></svg>
+          <input id="fxSearch" type="search" autocomplete="off" spellcheck="false"
+                 placeholder="Try “godmode”, “bypass”, “teleport”, “vehicle”…">
+          <button id="fxClear" type="button" aria-label="Clear search" hidden>&times;</button>
+        </div>
+
+        <div class="fx-cats" id="fxCats" role="tablist"></div>
+
+        <div class="fx-grid" id="fxGrid"></div>
+
+        <div class="fx-foot">
+          <span id="fxCount" class="mono"></span>
+          <a href="/roadmap#features" class="fx-more">See the full breakdown &rarr;</a>
         </div>
       </div>
     </div>
@@ -434,5 +847,7 @@
 <script src="app.js"></script>
 <script src="site.js"></script>
 <script src="nav-auth.js"></script>
+<script src="features-data.js" defer></script>
+<script src="explorer.js" defer></script>
 </body>
 </html>
