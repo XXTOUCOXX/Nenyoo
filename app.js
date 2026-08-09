@@ -133,7 +133,7 @@
     if(/store/.test(p))    return ['mvp or nothing tbh','the sale timer is real btw','buy it, i get treats'];
     if(/download/.test(p)) return ['battleye OFF first, trust','whitelist the loader ty','press insert once ur in'];
     if(/freekey/.test(p))  return ['free key gang','resets every 48h, dw','ngl mvp is better'];
-    if(/roadmap/.test(p))  return ['im in the next update','1216 options and counting','they let me pick one'];
+    if(/features/.test(p)) return ['im in the next update','4961 options and counting','they let me pick one'];
     if(/guides/.test(p))   return ['read it. please.','i wrote none of these','ctrl+f is your friend'];
     if(/dashboard/.test(p))return ['welcome back boss','ur hwid looks fine to me','dont log out'];
     if(/404/.test(p))      return ['i broke it','nothing here. my bad.','try the nav, genius'];

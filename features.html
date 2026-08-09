@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feature list · N3NY000</title>
+<meta name="description" content="Every option in the N3NY000 GTA 5 mod menu, pulled straight from the build — VIP &amp; MVP and the new MVP Plus, searchable by category.">
+<link rel="preload" as="font" type="font/woff2" href="fonts/plus-jakarta-sans-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin.woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
+<link rel="icon" type="image/png" href="brand/Logo.png">
+<link rel="apple-touch-icon" href="brand/Logo.png">
+<link rel="preload" as="image" href="brand/Logo@512.gif">
+<meta property="og:title" content="Feature list · N3NY000">
+<meta property="og:description" content="Every option in the menu, straight from the build. Search VIP &amp; MVP and MVP Plus side by side.">
+<meta property="og:image" content="https://www.nenyoocheats.net/brand/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#05040a">
+<link rel="canonical" href="https://www.nenyoocheats.net/features">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className+=" js";</script>
+<style>
+  .ft-wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:clamp(30px,4vw,46px) 24px 90px;}
+
+  /* menu switch */
+  .ft-switch{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px;}
+  @media(max-width:720px){.ft-switch{grid-template-columns:1fr;}}
+  .ft-menu{
+    position:relative;text-align:left;background:var(--panel);border:1px solid var(--line);
+    padding:20px 22px;cursor:pointer;font-family:inherit;overflow:hidden;
+    transition:border-color .35s var(--ease),transform .4s var(--ease-out-expo),background .35s;
+  }
+  .ft-menu:hover{transform:translateY(-2px);border-color:rgba(168,85,247,.4);}
+  .ft-menu.on{border-color:rgba(168,85,247,.6);background:rgba(139,92,246,.09);}
+  .ft-menu.on::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);}
+  .ft-menu[data-id="mvpplus"].on::before{background:linear-gradient(90deg,var(--cyan),var(--brand-2),var(--magenta));}
+  .ft-menu b{display:block;font-family:var(--font-display);font-weight:700;font-size:19px;
+    text-transform:uppercase;letter-spacing:.03em;margin-bottom:5px;}
+  .ft-menu s{display:block;text-decoration:none;font-size:13px;color:var(--ink-3);line-height:1.5;}
+  .ft-menu i{display:block;font-style:normal;font-family:var(--font-mono);font-size:12px;
+    color:var(--brand-3);margin-top:10px;letter-spacing:.06em;}
+
+  /* toolbar */
+  .ft-bar{position:sticky;top:var(--nav-h);z-index:20;background:rgba(6,5,12,.93);
+    backdrop-filter:blur(14px);border:1px solid var(--line);margin-bottom:22px;}
+  .ft-searchwrap{display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid var(--line);color:var(--ink-3);}
+  .ft-search{flex:1;min-width:0;background:transparent;border:none;color:var(--ink);
+    font-family:var(--font-body);font-size:15px;padding:16px 0;outline:none;}
+  .ft-search::-webkit-search-cancel-button{display:none;}
+  .ft-searchwrap button{background:none;border:none;color:var(--ink-3);font-size:22px;line-height:1;cursor:pointer;padding:4px 6px;}
+  .ft-searchwrap button:hover{color:var(--ink);}
+  .ft-cats{display:flex;overflow-x:auto;scrollbar-width:none;}
+  .ft-cats::-webkit-scrollbar{display:none;}
+  .ft-cat{flex:0 0 auto;background:none;border:none;border-right:1px solid var(--line);
+    color:var(--ink-3);font-family:var(--font-mono);font-size:11.5px;letter-spacing:.09em;
+    text-transform:uppercase;padding:12px 15px;cursor:pointer;white-space:nowrap;
+    display:flex;align-items:center;gap:8px;position:relative;transition:color .25s,background .25s;}
+  .ft-cat:hover{color:var(--ink);background:rgba(168,85,247,.06);}
+  .ft-cat b{font-weight:500;font-size:10.5px;color:var(--ink-4);}
+  .ft-cat.on{color:var(--ink);background:rgba(168,85,247,.1);}
+  .ft-cat.on::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--grad);}
+  .ft-cat.on b{color:var(--brand-3);}
+
+  /* tree */
+  .ft-sec{border:1px solid var(--line);margin-bottom:14px;background:var(--panel);}
+  .ft-sechead{display:flex;align-items:center;gap:12px;padding:15px 18px;cursor:pointer;
+    background:none;border:none;width:100%;text-align:left;font-family:inherit;color:var(--ink);
+    transition:background .25s;}
+  .ft-sechead:hover{background:rgba(168,85,247,.06);}
+  .ft-sechead h2{font-family:var(--font-display);font-weight:700;font-size:16px;text-transform:uppercase;
+    letter-spacing:.03em;margin:0;flex:1;}
+  .ft-sechead .n{font-family:var(--font-mono);font-size:11.5px;color:var(--brand-3);}
+  .ft-caret{width:9px;height:9px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);
+    transform:rotate(-45deg);transition:transform .3s var(--ease-out-expo);flex-shrink:0;}
+  .ft-sec.open .ft-caret{transform:rotate(45deg);}
+  .ft-secdesc{font-size:12.5px;color:var(--ink-3);padding:0 18px 14px;margin:0;}
+  .ft-body{display:none;border-top:1px solid var(--line);}
+  .ft-sec.open .ft-body{display:block;}
+
+  .ft-node{border-bottom:1px solid rgba(255,255,255,.055);}
+  .ft-node:last-child{border-bottom:0;}
+  .ft-grouphead{display:flex;align-items:center;gap:9px;padding:11px 18px;cursor:pointer;
+    background:none;border:none;width:100%;text-align:left;font-family:var(--font-mono);
+    font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-3);transition:background .25s;}
+  .ft-grouphead:hover{background:rgba(168,85,247,.05);}
+  .ft-grouphead .n{color:var(--ink-4);margin-left:auto;}
+  .ft-kids{display:none;background:rgba(0,0,0,.22);border-left:2px solid rgba(168,85,247,.25);}
+  .ft-node.open > .ft-kids{display:block;}
+  .ft-leaf{display:flex;align-items:flex-start;gap:12px;padding:10px 18px;transition:background .2s;}
+  .ft-leaf:hover{background:rgba(168,85,247,.06);}
+  .ft-leaf .lbl{font-size:13.8px;color:var(--ink);font-weight:500;}
+  .ft-leaf .dsc{display:block;font-size:12.3px;color:var(--ink-3);line-height:1.5;margin-top:3px;font-weight:400;}
+  .ft-leaf mark{background:rgba(168,85,247,.32);color:#fff;padding:0 1px;}
+  .ft-type{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;
+    padding:3px 7px;border:1px solid;flex-shrink:0;margin-top:1px;}
+  .t-toggle{color:#6ee7c4;border-color:rgba(52,211,153,.32);background:rgba(52,211,153,.09);}
+  .t-action{color:var(--gold);border-color:rgba(240,179,93,.32);background:rgba(240,179,93,.09);}
+  .t-value {color:#7dd7ec;border-color:rgba(34,211,238,.3);background:rgba(34,211,238,.08);}
+  .t-option{color:var(--brand-3);border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.08);}
+  .ft-path{font-family:var(--font-mono);font-size:10px;color:var(--ink-4);letter-spacing:.04em;margin-top:5px;}
+  .ft-state{text-align:center;padding:70px 20px;color:var(--ink-2);}
+  .ft-foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:18px;
+    font-family:var(--font-mono);font-size:11.5px;color:var(--ink-4);letter-spacing:.05em;}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<div class="bg-root">
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<canvas id="fx" class="fx-canvas"></canvas>
+<canvas id="catFx" class="fx-canvas"></canvas>
+<div class="scanlines" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-row">
+    <a href="/" class="brand" aria-label="N3NY000 home">
+      <img class="brand-mark" src="brand/Logo@96.gif" alt="" width="44" height="29">
+      <span class="brand-name">N3NY000</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/download">Download</a>
+      <a href="/store">Store</a>
+      <a href="/guides">Guides</a>
+      <a href="/features">Features</a>
+      <a href="/tools">Tools</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="/login" class="btn btn-ghost btn-sm">Login</a>
+      <a href="/signup" class="btn btn-primary btn-sm">Get Access</a>
+      <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+<div class="nav-drawer">
+  <a href="/download">Download</a>
+  <a href="/store">Store</a>
+  <a href="/guides">Guides</a>
+  <a href="/features">Features</a>
+  <a href="/tools">Tools</a>
+  <a href="/login">Login</a>
+  <a href="/signup" class="btn btn-primary btn-block">Get Access</a>
+</div>
+
+<main id="main" tabindex="-1" class="ft-wrap">
+  <div class="sec-head reveal" style="margin-bottom:30px;">
+    <span class="kicker">Feature list</span>
+    <h1 class="h-sec">Every option in the menu</h1>
+    <p class="h-sub">Pulled straight from the build, not written by hand. Pick a menu, then search or browse by category.</p>
+  </div>
+
+  <div class="ft-switch" id="ftSwitch"></div>
+
+  <div class="ft-bar">
+    <div class="ft-searchwrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg>
+      <input id="ftSearch" class="ft-search" type="search" autocomplete="off" spellcheck="false"
+             placeholder="Search every option… (godmode, bypass, teleport, tornado)">
+      <button id="ftClear" type="button" aria-label="Clear search" hidden>&times;</button>
+    </div>
+    <div class="ft-cats" id="ftCats" role="tablist"></div>
+  </div>
+
+  <div id="ftOut"><div class="ft-state">Loading the feature list…</div></div>
+  <div class="ft-foot"><span id="ftCount"></span><span id="ftSrc"></span></div>
+
+  <a class="dc" href="https://discord.gg/mwMcEDUjaa" target="_blank" rel="noopener" style="margin-top:34px;">
+    <div class="dc-ico" aria-hidden="true">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg>
+    </div>
+    <div class="dc-body">
+      <b>Want something that isn't here?</b>
+      <span>Feature requests go in Discord — a lot of this list started as one.</span>
+    </div>
+    <span class="btn btn-primary dc-join">Join Discord</span>
+  </a>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <img class="brand-mark" src="brand/Logo@96.gif" alt="" width="40" height="26" style="width:40px;height:26px;">
+      <div>
+        <div class="brand-name" style="font-size:16px;">N3NY000</div>
+        <div style="font-size:12px;color:var(--ink-4);">&copy; 2026 N3NY000 Mod Menu. Not affiliated with Rockstar Games or Take-Two.</div>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="https://discord.gg/mwMcEDUjaa" target="_blank" rel="noopener">DISCORD</a>
+      <a href="/download">DOWNLOAD</a>
+      <a href="/store">STORE</a>
+      <a href="/guides">GUIDES</a>
+      <a href="/tos">TERMS</a>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="app.js"></script>
+<script src="site.js"></script>
+<script src="nav-auth.js"></script>
+<script src="features-data.js" defer></script>
+<script src="features.js" defer></script>
+</body>
+</html>
