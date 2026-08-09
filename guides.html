@@ -61,6 +61,58 @@
   .g-imgs{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
   .g-imgs img{max-width:200px;max-height:150px;border:1px solid var(--line-2);cursor:zoom-in;object-fit:cover;}
   .g-file{display:inline-flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line-2);padding:9px 13px;margin-top:10px;font-family:var(--font-mono);font-size:12px;color:var(--brand-3);text-decoration:none;}
+  /* ---- filter bar ---- */
+  .g-bar{position:sticky;top:var(--nav-h);z-index:20;background:rgba(6,5,12,.92);
+    backdrop-filter:blur(14px);border:1px solid var(--line);margin-bottom:22px;}
+  .g-searchwrap{display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid var(--line);color:var(--ink-3);}
+  .g-mag{flex-shrink:0;}
+  .g-search{flex:1;min-width:0;background:transparent;border:none;color:var(--ink);
+    font-family:var(--font-body);font-size:15px;padding:16px 0;outline:none;}
+  .g-search::-webkit-search-cancel-button{display:none;}
+  .g-searchwrap button{background:none;border:none;color:var(--ink-3);font-size:22px;line-height:1;cursor:pointer;padding:4px 6px;}
+  .g-searchwrap button:hover{color:var(--ink);}
+  .g-cats{display:flex;overflow-x:auto;scrollbar-width:none;}
+  .g-cats::-webkit-scrollbar{display:none;}
+  .g-cat{flex:0 0 auto;background:none;border:none;border-right:1px solid var(--line);
+    color:var(--ink-3);font-family:var(--font-mono);font-size:11.5px;letter-spacing:.09em;
+    text-transform:uppercase;padding:12px 16px;cursor:pointer;white-space:nowrap;
+    display:flex;align-items:center;gap:8px;position:relative;transition:color .25s,background .25s;}
+  .g-cat:hover{color:var(--ink);background:rgba(168,85,247,.06);}
+  .g-cat b{font-weight:500;font-size:10.5px;color:var(--ink-4);}
+  .g-cat.on{color:var(--ink);background:rgba(168,85,247,.1);}
+  .g-cat.on::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--grad);}
+  .g-cat.on b{color:var(--brand-3);}
+
+  /* ---- cards ---- */
+  .g-group{margin-bottom:30px;}
+  .g-grouphead{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--brand-3);margin:0 0 12px;display:flex;align-items:center;gap:10px;}
+  .g-grouphead::after{content:'';flex:1;height:1px;background:var(--line);}
+  .g-badge{align-self:flex-start;font-family:var(--font-mono);font-size:9.5px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border:1px solid;}
+  .c-setup {color:#6ee7c4;border-color:rgba(52,211,153,.32);background:rgba(52,211,153,.09);}
+  .c-keys  {color:var(--gold);border-color:rgba(240,179,93,.32);background:rgba(240,179,93,.09);}
+  .c-errors{color:#ff7aa8;border-color:rgba(255,46,166,.3);background:rgba(255,46,166,.08);}
+  .c-ingame{color:#7dd7ec;border-color:rgba(34,211,238,.3);background:rgba(34,211,238,.08);}
+  .c-other {color:var(--brand-3);border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.08);}
+  .g-card mark{background:rgba(168,85,247,.32);color:#fff;padding:0 1px;}
+
+  /* ---- article ---- */
+  .g-artbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px;}
+  .g-arthead{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:24px;}
+  .g-arthead h1{font-family:var(--font-display);font-weight:700;font-size:clamp(23px,3.4vw,32px);
+    line-height:1.18;letter-spacing:-.01em;margin:12px 0 10px;text-transform:none;}
+  .g-artmeta{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.05em;}
+  .g-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px;}
+  @media(max-width:640px){.g-nav{grid-template-columns:1fr;}}
+  .g-navbtn{display:flex;flex-direction:column;gap:5px;padding:16px 18px;background:var(--panel);
+    border:1px solid var(--line);cursor:pointer;text-align:left;font-family:inherit;
+    transition:border-color .3s,transform .3s var(--ease-out-expo);}
+  .g-navbtn:hover{border-color:rgba(168,85,247,.4);transform:translateY(-2px);}
+  .g-navbtn span{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;color:var(--ink-4);text-transform:uppercase;}
+  .g-navbtn b{font-size:14px;font-weight:600;color:var(--ink);line-height:1.35;}
+  .g-navbtn.next{text-align:right;align-items:flex-end;}
+  .g-help{margin-top:34px;}
   /* lightbox */
   #lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(3,2,8,0.92);backdrop-filter:blur(6px);padding:30px;cursor:zoom-out;}
   #lightbox.on{display:flex;}
@@ -111,26 +163,38 @@
 <div id="main" tabindex="-1" class="g-wrap">
   <!-- LIST VIEW -->
   <div id="listView">
-    <div style="text-align:center;margin-bottom:30px;">
-      <div style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.14em;color:var(--brand-2);margin-bottom:10px;">[ KNOWLEDGE BASE ]</div>
-      <h1 style="font-family:var(--font-display);font-weight:700;font-size:44px;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 12px;">Guides &amp; Troubleshooting</h1>
-      <p style="font-size:16px;color:var(--ink-2);margin:0;">Setup help, fixes and common issues — synced live from our Discord help forum.</p>
+    <div class="sec-head reveal" style="margin-bottom:34px;">
+      <span class="kicker">Knowledge base</span>
+      <h1 class="h-sec">Guides &amp; troubleshooting</h1>
+      <p class="h-sub">Setup help, fixes and common issues &mdash; synced live from our Discord help forum.</p>
     </div>
-    <div style="position:relative;max-width:560px;margin:0 auto;">
-      <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink-4);">&#128269;</span>
-      <input id="search" class="g-search" type="text" placeholder="Search guides… (e.g. crash, HWID, login)" autocomplete="off">
+
+    <div class="g-bar">
+      <div class="g-searchwrap">
+        <svg class="g-mag" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg>
+        <input id="search" class="g-search" type="search" autocomplete="off" spellcheck="false"
+               placeholder="Search guides… (crash, HWID, login, BattlEye)">
+        <button id="searchClear" type="button" aria-label="Clear search" hidden>&times;</button>
+      </div>
+      <div class="g-cats" id="cats" role="tablist"></div>
     </div>
+
     <div id="cards"></div>
+
+    <a class="dc g-help" href="https://discord.gg/mwMcEDUjaa" target="_blank" rel="noopener">
+      <div class="dc-ico" aria-hidden="true">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg>
+      </div>
+      <div class="dc-body">
+        <b>Not covered here?</b>
+        <span>Open a ticket in Discord &mdash; setup help, HWID resets and key issues.</span>
+      </div>
+      <span class="btn btn-primary dc-join">Join Discord</span>
+    </a>
   </div>
 
   <!-- ARTICLE VIEW -->
   <div id="articleView" style="display:none;"></div>
-
-  <!-- still stuck CTA -->
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;background:linear-gradient(135deg,#15122a,#0d0a16);border:1px solid rgba(88,101,242,0.28);padding:22px 26px;margin-top:40px;">
-    <div style="font-size:14px;color:var(--ink-2);">Still stuck? Our team is one message away on Discord.</div>
-    <a href="https://discord.gg/mwMcEDUjaa" target="_blank" style="background:#5865F2;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:11px 20px;white-space:nowrap;">Join Discord</a>
-  </div>
 </div>
 
 <div id="lightbox"><img id="lightboxImg" src="" alt=""></div>
@@ -166,6 +230,28 @@
   var articleView = document.getElementById('articleView');
   var cardsEl = document.getElementById('cards');
   var searchEl = document.getElementById('search');
+  var clearEl = document.getElementById('searchClear');
+  var catsEl = document.getElementById('cats');
+  var activeCat = 'all';
+
+  // Discord's applied_tags come back empty, so bucket by title instead.
+  // Order matters: the first match wins, so the most specific bucket goes first.
+  var CATS = [
+    { id:'keys',   label:'Keys & account',   re:/key|upgrade|hwid|password|username|account|licen[cs]e|locked|paid/i },
+    { id:'errors', label:'Errors & crashes', re:/crash|dll|error|ssl|black ?screen|clos(e|ing)|stuck|warning|0x|kick|freez|fix/i },
+    { id:'setup',  label:'Setup',            re:/setup|how to use|register|install|log ?in|sign ?up/i },
+    { id:'ingame', label:'In-game',          re:/battleye|join|player|garage|vehicle|lobby|script|session/i },
+    { id:'other',  label:'Other',            re:/.^/ }
+  ];
+  function catOf(post){
+    var t = post.title || '';
+    for(var i=0;i<CATS.length;i++) if(CATS[i].re.test(t)) return CATS[i].id;
+    return 'other';
+  }
+  function catLabel(id){
+    for(var i=0;i<CATS.length;i++) if(CATS[i].id === id) return CATS[i].label;
+    return 'Other';
+  }
   var esc = (window.NenyooAuth && NenyooAuth.escapeHtml) || function(s){
     return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
   };
@@ -197,8 +283,15 @@
     try { parsed = (typeof value === 'string') ? JSON.parse(value) : value; }
     catch(e){ return errorState('Guide data is malformed.'); }
     if(!parsed || !Array.isArray(parsed.posts)) return errorState('No guides found.');
-    // newest first
-    POSTS = parsed.posts.slice().sort(function(a,b){
+    POSTS = parsed.posts.slice();
+    POSTS.forEach(function(p){ p.__cat = catOf(p); });
+    // setup first, then account, errors, in-game; newest within each bucket
+    var DISPLAY = ['setup','keys','errors','ingame','other'];
+    var order = {};
+    DISPLAY.forEach(function(id,i){ order[id] = i; });
+    POSTS.sort(function(a,b){
+      var d = order[a.__cat] - order[b.__cat];
+      if(d) return d;
       return new Date(b.created_at||0) - new Date(a.created_at||0);
     });
     // assign a readable, unique slug to each guide for clean deep-link URLs
@@ -210,7 +303,8 @@
       seen[s] = true; p.__slug = s;
       THREAD_SLUG[p.thread_id] = { slug: s, title: p.title || 'guide' };
     });
-    render(POSTS);
+    buildCats();
+    applyFilter();
     routeFromHash();
   }
 
@@ -266,6 +360,7 @@
   // remove Discord-only inline tokens for plain-text snippets:
   // custom emoji <a:name:id>, mentions <@user>/<#channel>/<@&role>, timestamps <t:..>
   function stripDiscordTokens(s){
+    s = String(s||'').replace(new RegExp(String.fromCharCode(27) + '[[][0-9;]*m', 'g'), '');
     return String(s||'')
       .replace(/<a?:\w+:\d+>/g,'')
       .replace(/<(?:@[!&]?|#)\d+>/g,'')
@@ -275,18 +370,56 @@
   function snippet(txt){
     return stripDiscordTokens(String(txt||''))
       .replace(/```[\s\S]*?```/g,' ')
-      .replace(/[*_~`>#]/g,'')
       .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1')
+      .replace(/https?:\/\/([^\s)]+)/g, function(_, rest){
+        var host = rest.split('/')[0].replace(/^www\./,'');
+        return '(' + host + ' link)';
+      })
+      .replace(/[*_~`>#]/g,'')
       .replace(/\s+/g,' ').trim();
   }
 
   // ---------- lightweight discord markdown renderer ----------
+  // Discord ```ansi blocks -> coloured spans, using our palette.
+  function ansiToHtml(raw){
+    var FG = {30:'#7e7791',31:'#ff6b6b',32:'#6ee7c4',33:'#f0b35d',34:'#7aa2ff',
+              35:'#ff7ad9',36:'#5ee0e0',37:'#f2f0f7'};
+    var BG = {40:'#12101a',41:'#5c2020',42:'#1f4a3c',43:'#5a4416',44:'#22304f',
+              45:'#4c2246',46:'#1d4a4a',47:'#cfc9db'};
+    var RE = new RegExp(String.fromCharCode(27) + '[[]([0-9;]*)m');
+    var parts = String(raw).split(new RegExp(RE.source, 'g'));
+    var out = esc(parts[0] || ''), open = 0;
+    for(var i=1;i<parts.length;i+=2){
+      var codes = (parts[i] || '0').split(';'), st = [], reset = false;
+      for(var k=0;k<codes.length;k++){
+        var c = parseInt(codes[k], 10);
+        if(!c) reset = true;
+        else if(c === 1) st.push('font-weight:700');
+        else if(c === 4) st.push('text-decoration:underline');
+        else if(FG[c]) st.push('color:' + FG[c]);
+        else if(BG[c]) st.push('background:' + BG[c]);
+      }
+      if(reset){ while(open > 0){ out += '</span>'; open--; } }
+      if(st.length){ out += '<span style="' + st.join(';') + '">'; open++; }
+      out += esc(parts[i+1] || '');
+    }
+    while(open > 0){ out += '</span>'; open--; }
+    return out;
+  }
+
   function renderMarkdown(raw){
     if(!raw) return '';
     // pull out code blocks first (placeholder @@CB<n>@@ survives escaping/markdown)
     var blocks = [];
-    raw = raw.replace(/```(?:[a-zA-Z0-9]+\n)?([\s\S]*?)```/g, function(_,c){
-      blocks.push('<pre>'+esc(c.replace(/\n$/,''))+'</pre>'); return '@@CB'+(blocks.length-1)+'@@';
+    raw = raw.replace(/```([a-zA-Z0-9]+)?\n?([\s\S]*?)```/g, function(_, lang, c){
+      c = c.replace(/\n$/,'');
+      // Discord ```ansi blocks carry real escape codes; colour them instead of
+      // dumping "[1;33m" into the page.
+      var hasEsc = c.indexOf(String.fromCharCode(27)) !== -1;
+      var inner = ((lang && lang.toLowerCase() === 'ansi') || hasEsc)
+        ? ansiToHtml(c) : esc(c);
+      blocks.push('<pre>' + inner + '</pre>');
+      return '@@CB'+(blocks.length-1)+'@@';
     });
     // ``double-backtick`` inline code spans, extracted at content level with a
     // lazy match so adjacent spans don't merge and multi-line spans still work.
@@ -365,33 +498,112 @@
   }
 
   // ---------- list render ----------
-  function render(posts){
-    if(!posts.length){ cardsEl.innerHTML = '<div class="g-state">No guides match your search.</div>'; return; }
-    var grid = document.createElement('div'); grid.className='g-grid';
-    posts.forEach(function(p){
-      var imgs = imgCount(p);
-      var btn = document.createElement('button');
-      btn.className='g-card';
-      btn.onclick = function(){ location.hash = p.__slug; };
-      btn.innerHTML =
-        '<h3>'+esc(p.title||'Untitled')+'</h3>'+
-        '<p class="g-snip">'+esc(snippet(firstText(p)).slice(0,160))+'</p>'+
-        '<div class="g-meta">'+
-          '<span class="g-chip">'+(p.message_count||(p.messages||[]).length||0)+' replies</span>'+
-          (imgs?'<span class="g-chip img">&#128247; '+imgs+'</span>':'')+
-          '<span class="g-chip">'+esc(fmtDate(p.created_at))+'</span>'+
-        '</div>';
-      grid.appendChild(btn);
+  function buildCats(){
+    if(!catsEl) return;
+    var counts = { all: POSTS.length };
+    POSTS.forEach(function(p){ counts[p.__cat] = (counts[p.__cat]||0) + 1; });
+    // chips follow the same order the groups render in
+    var DISPLAY = ['setup','keys','errors','ingame','other'];
+    var ordered = DISPLAY.map(function(id){
+      for(var i=0;i<CATS.length;i++) if(CATS[i].id === id) return CATS[i];
+    }).filter(function(c){ return c && counts[c.id]; });
+    var defs = [{id:'all',label:'All'}].concat(ordered);
+    catsEl.innerHTML = '';
+    defs.forEach(function(c){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'g-cat' + (c.id === activeCat ? ' on' : '');
+      b.setAttribute('role','tab');
+      b.innerHTML = esc(c.label) + ' <b>' + (counts[c.id]||0) + '</b>';
+      b.addEventListener('click', function(){
+        activeCat = c.id;
+        Array.prototype.forEach.call(catsEl.children, function(n,i){ n.classList.toggle('on', defs[i].id === activeCat); });
+        applyFilter();
+      });
+      catsEl.appendChild(b);
     });
-    cardsEl.innerHTML=''; cardsEl.appendChild(grid);
+  }
+
+  function hl(text, q){
+    var out = esc(text);
+    if(!q) return out;
+    q.split(/\s+/).filter(Boolean).forEach(function(term){
+      out = out.replace(new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')','ig'), '<mark>$1</mark>');
+    });
+    return out;
+  }
+
+  function applyFilter(){
+    var q = (searchEl.value || '').trim().toLowerCase();
+    if(clearEl) clearEl.hidden = !q;
+    var list = POSTS.filter(function(p){
+      if(activeCat !== 'all' && p.__cat !== activeCat) return false;
+      if(!q) return true;
+      return ((p.title||'') + ' ' + firstText(p)).toLowerCase().indexOf(q) !== -1;
+    });
+    render(list, q);
+  }
+
+  function card(p, q){
+    var imgs = imgCount(p);
+    var replies = p.message_count || (p.messages||[]).length || 0;
+    var btn = document.createElement('button');
+    btn.className = 'g-card';
+    btn.onclick = function(){ location.hash = p.__slug; };
+    btn.innerHTML =
+      '<span class="g-badge c-'+p.__cat+'">'+esc(catLabel(p.__cat))+'</span>'+
+      '<h3>'+hl(p.title||'Untitled', q)+'</h3>'+
+      '<p class="g-snip">'+hl(snippet(firstText(p)).slice(0,170), q)+'</p>'+
+      '<div class="g-meta">'+
+        (replies?'<span class="g-chip">'+replies+' message'+(replies===1?'':'s')+'</span>':'')+
+        (imgs?'<span class="g-chip img">&#128247; '+imgs+'</span>':'')+
+        '<span class="g-chip">'+esc(fmtDate(p.created_at))+'</span>'+
+      '</div>';
+    return btn;
+  }
+
+  function render(posts, q){
+    if(!posts.length){
+      cardsEl.innerHTML = POSTS.length
+        ? '<div class="g-state">Nothing matches that. <a href="https://discord.gg/mwMcEDUjaa" target="_blank" rel="noopener" style="color:var(--brand-3);font-weight:600;">Ask in Discord &rarr;</a></div>'
+        : '<div class="g-state">No guides published yet.<br><span style="font-size:13px;color:var(--ink-4);">They sync automatically from our Discord help forum.</span></div>';
+      return;
+    }
+    cardsEl.innerHTML = '';
+    // group by category unless a single category or a search is active
+    if(activeCat === 'all' && !q){
+      ['setup','keys','errors','ingame','other'].map(function(id){
+        for(var i=0;i<CATS.length;i++) if(CATS[i].id===id) return CATS[i];
+      }).forEach(function(c){
+        var inCat = posts.filter(function(p){ return p.__cat === c.id; });
+        if(!inCat.length) return;
+        var wrap = document.createElement('div'); wrap.className = 'g-group';
+        var h = document.createElement('div'); h.className = 'g-grouphead';
+        h.textContent = c.label;
+        var grid = document.createElement('div'); grid.className = 'g-grid'; grid.style.marginTop = '0';
+        inCat.forEach(function(p){ grid.appendChild(card(p, q)); });
+        wrap.appendChild(h); wrap.appendChild(grid);
+        cardsEl.appendChild(wrap);
+      });
+      return;
+    }
+    var grid = document.createElement('div'); grid.className = 'g-grid'; grid.style.marginTop = '0';
+    posts.forEach(function(p){ grid.appendChild(card(p, q)); });
+    cardsEl.appendChild(grid);
   }
 
   // ---------- article render ----------
   function openArticle(post){
+    var msgs = post.message_count || (post.messages||[]).length || 0;
     var html = '<div class="g-article">'+
-      '<button class="g-back" onclick="location.hash=\'\'">&larr; All guides</button>'+
-      '<h1 style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:30px;line-height:1.2;margin:0 0 8px;">'+esc(post.title||'Untitled')+'</h1>'+
-      '<div style="font-family:\'JetBrains Mono\',monospace;font-size:11.5px;color:var(--ink-3);margin-bottom:26px;">'+esc(fmtDate(post.created_at))+' · '+(post.message_count||(post.messages||[]).length||0)+' messages</div>';
+      '<div class="g-artbar">'+
+        '<button class="g-back" onclick="location.hash=\'\'">&larr; All guides</button>'+
+        '<span class="g-badge c-'+post.__cat+'">'+esc(catLabel(post.__cat))+'</span>'+
+      '</div>'+
+      '<div class="g-arthead">'+
+        '<h1>'+esc(post.title||'Untitled')+'</h1>'+
+        '<div class="g-artmeta">'+esc(fmtDate(post.created_at))+' &middot; '+msgs+' message'+(msgs===1?'':'s')+'</div>'+
+      '</div>';
 
     (post.messages||[]).forEach(function(m){
       var av = avatarUrl(m);
@@ -424,6 +636,20 @@
       });
       html += '</div>';
     });
+    // prev / next within the sorted list
+    var idx = POSTS.indexOf(post);
+    var prev = idx > 0 ? POSTS[idx-1] : null;
+    var next = idx > -1 && idx < POSTS.length-1 ? POSTS[idx+1] : null;
+    if(prev || next){
+      html += '<div class="g-nav">';
+      html += prev
+        ? '<button class="g-navbtn" onclick="location.hash=\''+esc(prev.__slug)+'\'"><span>&larr; Previous</span><b>'+esc(prev.title||'Untitled')+'</b></button>'
+        : '<span></span>';
+      html += next
+        ? '<button class="g-navbtn next" onclick="location.hash=\''+esc(next.__slug)+'\'"><span>Next &rarr;</span><b>'+esc(next.title||'Untitled')+'</b></button>'
+        : '<span></span>';
+      html += '</div>';
+    }
     html += '</div>';
     articleView.innerHTML = html;
     listView.style.display='none';
@@ -455,14 +681,10 @@
   var t;
   searchEl.addEventListener('input', function(){
     clearTimeout(t);
-    t = setTimeout(function(){
-      var q = searchEl.value.trim().toLowerCase();
-      if(!q){ render(POSTS); return; }
-      render(POSTS.filter(function(p){
-        var hay = (p.title||'')+' '+firstText(p);
-        return hay.toLowerCase().indexOf(q) !== -1;
-      }));
-    }, 120);
+    t = setTimeout(applyFilter, 120);
+  });
+  if(clearEl) clearEl.addEventListener('click', function(){
+    searchEl.value = ''; applyFilter(); searchEl.focus();
   });
 
   // ---------- lightbox ----------
