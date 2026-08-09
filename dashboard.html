@@ -19,6 +19,33 @@
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.className+=" js";</script>
+<style>
+  .dash-main{max-width:1120px;margin:0 auto;padding:clamp(28px,4vw,42px) 24px 80px;position:relative;z-index:1;}
+  .dash-h1{font-size:clamp(24px,3.4vw,32px);margin-bottom:6px;}
+
+  .dash-who{display:flex;align-items:center;gap:9px;padding:6px 12px;border:1px solid var(--line);font-size:14px;font-weight:600;}
+  .dash-av{
+    width:26px;height:26px;background:var(--grad);display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-weight:700;font-size:13px;color:#fff;overflow:hidden;flex-shrink:0;
+  }
+  @media (max-width:860px){.dash-who{display:none;}}
+
+  .dash-card{
+    position:relative;background:var(--panel);border:1px solid var(--line);padding:26px;
+    transition:border-color .4s var(--ease),transform .45s var(--ease-out-expo);
+  }
+  .dash-card:hover{border-color:rgba(168,85,247,.3);transform:translateY(-2px);}
+  .dash-lbl{
+    font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.16em;
+    color:var(--brand-3);margin-bottom:20px;display:flex;align-items:center;gap:9px;
+  }
+  .dash-lbl::after{content:'';flex:1;height:1px;background:var(--line);}
+  .dash-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
+  .dash-item{padding:14px 0;border-top:1px solid rgba(255,255,255,.07);transition:padding-left .3s var(--ease);}
+  .dash-item:hover{padding-left:6px;}
+  .dash-t{font-weight:700;font-size:14.5px;margin-bottom:4px;}
+  .dash-d{font-size:13px;color:var(--ink-2);line-height:1.5;}
+</style>
 </head>
 <body data-intro="off">
 <a href="#main" class="skip">Skip to content</a>
@@ -28,156 +55,171 @@
 
 <div style="position:relative;z-index:1;">
   <!-- dashboard nav -->
-  <header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,6,12,0.82);border-bottom:1px solid rgba(255,255,255,0.09);">
-    <div style="max-width:1120px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;">
-      <a href="/" style="display:flex;align-items:center;gap:11px;cursor:pointer;">
-        <img class="brand-mark" src="brand/Logo@96.gif" alt="Nenyoo" width="44" height="29" />
-        <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</span>
+  <header class="nav">
+    <div class="nav-row">
+      <a href="/" class="brand" aria-label="N3NY000 home">
+        <img class="brand-mark" src="brand/Logo@96.gif" alt="" width="44" height="29">
+        <span class="brand-name">N3NY000</span>
       </a>
-      <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.1);">
-        <div style="display:flex;align-items:center;gap:9px;padding:7px 12px;border-right:1px solid rgba(255,255,255,0.1);">
-          <div id="navAvatar" style="width:28px;height:28px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#fff;">·</div>
-          <span id="navUsername" style="font-size:14px;font-weight:600;">…</span>
-        </div>
-        <button id="logoutBtn" style="cursor:pointer;background:transparent;border:none;color:#c4bdd1;font-family:inherit;font-size:13.5px;font-weight:600;padding:8px 14px;">Log out</button>
+      <nav class="nav-links">
+        <a href="/download">Download</a>
+        <a href="/store">Store</a>
+        <a href="/guides">Guides</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/tools">Tools</a>
+      </nav>
+      <div class="nav-actions">
+        <span class="dash-who">
+          <span id="navAvatar" class="dash-av">&middot;</span>
+          <span id="navUsername">&hellip;</span>
+        </span>
+        <button id="logoutBtn" type="button" class="btn btn-ghost btn-sm">Log out</button>
+        <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
       </div>
     </div>
   </header>
+  <div class="nav-drawer">
+    <a href="/download">Download</a>
+    <a href="/store">Store</a>
+    <a href="/guides">Guides</a>
+    <a href="/roadmap">Roadmap</a>
+    <a href="/tools">Tools</a>
+  </div>
 
-  <main id="main" tabindex="-1" style="max-width:1120px;margin:0 auto;padding:38px 24px 80px;">
+  <main id="main" tabindex="-1" class="dash-main">
     <div style="margin-bottom:26px;">
-      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-spacing:-0.01em;text-transform:uppercase;margin:0 0 6px;">Welcome back, <span id="welcomeName">…</span></h1>
-      <p style="font-size:15px;color:#9b94ab;margin:0;">Here's everything about your account.</p>
+      <h1 class="h-sec dash-h1">Welcome back, <span id="welcomeName">…</span></h1>
+      <p style="font-size:15px;color:var(--ink-2);margin:0;">Here's everything about your account.</p>
     </div>
 
     <!-- status banner -->
     <div style="display:flex;align-items:center;gap:12px;background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.28);padding:15px 20px;margin-bottom:22px;">
-      <span style="width:9px;height:9px;background:#34d399;box-shadow:0 0 10px #34d399;animation:pulseDot 1.8s ease-in-out infinite;"></span>
+      <span style="width:9px;height:9px;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulseDot 1.8s ease-in-out infinite;"></span>
       <span style="font-size:14.5px;font-weight:600;color:#5ee0a8;">All systems operational</span>
       <span style="font-size:14px;color:#7d9c8c;">· Cheat status is currently <strong style="color:#9ff0c8;">Undetected</strong></span>
-      <span id="onlineBanner" style="display:none;margin-left:auto;align-items:center;gap:7px;font-size:13.5px;color:#7d9c8c;"><span style="width:8px;height:8px;background:#34d399;box-shadow:0 0 8px #34d399;border-radius:50%;"></span><strong id="onlineCount" style="color:#5ee0a8;">0</strong>&nbsp;online now</span>
+      <span id="onlineBanner" style="display:none;margin-left:auto;align-items:center;gap:7px;font-size:13.5px;color:#7d9c8c;"><span style="width:8px;height:8px;background:var(--green);box-shadow:0 0 8px var(--green);border-radius:50%;"></span><strong id="onlineCount" style="color:#5ee0a8;">0</strong>&nbsp;online now</span>
     </div>
 
     <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:16px;">
 
       <!-- Account info -->
-      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;margin-bottom:20px;">[ ACCOUNT ]</div>
+      <div class="dash-card spot">
+        <div class="dash-lbl">[ ACCOUNT ]</div>
         <div style="display:flex;align-items:center;gap:15px;margin-bottom:18px;">
           <button id="accAvatarBtn" title="Change profile picture" style="position:relative;width:54px;height:54px;padding:0;border:none;background:transparent;cursor:pointer;flex-shrink:0;">
-            <div id="accAvatar" style="width:54px;height:54px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;color:#fff;box-shadow:0 8px 22px rgba(124,58,237,0.4);overflow:hidden;">·</div>
-            <span style="position:absolute;right:-3px;bottom:-3px;width:20px;height:20px;background:#0b0813;border:1px solid rgba(255,255,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M4 7h3l2-2h6l2 2h3v12H4V7z" stroke="#c4b5fd" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" stroke="#c4b5fd" stroke-width="1.8"/></svg></span>
+            <div id="accAvatar" style="width:54px;height:54px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:24px;color:#fff;box-shadow:0 8px 22px rgba(124,58,237,0.4);overflow:hidden;">·</div>
+            <span style="position:absolute;right:-3px;bottom:-3px;width:20px;height:20px;background:var(--panel);border:1px solid rgba(255,255,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M4 7h3l2-2h6l2 2h3v12H4V7z" stroke="#c4b5fd" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" stroke="#c4b5fd" stroke-width="1.8"/></svg></span>
           </button>
           <div>
             <div style="display:flex;align-items:center;gap:9px;">
-              <span id="accUsername" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;">…</span>
-              <span id="accPlan" style="background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 8px;">—</span>
+              <span id="accUsername" style="font-family:var(--font-display);font-weight:700;font-size:19px;">…</span>
+              <span id="accPlan" style="background:var(--grad);color:#fff;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 8px;">—</span>
             </div>
-            <div id="accEmail" style="font-size:13.5px;color:#9b94ab;margin-top:3px;">…</div>
+            <div id="accEmail" style="font-size:13.5px;color:var(--ink-2);margin-top:3px;">…</div>
           </div>
         </div>
         <div id="pfpEditor" style="display:none;margin-bottom:18px;">
           <div style="display:flex;gap:0;">
-            <input id="pfpInput" type="text" placeholder="https://image-url.png" style="flex:1;min-width:0;background:#07060c;border:1px solid rgba(255,255,255,0.12);border-right:none;padding:10px 12px;color:#ECEAF2;font-family:'JetBrains Mono',monospace;font-size:12.5px;" />
-            <button id="pfpSave" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:13px;font-weight:600;padding:10px 16px;white-space:nowrap;">Save</button>
-            <button id="pfpCancel" style="cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.12);border-left:none;color:#9b94ab;font-family:inherit;font-size:13px;font-weight:600;padding:10px 14px;white-space:nowrap;">Cancel</button>
+            <input id="pfpInput" type="text" placeholder="https://image-url.png" style="flex:1;min-width:0;background:var(--bg);border:1px solid var(--line-2);border-right:none;padding:10px 12px;color:var(--ink);font-family:var(--font-mono);font-size:12.5px;" />
+            <button id="pfpSave" style="cursor:pointer;background:var(--grad);border:none;color:#fff;font-family:inherit;font-size:13px;font-weight:600;padding:10px 16px;white-space:nowrap;">Save</button>
+            <button id="pfpCancel" style="cursor:pointer;background:transparent;border:1px solid var(--line-2);border-left:none;color:var(--ink-2);font-family:inherit;font-size:13px;font-weight:600;padding:10px 14px;white-space:nowrap;">Cancel</button>
           </div>
           <div id="pfpMsg" style="display:none;margin-top:8px;font-size:12.5px;font-weight:600;"></div>
-          <div style="font-size:11.5px;color:#7d768c;margin-top:6px;">Paste a direct image URL (PNG/JPG/GIF). Leave empty to remove.</div>
+          <div style="font-size:11.5px;color:var(--ink-3);margin-top:6px;">Paste a direct image URL (PNG/JPG/GIF). Leave empty to remove.</div>
         </div>
-        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Member since</span><span id="accMemberSince" style="font-weight:600;font-family:'JetBrains Mono',monospace;font-size:13px;">—</span></div>
-        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:#9b94ab;">Account status</span><span style="font-weight:600;color:#5ee0a8;">Active</span></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:var(--ink-2);">Member since</span><span id="accMemberSince" style="font-weight:600;font-family:var(--font-mono);font-size:13px;">—</span></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:14px;"><span style="color:var(--ink-2);">Account status</span><span style="font-weight:600;color:#5ee0a8;">Active</span></div>
       </div>
 
       <!-- Subscription -->
-      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ SUBSCRIPTIONS ]</div>
-          <span id="subCount" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;"></span>
+      <div class="dash-card spot">
+        <div class="dash-row">
+          <div style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:var(--ink-3);">[ SUBSCRIPTIONS ]</div>
+          <span id="subCount" style="font-family:var(--font-mono);font-size:11px;color:var(--ink-3);"></span>
         </div>
         <div id="subList">
-          <div style="padding:20px 0;color:#6b6479;font-size:13px;">Loading…</div>
+          <div style="padding:20px 0;color:var(--ink-4);font-size:13px;">Loading…</div>
         </div>
         <a id="upgradeLink" href="/store" style="display:block;text-align:center;margin-top:16px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#c4b5fd;font-family:inherit;font-size:14px;font-weight:600;padding:11px;cursor:pointer;">Browse the store</a>
       </div>
 
       <!-- HWID reset -->
-      <div id="hwidCard" style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ HWID RESET ]</div>
+      <div id="hwidCard" class="dash-card spot">
+        <div class="dash-row">
+          <div style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:var(--ink-3);">[ HWID RESET ]</div>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 11A8 8 0 006 5.3L3 8M4 13a8 8 0 0014 5.7l3-2.7M3 4v4h4M21 20v-4h-4" stroke="#7d768c" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="round"/></svg>
         </div>
-        <p style="font-size:13.5px;color:#9b94ab;line-height:1.55;margin:0 0 20px;">Reset your hardware ID to use your license on a new device.</p>
+        <p style="font-size:13.5px;color:var(--ink-2);line-height:1.55;margin:0 0 20px;">Reset your hardware ID to use your license on a new device.</p>
 
         <!-- eligible -->
         <div id="hwidEligible" style="display:none;">
           <div style="display:flex;align-items:center;gap:9px;background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.24);padding:13px 15px;margin-bottom:16px;">
-            <span style="width:8px;height:8px;background:#34d399;"></span>
+            <span style="width:8px;height:8px;background:var(--green);"></span>
             <span style="font-size:13.5px;font-weight:600;color:#5ee0a8;">Reset available now</span>
           </div>
-          <button id="hwidResetBtn" style="cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:13px;box-shadow:0 8px 24px rgba(124,58,237,0.4);">Reset HWID</button>
+          <button id="hwidResetBtn" style="cursor:pointer;width:100%;background:var(--grad);border:none;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:13px;box-shadow:0 8px 24px rgba(124,58,237,0.4);">Reset HWID</button>
         </div>
         <!-- cooldown -->
         <div id="hwidCooldown" style="display:none;">
-          <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:16px;margin-bottom:16px;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;margin-bottom:8px;letter-spacing:0.06em;">NEXT RESET AVAILABLE IN</div>
-            <div id="hwidCountdown" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:25px;letter-spacing:0.02em;color:#ECEAF2;">—</div>
+          <div style="background:var(--bg);border:1px solid var(--line);padding:16px;margin-bottom:16px;">
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink-3);margin-bottom:8px;letter-spacing:0.06em;">NEXT RESET AVAILABLE IN</div>
+            <div id="hwidCountdown" style="font-family:var(--font-mono);font-weight:700;font-size:25px;letter-spacing:0.02em;color:var(--ink);">—</div>
           </div>
-          <button disabled style="width:100%;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);color:#6b6479;font-family:inherit;font-size:15px;font-weight:600;padding:13px;cursor:not-allowed;">On cooldown</button>
+          <button disabled style="width:100%;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);color:var(--ink-4);font-family:inherit;font-size:15px;font-weight:600;padding:13px;cursor:not-allowed;">On cooldown</button>
         </div>
         <!-- disabled / unknown -->
         <div id="hwidDisabled" style="display:none;">
-          <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:14px 16px;font-size:13px;color:#8b8499;">HWID resets are not available on your account.</div>
+          <div style="background:var(--bg);border:1px solid var(--line);padding:14px 16px;font-size:13px;color:#8b8499;">HWID resets are not available on your account.</div>
         </div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#7d768c;margin-top:14px;text-align:center;letter-spacing:0.04em;">RESETS USED: <span id="hwidResets">0</span></div>
+        <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-3);margin-top:14px;text-align:center;letter-spacing:0.04em;">RESETS USED: <span id="hwidResets">0</span></div>
       </div>
 
       <!-- Download -->
-      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;display:flex;flex-direction:column;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ DOWNLOAD ]</div>
-          <span style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:#5ee0a8;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.28);padding:2px 9px;"><span style="width:7px;height:7px;background:#34d399;box-shadow:0 0 8px #34d399;"></span>ONLINE</span>
+      <div style="background:var(--panel);border:1px solid var(--line);padding:26px;display:flex;flex-direction:column;">
+        <div class="dash-row">
+          <div style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:var(--ink-3);">[ DOWNLOAD ]</div>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;font-weight:600;color:#5ee0a8;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.28);padding:2px 9px;"><span style="width:7px;height:7px;background:var(--green);box-shadow:0 0 8px var(--green);"></span>ONLINE</span>
         </div>
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
           <div style="width:50px;height:50px;border:1px solid rgba(139,92,246,0.3);background:rgba(139,92,246,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="#a78bfa" stroke-width="1.9" stroke-linecap="square" stroke-linejoin="round"/></svg></div>
           <div>
             <div style="font-weight:700;font-size:15.5px;">Nenyoo Loader</div>
-            <div style="font-size:13px;color:#9b94ab;margin-top:2px;">Windows 10/11 · 64-bit</div>
+            <div style="font-size:13px;color:var(--ink-2);margin-top:2px;">Windows 10/11 · 64-bit</div>
           </div>
         </div>
-        <a href="/download" style="cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:13px;box-shadow:0 8px 24px rgba(124,58,237,0.4);display:flex;align-items:center;justify-content:center;gap:9px;margin-top:auto;text-align:center;">
+        <a href="/download" style="cursor:pointer;width:100%;background:var(--grad);border:none;color:#fff;font-family:inherit;font-size:15px;font-weight:600;padding:13px;box-shadow:0 8px 24px rgba(124,58,237,0.4);display:flex;align-items:center;justify-content:center;gap:9px;margin-top:auto;text-align:center;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="#fff" stroke-width="1.9" stroke-linecap="square" stroke-linejoin="round"/></svg>
           Download &amp; Install Guide
         </a>
-        <div style="font-size:12px;color:#7d768c;margin-top:12px;text-align:center;">Make sure BattlEye is OFF before injecting.</div>
+        <div style="font-size:12px;color:var(--ink-3);margin-top:12px;text-align:center;">Make sure BattlEye is OFF before injecting.</div>
       </div>
 
     </div>
 
     <!-- Redeem license -->
-    <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;margin-top:16px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ REDEEM LICENSE ]</div>
+    <div style="background:var(--panel);border:1px solid var(--line);padding:26px;margin-top:16px;">
+      <div class="dash-row">
+        <div style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:var(--ink-3);">[ REDEEM LICENSE ]</div>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 7a4 4 0 11-3.9 5H7v3H4v-3H2v-3h9.1A4 4 0 0115 7z" stroke="#7d768c" stroke-width="1.7" stroke-linejoin="round"/></svg>
       </div>
-      <p style="font-size:13.5px;color:#9b94ab;line-height:1.55;margin:0 0 18px;max-width:560px;">Got a key from a reseller or giveaway? Enter it below to activate it on your account instantly.</p>
+      <p style="font-size:13.5px;color:var(--ink-2);line-height:1.55;margin:0 0 18px;max-width:560px;">Got a key from a reseller or giveaway? Enter it below to activate it on your account instantly.</p>
       <div style="display:flex;gap:0;max-width:560px;">
-        <input id="licenseInput" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" style="flex:1;min-width:0;background:#07060c;border:1px solid rgba(255,255,255,0.12);border-right:none;padding:13px 15px;color:#ECEAF2;font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.06em;" />
-        <button id="redeemBtn" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px 24px;white-space:nowrap;box-shadow:0 8px 24px rgba(124,58,237,0.35);">Redeem</button>
+        <input id="licenseInput" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" style="flex:1;min-width:0;background:var(--bg);border:1px solid var(--line-2);border-right:none;padding:13px 15px;color:var(--ink);font-family:var(--font-mono);font-size:14px;letter-spacing:0.06em;" />
+        <button id="redeemBtn" style="cursor:pointer;background:var(--grad);border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px 24px;white-space:nowrap;box-shadow:0 8px 24px rgba(124,58,237,0.35);">Redeem</button>
       </div>
       <div id="redeemMsg" style="display:none;margin-top:14px;font-size:13.5px;font-weight:600;"></div>
     </div>
 
     <!-- Link Discord -->
-    <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;margin-top:16px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ DISCORD ]</div>
+    <div style="background:var(--panel);border:1px solid var(--line);padding:26px;margin-top:16px;">
+      <div class="dash-row">
+        <div style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:var(--ink-3);">[ DISCORD ]</div>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="#7d768c"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg>
       </div>
 
       <!-- not linked -->
       <div id="discordUnlinked" style="display:none;">
-        <p style="font-size:13.5px;color:#9b94ab;line-height:1.55;margin:0 0 18px;max-width:560px;">Link your Discord account to get your role automatically, post in the community chat and receive update pings.</p>
+        <p style="font-size:13.5px;color:var(--ink-2);line-height:1.55;margin:0 0 18px;max-width:560px;">Link your Discord account to get your role automatically, post in the community chat and receive update pings.</p>
         <button id="linkDiscordBtn" style="cursor:pointer;background:#5865F2;border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px 22px;display:flex;align-items:center;gap:10px;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg>
           Link Discord
@@ -192,12 +234,12 @@
             <div>
               <div style="display:flex;align-items:center;gap:9px;">
                 <span id="discordName" style="font-weight:700;font-size:15.5px;">Discord</span>
-                <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.14);color:#5ee0a8;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 8px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#5ee0a8" stroke-width="3" stroke-linecap="square"/></svg>LINKED</span>
+                <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.14);color:#5ee0a8;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 8px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#5ee0a8" stroke-width="3" stroke-linecap="square"/></svg>LINKED</span>
               </div>
-              <div style="font-size:13px;color:#9b94ab;margin-top:3px;">Roles synced · update pings enabled</div>
+              <div style="font-size:13px;color:var(--ink-2);margin-top:3px;">Roles synced · update pings enabled</div>
             </div>
           </div>
-          <button id="unlinkDiscordBtn" style="cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,0.14);color:#c4bdd1;font-family:inherit;font-size:13.5px;font-weight:600;padding:10px 18px;white-space:nowrap;">Unlink</button>
+          <button id="unlinkDiscordBtn" style="cursor:pointer;background:transparent;border:1px solid var(--line-2);color:var(--ink-2);font-family:inherit;font-size:13.5px;font-weight:600;padding:10px 18px;white-space:nowrap;">Unlink</button>
         </div>
       </div>
     </div>
@@ -206,63 +248,63 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start;">
 
       <!-- Announcements (static) -->
-      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:26px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ ANNOUNCEMENTS ]</div>
-          <span style="width:8px;height:8px;background:#a78bfa;box-shadow:0 0 9px #a78bfa;"></span>
+      <div class="dash-card spot">
+        <div class="dash-row">
+          <div style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:var(--ink-3);">[ ANNOUNCEMENTS ]</div>
+          <span style="width:8px;height:8px;background:var(--brand-3);box-shadow:0 0 9px var(--brand-3);"></span>
         </div>
         <div style="display:flex;flex-direction:column;">
-          <div style="padding:14px 0;border-top:1px solid rgba(255,255,255,0.07);">
+          <div class="dash-item">
             <div style="display:flex;align-items:center;gap:9px;margin-bottom:7px;">
-              <span style="background:rgba(139,92,246,0.14);border:1px solid rgba(139,92,246,0.3);color:#b9a4f5;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 7px;">v2.4.1</span>
-              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;">LATEST</span>
+              <span style="background:rgba(139,92,246,0.14);border:1px solid rgba(139,92,246,0.3);color:#b9a4f5;font-family:var(--font-mono);font-size:10px;font-weight:700;padding:2px 7px;">v2.4.1</span>
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--ink-3);">LATEST</span>
             </div>
-            <div style="font-weight:700;font-size:14.5px;margin-bottom:4px;">Performance update</div>
-            <div style="font-size:13px;color:#9b94ab;line-height:1.5;">Improved stability and performance. Recommended for everyone.</div>
+            <div class="dash-t">Performance update</div>
+            <div class="dash-d">Improved stability and performance. Recommended for everyone.</div>
           </div>
-          <div style="padding:14px 0;border-top:1px solid rgba(255,255,255,0.07);">
+          <div class="dash-item">
             <div style="display:flex;align-items:center;gap:9px;margin-bottom:7px;">
-              <span style="background:rgba(139,92,246,0.14);border:1px solid rgba(139,92,246,0.3);color:#b9a4f5;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 7px;">v2.4.0</span>
+              <span style="background:rgba(139,92,246,0.14);border:1px solid rgba(139,92,246,0.3);color:#b9a4f5;font-family:var(--font-mono);font-size:10px;font-weight:700;padding:2px 7px;">v2.4.0</span>
             </div>
-            <div style="font-weight:700;font-size:14.5px;margin-bottom:4px;">New rendering pipeline</div>
-            <div style="font-size:13px;color:#9b94ab;line-height:1.5;">Added a new rendering pipeline and configurable smoothing.</div>
+            <div class="dash-t">New rendering pipeline</div>
+            <div class="dash-d">Added a new rendering pipeline and configurable smoothing.</div>
           </div>
-          <div style="padding:14px 0;border-top:1px solid rgba(255,255,255,0.07);">
+          <div class="dash-item">
             <div style="display:flex;align-items:center;gap:9px;margin-bottom:7px;">
-              <span style="background:rgba(245,158,66,0.14);border:1px solid rgba(245,158,66,0.32);color:#f0b35d;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 7px;">NOTICE</span>
+              <span style="background:rgba(245,158,66,0.14);border:1px solid rgba(245,158,66,0.32);color:var(--gold);font-family:var(--font-mono);font-size:10px;font-weight:700;padding:2px 7px;">NOTICE</span>
             </div>
-            <div style="font-weight:700;font-size:14.5px;margin-bottom:4px;">Keep BattlEye off</div>
-            <div style="font-size:13px;color:#9b94ab;line-height:1.5;">Always disable BattlEye before injecting the loader.</div>
+            <div class="dash-t">Keep BattlEye off</div>
+            <div class="dash-d">Always disable BattlEye before injecting the loader.</div>
           </div>
         </div>
       </div>
 
       <!-- Community chat (live) -->
-      <div style="background:#0b0813;border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;">
+      <div style="background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column;">
         <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 26px 16px;border-bottom:1px solid rgba(255,255,255,0.07);">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:#7d768c;">[ COMMUNITY CHAT ]</div>
-          <div style="display:flex;align-items:center;gap:7px;"><span style="width:7px;height:7px;background:#34d399;box-shadow:0 0 8px #34d399;"></span><span id="chatLive" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d9c8c;">LIVE</span></div>
+          <div style="font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:0.12em;color:var(--ink-3);">[ COMMUNITY CHAT ]</div>
+          <div style="display:flex;align-items:center;gap:7px;"><span style="width:7px;height:7px;background:var(--green);box-shadow:0 0 8px var(--green);"></span><span id="chatLive" style="font-family:var(--font-mono);font-size:11px;color:#7d9c8c;">LIVE</span></div>
         </div>
         <div id="onlineStrip" style="display:none;align-items:center;gap:8px;padding:11px 26px;border-bottom:1px solid rgba(255,255,255,0.07);overflow-x:auto;white-space:nowrap;">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;color:#7d768c;flex-shrink:0;">ONLINE</span>
+          <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.06em;color:var(--ink-3);flex-shrink:0;">ONLINE</span>
           <div id="onlineList" style="display:flex;align-items:center;gap:7px;"></div>
         </div>
         <div id="chatScroll" style="height:248px;overflow-y:auto;padding:18px 26px;display:flex;flex-direction:column;">
-          <div style="margin:auto;color:#6b6479;font-size:13px;">Loading chat…</div>
+          <div style="margin:auto;color:var(--ink-4);font-size:13px;">Loading chat…</div>
         </div>
         <div id="chatReplyBar" style="display:none;align-items:center;justify-content:space-between;gap:10px;padding:9px 20px;border-top:1px solid rgba(255,255,255,0.07);background:rgba(139,92,246,0.06);">
           <div style="min-width:0;display:flex;align-items:center;gap:9px;">
-            <span style="width:3px;align-self:stretch;background:#a78bfa;flex-shrink:0;"></span>
+            <span style="width:3px;align-self:stretch;background:var(--brand-3);flex-shrink:0;"></span>
             <div style="min-width:0;">
-              <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;color:#b9a4f5;letter-spacing:0.04em;">REPLYING TO <span id="chatReplyName">—</span></div>
-              <div id="chatReplyPreview" style="font-size:12px;color:#9b94ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px;">…</div>
+              <div style="font-family:var(--font-mono);font-size:10.5px;font-weight:700;color:#b9a4f5;letter-spacing:0.04em;">REPLYING TO <span id="chatReplyName">—</span></div>
+              <div id="chatReplyPreview" style="font-size:12px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px;">…</div>
             </div>
           </div>
-          <button id="chatReplyCancel" style="cursor:pointer;background:transparent;border:none;color:#9b94ab;font-family:inherit;font-size:18px;line-height:1;padding:4px 6px;flex-shrink:0;" title="Cancel reply">&times;</button>
+          <button id="chatReplyCancel" style="cursor:pointer;background:transparent;border:none;color:var(--ink-2);font-family:inherit;font-size:18px;line-height:1;padding:4px 6px;flex-shrink:0;" title="Cancel reply">&times;</button>
         </div>
         <div style="display:flex;gap:0;padding:0;border-top:1px solid rgba(255,255,255,0.07);">
-          <input id="chatInput" type="text" placeholder="Type a message..." style="flex:1;min-width:0;background:transparent;border:none;padding:15px 20px;color:#ECEAF2;font-family:inherit;font-size:14px;" />
-          <button id="chatSend" style="cursor:pointer;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:0 22px;white-space:nowrap;">Send</button>
+          <input id="chatInput" type="text" placeholder="Type a message..." style="flex:1;min-width:0;background:transparent;border:none;padding:15px 20px;color:var(--ink);font-family:inherit;font-size:14px;" />
+          <button id="chatSend" style="cursor:pointer;background:var(--grad);border:none;color:#fff;font-family:inherit;font-size:14px;font-weight:600;padding:0 22px;white-space:nowrap;">Send</button>
         </div>
       </div>
 
@@ -274,7 +316,7 @@
         <div style="width:48px;height:48px;background:#5865F2;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M19.5 5.3A17 17 0 0015.3 4l-.2.4a15.6 15.6 0 014 1.3 14 14 0 00-9.6 0 15.6 15.6 0 014-1.3L13.2 4A17 17 0 008.9 5.3C5.9 9.7 5 14 5.4 18.3a17 17 0 005.2 2.6l.6-1a11 11 0 01-1.9-.9l.3-.2a12 12 0 0010.6 0l.3.2c-.6.4-1.2.7-1.9.9l.6 1a17 17 0 005.2-2.6c.5-5-1-9.2-3.6-13zM10.2 15.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2zm5.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2z"/></svg></div>
         <div>
           <div style="font-weight:700;font-size:16px;">Need help?</div>
-          <div style="font-size:13.5px;color:#9b94ab;margin-top:2px;">Join our Discord for setup help, updates and priority support.</div>
+          <div style="font-size:13.5px;color:var(--ink-2);margin-top:2px;">Join our Discord for setup help, updates and priority support.</div>
         </div>
       </div>
       <a href="https://discord.gg/mwMcEDUjaa" target="_blank" style="cursor:pointer;background:#5865F2;border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:12px 22px;white-space:nowrap;">Join Discord</a>
@@ -285,12 +327,12 @@
 </div>
 
 <!-- toast -->
-<div id="toast" style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:200;display:none;background:#0b0813;border:1px solid rgba(139,92,246,0.4);color:#ECEAF2;font-size:13.5px;font-weight:600;padding:12px 20px;box-shadow:0 10px 30px rgba(0,0,0,0.5);"></div>
+<div id="toast" style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:200;display:none;background:var(--panel);border:1px solid rgba(139,92,246,0.4);color:var(--ink);font-size:13.5px;font-weight:600;padding:12px 20px;box-shadow:0 10px 30px rgba(0,0,0,0.5);"></div>
 
 <!-- profile modal -->
 <div id="profileModal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(3,2,7,0.66);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px;">
-  <div style="width:100%;max-width:380px;background:#0b0813;border:1px solid rgba(255,255,255,0.12);position:relative;box-shadow:0 24px 70px rgba(0,0,0,0.6);">
-    <button id="profileClose" title="Close" style="position:absolute;top:10px;right:10px;z-index:2;cursor:pointer;background:transparent;border:none;color:#9b94ab;font-size:22px;line-height:1;padding:6px 9px;">&times;</button>
+  <div style="width:100%;max-width:380px;background:var(--panel);border:1px solid var(--line-2);position:relative;box-shadow:0 24px 70px rgba(0,0,0,0.6);">
+    <button id="profileClose" title="Close" style="position:absolute;top:10px;right:10px;z-index:2;cursor:pointer;background:transparent;border:none;color:var(--ink-2);font-size:22px;line-height:1;padding:6px 9px;">&times;</button>
     <div id="profileBody" style="padding:32px 26px 26px;"></div>
   </div>
 </div>
@@ -417,8 +459,8 @@
       $('subCount').textContent = '';
       list.innerHTML =
         '<div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 10px;">' +
-          '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;color:#9b94ab;margin-bottom:6px;">No plan yet</div>' +
-          '<div style="font-size:13.5px;color:#7d768c;line-height:1.5;">You\'re on the free tier. Redeem a key or grab a plan to unlock the loader.</div>' +
+          '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;">No plan yet</div>' +
+          '<div style="font-size:13.5px;color:var(--ink-3);line-height:1.5;">You\'re on the free tier. Redeem a key or grab a plan to unlock the loader.</div>' +
         '</div>';
       return;
     }
@@ -438,13 +480,13 @@
       // animated GIF with PNG fallback if art is missing
       var art = o.slug
         ? '<img src="products/' + o.slug + '@128.gif" alt="" onerror="this.onerror=null;this.src=\'products/' + o.slug + '.png\';" style="width:48px;height:48px;object-fit:contain;flex-shrink:0;" />'
-        : '<div style="width:48px;height:48px;flex-shrink:0;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:18px;color:#fff;">' + A.escapeHtml(A.getInitials(o.name)) + '</div>';
+        : '<div style="width:48px;height:48px;flex-shrink:0;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:18px;color:#fff;">' + A.escapeHtml(A.getInitials(o.name)) + '</div>';
       html +=
         '<div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid rgba(255,255,255,0.08);">' +
           art +
           '<div style="flex:1;min-width:0;">' +
             '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:0.01em;">' + A.escapeHtml(o.name) + '</div>' +
-            '<div style="font-size:12.5px;color:#9b94ab;margin-top:3px;">' + A.escapeHtml(expLabel) + '</div>' +
+            '<div style="font-size:12.5px;color:var(--ink-2);margin-top:3px;">' + A.escapeHtml(expLabel) + '</div>' +
           '</div>' +
           badge +
         '</div>';
@@ -489,10 +531,10 @@
 
   function showFatal(msg){
     var m = document.querySelector('main');
-    if(m) m.innerHTML = '<div style="max-width:520px;margin:80px auto;text-align:center;background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:40px 30px;">' +
+    if(m) m.innerHTML = '<div style="max-width:520px;margin:80px auto;text-align:center;background:var(--panel);border:1px solid var(--line);padding:40px 30px;">' +
       '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;margin-bottom:12px;">Can\'t load dashboard</div>' +
-      '<p style="font-size:14px;color:#9b94ab;line-height:1.6;margin:0 0 24px;">' + A.escapeHtml(msg) + '</p>' +
-      '<a href="/login" style="display:inline-block;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-weight:600;font-size:14px;padding:12px 26px;">Back to login</a></div>';
+      '<p style="font-size:14px;color:var(--ink-2);line-height:1.6;margin:0 0 24px;">' + A.escapeHtml(msg) + '</p>' +
+      '<a href="/login" style="display:inline-block;background:var(--grad);color:#fff;font-weight:600;font-size:14px;padding:12px 26px;">Back to login</a></div>';
   }
 
   async function doHwidReset(){
@@ -565,14 +607,14 @@
   async function openProfile(uid, uname){
     var modal = $('profileModal'), body = $('profileBody');
     modal.style.display = 'flex';
-    body.innerHTML = '<div style="padding:30px 0;text-align:center;color:#6b6479;font-size:13px;">Loading profile…</div>';
+    body.innerHTML = '<div style="padding:30px 0;text-align:center;color:var(--ink-4);font-size:13px;">Loading profile…</div>';
     var ep = (uid != null && uid !== '')
       ? '/profile/' + encodeURIComponent(uid)
       : '/users/by-username/' + encodeURIComponent(uname);
     var r = await A.api('GET', ep);
     var p = (r.ok) ? pickProfile(r.data) : null;
     if(!p || (!p.username && !p.display_name)){
-      body.innerHTML = '<div style="padding:24px 0;text-align:center;"><div style="font-weight:700;font-size:16px;margin-bottom:6px;">Profile unavailable</div><div style="font-size:13px;color:#9b94ab;">' + A.escapeHtml((r.data && r.data.message) || 'Could not load this user\'s profile.') + '</div></div>';
+      body.innerHTML = '<div style="padding:24px 0;text-align:center;"><div style="font-weight:700;font-size:16px;margin-bottom:6px;">Profile unavailable</div><div style="font-size:13px;color:var(--ink-2);">' + A.escapeHtml((r.data && r.data.message) || 'Could not load this user\'s profile.') + '</div></div>';
       return;
     }
     cacheSenderPic(p);
@@ -580,13 +622,13 @@
     var pic = p.profile_picture || p.avatar;
     var online = isOnline({ id: p.id, username: p.username });
     var avatar = pic
-      ? '<span style="width:84px;height:84px;display:block;overflow:hidden;border-radius:50%;border:1px solid rgba(255,255,255,0.12);"><img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></span>'
-      : '<span style="width:84px;height:84px;border-radius:50%;background:' + colorFor(name) + ';display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:30px;color:#0b0813;">' + A.escapeHtml(A.getInitials(name)) + '</span>';
+      ? '<span style="width:84px;height:84px;display:block;overflow:hidden;border-radius:50%;border:1px solid var(--line-2);"><img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></span>'
+      : '<span style="width:84px;height:84px;border-radius:50%;background:' + colorFor(name) + ';display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:30px;color:var(--panel);">' + A.escapeHtml(A.getInitials(name)) + '</span>';
 
     var rows = '';
     function row(label, value){
       if(!value) return;
-      rows += '<div style="display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:13.5px;"><span style="color:#9b94ab;flex-shrink:0;">' + label + '</span><span style="font-weight:600;text-align:right;word-break:break-word;">' + A.escapeHtml(value) + '</span></div>';
+      rows += '<div style="display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:13.5px;"><span style="color:var(--ink-2);flex-shrink:0;">' + label + '</span><span style="font-weight:600;text-align:right;word-break:break-word;">' + A.escapeHtml(value) + '</span></div>';
     }
     row('Location', p.location);
     row('Member since', (p.created_at || p.join_date) ? A.formatDate(p.created_at || p.join_date) : '');
@@ -597,14 +639,14 @@
     body.innerHTML =
       '<div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:18px;">' +
         '<div style="position:relative;margin-bottom:14px;">' + avatar +
-          (online ? '<span title="Online" style="position:absolute;right:4px;bottom:4px;width:15px;height:15px;border-radius:50%;background:#34d399;border:2.5px solid #0b0813;"></span>' : '') +
+          (online ? '<span title="Online" style="position:absolute;right:4px;bottom:4px;width:15px;height:15px;border-radius:50%;background:var(--green);border:2.5px solid var(--panel);"></span>' : '') +
         '</div>' +
         '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:21px;">' + A.escapeHtml(name) + '</div>' +
-        (p.username ? '<div style="font-family:\'JetBrains Mono\',monospace;font-size:12.5px;color:#7d768c;margin-top:2px;">@' + A.escapeHtml(p.username) + '</div>' : '') +
-        '<div style="font-size:12px;font-weight:600;color:' + (online ? '#5ee0a8' : '#7d768c') + ';margin-top:8px;">' + (online ? '● Online' : '○ Offline') + '</div>' +
-        (p.status ? '<div style="font-size:13.5px;color:#c4bdd1;margin-top:10px;font-style:italic;">"' + A.escapeHtml(p.status) + '"</div>' : '') +
+        (p.username ? '<div style="font-family:\'JetBrains Mono\',monospace;font-size:12.5px;color:var(--ink-3);margin-top:2px;">@' + A.escapeHtml(p.username) + '</div>' : '') +
+        '<div style="font-size:12px;font-weight:600;color:' + (online ? '#5ee0a8' : 'var(--ink-3)') + ';margin-top:8px;">' + (online ? '● Online' : '○ Offline') + '</div>' +
+        (p.status ? '<div style="font-size:13.5px;color:var(--ink-2);margin-top:10px;font-style:italic;">"' + A.escapeHtml(p.status) + '"</div>' : '') +
       '</div>' +
-      (p.bio ? '<div style="font-size:13.5px;color:#d4cfe0;line-height:1.55;background:#07060c;border:1px solid rgba(255,255,255,0.08);padding:13px 15px;margin-bottom:6px;">' + A.escapeHtml(p.bio) + '</div>' : '') +
+      (p.bio ? '<div style="font-size:13.5px;color:#d4cfe0;line-height:1.55;background:var(--bg);border:1px solid rgba(255,255,255,0.08);padding:13px 15px;margin-bottom:6px;">' + A.escapeHtml(p.bio) + '</div>' : '') +
       rows;
   }
 
@@ -731,10 +773,10 @@
       var pic = m.profile_picture || m.avatar;
       var av = pic
         ? '<span style="width:20px;height:20px;display:block;overflow:hidden;border-radius:50%;flex-shrink:0;"><img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></span>'
-        : '<span style="width:20px;height:20px;border-radius:50%;background:' + colorFor(nm) + ';display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:9px;color:#0b0813;flex-shrink:0;">' + A.escapeHtml(A.getInitials(nm)) + '</span>';
+        : '<span style="width:20px;height:20px;border-radius:50%;background:' + colorFor(nm) + ';display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:9px;color:var(--panel);flex-shrink:0;">' + A.escapeHtml(A.getInitials(nm)) + '</span>';
       html += '<span' + profileAttrs(m) + ' style="display:inline-flex;align-items:center;gap:6px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.22);padding:3px 9px 3px 4px;border-radius:999px;flex-shrink:0;cursor:pointer;">' +
         '<span style="position:relative;display:flex;flex-shrink:0;">' + av +
-          '<span style="position:absolute;right:-1px;bottom:-1px;width:7px;height:7px;border-radius:50%;background:#34d399;border:1.5px solid #0b0813;"></span>' +
+          '<span style="position:absolute;right:-1px;bottom:-1px;width:7px;height:7px;border-radius:50%;background:var(--green);border:1.5px solid var(--panel);"></span>' +
         '</span>' +
         '<span style="font-size:11.5px;font-weight:600;color:#d4cfe0;max-width:96px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + A.escapeHtml(nm) + '</span>' +
       '</span>';
@@ -774,14 +816,14 @@
   function chatAvatar(pic, name, online, sender){
     var inner = pic
       ? '<img src="' + A.escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">'
-      : '<span style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:12px;color:#0b0813;background:' + colorFor(name) + ';">' + A.escapeHtml(A.getInitials(name)) + '</span>';
+      : '<span style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:12px;color:var(--panel);background:' + colorFor(name) + ';">' + A.escapeHtml(A.getInitials(name)) + '</span>';
     var dot = online
-      ? '<span title="Online" style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-radius:50%;background:#34d399;border:1.5px solid #0b0813;"></span>'
+      ? '<span title="Online" style="position:absolute;right:-1px;bottom:-1px;width:8px;height:8px;border-radius:50%;background:var(--green);border:1.5px solid var(--panel);"></span>'
       : '';
     var attrs = profileAttrs(sender);
     var cur = attrs ? 'cursor:pointer;' : '';
     return '<span' + attrs + ' style="position:relative;display:block;width:30px;height:30px;flex-shrink:0;' + cur + '">' +
-      '<span style="display:block;width:30px;height:30px;overflow:hidden;border-radius:50%;border:1px solid rgba(255,255,255,0.1);">' + inner + '</span>' +
+      '<span style="display:block;width:30px;height:30px;overflow:hidden;border-radius:50%;border:1px solid var(--line);">' + inner + '</span>' +
       dot + '</span>';
   }
 
@@ -830,7 +872,7 @@
     var r = await A.api('GET', '/chat/messages?limit=50');
     var box = $('chatScroll');
     if(r.ok && r.data && Array.isArray(r.data.messages)){
-      if(r.data.messages.length === 0){ box.innerHTML = '<div style="margin:auto;color:#6b6479;font-size:13px;">No messages yet. Start the conversation!</div>'; return; }
+      if(r.data.messages.length === 0){ box.innerHTML = '<div style="margin:auto;color:var(--ink-4);font-size:13px;">No messages yet. Start the conversation!</div>'; return; }
       var html = '';
       var maxId = lastChatId;
       var gotNewFromOther = false;
@@ -850,14 +892,14 @@
           var jumpAttrs = (rId !== '') ? ' class="chatJump" data-target="' + A.escapeHtml(rId) + '" title="Jump to replied message"' : '';
           var jumpCur = (rId !== '') ? 'cursor:pointer;' : '';
           quote = '<div' + jumpAttrs + ' style="display:flex;gap:7px;align-items:stretch;margin-bottom:4px;opacity:0.85;' + jumpCur + '">' +
-            '<span style="width:2px;background:#a78bfa;flex-shrink:0;"></span>' +
+            '<span style="width:2px;background:var(--brand-3);flex-shrink:0;"></span>' +
             '<div style="min-width:0;font-size:11.5px;line-height:1.4;">' +
               '<span style="color:' + colorFor(rAuthor) + ';font-weight:700;">↩ ' + A.escapeHtml(rAuthor) + '</span> ' +
               '<span style="color:#8b8499;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + A.escapeHtml(rPreview) + '</span>' +
             '</div></div>';
         }
         var replyBtn = f.id != null
-          ? '<button class="chatReplyBtn" data-id="' + A.escapeHtml(f.id) + '" data-name="' + A.escapeHtml(f.name) + '" data-text="' + A.escapeHtml(f.text) + '" style="background:none;border:none;color:#7d768c;font-family:\'JetBrains Mono\',monospace;font-size:10.5px;font-weight:600;cursor:pointer;padding:0;letter-spacing:0.04em;">↩ REPLY</button>'
+          ? '<button class="chatReplyBtn" data-id="' + A.escapeHtml(f.id) + '" data-name="' + A.escapeHtml(f.name) + '" data-text="' + A.escapeHtml(f.text) + '" style="background:none;border:none;color:var(--ink-3);font-family:\'JetBrains Mono\',monospace;font-size:10.5px;font-weight:600;cursor:pointer;padding:0;letter-spacing:0.04em;">↩ REPLY</button>'
           : '';
         cacheSenderPic(m.sender);
         var av = chatAvatar(senderPic(m.sender), f.name, isOnline(m.sender), m.sender);
@@ -882,7 +924,7 @@
     } else if(r.data && (r.data.error_code === 'LOGIN_REQUIRED')){
       A.clearToken(); window.location.href = '/login';
     } else if(r.data && r.data.error_code === 'MEMBERSHIP_REQUIRED'){
-      box.innerHTML = '<div style="margin:auto;color:#7d768c;font-size:13px;text-align:center;">Redeem a membership key to join the community chat.</div>';
+      box.innerHTML = '<div style="margin:auto;color:var(--ink-3);font-size:13px;text-align:center;">Redeem a membership key to join the community chat.</div>';
     }
   }
 
