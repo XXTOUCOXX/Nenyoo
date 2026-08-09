@@ -20,19 +20,19 @@
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.className+=" js";</script>
 <style>
-  .tos-sec{background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:24px 28px;margin-bottom:16px;}
-  .tos-sec h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:#ECEAF2;margin:0 0 14px;display:flex;align-items:center;gap:10px;}
-  .tos-sec h2 .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8b5cf6;}
+  .tos-sec{background:var(--panel);border:1px solid var(--line);padding:24px 28px;margin-bottom:16px;}
+  .tos-sec h2{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--ink);margin:0 0 14px;display:flex;align-items:center;gap:10px;}
+  .tos-sec h2 .num{font-family:var(--font-mono);font-size:12px;color:var(--brand-2);}
   .tos-sec ul{list-style:none;padding:0;margin:0;}
   .tos-sec li{padding:9px 0 9px 18px;position:relative;font-size:13.5px;color:#b6afc4;line-height:1.6;border-bottom:1px solid rgba(255,255,255,0.06);}
   .tos-sec li:last-child{border-bottom:none;}
-  .tos-sec li::before{content:'';position:absolute;left:0;top:15px;width:5px;height:5px;background:#8b5cf6;}
+  .tos-sec li::before{content:'';position:absolute;left:0;top:15px;width:5px;height:5px;background:var(--brand-2);}
   .tos-sec p{font-size:13.5px;color:#b6afc4;line-height:1.6;margin:0;}
-  details.faq{border-bottom:1px solid rgba(255,255,255,0.09);}
+  details.faq{border-bottom:1px solid var(--line);}
   details.faq summary{cursor:pointer;list-style:none;padding:18px 22px;font-weight:600;font-size:14.5px;display:flex;justify-content:space-between;align-items:center;gap:12px;}
   details.faq summary::-webkit-details-marker{display:none;}
-  details.faq summary .pm{color:#8b5cf6;}
-  details.faq .ans{padding:0 22px 18px;font-size:13.5px;color:#9b94ab;line-height:1.6;}
+  details.faq summary .pm{color:var(--brand-2);}
+  details.faq .ans{padding:0 22px 18px;font-size:13.5px;color:var(--ink-2);line-height:1.6;}
 </style>
 </head>
 <body>
@@ -75,9 +75,9 @@
 
 <div id="main" tabindex="-1" style="position:relative;z-index:1;max-width:900px;margin:0 auto;padding:40px 24px 80px;">
   <div style="text-align:center;margin-bottom:36px;">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;letter-spacing:0.16em;color:#8b5cf6;margin-bottom:14px;">[ LEGAL ]</div>
-    <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 14px;">Terms of Service</h1>
-    <p style="font-size:14.5px;color:#9b94ab;margin:0 auto;max-width:680px;line-height:1.6;">By purchasing, downloading, or using any products sold through Nenyooo Store (including Nenyooo, Infamous, and Riptide), you fully agree to the following Terms of Service. If you do not agree, you must not purchase, download, or use our products.</p>
+    <div style="font-family:var(--font-mono);font-size:12.5px;font-weight:600;letter-spacing:0.16em;color:var(--brand-2);margin-bottom:14px;">[ LEGAL ]</div>
+    <h1 style="font-family:var(--font-display);font-weight:700;font-size:40px;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 14px;">Terms of Service</h1>
+    <p style="font-size:14.5px;color:var(--ink-2);margin:0 auto;max-width:680px;line-height:1.6;">By purchasing, downloading, or using any products sold through Nenyooo Store (including Nenyooo, Infamous, and Riptide), you fully agree to the following Terms of Service. If you do not agree, you must not purchase, download, or use our products.</p>
   </div>
 
   <div class="tos-sec">
@@ -172,8 +172,8 @@
     <p>By purchasing from Nenyooo Store, you confirm that you have read, understood, and fully agree to these Terms of Service and the Refund Policy.</p>
   </div>
 
-  <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;text-transform:uppercase;text-align:center;margin:40px 0 22px;">Frequently asked questions</h2>
-  <div style="border:1px solid rgba(255,255,255,0.1);">
+  <h2 style="font-family:var(--font-display);font-weight:700;font-size:26px;text-transform:uppercase;text-align:center;margin:40px 0 22px;">Frequently asked questions</h2>
+  <div style="border:1px solid var(--line);">
     <details class="faq" open>
       <summary>What happens if I lose my product key?<span class="pm">+</span></summary>
       <div class="ans">You are responsible for keeping your product key safe. Lost keys will not be replaced and your access will be lost.</div>
@@ -200,7 +200,7 @@
     </details>
   </div>
 
-  <p style="text-align:center;font-size:12px;color:#6b6479;margin-top:34px;">© 2026 N3NY000 Mod Menu. All rights reserved. · <a href="/" style="color:#a78bfa;">Home</a></p>
+  <p style="text-align:center;font-size:12px;color:var(--ink-4);margin-top:34px;">© 2026 N3NY000 Mod Menu. All rights reserved. · <a href="/" style="color:var(--brand-3);">Home</a></p>
 </div>
 
 <footer class="foot">

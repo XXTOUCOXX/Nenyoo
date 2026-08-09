@@ -59,6 +59,39 @@ input::placeholder{color:#5d5670;}
 ::-webkit-scrollbar-thumb:hover{background:#3a2a58;}
 :focus-visible{outline:2px solid var(--brand-2);outline-offset:3px;}
 
+/* ---------- tier typography (index + store) ---------- */
+.plan-name{font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:.03em;text-transform:uppercase;}
+.plan-price{display:flex;align-items:baseline;gap:10px;margin-bottom:5px;}
+.plan-price b{font-family:var(--font-mono);font-weight:700;font-size:38px;letter-spacing:-.03em;}
+.plan-price s{font-family:var(--font-mono);font-size:17px;color:var(--ink-4);}
+.plan-term{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.08em;margin-bottom:16px;}
+
+/* ---------- tier timer (index + store) ---------- */
+.plan-timer{
+  background:#06050c;border:1px solid var(--line);padding:9px 12px;margin-bottom:18px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-3);
+}
+.plan-timer b{font-size:14px;color:var(--brand-3);letter-spacing:0;font-weight:700;}
+
+/* ---------- modal ---------- */
+.pop{
+  position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
+  background:rgba(3,2,8,.8);backdrop-filter:blur(6px);padding:24px;
+}
+.pop.active{display:flex;animation:fadeIn .25s both;}
+.pop-box{
+  position:relative;width:100%;max-width:440px;background:var(--panel);
+  border:1px solid rgba(168,85,247,.34);padding:32px;
+  animation:popIn .35s var(--ease-out-expo) both;
+}
+@keyframes popIn{from{opacity:0;transform:translateY(16px) scale(.97);}to{opacity:1;transform:none;}}
+.pop-x{
+  position:absolute;top:12px;right:14px;background:transparent;border:none;
+  color:var(--ink-3);font-size:24px;line-height:1;cursor:pointer;padding:4px 8px;transition:color .2s;
+}
+.pop-x:hover{color:var(--ink);}
+
 /* ---------- skip link ---------- */
 .skip{
   position:fixed;top:-100px;left:16px;z-index:10000;

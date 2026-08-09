@@ -28,7 +28,7 @@
      It's an SVG overlay sitting behind the cards/nodes, inset to span
      exactly the rows region so its viewBox y-fractions line up with nodes. */
   .rm-svg{position:absolute;left:0;right:0;top:10px;bottom:30px;width:100%;z-index:1;pointer-events:none;overflow:visible;}
-  .rm-track{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:3;vector-effect:non-scaling-stroke;}
+  .rm-track{fill:none;stroke:var(--line-2);stroke-width:3;vector-effect:non-scaling-stroke;}
   .rm-progress{fill:none;stroke:url(#rmGrad);stroke-width:3.5;stroke-linecap:round;vector-effect:non-scaling-stroke;
     filter:drop-shadow(0 0 6px rgba(124,58,237,0.55));
     stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.2s cubic-bezier(.4,0,.2,1);}
@@ -44,10 +44,10 @@
   .rm-node{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
     width:26px;height:26px;border-radius:50%;z-index:3;
     display:flex;align-items:center;justify-content:center;
-    font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
-    border:3px solid #07060c;}
+    font-family:var(--font-mono);font-size:13px;font-weight:700;
+    border:3px solid var(--bg);}
   .rm-node.done{background:#5ee0a8;color:#06281b;box-shadow:0 0 0 4px rgba(94,224,168,0.18),0 0 22px rgba(94,224,168,0.5);}
-  .rm-node.prog{background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;box-shadow:0 0 0 4px rgba(124,58,237,0.22),0 0 22px rgba(124,58,237,0.55);animation:pulseDot 1.8s ease-in-out infinite;}
+  .rm-node.prog{background:linear-gradient(180deg,#9a6cf3,var(--brand));color:#fff;box-shadow:0 0 0 4px rgba(124,58,237,0.22),0 0 22px rgba(124,58,237,0.55);animation:pulseDot 1.8s ease-in-out infinite;}
   .rm-node.todo{background:#1a1426;color:#6b6480;box-shadow:0 0 0 4px rgba(255,255,255,0.04);}
   /* push nodes onto the curve's swing (x=38% / x=62% — must match the path d) */
   .rm-row.left  .rm-node{left:38%;}
@@ -55,33 +55,33 @@
 
   /* little connector from node to card */
   .rm-row.left  .rm-card::after,
-  .rm-row.right .rm-card::after{content:"";position:absolute;top:50%;width:34px;height:2px;background:rgba(255,255,255,0.14);}
+  .rm-row.right .rm-card::after{content:"";position:absolute;top:50%;width:34px;height:2px;background:var(--line-2);}
   .rm-row.left  .rm-card{position:relative;}
   .rm-row.right .rm-card{position:relative;}
   .rm-row.left  .rm-card::after{right:-34px;}
   .rm-row.right .rm-card::after{left:-34px;}
 
-  .rm-card{position:relative;z-index:2;background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:16px 18px;transition:border-color .2s,transform .2s;}
+  .rm-card{position:relative;z-index:2;background:var(--panel);border:1px solid var(--line);padding:16px 18px;transition:border-color .2s,transform .2s;}
   .rm-card:hover{border-color:rgba(124,58,237,0.55);transform:translateY(-2px);}
   .rm-card.done{border-left:3px solid #5ee0a8;}
   .rm-card.prog{border-left:3px solid #9a6cf3;}
   .rm-card.todo{border-left:3px solid rgba(255,255,255,0.18);}
 
-  .rm-stat{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;display:inline-block;}
+  .rm-stat{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;display:inline-block;}
   .rm-stat.done{color:#5ee0a8;}
-  .rm-stat.prog{color:#a78bfa;}
-  .rm-stat.todo{color:#7d768c;}
-  .rm-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;margin:0 0 5px;}
-  .rm-desc{font-size:13px;color:#9b94ab;margin:0;line-height:1.5;}
+  .rm-stat.prog{color:var(--brand-3);}
+  .rm-stat.todo{color:var(--ink-3);}
+  .rm-title{font-family:var(--font-display);font-weight:700;font-size:16px;margin:0 0 5px;}
+  .rm-desc{font-size:13px;color:var(--ink-2);margin:0;line-height:1.5;}
   .rm-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;}
-  .rm-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.05em;color:#b9b2c8;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:3px 8px;}
+  .rm-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:0.05em;color:#b9b2c8;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:3px 8px;}
 
   /* progress summary bar */
   .rm-prog{max-width:520px;margin:0 auto 44px;}
-  .rm-prog-track{height:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);overflow:hidden;}
-  .rm-prog-fill{height:100%;width:0;background:linear-gradient(90deg,#5ee0a8,#7c3aed);transition:width 1s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 18px rgba(124,58,237,0.45);}
+  .rm-prog-track{height:10px;background:rgba(255,255,255,0.06);border:1px solid var(--line);overflow:hidden;}
+  .rm-prog-fill{height:100%;width:0;background:linear-gradient(90deg,#5ee0a8,var(--brand));transition:width 1s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 18px rgba(124,58,237,0.45);}
   .rm-legend{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:14px;}
-  .rm-leg{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#9b94ab;}
+  .rm-leg{display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:11.5px;color:var(--ink-2);}
   .rm-leg i{width:11px;height:11px;border-radius:50%;display:inline-block;}
 
   /* mobile: curve collapses to a straight line pinned left, cards on the right */
@@ -99,33 +99,33 @@
 
   /* ===== Feature browser (subtabs) ===== */
   .ft-sec{margin-top:64px;}
-  .ft-search{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.14);color:#ECEAF2;font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:11px 13px;outline:none;margin-bottom:16px;}
-  .ft-search:focus{border-color:#7c3aed;}
-  .ft-search::placeholder{color:#5d5670;}
+  .ft-search{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.03);border:1px solid var(--line-2);color:var(--ink);font-family:var(--font-mono);font-size:13.5px;padding:11px 13px;outline:none;margin-bottom:16px;}
+  .ft-search:focus{border-color:var(--brand);}
+  .ft-search::placeholder{color:var(--ink-4);}
 
   /* subtab strip — horizontal, scrolls on small screens */
-  .ft-tabs{display:flex;gap:0;flex-wrap:wrap;border:1px solid rgba(255,255,255,0.12);margin-bottom:20px;}
-  .ft-tab{flex:1 1 auto;cursor:pointer;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.1);
-    color:#9b94ab;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;
+  .ft-tabs{display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--line-2);margin-bottom:20px;}
+  .ft-tab{flex:1 1 auto;cursor:pointer;background:transparent;border:none;border-right:1px solid var(--line);
+    color:var(--ink-2);font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:0.04em;
     padding:10px 12px;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:7px;justify-content:center;transition:background .15s,color .15s;}
   .ft-tab:last-child{border-right:none;}
-  .ft-tab:hover{color:#ECEAF2;background:rgba(255,255,255,0.03);}
-  .ft-tab.on{background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;}
+  .ft-tab:hover{color:var(--ink);background:rgba(255,255,255,0.03);}
+  .ft-tab.on{background:linear-gradient(180deg,#9a6cf3,var(--brand));color:#fff;}
   .ft-tab .ft-cnt{font-size:10px;background:rgba(0,0,0,0.22);padding:1px 6px;border-radius:10px;color:inherit;opacity:.85;}
   .ft-tab.on .ft-cnt{background:rgba(255,255,255,0.22);}
 
   .ft-panel{animation:fadeUp .35s ease both;}
-  .ft-cat-head{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;margin:0 0 2px;}
-  .ft-cat-sub{font-size:13px;color:#9b94ab;margin:0 0 18px;}
+  .ft-cat-head{font-family:var(--font-display);font-weight:700;font-size:18px;margin:0 0 2px;}
+  .ft-cat-sub{font-size:13px;color:var(--ink-2);margin:0 0 18px;}
 
   /* a group (submenu) of features */
-  .ft-group{border:1px solid rgba(255,255,255,0.09);margin-bottom:12px;background:#0b0813;}
+  .ft-group{border:1px solid var(--line);margin-bottom:12px;background:var(--panel);}
   .ft-group-h{display:flex;align-items:center;gap:10px;cursor:pointer;padding:13px 16px;user-select:none;}
   .ft-group-h:hover{background:rgba(255,255,255,0.02);}
-  .ft-caret{color:#7c3aed;font-size:11px;transition:transform .2s;flex:0 0 auto;}
+  .ft-caret{color:var(--brand);font-size:11px;transition:transform .2s;flex:0 0 auto;}
   .ft-group.open .ft-caret{transform:rotate(90deg);}
-  .ft-group-n{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px;flex:1;}
-  .ft-group-d{font-size:11.5px;color:#7d768c;}
+  .ft-group-n{font-family:var(--font-display);font-weight:600;font-size:14.5px;flex:1;}
+  .ft-group-d{font-size:11.5px;color:var(--ink-3);}
   .ft-group-body{display:none;padding:0 8px 8px;}
   .ft-group.open .ft-group-body{display:block;}
   .ft-nest{margin-left:14px;border-left:1px solid rgba(124,58,237,0.25);padding-left:8px;}
@@ -134,17 +134,17 @@
   .ft-feat{display:flex;align-items:flex-start;gap:11px;padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.05);}
   .ft-feat:last-child{border-bottom:none;}
   .ft-feat-main{flex:1;min-width:0;}
-  .ft-feat-n{font-size:13.5px;font-weight:600;color:#ECEAF2;}
-  .ft-feat-d{font-size:12px;color:#9b94ab;margin-top:2px;line-height:1.45;}
-  .ft-badge{flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.05em;text-transform:uppercase;
+  .ft-feat-n{font-size:13.5px;font-weight:600;color:var(--ink);}
+  .ft-feat-d{font-size:12px;color:var(--ink-2);margin-top:2px;line-height:1.45;}
+  .ft-badge{flex:0 0 auto;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.05em;text-transform:uppercase;
     padding:3px 7px;border-radius:3px;margin-top:1px;border:1px solid transparent;}
   .ft-b-toggle{color:#5ee0a8;background:rgba(94,224,168,0.1);border-color:rgba(94,224,168,0.3);}
-  .ft-b-action{color:#a78bfa;background:rgba(124,58,237,0.14);border-color:rgba(124,58,237,0.35);}
+  .ft-b-action{color:var(--brand-3);background:rgba(124,58,237,0.14);border-color:rgba(124,58,237,0.35);}
   .ft-b-float{color:#f0c47d;background:rgba(240,196,125,0.12);border-color:rgba(240,196,125,0.3);}
   .ft-b-array{color:#7db8f0;background:rgba(125,184,240,0.12);border-color:rgba(125,184,240,0.3);}
-  .ft-b-default{color:#9b94ab;background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.12);}
-  .ft-dyn{font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;padding:10px 14px;font-style:italic;}
-  .ft-empty{text-align:center;color:#7d768c;font-family:'JetBrains Mono',monospace;font-size:12.5px;padding:30px 0;}
+  .ft-b-default{color:var(--ink-2);background:rgba(255,255,255,0.05);border-color:var(--line-2);}
+  .ft-dyn{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);padding:10px 14px;font-style:italic;}
+  .ft-empty{text-align:center;color:var(--ink-3);font-family:var(--font-mono);font-size:12.5px;padding:30px 0;}
 </style>
 </head>
 <body>
@@ -191,8 +191,8 @@
 
     <div style="text-align:center;margin-bottom:30px;">
       <div class="rm-stat prog" style="margin-bottom:8px;">[ ROADMAP ]</div>
-      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;text-transform:uppercase;margin:0;">What we're building</h1>
-      <p style="font-size:14px;color:#9b94ab;margin:8px 0 0;">Shipped, in progress, and what's coming next.</p>
+      <h1 style="font-family:var(--font-display);font-weight:700;font-size:30px;text-transform:uppercase;margin:0;">What we're building</h1>
+      <p style="font-size:14px;color:var(--ink-2);margin:8px 0 0;">Shipped, in progress, and what's coming next.</p>
     </div>
 
     <!-- progress summary -->
@@ -203,7 +203,7 @@
         <span class="rm-leg"><i style="background:#9a6cf3;"></i> In progress</span>
         <span class="rm-leg"><i style="background:#1a1426;border:1px solid rgba(255,255,255,0.2);"></i> Planned</span>
       </div>
-      <p id="rmPct" style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin:12px 0 0;"></p>
+      <p id="rmPct" style="text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--ink-3);margin:12px 0 0;"></p>
     </div>
 
     <!-- ============ TIMELINE ============ -->
@@ -327,8 +327,8 @@
     <section class="ft-sec" id="features" style="scroll-margin-top:90px;">
       <div style="text-align:center;margin-bottom:24px;">
         <div class="rm-stat done" style="margin-bottom:8px;">[ FEATURES ]</div>
-        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;text-transform:uppercase;margin:0;">Full feature list</h2>
-        <p style="font-size:14px;color:#9b94ab;margin:8px 0 0;">Browse everything in the menu by category. <span id="ftTotal"></span></p>
+        <h2 style="font-family:var(--font-display);font-weight:700;font-size:26px;text-transform:uppercase;margin:0;">Full feature list</h2>
+        <p style="font-size:14px;color:var(--ink-2);margin:8px 0 0;">Browse everything in the menu by category. <span id="ftTotal"></span></p>
       </div>
 
       <input id="ftSearch" class="ft-search" type="text" placeholder="Search features…  (e.g. godmode, teleport, vehicle)">
@@ -336,7 +336,7 @@
       <div class="ft-panel" id="ftPanel"></div>
     </section>
 
-    <p style="text-align:center;margin-top:40px;"><a href="/" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#a78bfa;font-weight:600;">← Back to home</a></p>
+    <p style="text-align:center;margin-top:40px;"><a href="/" style="font-family:var(--font-mono);font-size:12.5px;color:var(--brand-3);font-weight:600;">← Back to home</a></p>
   </div>
 </main>
 

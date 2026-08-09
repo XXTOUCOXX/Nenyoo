@@ -315,25 +315,73 @@
   /* ---------------------------------------------------------
      10. SALE COUNTDOWN  — any [data-countdown] element
      --------------------------------------------------------- */
+  /* A real, shared deadline: the sale runs to the end of Sunday UTC and
+     rolls to the next week. Everyone sees the same clock, and it genuinely
+     expires — unlike a per-visitor timer that silently restarts forever. */
+  function saleEndsAt(now) {
+    var d = new Date(now);
+    var days = (7 - d.getUTCDay()) % 7;               // 0 = already Sunday
+    var end = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + days, 23, 59, 59);
+    if (end <= now) end += 7 * 86400000;              // Sunday, past cutoff
+    return end;
+  }
+
   function initCountdown() {
     var els = document.querySelectorAll('[data-countdown]');
     if (!els.length) return;
-    var KEY = 'nenyoo_countdown_end';
-    var end = parseInt(localStorage.getItem(KEY), 10);
-    if (!end || isNaN(end) || end < Date.now()) {
-      end = Date.now() + 48 * 3600 * 1000;
-      try { localStorage.setItem(KEY, end); } catch (e) {}
-    }
+
     function pad(n) { return String(n).padStart(2, '0'); }
     function tick() {
-      var rem = Math.max(end - Date.now(), 0);
-      var txt = pad(Math.floor(rem / 3600000)) + ':' +
+      var now = Date.now();
+      var rem = Math.max(saleEndsAt(now) - now, 0);
+      var d = Math.floor(rem / 86400000);
+      var txt = (d ? d + 'd ' : '') +
+                pad(Math.floor((rem % 86400000) / 3600000)) + ':' +
                 pad(Math.floor((rem % 3600000) / 60000)) + ':' +
                 pad(Math.floor((rem % 60000) / 1000));
       els.forEach(function (el) { el.textContent = txt; });
     }
     tick();
     setInterval(tick, 1000);
+  }
+
+  /* ---------------------------------------------------------
+     11. MODALS
+     [data-pop="id"] opens, [data-pop-close] / backdrop / Esc closes.
+     Focus is parked on the dialog and returned to the opener.
+     --------------------------------------------------------- */
+  function initModals() {
+    var opener = null;
+
+    function close(pop) {
+      if (!pop) return;
+      pop.classList.remove('active');
+      document.body.classList.remove('intro-lock');
+      if (opener) { opener.focus(); opener = null; }
+    }
+    function openPop(pop, from) {
+      if (!pop) return;
+      opener = from || null;
+      pop.classList.add('active');
+      document.body.classList.add('intro-lock');   // reuse the scroll lock
+      var box = pop.querySelector('.pop-box');
+      if (box) { box.setAttribute('tabindex', '-1'); box.focus(); }
+    }
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('[data-pop]');
+      if (trigger) {
+        e.preventDefault();
+        openPop(document.getElementById(trigger.getAttribute('data-pop')), trigger);
+        return;
+      }
+      if (e.target.closest('[data-pop-close]')) { close(e.target.closest('.pop')); return; }
+      if (e.target.classList && e.target.classList.contains('pop')) close(e.target);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close(document.querySelector('.pop.active'));
+    });
   }
 
   /* ---------------------------------------------------------
@@ -359,6 +407,7 @@
     safe(initParallax)();
     safe(initMarquee)();
     safe(initCountdown)();
+    safe(initModals)();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

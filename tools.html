@@ -21,24 +21,24 @@
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.className+=" js";</script>
 <style>
-  .tool-card{background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:28px;margin-bottom:22px;}
-  .tool-tag{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.14em;color:#8b5cf6;margin-bottom:10px;}
-  .tool-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;margin:0 0 4px;}
-  .tool-sub{font-size:13.5px;color:#9b94ab;margin:0 0 20px;}
+  .tool-card{background:var(--panel);border:1px solid var(--line);padding:28px;margin-bottom:22px;}
+  .tool-tag{font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.14em;color:var(--brand-2);margin-bottom:10px;}
+  .tool-h{font-family:var(--font-display);font-weight:700;font-size:20px;text-transform:uppercase;margin:0 0 4px;}
+  .tool-sub{font-size:13.5px;color:var(--ink-2);margin:0 0 20px;}
   .fld{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
-  .fld label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#7d768c;text-transform:uppercase;}
-  .inp{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.14);color:#ECEAF2;font-family:'JetBrains Mono',monospace;font-size:14px;padding:11px 13px;outline:none;}
-  .inp:focus{border-color:#7c3aed;}
-  .seg{display:flex;border:1px solid rgba(255,255,255,0.14);margin-bottom:14px;}
-  .seg button{flex:1;cursor:pointer;background:transparent;border:none;color:#9b94ab;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;padding:10px;}
-  .seg button.on{background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;}
-  .btn{cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,#7c3aed);border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 26px rgba(124,58,237,0.4);}
-  .out{margin-top:16px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);padding:0;display:none;}
+  .fld label{font-family:var(--font-mono);font-size:11px;letter-spacing:0.06em;color:var(--ink-3);text-transform:uppercase;}
+  .inp{width:100%;box-sizing:border-box;background:rgba(255,255,255,0.03);border:1px solid var(--line-2);color:var(--ink);font-family:var(--font-mono);font-size:14px;padding:11px 13px;outline:none;}
+  .inp:focus{border-color:var(--brand);}
+  .seg{display:flex;border:1px solid var(--line-2);margin-bottom:14px;}
+  .seg button{flex:1;cursor:pointer;background:transparent;border:none;color:var(--ink-2);font-family:var(--font-mono);font-size:14px;font-weight:600;padding:10px;}
+  .seg button.on{background:linear-gradient(180deg,#9a6cf3,var(--brand));color:#fff;}
+  .btn{cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,var(--brand));border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 26px rgba(124,58,237,0.4);}
+  .out{margin-top:16px;border:1px solid var(--line);background:rgba(255,255,255,0.02);padding:0;display:none;}
   .out.show{display:block;}
   .out-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.07);}
   .out-row:last-child{border-bottom:none;}
-  .out-k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#7d768c;text-transform:uppercase;}
-  .out-v{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5ee0a8;cursor:pointer;word-break:break-all;text-align:right;}
+  .out-k{font-family:var(--font-mono);font-size:11px;letter-spacing:0.06em;color:var(--ink-3);text-transform:uppercase;}
+  .out-v{font-family:var(--font-mono);font-size:14px;color:#5ee0a8;cursor:pointer;word-break:break-all;text-align:right;}
   .out-v:hover{color:#9af3c4;}
   .err{color:#f0857d!important;}
 </style>
@@ -87,8 +87,8 @@
 
     <div style="text-align:center;margin-bottom:32px;">
       <div class="tool-tag" style="margin-bottom:8px;">[ DEVELOPER TOOLS ]</div>
-      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;text-transform:uppercase;margin:0;">Tools</h1>
-      <p style="font-size:14px;color:#9b94ab;margin:6px 0 0;">Hex calculator · JOAAT hashing · hash reverse lookup</p>
+      <h1 style="font-family:var(--font-display);font-weight:700;font-size:28px;text-transform:uppercase;margin:0;">Tools</h1>
+      <p style="font-size:14px;color:var(--ink-2);margin:6px 0 0;">Hex calculator · JOAAT hashing · hash reverse lookup</p>
     </div>
 
     <!-- ============ HEX / INT CALCULATOR ============ -->
@@ -156,7 +156,7 @@
       </div>
     </div>
 
-    <p style="text-align:center;margin-top:8px;"><a href="/" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#a78bfa;font-weight:600;">← Back to home</a></p>
+    <p style="text-align:center;margin-top:8px;"><a href="/" style="font-family:var(--font-mono);font-size:12.5px;color:var(--brand-3);font-weight:600;">← Back to home</a></p>
   </div>
 </main>
 
@@ -313,7 +313,7 @@ function doReverse(){
       if(rs && rs.verified){
         strEl.textContent = rs.str;
       } else if(rs){
-        strEl.innerHTML = rs.str + '<span style="color:#7d768c;"> (unverified)</span>';
+        strEl.innerHTML = rs.str + '<span style="color:var(--ink-3);"> (unverified)</span>';
       } else {
         strEl.textContent = '—';
       }
@@ -323,7 +323,7 @@ function doReverse(){
       document.getElementById('rKey').textContent = key;
     } else {
       showRevError('No match for ' + (raw || key));
-      document.getElementById('rKey').innerHTML = '<span style="color:#7d768c;">' + key + '</span>';
+      document.getElementById('rKey').innerHTML = '<span style="color:var(--ink-3);">' + key + '</span>';
     }
   }).catch(function(e){
     showRevError('Lookup failed: ' + e.message);

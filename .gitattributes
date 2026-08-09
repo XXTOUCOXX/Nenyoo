@@ -1,0 +1,9 @@
+# Normalise line endings so commits stop reporting LF->CRLF on every file.
+* text=auto eol=lf
+
+*.png  binary
+*.gif  binary
+*.jpg  binary
+*.webp binary
+*.ico  binary
+*.woff2 binary

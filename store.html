@@ -19,6 +19,38 @@
 <link rel="canonical" href="https://www.nenyoocheats.net/store">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.className+=" js";</script>
+<style>
+  .st-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start;}
+  @media (max-width:960px){.st-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto;}}
+  .st-tier{
+    position:relative;display:flex;flex-direction:column;padding:34px 28px;
+    background:var(--panel);border:1px solid var(--line);
+    transition:border-color .4s var(--ease),transform .45s var(--ease-out-expo);
+  }
+  .st-tier:hover{border-color:rgba(168,85,247,.36);transform:translateY(-4px);}
+  .st-feat{background:rgba(139,92,246,.07);border-color:rgba(139,92,246,.34);}
+  .st-feat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);}
+  .st-new{background:linear-gradient(150deg,rgba(34,211,238,.07),rgba(12,9,22,.9));border-color:rgba(34,211,238,.3);}
+  .st-new::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--cyan),var(--brand-2),var(--magenta));}
+  .st-flag{position:absolute;top:18px;right:18px;}
+  .st-list{display:flex;flex-direction:column;gap:11px;margin-bottom:26px;}
+  .st-list .check{font-size:13.5px;}
+  .st-sep{font-size:12.5px;color:var(--cyan);line-height:1.5;margin:0 0 18px;}
+  .st-buy{display:flex;flex-direction:column;gap:8px;margin-top:auto;}
+  .st-note{text-align:center;font-size:11.5px;color:var(--ink-4);font-style:italic;margin:12px 0 0;}
+  .st-up{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);text-align:center;}
+  .st-up .mono{display:block;font-size:11px;color:var(--ink-4);letter-spacing:.12em;margin-bottom:10px;}
+  .st-up-btn{background:rgba(240,179,93,.1);border:1px solid rgba(240,179,93,.34);color:var(--gold);}
+  .st-up-btn:hover{background:rgba(240,179,93,.18);}
+  .st-up-new{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.34);color:#7dd7ec;gap:7px;}
+  .st-up-new:hover{background:rgba(34,211,238,.18);}
+  .st-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+  .st-chips .pill em{font-style:normal;color:var(--ink-4);text-transform:none;letter-spacing:0;}
+  .st-foot{text-align:center;font-size:13px;color:var(--ink-3);margin-top:34px;}
+  .st-foot a{color:var(--brand-3);font-weight:600;}
+  .st-fine{font-size:12px;margin-top:12px;}
+</style>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -58,133 +90,125 @@
   <a href="/signup" class="btn btn-primary btn-block">Get Access</a>
 </div>
 
-<div id="main" tabindex="-1" style="position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:40px 24px 80px;">
-  <div style="text-align:center;margin-bottom:44px;">
-    <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:46px;letter-spacing:-0.02em;text-transform:uppercase;margin:0 0 12px;">Store</h1>
-    <p style="font-size:16px;color:#9b94ab;margin:0;">Choose your plan and unlock the full power of N3NY000.</p>
+<main id="main" tabindex="-1" class="sec" style="padding-top:clamp(40px,5vw,64px);">
+  <div class="wrap">
+
+    <div class="sec-head reveal">
+      <span class="kicker">Store</span>
+      <h1 class="h-sec">Choose your plan</h1>
+      <p class="h-sub">One-time payment, lifetime access. Card, crypto and more.</p>
+    </div>
+
+    <div class="st-grid">
+
+      <!-- VIP -->
+      <div class="st-tier reveal spot">
+        <span class="tag tag-brand st-flag">SALE</span>
+        <div class="plan-name">VIP</div>
+        <div class="plan-price"><b>$12.50</b><s style="text-decoration:line-through;">$25</s></div>
+        <div class="plan-term">LIFETIME ACCESS</div>
+        <div class="plan-timer"><span>OFFER ENDS IN</span><b data-countdown>--:--:--</b></div>
+        <div class="st-list">
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-2)" stroke-width="2.8" stroke-linecap="square"/></svg>All Free features</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-2)" stroke-width="2.8" stroke-linecap="square"/></svg>GTA 5 Enhanced &amp; Legacy support</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-2)" stroke-width="2.8" stroke-linecap="square"/></svg>ScriptHookV integration</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-2)" stroke-width="2.8" stroke-linecap="square"/></svg>Recovery options</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-2)" stroke-width="2.8" stroke-linecap="square"/></svg>Trolling options</div>
+        </div>
+          <div class="st-buy">
+            <a href="https://fusiondash.myshopify.com/products/nenyooo-vip" target="_blank" rel="noopener" class="btn btn-primary btn-block">Purchase with Card</a>
+            <a href="https://nenyooocrypto.shop/" target="_blank" rel="noopener" class="btn btn-ghost btn-block">Purchase with Crypto</a>
+            <button type="button" class="btn btn-ghost btn-block btn-sm" data-pop="paymentsPopup">More payment methods</button>
+          </div>
+      </div>
+
+      <!-- MVP -->
+      <div class="st-tier st-feat reveal spot">
+        <span class="tag tag-gold st-flag">50% OFF</span>
+        <div class="plan-name">MVP</div>
+        <div class="plan-price"><b>$20</b><s style="text-decoration:line-through;">$35</s></div>
+        <div class="plan-term">LIFETIME ACCESS</div>
+        <div class="plan-timer"><span>LIMITED TIME</span><b data-countdown style="color:var(--gold);">--:--:--</b></div>
+        <div class="st-list">
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>All VIP features</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>VFX engine &amp; session browser</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Player tracker &amp; magnet</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>DLC loader / addons</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Business manager</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Advanced crashes &amp; kicks</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Lua engine support</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>BattlEye enabled / disabled</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Public lobbies &amp; missions</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Early access to features</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Exclusive MVP options</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Advanced protection suite</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Custom script support</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--brand-3)" stroke-width="2.8" stroke-linecap="square"/></svg>Lifetime updates</div>
+        </div>
+          <div class="st-buy">
+            <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp" target="_blank" rel="noopener" class="btn btn-primary btn-block">Purchase with Card</a>
+            <a href="https://nenyooocrypto.shop/" target="_blank" rel="noopener" class="btn btn-ghost btn-block">Purchase with Crypto</a>
+            <button type="button" class="btn btn-ghost btn-block btn-sm" data-pop="paymentsPopup">More payment methods</button>
+          </div>
+        <div class="st-up">
+          <span class="mono">ALREADY VIP?</span>
+          <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-to-mvp" target="_blank" rel="noopener" class="btn btn-block st-up-btn">Upgrade to MVP</a>
+        </div>
+      </div>
+
+      <!-- MVP PLUS -->
+      <div class="st-tier st-new reveal spot">
+        <span class="tag tag-cyan st-flag">NEW BUILD</span>
+        <div class="plan-name">MVP Plus</div>
+        <div class="plan-price"><b>$50</b><s style="text-decoration:line-through;">$90</s></div>
+        <div class="plan-term">LIFETIME ACCESS</div>
+        <div class="plan-timer"><span>OFFER ENDS IN</span><b data-countdown>--:--:--</b></div>
+        <p class="st-sep">A separate menu built on a new core &mdash; not an upgrade of MVP.</p>
+        <div class="st-list">
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="square"/></svg>Everything MVP does, rebuilt</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="square"/></svg>Undetected</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="square"/></svg>Private BattlEye bypass</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="square"/></svg>Next-gen exclusive feature set</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="square"/></svg>Priority support</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="square"/></svg>Early builds &amp; beta access</div>
+            <div class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--cyan)" stroke-width="2.8" stroke-linecap="square"/></svg>Lifetime updates</div>
+        </div>
+          <div class="st-buy">
+            <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp-plus" target="_blank" rel="noopener" class="btn btn-primary btn-block">Purchase with Card</a>
+            <a href="https://nenyooocrypto.shop/" target="_blank" rel="noopener" class="btn btn-ghost btn-block">Purchase with Crypto</a>
+            <button type="button" class="btn btn-ghost btn-block btn-sm" data-pop="paymentsPopup">More payment methods</button>
+          </div>
+        <p class="st-note">This is a pre-order for MVP Plus.</p>
+        <div class="st-up">
+          <span class="mono">ALREADY MVP?</span>
+          <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-from-mvp-to-mvp-plus" target="_blank" rel="noopener" class="btn btn-block st-up-btn st-up-new">
+            Upgrade to MVP+ <span class="mono" style="color:#fff;">$25</span><span class="mono" style="color:var(--ink-4);text-decoration:line-through;">$35</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="st-foot">Looking for the free version? <a href="/freekey">Get a free key &rarr;</a></p>
+    <p class="st-foot st-fine">By purchasing you agree to our <a href="/tos">Terms of Service &amp; Refund Policy</a>.</p>
   </div>
+</main>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;align-items:start;">
-
-    <!-- VIP -->
-    <div style="position:relative;background:#0b0813;border:1px solid rgba(255,255,255,0.1);padding:34px 30px;display:flex;flex-direction:column;">
-      <span style="position:absolute;top:18px;right:18px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:4px 9px;">SALE</span>
-      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:6px;">VIP</div>
-      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
-        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:38px;letter-spacing:-0.02em;">$12.50</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#6b6479;text-decoration:line-through;">$25</span>
-      </div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin-bottom:18px;letter-spacing:0.04em;">LIFETIME ACCESS</div>
-      <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:9px 12px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7d768c;letter-spacing:0.06em;">OFFER ENDS IN</span>
-        <span id="countdown-vip" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#a78bfa;">48:00:00</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px;color:#c4bdd1;margin-bottom:26px;">
-        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>All Free Features</div>
-        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>GTA 5 Enhanced &amp; Legacy Support</div>
-        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>ScriptHookV Integration</div>
-        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>Recovery Options</div>
-        <div style="display:flex;gap:10px;"><span style="color:#8b5cf6;">✓</span>Trolling Options</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:0;margin-top:auto;">
-        <a href="https://fusiondash.myshopify.com/products/nenyooo-vip" target="_blank" style="text-align:center;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 22px rgba(124,58,237,0.35);">💳 Purchase with Card</a>
-        <a href="https://nenyooocrypto.shop/" target="_blank" style="text-align:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);border-top:none;color:#ECEAF2;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;">₿ Purchase with Crypto</a>
-        <button onclick="document.getElementById('paymentsPopup').classList.add('active')" style="cursor:pointer;text-align:center;background:transparent;border:1px solid rgba(255,255,255,0.14);border-top:none;color:#c4bdd1;font-family:inherit;font-size:14px;font-weight:600;padding:12px;">More Payments</button>
-      </div>
+<!-- More payment methods -->
+<div id="paymentsPopup" class="pop" role="dialog" aria-modal="true" aria-labelledby="popTitle">
+  <div class="pop-box">
+    <button type="button" class="pop-x" data-pop-close aria-label="Close">&times;</button>
+    <h2 id="popTitle" class="h-sec" style="font-size:20px;margin-bottom:18px;">More payment methods</h2>
+    <div class="st-chips">
+      <span class="pill">PayPal F&amp;F <em>family &amp; friends only</em></span>
+      <span class="pill">Skrill</span>
+      <span class="pill">Paysafe</span>
+      <span class="pill">Steam gift cards</span>
     </div>
-
-    <!-- MVP (featured) -->
-    <div style="position:relative;background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.34);padding:34px 30px;display:flex;flex-direction:column;">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#9a6cf3,#7c3aed);"></div>
-      <span style="position:absolute;top:18px;right:18px;background:rgba(245,158,66,0.16);border:1px solid rgba(245,158,66,0.34);color:#f0b35d;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:3px 9px;">50% OFF</span>
-      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:6px;">MVP</div>
-      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
-        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:38px;letter-spacing:-0.02em;">$20</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#6b6479;text-decoration:line-through;">$35</span>
-      </div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin-bottom:18px;letter-spacing:0.04em;">LIFETIME ACCESS</div>
-      <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:9px 12px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7d768c;letter-spacing:0.06em;">LIMITED TIME</span>
-        <span id="countdown-mvp" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#f0b35d;">48:00:00</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px;color:#c4bdd1;margin-bottom:26px;">
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>All VIP Features</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>VFX Engine &amp; Session Browser</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Player Tracker &amp; Magnet</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>DLC Loader / Addons</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Business Manager</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Advanced Crashes &amp; Kicks</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Lua Engine Support</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Battle Eye Enabled/Disabled</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Public Lobbies &amp; Missions</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Early Access to Features</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Exclusive MVP Options</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Advanced Protection Suite</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Custom Script Support</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Lifetime Updates</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:0;margin-top:auto;">
-        <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp" target="_blank" style="text-align:center;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 22px rgba(124,58,237,0.35);">💳 Purchase with Card</a>
-        <a href="https://nenyooocrypto.shop/" target="_blank" style="text-align:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);border-top:none;color:#ECEAF2;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;">₿ Purchase with Crypto</a>
-        <button onclick="document.getElementById('paymentsPopup').classList.add('active')" style="cursor:pointer;text-align:center;background:transparent;border:1px solid rgba(255,255,255,0.14);border-top:none;color:#c4bdd1;font-family:inherit;font-size:14px;font-weight:600;padding:12px;">More Payments</button>
-      </div>
-      <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;margin:18px 0 10px;letter-spacing:0.04em;">ALREADY VIP?</div>
-      <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-to-mvp" target="_blank" style="text-align:center;background:rgba(245,158,66,0.1);border:1px solid rgba(245,158,66,0.34);color:#f0b35d;font-family:inherit;font-size:14px;font-weight:600;padding:12px;">↑ Upgrade to MVP</a>
-    </div>
-
-    <!-- MVP PLUS (featured) -->
-    <div style="position:relative;background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.34);padding:34px 30px;display:flex;flex-direction:column;">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#9a6cf3,#7c3aed);"></div>
-      <span style="position:absolute;top:18px;right:18px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:4px 9px;">NEW</span>
-      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:0.02em;text-transform:uppercase;margin-bottom:6px;">MVP Plus</div>
-      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px;">
-        <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:38px;letter-spacing:-0.02em;">$50</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#6b6479;text-decoration:line-through;">$90</span>
-      </div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d768c;margin-bottom:18px;letter-spacing:0.04em;">LIFETIME ACCESS</div>
-      <div style="background:#07060c;border:1px solid rgba(255,255,255,0.1);padding:9px 12px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7d768c;letter-spacing:0.06em;">OFFER ENDS IN</span>
-        <span id="countdown-mvpplus" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#a78bfa;">48:00:00</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:11px;font-size:13.5px;color:#c4bdd1;margin-bottom:26px;">
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Everything MVP does, rebuilt</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Undetected</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Private Bypass for Battleye</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>A separate build — not the MVP menu</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Next-gen exclusive feature set</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Priority Support</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Early Builds &amp; Beta Access</div>
-        <div style="display:flex;gap:10px;"><span style="color:#a78bfa;">✓</span>Lifetime Updates</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:0;margin-top:auto;">
-        <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp-plus" target="_blank" style="text-align:center;background:linear-gradient(180deg,#9a6cf3,#7c3aed);color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 22px rgba(124,58,237,0.35);">💳 Purchase with Card</a>
-        <a href="https://nenyooocrypto.shop/" target="_blank" style="text-align:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);border-top:none;color:#ECEAF2;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;">₿ Purchase with Crypto</a>
-        <button onclick="document.getElementById('paymentsPopup').classList.add('active')" style="cursor:pointer;text-align:center;background:transparent;border:1px solid rgba(255,255,255,0.14);border-top:none;color:#c4bdd1;font-family:inherit;font-size:14px;font-weight:600;padding:12px;">More Payments</button>
-      </div>
-      <div style="text-align:center;font-size:11.5px;color:#7d768c;margin-top:10px;line-height:1.5;font-style:italic;">This is a pre-order for MVP Plus.</div>
-      <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d768c;margin:18px 0 10px;letter-spacing:0.04em;">ALREADY MVP?</div>
-      <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-from-mvp-to-mvp-plus" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.34);color:#b9a4f5;font-family:inherit;font-size:14px;font-weight:600;padding:12px;">↑ Upgrade to MVP+ <span style="font-family:'JetBrains Mono',monospace;color:#fff;">$25</span><span style="font-family:'JetBrains Mono',monospace;color:#6b6479;text-decoration:line-through;">$35</span></a>
-    </div>
-
-  </div>
-
-  <p style="text-align:center;font-size:13px;color:#6b6479;margin-top:34px;">Looking for the free version? <a href="/freekey" style="color:#a78bfa;font-weight:600;">Get a free key →</a></p>
-  <p style="text-align:center;font-size:12px;color:#6b6479;margin-top:14px;">By purchasing you agree to our <a href="/tos" style="color:#a78bfa;">Terms of Service &amp; Refund Policy</a>.</p>
-</div>
-
-<!-- More Payments popup -->
-<div id="paymentsPopup" style="position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(3,2,8,0.78);backdrop-filter:blur(6px);padding:24px;" onclick="if(event.target===this)this.classList.remove('active')">
-  <div style="position:relative;width:100%;max-width:420px;background:#0b0813;border:1px solid rgba(139,92,246,0.34);padding:32px;">
-    <button onclick="document.getElementById('paymentsPopup').classList.remove('active')" style="position:absolute;top:14px;right:16px;background:transparent;border:none;color:#9b94ab;font-size:22px;cursor:pointer;line-height:1;">&times;</button>
-    <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;margin:0 0 18px;">More Payment Methods</h3>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);padding:6px 11px;color:#c4bdd1;">PayPal F&amp;F (Family &amp; Friends ONLY)</span>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);padding:6px 11px;color:#c4bdd1;">Skrill</span>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);padding:6px 11px;color:#c4bdd1;">Paysafe</span>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);padding:6px 11px;color:#c4bdd1;">Steam Gift Cards</span>
-    </div>
-    <p style="font-size:13px;color:#9b94ab;line-height:1.55;margin:0 0 20px;">For any other payment method, purchase a <strong style="color:#ECEAF2;">Steam Gift Card (EUROPE/EURO)</strong>.</p>
-    <a href="https://discord.gg/mwMcEDUjaa" target="_blank" style="display:block;text-align:center;background:#5865F2;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;">Open a Ticket on Discord</a>
+    <p style="font-size:13.5px;color:var(--ink-2);line-height:1.6;margin:0 0 20px;">
+      For any other method, buy a <strong style="color:var(--ink);">Steam Gift Card (EUROPE/EURO)</strong> and open a ticket.
+    </p>
+    <a href="https://discord.gg/mwMcEDUjaa" target="_blank" rel="noopener" class="btn btn-block" style="background:#5865F2;color:#fff;">Open a ticket on Discord</a>
   </div>
 </div>
 
@@ -210,28 +234,6 @@
 <script src="app.js"></script>
 <script src="site.js"></script>
 <script src="nav-auth.js"></script>
-<script>
-(function(){
-  // popup show/hide via .active class
-  var style = document.createElement('style');
-  style.textContent = '#paymentsPopup.active{display:flex !important;}';
-  document.head.appendChild(style);
-  // 48h sale countdown (shared key with landing)
-  var KEY = 'nenyoo_countdown_end';
-  var end = parseInt(localStorage.getItem(KEY), 10);
-  if(!end || isNaN(end) || end < Date.now()){
-    end = Date.now() + 48*60*60*1000;
-    localStorage.setItem(KEY, end);
-  }
-  var els = [document.getElementById('countdown-vip'), document.getElementById('countdown-mvp'), document.getElementById('countdown-mvpplus')];
-  function pad(n){ return String(n).padStart(2,'0'); }
-  function tick(){
-    var rem = end - Date.now(); if(rem < 0) rem = 0;
-    var txt = pad(Math.floor(rem/3600000)) + ':' + pad(Math.floor((rem%3600000)/60000)) + ':' + pad(Math.floor((rem%60000)/1000));
-    els.forEach(function(el){ if(el) el.textContent = txt; });
-  }
-  tick(); setInterval(tick, 1000);
-})();
-</script>
+
 </body>
 </html>
