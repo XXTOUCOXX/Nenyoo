@@ -24,6 +24,12 @@
   var app = {
     mouse: { x: -9999, y: -9999 },
     drag: false,
+    state: 'roam',          // roam | perch | sleep | chase
+    lastMove: 0,            // for the idle -> sleep timer
+    downAt: 0, downX: 0, downY: 0, moved: false,
+    nextPerch: 0, perchEl: null, perchUntil: 0, knocked: false,
+    laser: null, laserUntil: 0,
+    hearts: [], paws: [], wake: 0,
     grabR: 36,
     dpr: 1,
     cat: null,
@@ -70,24 +76,51 @@
 
   app.onMouse = function(e){
     app.mouse.x = e.clientX; app.mouse.y = e.clientY;
+    app.lastMove = performance.now();
     var cat = app.cat; if(!cat) return;
     if(app.drag){
+      app.moved = true;
       cat.x = Math.max(20, Math.min(window.innerWidth - 20, e.clientX));
       cat.y = Math.max(20, Math.min(window.innerHeight - 20, e.clientY));
     } else {
+      // a moving cursor near a sleeping cat wakes it
+      if(app.state === 'sleep' && Math.hypot(e.clientX - cat.x, e.clientY - cat.y) < 260) app.wakeUp();
       var near = Math.hypot(e.clientX - cat.x, e.clientY - cat.y) < app.grabR;
       document.body.style.cursor = near ? 'grab' : '';
     }
   };
 
+  app.wakeUp = function(){
+    if(app.state !== 'sleep') return;
+    app.state = 'roam';
+    app.wake = performance.now() + 650;      // stretch before walking off
+    app.cat.pause = 40;
+  };
+
+  // Pet: a tap that never turned into a drag.
+  app.pet = function(){
+    var cat = app.cat; if(!cat) return;
+    cat.purr = performance.now() + 2200;
+    // spawn above the head, not on the cat's back
+    for(var i=0;i<6;i++){
+      app.hearts.push({
+        x: cat.x + cat.facing*9 + (Math.random()*18-9),
+        y: cat.y - 24 - Math.random()*6,
+        vx: (Math.random()-0.5)*0.45, vy: -(0.45 + Math.random()*0.6),
+        life: 1, size: 3.4 + Math.random()*2.6
+      });
+    }
+  };
+
   app.onDown = function(e){
     var cat = app.cat; if(!cat) return;
+    app.downAt = performance.now(); app.downX = e.clientX; app.downY = e.clientY; app.moved = false;
+    if(app.state === 'sleep'){ app.wakeUp(); return; }
     if(Math.hypot(e.clientX - cat.x, e.clientY - cat.y) < app.grabR){
       app.drag = true; cat.held = true;
       cat.say = app.protests[(Math.random()*app.protests.length)|0];
       cat.pause = 0;
       document.body.style.cursor = 'grabbing';
-      // easter egg: grab the cat 5 times -> RAGE MODE
       var tnow = performance.now();
       if(tnow > app.rageUntil){
         app.grabCount++;
@@ -100,34 +133,214 @@
     }
   };
 
-  app.onUp = function(){
-    if(!app.drag) return;
-    app.drag = false;
-    if(app.cat){ app.cat.held = false; app.cat.say = null; app.cat.tx = app.cat.x; app.cat.ty = app.cat.y; }
-    document.body.style.cursor = '';
+  app.onUp = function(e){
+    var cat = app.cat;
+    var quick = performance.now() - app.downAt < 260;
+    var still = Math.hypot((e && e.clientX || app.downX) - app.downX,
+                           (e && e.clientY || app.downY) - app.downY) < 8;
+    if(app.drag){
+      app.drag = false;
+      if(cat){ cat.held = false; cat.say = null; cat.tx = cat.x; cat.ty = cat.y; }
+      document.body.style.cursor = '';
+      if(quick && still && !app.moved) app.pet();      // tapped, not dragged
+      return;
+    }
+    // tap on empty space near the cat = pet it too
+    if(cat && quick && still && Math.hypot(app.downX - cat.x, app.downY - cat.y) < app.grabR + 14) app.pet();
+  };
+
+  // Laser pointer: press L (or double-click anywhere) and the cat loses its mind.
+  app.startLaser = function(){
+    app.laser = { x: app.mouse.x, y: app.mouse.y };
+    app.laserUntil = performance.now() + 9000;
+    app.state = 'chase';
+    if(app.cat){ app.cat.pause = 0; app.cat.say = null; }
+    app.releasePerch();
+  };
+
+  app.releasePerch = function(){
+    app.perchEl = null; app.knocked = false;
+  };
+
+  // ---- perching: sit on a real element's top edge, occasionally nudge it ----
+  app.perchTargets = function(){
+    var sel = '.panel,.st-tier,.dash-card,.rev,.fcard,.cta,.dc,.acc,.stat-row,.plan,.stack,.cmp,.fx';
+    var out = [];
+    var nodes = document.querySelectorAll(sel);
+    for(var i=0;i<nodes.length && out.length<24;i++){
+      var r = nodes[i].getBoundingClientRect();
+      if(r.width > 150 && r.top > 90 && r.top < window.innerHeight - 60) out.push({el:nodes[i], r:r});
+    }
+    return out;
+  };
+
+  app.pickPerch = function(now){
+    var t = app.perchTargets();
+    if(!t.length){ app.nextPerch = now + 9000; return false; }
+    var pick = t[(Math.random()*t.length)|0];
+    var r = pick.r;
+    app.perchEl = pick.el;
+    app.knocked = false;
+    app.state = 'perch';
+    app.cat.tx = r.left + 30 + Math.random()*Math.max(1, r.width - 60);
+    app.cat.ty = r.top - 13;                   // feet on the ledge
+    app.cat.pause = 0;
+    return true;
   };
 
   app.updateCat = function(cat, W, H){
-    if(app.drag){ cat.phase += 0.32; return; }   // held by the mouse — wiggle, stay put
+    var now = performance.now();
+    if(app.drag){ cat.phase += 0.32; return; }
+    if(now < app.wake){ cat.phase += 0.05; return; }   // mid-stretch
+
+    // --- laser chase ---
+    if(app.state === 'chase'){
+      if(now > app.laserUntil || !app.laser){ app.laser = null; app.state = 'roam'; }
+      else {
+        app.laser.x += (app.mouse.x - app.laser.x) * 0.25;
+        app.laser.y += (app.mouse.y - app.laser.y) * 0.25;
+        var ldx = app.laser.x - cat.x, ldy = app.laser.y - cat.y;
+        var ld = Math.hypot(ldx, ldy);
+        if(ld > 14){
+          var sp = 3.4;
+          cat.x += (ldx/ld)*sp; cat.y += (ldy/ld)*sp;
+          if(Math.abs(ldx) > 1.5) cat.facing = ldx < 0 ? -1 : 1;
+          cat.phase += 0.5;
+          app.dropPaw(cat, now, 9);
+        } else { cat.phase += 0.3; }
+        return;
+      }
+    }
+
+    // --- sleep after a long idle ---
+    if(app.state !== 'sleep' && app.lastMove && now - app.lastMove > 22000 && !cat.held){
+      app.state = 'sleep'; app.releasePerch(); cat.say = null; cat.pause = 0;
+    }
+    if(app.state === 'sleep'){ cat.phase += 0.012; return; }
+
+    // --- perched: sit, maybe knock the thing over ---
+    if(app.state === 'perch'){
+      if(!app.perchEl || !document.body.contains(app.perchEl)){ app.state = 'roam'; app.releasePerch(); }
+      else {
+        var pr = app.perchEl.getBoundingClientRect();
+        if(pr.bottom < 0 || pr.top > H){ app.state = 'roam'; app.releasePerch(); }  // scrolled away
+        else {
+          cat.ty = pr.top - 13;
+          var pdx = cat.tx - cat.x, pdy = cat.ty - cat.y, pd = Math.hypot(pdx, pdy);
+          if(pd > 4){
+            var ps = 1.6;
+            cat.x += (pdx/pd)*ps; cat.y += (pdy/pd)*ps;
+            if(Math.abs(pdx) > 1.5) cat.facing = pdx < 0 ? -1 : 1;
+            cat.phase += 0.22;
+            app.dropPaw(cat, now, 16);
+            return;
+          }
+          if(!app.perchUntil){ app.perchUntil = now + 8000 + Math.random()*7000; }
+          cat.phase += 0.03;
+          // the obligatory nudge
+          if(!app.knocked && now > app.perchUntil - 3200){
+            app.knocked = true;
+            var el = app.perchEl;
+            el.classList.add('cat-knock');
+            setTimeout(function(){ el.classList.remove('cat-knock'); }, 700);
+            cat.say = app.phrases[(Math.random()*app.phrases.length)|0];
+            cat.sayMax = 200; cat.pause = 200;
+          }
+          if(now > app.perchUntil){
+            app.perchUntil = 0; app.state = 'roam'; app.releasePerch();
+            app.nextPerch = now + 14000 + Math.random()*16000;
+          }
+          return;
+        }
+      }
+    }
+
+    // --- default roaming (original behaviour) ---
     var m = 90;
     if(cat.pause > 0){ cat.pause--; cat.phase += 0.04; return; }
+    if(now > app.nextPerch && Math.random() < 0.5 && app.pickPerch(now)) return;
     var dx = cat.tx - cat.x, dy = cat.ty - cat.y;
     var d = Math.hypot(dx, dy);
     if(d < 26){
       cat.tx = m + Math.random()*(W - 2*m);
       cat.ty = m + Math.random()*(H - 2*m);
       if(Math.random() < 0.55){
-        cat.pause = 200 + Math.random()*160;          // ~3-6s sit
+        cat.pause = 200 + Math.random()*160;
         cat.say = app.phrases[(Math.random()*app.phrases.length)|0];
         cat.sayMax = cat.pause;
       }
       return;
     }
-    var sp = 1.15;
-    cat.x += (dx/d) * sp;
-    cat.y += (dy/d) * sp;
+    var sp2 = 1.15;
+    cat.x += (dx/d) * sp2;
+    cat.y += (dy/d) * sp2;
     if(Math.abs(dx) > 1.5) cat.facing = dx < 0 ? -1 : 1;
     cat.phase += 0.22;
+    app.dropPaw(cat, now, 18);
+  };
+
+  app.dropPaw = function(cat, now, every){
+    if(!app.paws) app.paws = [];
+    if(now - (app.lastPaw||0) < every*16) return;
+    app.lastPaw = now;
+    app.paws.push({ x: cat.x - cat.facing*10, y: cat.y + 12, a: 1, r: cat.facing });
+    if(app.paws.length > 26) app.paws.shift();
+  };
+
+  app.drawExtras = function(ctx, now){
+    var i;
+    // paw prints
+    for(i=app.paws.length-1;i>=0;i--){
+      var pw = app.paws[i];
+      pw.a -= 0.008;
+      if(pw.a <= 0){ app.paws.splice(i,1); continue; }
+      ctx.save();
+      ctx.globalAlpha = pw.a * 0.5;
+      ctx.fillStyle = '#b9a4f5';
+      ctx.beginPath(); ctx.ellipse(pw.x, pw.y, 2.4, 1.9, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(pw.x - 2.4*pw.r, pw.y - 2.4, 0.9, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(pw.x, pw.y - 3.1, 0.9, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(pw.x + 2.4*pw.r, pw.y - 2.4, 0.9, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+    }
+    // hearts from petting
+    for(i=app.hearts.length-1;i>=0;i--){
+      var h = app.hearts[i];
+      h.x += h.vx; h.y += h.vy; h.vy -= 0.004; h.life -= 0.011;
+      if(h.life <= 0){ app.hearts.splice(i,1); continue; }
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, h.life);
+      ctx.fillStyle = '#f3a6c8';
+      ctx.shadowColor = 'rgba(243,166,200,0.9)'; ctx.shadowBlur = 10;
+      var sz = h.size;
+      ctx.beginPath();
+      ctx.moveTo(h.x, h.y + sz*0.35);
+      ctx.bezierCurveTo(h.x - sz, h.y - sz*0.35, h.x - sz*0.35, h.y - sz, h.x, h.y - sz*0.35);
+      ctx.bezierCurveTo(h.x + sz*0.35, h.y - sz, h.x + sz, h.y - sz*0.35, h.x, h.y + sz*0.35);
+      ctx.fill();
+      ctx.restore();
+    }
+    // laser dot
+    if(app.laser){
+      ctx.save();
+      var pulse = 3 + Math.sin(now*0.02)*1.2;
+      ctx.shadowColor = 'rgba(255,40,80,0.95)'; ctx.shadowBlur = 18;
+      ctx.fillStyle = '#ff2a50';
+      ctx.beginPath(); ctx.arc(app.laser.x, app.laser.y, pulse, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+    }
+    // zzz while asleep
+    if(app.state === 'sleep' && app.cat){
+      ctx.save();
+      ctx.font = '600 13px "JetBrains Mono", monospace';
+      ctx.fillStyle = 'rgba(199,162,255,0.9)';
+      for(var z=0; z<3; z++){
+        var ph = (now*0.0011 + z*0.33) % 1;
+        ctx.globalAlpha = (1 - ph) * 0.85;
+        ctx.fillText('z', app.cat.x + 14 + ph*16, app.cat.y - 16 - ph*26);
+      }
+      ctx.restore();
+    }
   };
 
   app.drawCat = function(ctx, cat, time, rage){
@@ -214,6 +427,8 @@
     // ---- big sparkly eyes (with blink) ----
     var bc = time % 3600;
     var blink = bc > 3380 ? Math.max(0, 1 - Math.abs(bc - 3480)/100) : 0;
+    if(app.state === 'sleep') blink = 1;                       // eyes shut
+    if(app.cat && app.cat.purr > time) blink = 0.72;           // happy squint
     var eo = 4.3, ey = hy - 0.3;
     var erY = (rage>0.3 ? 3.2 : 3.1) * (1 - blink);
     var erX = rage>0.3 ? 2.5 : 2.7;
@@ -356,9 +571,27 @@
   app.init = function(){
     app.onResize();
     window.addEventListener('resize', app.onResize);
-    window.addEventListener('mousemove', app.onMouse);
-    window.addEventListener('mousedown', app.onDown);
-    window.addEventListener('mouseup', app.onUp);
+    // pointer events so phones can pet and drag the cat too
+    window.addEventListener('pointermove', app.onMouse, {passive:true});
+    window.addEventListener('pointerdown', app.onDown);
+    window.addEventListener('pointerup', app.onUp);
+    window.addEventListener('pointercancel', app.onUp);
+    window.addEventListener('dblclick', function(){ app.startLaser(); });
+    window.addEventListener('keydown', function(e){
+      if(e.key === 'l' || e.key === 'L'){
+        var t = e.target && e.target.tagName;
+        if(t === 'INPUT' || t === 'TEXTAREA' || (e.target && e.target.isContentEditable)) return;
+        app.startLaser();
+      }
+      if(e.key === 'Escape'){ app.laser = null; if(app.state === 'chase') app.state = 'roam'; }
+    });
+    // stop burning frames in a background tab
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ cancelAnimationFrame(app.raf); app.raf = 0; }
+      else if(!app.raf){ app.lastMove = performance.now(); app.raf = requestAnimationFrame(app.tick); }
+    });
+    app.lastMove = performance.now();
+    app.nextPerch = performance.now() + 6000;
 
     var SPACING = 34;
     var R = 200, R2 = R*R;
@@ -366,9 +599,9 @@
     app.cat = {
       x: window.innerWidth*0.5, y: window.innerHeight*0.5,
       tx: window.innerWidth*0.5, ty: window.innerHeight*0.5,
-      facing: 1, phase: 0, pause: 0, held: false,
+      facing: 1, phase: 0, pause: 0, held: false, purr: 0,
     };
-    var tick = function(){
+    var tick = app.tick = function(){
       var dpr = app.dpr || 1;
       var W = window.innerWidth, H = window.innerHeight;
       ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -439,14 +672,21 @@
           app.drawRageOverlay(catCtx, W, H, now, rageF);
           app.drawSigil(catCtx, cat.x, cat.y, now, rageF);
         }
+        app.drawExtras(catCtx, now);
         app.drawCat(catCtx, cat, performance.now(), rageF);
       } else {
+        app.drawExtras(ctx, now);
         app.drawCat(ctx, cat, performance.now(), rageF);
       }
       app.raf = requestAnimationFrame(tick);
     };
     app.raf = requestAnimationFrame(tick);
   };
+
+  // exposed so the cat can be poked from the console:
+  //   NenyooCat.startLaser()  NenyooCat.pickPerch(performance.now())
+  //   NenyooCat.state = 'sleep'   NenyooCat.pet()
+  window.NenyooCat = app;
 
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', app.init);
