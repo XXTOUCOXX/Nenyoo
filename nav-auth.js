@@ -30,30 +30,57 @@
     return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
   }
 
+  function makePill(name, pic, cls) {
+    var avatar = pic
+      ? '<span style="width:22px;height:22px;display:block;overflow:hidden;border:1px solid rgba(255,255,255,0.15);flex-shrink:0;"><img src="' + escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></span>'
+      : '<span style="width:22px;height:22px;background:linear-gradient(135deg,#a855f7,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:11px;color:#fff;flex-shrink:0;">' + escapeHtml(initials(name)) + '</span>';
+
+    var pill = document.createElement('a');
+    pill.href = '/dashboard';
+    pill.title = 'Open dashboard';
+    pill.className = cls;
+    pill.innerHTML = avatar + '<span>' + escapeHtml(name) + '</span>';
+    return pill;
+  }
+
   function run() {
+    var prof = getProfile();
+    var name = prof.name || 'Account';
+    var pic = prof.pic || '';
+
+    // Redesigned nav: swap Login + Get Access for a profile pill, kept
+    // in front of the burger so the mobile toggle stays last.
+    var actions = document.querySelector('.nav-actions');
+    if (actions) {
+      var burger = actions.querySelector('.nav-burger');
+      actions.querySelectorAll('a[href="/login"],a[href="/signup"]').forEach(function (a) {
+        a.parentNode.removeChild(a);
+      });
+      var pill = makePill(name, pic, 'btn btn-ghost btn-sm');
+      if (burger) actions.insertBefore(pill, burger); else actions.appendChild(pill);
+
+      var drawer = document.querySelector('.nav-drawer');
+      if (drawer) {
+        drawer.querySelectorAll('a[href="/login"],a[href="/signup"]').forEach(function (a) {
+          a.parentNode.removeChild(a);
+        });
+        drawer.appendChild(makePill(name, pic, 'btn btn-primary btn-block'));
+      }
+      return;
+    }
+
+    // Legacy inline-styled nav (pages not yet migrated).
     var loginLink = document.querySelector('a[href="/login"]');
     if (!loginLink) return;                 // page has no marketing nav
     var group = loginLink.parentNode;
     var signupLink = group.querySelector('a[href="/signup"]');
 
-    var prof = getProfile();
-    var name = prof.name || 'Account';
-    var pic = prof.pic || '';
+    var legacy = makePill(name, pic, '');
+    legacy.style.cssText = 'cursor:pointer;display:flex;align-items:center;gap:9px;background:transparent;color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:8px 16px;';
 
-    var avatar = pic
-      ? '<span style="width:22px;height:22px;display:block;overflow:hidden;border:1px solid rgba(255,255,255,0.15);flex-shrink:0;"><img src="' + escapeHtml(pic) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></span>'
-      : '<span style="width:22px;height:22px;background:linear-gradient(180deg,#9a6cf3,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:11px;color:#fff;flex-shrink:0;">' + escapeHtml(initials(name)) + '</span>';
-
-    var pill = document.createElement('a');
-    pill.href = '/dashboard';
-    pill.title = 'Open dashboard';
-    pill.style.cssText = 'cursor:pointer;display:flex;align-items:center;gap:9px;background:transparent;color:#ECEAF2;font-family:inherit;font-size:14px;font-weight:600;padding:8px 16px;';
-    pill.innerHTML = avatar + '<span>' + escapeHtml(name) + '</span>';
-
-    // Drop Login + Get Access, add the profile pill as the last nav item.
     loginLink.parentNode.removeChild(loginLink);
     if (signupLink) signupLink.parentNode.removeChild(signupLink);
-    group.appendChild(pill);
+    group.appendChild(legacy);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);

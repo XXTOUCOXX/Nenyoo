@@ -10,8 +10,9 @@
 <link rel="icon" type="image/png" href="brand/Logo.png">
 <link rel="apple-touch-icon" href="brand/Logo.png">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.className+=" js";</script>
 </head>
-<body>
+<body data-intro="off">
 <div class="bg-root">
 <canvas id="fx" class="fx-canvas"></canvas>
 <canvas id="catFx" class="fx-canvas"></canvas>
@@ -21,7 +22,7 @@
   <header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(7,6,12,0.82);border-bottom:1px solid rgba(255,255,255,0.09);">
     <div style="max-width:1120px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;">
       <a href="/" style="display:flex;align-items:center;gap:11px;cursor:pointer;">
-        <img src="brand/Logo.png" alt="Nenyoo" style="width:32px;height:32px;display:block;border:1px solid rgba(255,255,255,0.1);" />
+        <img class="brand-mark" src="brand/Logo@96.gif" alt="Nenyoo" width="44" height="29" />
         <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.02em;text-transform:uppercase;">N3NY000</span>
       </a>
       <div style="display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.1);">
@@ -286,6 +287,7 @@
 </div>
 
 <script src="app.js"></script>
+<script src="site.js"></script>
 <script src="auth.js"></script>
 <script>
 (function(){
