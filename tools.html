@@ -32,7 +32,10 @@
   .seg{display:flex;border:1px solid var(--line-2);margin-bottom:14px;}
   .seg button{flex:1;cursor:pointer;background:transparent;border:none;color:var(--ink-2);font-family:var(--font-mono);font-size:14px;font-weight:600;padding:10px;}
   .seg button.on{background:linear-gradient(180deg,#9a6cf3,var(--brand));color:#fff;}
-  .btn{cursor:pointer;width:100%;background:linear-gradient(180deg,#9a6cf3,var(--brand));border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 26px rgba(124,58,237,0.4);}
+  /* page-local action button; must not be called .btn -- that name belongs
+     to the design system and this rule was hijacking the nav buttons */
+  .tool-btn{cursor:pointer;width:100%;background:var(--grad);border:none;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;padding:13px;box-shadow:0 8px 26px rgba(124,58,237,0.4);transition:transform .25s var(--ease-out-expo),box-shadow .25s;}
+  .tool-btn:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(124,58,237,0.55);}
   .out{margin-top:16px;border:1px solid var(--line);background:rgba(255,255,255,0.02);padding:0;display:none;}
   .out.show{display:block;}
   .out-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.07);}
@@ -145,7 +148,7 @@
         <label>Hash</label>
         <input id="rIn" class="inp" placeholder="0xC2B82BE4 or 3266348004" onkeydown="if(event.key==='Enter')doReverse()">
       </div>
-      <button class="btn" onclick="doReverse()">Reverse Lookup</button>
+      <button class="tool-btn" onclick="doReverse()">Reverse Lookup</button>
 
       <div id="revOut" class="out">
         <div class="out-row"><span class="out-k">Hash String</span><span id="rStr" class="out-v" onclick="copyText(this)"></span></div>
