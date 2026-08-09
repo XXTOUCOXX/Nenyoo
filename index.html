@@ -157,6 +157,43 @@
   .cmp-hint{display:none;margin:12px 0 0;font-size:11px;color:var(--ink-4);letter-spacing:.08em;text-align:center;}
   @media (max-width:760px){.cmp-hint{display:block;}}
 
+  /* ---- MVP Plus (separate build, not a tier) ---- */
+  .np{
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#160f2c 0%,#0a0813 55%,#0d1524 100%);
+    border:1px solid rgba(34,211,238,.24);
+  }
+  .np-glow{
+    position:absolute;top:-140px;right:-80px;width:min(620px,90%);height:420px;pointer-events:none;
+    background:radial-gradient(circle,rgba(34,211,238,.20),transparent 62%);filter:blur(16px);
+  }
+  .np::after{ /* cyan/magenta seam, echoes the logo */
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--cyan),var(--brand-2),var(--magenta));
+  }
+  .np-in{
+    position:relative;display:grid;grid-template-columns:1.02fr .98fr;
+    gap:clamp(28px,4vw,56px);padding:clamp(32px,4.5vw,56px);align-items:center;
+  }
+  .np-left{display:flex;flex-direction:column;}
+  .np-icon{width:76px;height:76px;object-fit:contain;margin:20px 0 16px;}
+  .np-lead{font-size:15.5px;line-height:1.65;color:var(--ink-2);margin:0 0 26px;max-width:52ch;}
+  .np-lead strong{color:var(--ink);font-weight:700;}
+  .np-price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+  .np-price b{font-family:var(--font-mono);font-weight:700;font-size:44px;letter-spacing:-.03em;}
+  .np-price s{font-family:var(--font-mono);font-size:19px;color:var(--ink-4);}
+  .np-term{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em;}
+  .np-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;}
+  .np-note{font-size:11.5px;color:var(--ink-4);font-style:italic;margin:14px 0 0;}
+
+  .np-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .np-f{display:flex;gap:13px;align-items:flex-start;background:rgba(8,6,16,.72);padding:16px 18px;transition:background .3s var(--ease),padding-left .3s var(--ease);}
+  .np-f:hover{background:rgba(34,211,238,.07);padding-left:24px;}
+  .np-t{flex-shrink:0;margin-top:2px;line-height:0;}
+  .np-f b{display:block;font-size:14.5px;font-weight:600;margin-bottom:3px;}
+  .np-f span{font-size:12.8px;color:var(--ink-3);line-height:1.5;}
+  @media (max-width:900px){.np-in{grid-template-columns:1fr;}}
+
   /* ---- feature explorer ---- */
   .fx{border:1px solid var(--line);background:rgba(255,255,255,.015);}
   .fx-bar{display:flex;align-items:center;gap:12px;padding:0 18px;border-bottom:1px solid var(--line);}
@@ -285,7 +322,7 @@
     },
     {
      "@type": "Offer",
-     "name": "MVP Plus",
+     "name": "MVP Plus (separate build)",
      "price": "50.00",
      "priceCurrency": "USD",
      "url": "https://www.nenyoocheats.net/store",
@@ -427,10 +464,10 @@
       <div class="sec-head reveal">
         <span class="kicker">Pricing</span>
         <h2 class="h-sec">Choose your package</h2>
-        <p class="h-sub">One-time payment. Lifetime access. No subscriptions, ever.</p>
+        <p class="h-sub">Three tiers of the current menu. One-time payment, lifetime access, no subscriptions. Looking for <a href="#mvpplus" style="color:var(--brand-3);">MVP Plus</a>? It’s a separate build — see below.</p>
       </div>
 
-      <div class="gridline cols-4 tilt-scene">
+      <div class="gridline cols-3 tilt-scene">
 
         <!-- FREE -->
         <div class="plan spot reveal" data-tilt data-tilt-max="4">
@@ -499,32 +536,6 @@
           </div>
         </div>
 
-        <!-- MVP PLUS -->
-        <div class="plan plan-feat spot reveal" data-tilt data-tilt-max="4">
-          <img class="plan-icon" src="products/mvp_plus@128.gif" alt="" loading="lazy" onerror="this.onerror=null;this.src='products/mvp_plus.png';">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
-            <div class="plan-name">MVP Plus</div>
-            <span class="tag tag-cyan">NEW</span>
-          </div>
-          <div class="plan-desc">The next generation. Built different.</div>
-          <div class="plan-price"><b>$50</b><s style="text-decoration:line-through;">$90</s></div>
-          <div class="plan-term">LIFETIME · ONE-TIME</div>
-          <div class="plan-timer"><span>OFFER ENDS IN</span><b data-countdown>48:00:00</b></div>
-          <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp-plus" target="_blank" rel="noopener" class="btn btn-primary btn-block">Purchase MVP+</a>
-          <div style="text-align:center;font-size:11.5px;color:var(--ink-3);margin:10px 0 12px;font-style:italic;">This is a pre-order for MVP Plus.</div>
-          <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-from-mvp-to-mvp-plus" target="_blank" rel="noopener" class="btn btn-ghost btn-block btn-sm">
-            Upgrade from MVP <span class="mono" style="color:#fff;">$25</span><span class="mono" style="color:var(--ink-4);text-decoration:line-through;">$35</span>
-          </a>
-          <div class="plan-list">
-            <div class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#c7a2ff" stroke-width="2.6" stroke-linecap="square"/></svg><span style="color:var(--ink);font-weight:600;">All MVP features, plus:</span></div>
-            <div class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#c7a2ff" stroke-width="2.6" stroke-linecap="square"/></svg>Undetected</div>
-            <div class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#c7a2ff" stroke-width="2.6" stroke-linecap="square"/></svg>Private BattlEye bypass</div>
-            <div class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#c7a2ff" stroke-width="2.6" stroke-linecap="square"/></svg>Everything in MVP, supercharged</div>
-            <div class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#c7a2ff" stroke-width="2.6" stroke-linecap="square"/></svg>Next-gen exclusive feature set</div>
-            <div class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#c7a2ff" stroke-width="2.6" stroke-linecap="square"/></svg>Priority support &amp; early builds</div>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -535,139 +546,173 @@
       <div class="sec-head reveal">
         <span class="kicker">Side by side</span>
         <h2 class="h-sec">What you get, per tier</h2>
-        <p class="h-sub">Every tier includes everything to its left. MVP is where most people land.</p>
+        <p class="h-sub">Three tiers of the same menu — each one includes everything to its left. MVP is where most people land.</p>
       </div>
 
       <div class="cmp reveal">
         <table>
-          <caption class="sr-only">Feature comparison across the Free, VIP, MVP and MVP Plus tiers</caption>
+          <caption class="sr-only">Feature comparison across the Free, VIP and MVP tiers</caption>
           <thead>
             <tr>
               <th scope="col"><span class="ch-lbl">Feature</span></th>
               <th scope="col"><span class="ch-n">Free</span><span class="ch-p">$0</span></th>
-              <th scope="col" class="cf"><span class="ch-n">VIP</span><span class="ch-p">$12.50</span></th>
-              <th scope="col"><span class="ch-n">MVP</span><span class="ch-p">$20</span><span class="ch-tag">Best value</span></th>
-              <th scope="col" class="cf"><span class="ch-n">MVP+</span><span class="ch-p">$50</span></th>
+              <th scope="col"><span class="ch-n">VIP</span><span class="ch-p">$12.50</span></th>
+              <th scope="col" class="cf"><span class="ch-n">MVP</span><span class="ch-p">$20</span><span class="ch-tag">Best value</span></th>
             </tr>
           </thead>
           <tbody>
-        <tr class="cg"><th colspan="5" scope="colgroup">Core</th></tr>
+        <tr class="cg"><th colspan="4" scope="colgroup">Core</th></tr>
         <tr>
           <th scope="row">GTA 5 Enhanced &amp; Legacy support</th>
-          <td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Player options</th>
-          <td><span class="ct">Basic</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><span class="ct">Basic</span></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Vehicle features</th>
-          <td><span class="ct">Essential</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><span class="ct">Essential</span></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Trolling options</th>
-          <td><span class="ct">Basic</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><span class="ct">Basic</span></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Money methods</th>
-          <td><span class="ct">Simple</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><span class="ct">Simple</span></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Lua engine support</th>
-          <td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Protections</th>
-          <td><span class="ct">Limited</span></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><span class="ct">Advanced suite</span></td><td class="cf"><span class="ct">Advanced suite</span></td>
+          <td><span class="ct">Limited</span></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><span class="ct">Advanced suite</span></td>
         </tr>
         <tr>
           <th scope="row">ScriptHookV integration</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Recovery options</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
-        <tr class="cg"><th colspan="5" scope="colgroup">Power tools</th></tr>
+        <tr class="cg"><th colspan="4" scope="colgroup">Power tools</th></tr>
         <tr>
           <th scope="row">VFX engine &amp; session browser</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Player tracker &amp; magnet</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">DLC loader / addons</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Business manager</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Advanced crashes &amp; kicks</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">BattlEye enabled / disabled</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Public lobbies &amp; missions</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Custom script support</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Exclusive MVP options</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
         <tr>
           <th scope="row">Early access to features</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
-        <tr class="cg"><th colspan="5" scope="colgroup">Next generation</th></tr>
-        <tr>
-          <th scope="row">Undetected</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
-        </tr>
-        <tr>
-          <th scope="row">Private BattlEye bypass</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
-        </tr>
-        <tr>
-          <th scope="row">Next-gen exclusive feature set</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
-        </tr>
-        <tr>
-          <th scope="row">Priority support &amp; early builds</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cn" aria-label="Not included"></i></td><td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
-        </tr>
-        <tr class="cg"><th colspan="5" scope="colgroup">Access</th></tr>
+        <tr class="cg"><th colspan="4" scope="colgroup">Access</th></tr>
         <tr>
           <th scope="row">Key validity</th>
-          <td><span class="ct">Resets 48h</span></td><td class="cf"><span class="ct">Lifetime</span></td><td><span class="ct">Lifetime</span></td><td class="cf"><span class="ct">Lifetime</span></td>
+          <td><span class="ct">Resets 48h</span></td><td><span class="ct">Lifetime</span></td><td class="cf"><span class="ct">Lifetime</span></td>
         </tr>
         <tr>
           <th scope="row">Lifetime updates</th>
-          <td><i class="cn" aria-label="Not included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
+          <td><i class="cn" aria-label="Not included"></i></td><td><i class="cy" aria-label="Included"></i></td><td class="cf"><i class="cy" aria-label="Included"></i></td>
         </tr>
           </tbody>
           <tfoot>
             <tr>
               <td></td>
               <td><a href="/freekey" class="btn btn-ghost btn-sm btn-block">Get free key</a></td>
-              <td class="cf"><a href="/store" class="btn btn-ghost btn-sm btn-block">Buy VIP</a></td>
-              <td><a href="/store" class="btn btn-primary btn-sm btn-block">Buy MVP</a></td>
-              <td class="cf"><a href="https://fusiondash.myshopify.com/products/nenyooo-mvp-plus" target="_blank" rel="noopener" class="btn btn-ghost btn-sm btn-block">Pre-order</a></td>
+              <td><a href="/store" class="btn btn-ghost btn-sm btn-block">Buy VIP</a></td>
+              <td class="cf"><a href="/store" class="btn btn-primary btn-sm btn-block">Buy MVP</a></td>
             </tr>
           </tfoot>
         </table>
       </div>
       <p class="cmp-hint mono">Scroll the table sideways on small screens &rarr;</p>
+    </div>
+  </section>
+
+  <!-- ===================== MVP PLUS ===================== -->
+  <section class="sec" id="mvpplus" style="padding-top:0;scroll-margin-top:90px;">
+    <div class="wrap">
+      <div class="np reveal-s spot">
+        <div class="np-glow" aria-hidden="true"></div>
+        <div class="np-in">
+
+          <div class="np-left">
+            <span class="tag tag-cyan" style="align-self:flex-start;">NEW BUILD &middot; PRE-ORDER</span>
+            <img class="np-icon" src="products/mvp_plus@128.gif" alt="" loading="lazy"
+                 onerror="this.onerror=null;this.src='products/mvp_plus.png';">
+            <h2 class="h-sec" style="margin-bottom:10px;">MVP Plus</h2>
+            <p class="np-lead">
+              Not an upgrade path &mdash; a <strong>different menu</strong>. MVP Plus is built from
+              scratch on a new core, so it isn&rsquo;t the same software as Free, VIP and MVP.
+              Feature-wise it covers everything MVP does, then goes further.
+            </p>
+
+            <div class="np-price">
+              <b>$50</b><s>$90</s>
+              <span class="np-term">LIFETIME &middot; ONE-TIME</span>
+            </div>
+
+            <div class="plan-timer" style="max-width:280px;">
+              <span>OFFER ENDS IN</span><b data-countdown>48:00:00</b>
+            </div>
+
+            <div class="np-cta">
+              <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp-plus" target="_blank" rel="noopener"
+                 class="btn btn-primary btn-lg" data-magnet>Pre-order MVP+</a>
+              <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-from-mvp-to-mvp-plus" target="_blank" rel="noopener"
+                 class="btn btn-ghost">Already on MVP? Upgrade
+                 <span class="mono" style="color:#fff;">$25</span>
+                 <span class="mono" style="color:var(--ink-4);text-decoration:line-through;">$35</span></a>
+            </div>
+            <p class="np-note">This is a pre-order. You&rsquo;ll get access as builds roll out.</p>
+          </div>
+
+          <ul class="np-list">
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Everything MVP does</b><span>The full MVP feature set carried over, rebuilt on the new core.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Undetected</b><span>Built fresh against current detection, not patched onto the old build.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Private BattlEye bypass</b><span>A private bypass, separate from the public one MVP ships with.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Next-gen exclusive features</b><span>Options that only exist on the new engine.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Priority support</b><span>Front of the queue on Discord.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Early builds &amp; beta access</b><span>New work lands here first.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Lifetime updates</b><span>One payment, updated for as long as the menu runs.</span></div></li>
+          </ul>
+
+        </div>
+      </div>
     </div>
   </section>
 
