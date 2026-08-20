@@ -183,6 +183,66 @@
   .np-f span{font-size:12.8px;color:var(--ink-3);line-height:1.5;}
   @media (max-width:900px){.np-in{grid-template-columns:1fr;}}
 
+  /* ---- in-game screenshots ---- */
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .shot{
+    position:relative;display:block;padding:0;margin:0;border:none;line-height:0;overflow:hidden;
+    background:#08060f;font-family:inherit;cursor:zoom-in;
+  }
+  .shot img{
+    display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;opacity:.9;
+    transition:transform .7s var(--ease-out-expo),opacity .35s var(--ease);
+  }
+  .shot:hover img,.shot:focus-visible img{transform:scale(1.05);opacity:1;}
+  .shot:focus-visible{outline:2px solid var(--brand-2);outline-offset:-2px;}
+  .shot-cap{
+    position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;
+    gap:10px;padding:30px 14px 11px;line-height:1.3;text-align:left;color:var(--ink-2);
+    background:linear-gradient(to top,rgba(5,4,10,.94),rgba(5,4,10,.55) 55%,transparent);
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    transition:color .3s var(--ease);
+  }
+  .shot:hover .shot-cap,.shot:focus-visible .shot-cap{color:#fff;}
+  .shot-cap i{font-style:normal;color:var(--brand-3);opacity:0;transition:opacity .3s var(--ease);}
+  .shot:hover .shot-cap i,.shot:focus-visible .shot-cap i{opacity:1;}
+  /* the camo shot runs the full width and gets the animated wordmark */
+  .shot-hero{grid-column:1/-1;}
+  .shot-hero .shot-cap{padding:70px 22px 18px;align-items:flex-end;}
+  .camo-txt{
+    font-family:var(--font-display);font-weight:700;line-height:1;
+    font-size:clamp(20px,3.4vw,40px);letter-spacing:.02em;text-transform:uppercase;
+    background:linear-gradient(100deg,#a855f7,#e879f9 18%,#22d3ee 36%,#a855f7 54%,#e879f9 72%,#22d3ee 90%,#a855f7);
+    background-size:300% 100%;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    filter:drop-shadow(0 2px 20px rgba(168,85,247,.45));
+    animation:camoFlow 7s linear infinite;
+  }
+  @keyframes camoFlow{from{background-position:0 0;}to{background-position:300% 0;}}
+  @media (prefers-reduced-motion:reduce){.camo-txt{animation:none;}}
+  .shots-note{text-align:center;font-size:12px;color:var(--ink-4);margin:16px 0 0;letter-spacing:.04em;}
+  @media (max-width:900px){.shots{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.shots{grid-template-columns:1fr;}}
+
+  /* lightbox (rides on the .pop modal plumbing in site.js) */
+  .lb{background:rgba(3,2,8,.93);}
+  .lb-fig{position:relative;margin:0;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:100%;}
+  .lb-fig img{
+    max-width:min(1400px,100%);max-height:82vh;width:auto;height:auto;display:block;
+    border:1px solid var(--line-2);animation:popIn .35s var(--ease-out-expo) both;
+  }
+  .lb-fig figcaption{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);}
+  .lb-x{position:absolute;top:14px;right:20px;background:transparent;border:none;color:var(--ink-3);font-size:32px;line-height:1;cursor:pointer;padding:4px 10px;transition:color .2s;}
+  .lb-x:hover{color:#fff;}
+  .lb-nav{
+    position:absolute;top:50%;transform:translateY(-50%);background:transparent;border:none;
+    color:var(--ink-3);font-size:42px;line-height:1;cursor:pointer;padding:10px 16px;transition:color .2s;
+  }
+  .lb-nav:hover{color:#fff;}
+  .lb-prev{left:4px;}
+  .lb-next{right:4px;}
+  @media (max-width:560px){.lb-nav{font-size:32px;padding:8px 10px;}}
+
   /* ---- feature explorer ---- */
   .fx{border:1px solid var(--line);background:rgba(255,255,255,.015);}
   .fx-bar{display:flex;align-items:center;gap:12px;padding:0 18px;border-bottom:1px solid var(--line);}
@@ -451,13 +511,146 @@
     </div>
   </div>
 
+  <!-- ===================== MVP PLUS ===================== -->
+  <section class="sec" id="mvpplus" style="scroll-margin-top:90px;">
+    <div class="wrap">
+      <div class="np reveal-s spot">
+        <div class="np-glow" aria-hidden="true"></div>
+        <div class="np-in">
+
+          <div class="np-left">
+            <span class="tag tag-cyan" style="align-self:flex-start;">NEW BUILD &middot; PRE-ORDER</span>
+            <img class="np-icon" src="products/mvp_plus@128.gif" alt="" loading="lazy"
+                 onerror="this.onerror=null;this.src='products/mvp_plus.png';">
+            <h2 class="h-sec" style="margin-bottom:10px;">MVP Plus</h2>
+            <p class="np-lead">
+              Our best build. Not an upgrade path &mdash; a <strong>different menu</strong>, built from
+              scratch on a new core, so it isn&rsquo;t the same software as the Free, VIP and MVP tiers
+              below. Feature-wise it covers everything MVP does, then goes further.
+            </p>
+
+            <div class="np-price">
+              <b>$50</b><s>$90</s>
+              <span class="np-term">LIFETIME &middot; ONE-TIME</span>
+            </div>
+
+            <div class="plan-timer" style="max-width:280px;">
+              <span>OFFER ENDS IN</span><b data-countdown>48:00:00</b>
+            </div>
+
+            <div class="np-cta">
+              <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp-plus" target="_blank" rel="noopener"
+                 class="btn btn-primary btn-lg" data-magnet>Pre-order MVP+</a>
+              <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-from-mvp-to-mvp-plus" target="_blank" rel="noopener"
+                 class="btn btn-ghost">Already on MVP? Upgrade
+                 <span class="mono" style="color:#fff;">$25</span>
+                 <span class="mono" style="color:var(--ink-4);text-decoration:line-through;">$35</span></a>
+            </div>
+            <p class="np-note">This is a pre-order. You&rsquo;ll get access as builds roll out.</p>
+          </div>
+
+          <ul class="np-list">
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Everything MVP does</b><span>The full MVP feature set carried over, rebuilt on the new core.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Undetected</b><span>Built fresh against current detection, not patched onto the old build.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Private BattlEye bypass</b><span>A private bypass, separate from the public one MVP ships with.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Next-gen exclusive features</b><span>Options that only exist on the new engine.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Priority support</b><span>Front of the queue on Discord.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Early builds &amp; beta access</b><span>New work lands here first.</span></div></li>
+          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Lifetime updates</b><span>One payment, updated for as long as the menu runs.</span></div></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREENSHOTS ===================== -->
+  <section class="sec" id="shots" style="padding-top:0;scroll-margin-top:90px;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">In game</span>
+        <h2 class="h-sec">What it actually looks like</h2>
+        <p class="h-sub">Unedited grabs from MVP running in GTA Online &mdash; the menu, the HUD and a few of the exclusives you won&rsquo;t find in another build.</p>
+      </div>
+
+      <div class="shots reveal-s">
+        <button type="button" class="shot shot-hero" data-shot="shots/custom-camo.jpg" data-cap="Custom animated camo">
+          <img src="shots/custom-camo.jpg"
+               srcset="shots/custom-camo@800.jpg 800w, shots/custom-camo.jpg 1600w"
+               sizes="(max-width:900px) 100vw, 1152px"
+               width="1600" height="900" loading="lazy" decoding="async"
+               alt="A sniper rifle wearing an animated purple and magenta custom camo, menu open on the right">
+          <span class="shot-cap"><b class="camo-txt">Custom animated camo</b> <i>&#10530;</i></span>
+        </button>
+        <button type="button" class="shot" data-shot="shots/menu-home.jpg" data-cap="Main menu">
+          <img src="shots/menu-home@800.jpg" width="800" height="450" loading="lazy" decoding="async"
+               alt="The N3NY000 main menu open in GTA Online, showing Network, Self, Vehicle, Weapon and VFX categories">
+          <span class="shot-cap">Main menu <i>&#10530;</i></span>
+        </button>
+        <button type="button" class="shot" data-shot="shots/mechanical-dragon.jpg" data-cap="Mechanical dragon">
+          <img src="shots/mechanical-dragon@800.jpg" width="800" height="450" loading="lazy" decoding="async"
+               alt="Riding a mechanical dragon over downtown Los Santos with the flight HUD and dragon control panel">
+          <span class="shot-cap">Mechanical dragon <i>&#10530;</i></span>
+        </button>
+        <button type="button" class="shot" data-shot="shots/jarvis.jpg" data-cap="J.A.R.V.I.S. flight">
+          <img src="shots/jarvis@800.jpg" width="800" height="450" loading="lazy" decoding="async"
+               alt="The J.A.R.V.I.S. flight suit firing its chest unibeam on a night street, with shield and heat gauges">
+          <span class="shot-cap">J.A.R.V.I.S. flight <i>&#10530;</i></span>
+        </button>
+        <button type="button" class="shot" data-shot="shots/guided-missile.jpg" data-cap="Guided missile">
+          <img src="shots/guided-missile@800.jpg" width="800" height="450" loading="lazy" decoding="async"
+               alt="Strategic guidance system steering a missile over the city at night, range to target 276 metres">
+          <span class="shot-cap">Guided missile <i>&#10530;</i></span>
+        </button>
+        <button type="button" class="shot" data-shot="shots/rock-barrage.jpg" data-cap="Rock barrage">
+          <img src="shots/rock-barrage@800.jpg" width="800" height="450" loading="lazy" decoding="async"
+               alt="Ebony Maw rock barrage hurling boulders at traffic, with an orbit indicator and impact point marker">
+          <span class="shot-cap">Rock barrage <i>&#10530;</i></span>
+        </button>
+        <button type="button" class="shot" data-shot="shots/recon-drone.jpg" data-cap="Recon drone">
+          <img src="shots/recon-drone@800.jpg" width="800" height="450" loading="lazy" decoding="async"
+               alt="Flying the recon drone down a night street with a signal, battery and altitude overlay">
+          <span class="shot-cap">Recon drone <i>&#10530;</i></span>
+        </button>
+        <button type="button" class="shot" data-shot="shots/wall-climb.jpg" data-cap="Wall climb">
+          <img src="shots/wall-climb@800.jpg" width="800" height="450" loading="lazy" decoding="async"
+               alt="Climbing the side of a building with the wall climb options panel open">
+          <span class="shot-cap">Wall climb <i>&#10530;</i></span>
+        </button>
+        <button type="button" class="shot" data-shot="shots/skateboard.jpg" data-cap="Skateboarding">
+          <img src="shots/skateboard@800.jpg" width="800" height="450" loading="lazy" decoding="async"
+               alt="Riding a physics-driven skateboard at night with the skateboarding settings open">
+          <span class="shot-cap">Skateboarding <i>&#10530;</i></span>
+        </button>
+        <button type="button" class="shot" data-shot="shots/friends-list.jpg" data-cap="Friends &amp; fake friends">
+          <img src="shots/friends-list@800.jpg" width="800" height="450" loading="lazy" decoding="async"
+               alt="The friends menu with friend requests, blocked players, fake friends and monitor options">
+          <span class="shot-cap">Friends &amp; fake friends <i>&#10530;</i></span>
+        </button>
+      </div>
+
+      <p class="shots-note mono">Click a shot to view it full size &middot; captured on the current MVP build</p>
+    </div>
+  </section>
+
+  <!-- screenshot lightbox -->
+  <div class="pop lb" id="shotLb" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+    <button type="button" class="lb-x" data-pop-close aria-label="Close">&times;</button>
+    <button type="button" class="lb-nav lb-prev" id="shotPrev" aria-label="Previous screenshot">&#8249;</button>
+    <figure class="lb-fig">
+      <img id="shotImg" src="" alt="">
+      <figcaption id="shotCap"></figcaption>
+    </figure>
+    <button type="button" class="lb-nav lb-next" id="shotNext" aria-label="Next screenshot">&#8250;</button>
+  </div>
+
   <!-- ===================== PLANS ===================== -->
-  <section class="sec" id="plans" style="scroll-margin-top:90px;">
+  <section class="sec" id="plans" style="padding-top:0;scroll-margin-top:90px;">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="kicker">Pricing</span>
         <h2 class="h-sec">Choose your package</h2>
-        <p class="h-sub">Three tiers of the current menu. One-time payment, lifetime access, no subscriptions. Looking for <a href="#mvpplus" style="color:var(--brand-3);">MVP Plus</a>? It’s a separate build — see below.</p>
+        <p class="h-sub">Three tiers of the current menu. One-time payment, lifetime access, no subscriptions. Looking for <a href="#mvpplus" style="color:var(--brand-3);">MVP Plus</a>? It’s a separate build — see above.</p>
       </div>
 
       <div class="gridline cols-3 tilt-scene">
@@ -654,59 +847,6 @@
         </table>
       </div>
       <p class="cmp-hint mono">Scroll the table sideways on small screens &rarr;</p>
-    </div>
-  </section>
-
-  <!-- ===================== MVP PLUS ===================== -->
-  <section class="sec" id="mvpplus" style="padding-top:0;scroll-margin-top:90px;">
-    <div class="wrap">
-      <div class="np reveal-s spot">
-        <div class="np-glow" aria-hidden="true"></div>
-        <div class="np-in">
-
-          <div class="np-left">
-            <span class="tag tag-cyan" style="align-self:flex-start;">NEW BUILD &middot; PRE-ORDER</span>
-            <img class="np-icon" src="products/mvp_plus@128.gif" alt="" loading="lazy"
-                 onerror="this.onerror=null;this.src='products/mvp_plus.png';">
-            <h2 class="h-sec" style="margin-bottom:10px;">MVP Plus</h2>
-            <p class="np-lead">
-              Not an upgrade path &mdash; a <strong>different menu</strong>. MVP Plus is built from
-              scratch on a new core, so it isn&rsquo;t the same software as Free, VIP and MVP.
-              Feature-wise it covers everything MVP does, then goes further.
-            </p>
-
-            <div class="np-price">
-              <b>$50</b><s>$90</s>
-              <span class="np-term">LIFETIME &middot; ONE-TIME</span>
-            </div>
-
-            <div class="plan-timer" style="max-width:280px;">
-              <span>OFFER ENDS IN</span><b data-countdown>48:00:00</b>
-            </div>
-
-            <div class="np-cta">
-              <a href="https://fusiondash.myshopify.com/products/nenyooo-mvp-plus" target="_blank" rel="noopener"
-                 class="btn btn-primary btn-lg" data-magnet>Pre-order MVP+</a>
-              <a href="https://fusiondash.myshopify.com/products/nenyooo-upgrade-from-mvp-to-mvp-plus" target="_blank" rel="noopener"
-                 class="btn btn-ghost">Already on MVP? Upgrade
-                 <span class="mono" style="color:#fff;">$25</span>
-                 <span class="mono" style="color:var(--ink-4);text-decoration:line-through;">$35</span></a>
-            </div>
-            <p class="np-note">This is a pre-order. You&rsquo;ll get access as builds roll out.</p>
-          </div>
-
-          <ul class="np-list">
-          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Everything MVP does</b><span>The full MVP feature set carried over, rebuilt on the new core.</span></div></li>
-          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Undetected</b><span>Built fresh against current detection, not patched onto the old build.</span></div></li>
-          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Private BattlEye bypass</b><span>A private bypass, separate from the public one MVP ships with.</span></div></li>
-          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Next-gen exclusive features</b><span>Options that only exist on the new engine.</span></div></li>
-          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Priority support</b><span>Front of the queue on Discord.</span></div></li>
-          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Early builds &amp; beta access</b><span>New work lands here first.</span></div></li>
-          <li class="np-f"><span class="np-t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#7dd7ec" stroke-width="2.6" stroke-linecap="square"/></svg></span><div><b>Lifetime updates</b><span>One payment, updated for as long as the menu runs.</span></div></li>
-          </ul>
-
-        </div>
-      </div>
     </div>
   </section>
 
@@ -908,5 +1048,42 @@
 <script src="nav-auth.js"></script>
 <script src="discord.js" defer></script>
 <script src="explorer.js" defer></script>
+<script>
+/* screenshot gallery — opening is ours, closing rides on the .pop modal in site.js */
+(function () {
+  var shots = [].slice.call(document.querySelectorAll('.shot'));
+  var lb = document.getElementById('shotLb');
+  if (!shots.length || !lb) return;
+
+  var img = document.getElementById('shotImg');
+  var cap = document.getElementById('shotCap');
+  var at = 0;
+
+  function show(n) {
+    at = (n + shots.length) % shots.length;
+    var s = shots[at];
+    img.src = s.getAttribute('data-shot');
+    img.alt = s.querySelector('img').alt;
+    cap.textContent = s.getAttribute('data-cap');
+  }
+
+  shots.forEach(function (s, n) {
+    s.addEventListener('click', function () {
+      show(n);
+      lb.classList.add('active');
+      document.body.classList.add('intro-lock');   // the scroll lock the modals reuse
+    });
+  });
+
+  document.getElementById('shotPrev').addEventListener('click', function () { show(at - 1); });
+  document.getElementById('shotNext').addEventListener('click', function () { show(at + 1); });
+
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') show(at - 1);
+    else if (e.key === 'ArrowRight') show(at + 1);
+  });
+})();
+</script>
 </body>
 </html>
